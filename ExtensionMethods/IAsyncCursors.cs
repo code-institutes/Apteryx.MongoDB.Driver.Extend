@@ -11,34 +11,51 @@ namespace Apteryx.MongoDB.Driver.Extend.ExtensionMethods
     public static class IAsyncCursors
     {
         #region 同步方法
-        public static TDocument FindOne<TDocument>(this IMongoCollection<TDocument> collection, Expression<Func<TDocument, bool>> filter) where TDocument:BaseMongoEntity
+        public static T FindOne<T>(this IMongoCollection<T> collection, Expression<Func<T, bool>> filter) where T:BaseMongoEntity
         {
-            //return collection.Find(Builders<TDocument>.Filter.Eq( )).FirstOrDefault();
             return collection.Find(filter).FirstOrDefault();
         }
-        public static IEnumerable<TDocument> FindAll<TDocument>(this IMongoCollection<TDocument> collection)
+        public static IEnumerable<T> FindAll<T>(this IMongoCollection<T> collection)
         {
             return collection.Find(_ => true).ToList();
         }
 
-        public static IEnumerable<TDocument> FindAll<TDocument>(this IMongoCollection<TDocument> collection, Expression<Func<TDocument, bool>> filte)
+        public static IEnumerable<T> Where<T>(this IMongoCollection<T> collection, Expression<Func<T, bool>> filte)
         {
             return collection.Find(filte).ToList();
+        }
+
+        public static void Add<T>(this IMongoCollection<T> collection, T document)
+        {
+            collection.InsertOne(document);
+        }
+
+        public static ReplaceOneResult Update<T>(this IMongoCollection<T> collection, FilterDefinition<T> filter, T document)
+        {
+            return collection.ReplaceOne(filter, document);
         }
         #endregion
 
         #region 异步方法
-        public async static Task<TDocument> FindOneAsync<TDocument>(this IMongoCollection<TDocument> collection, Expression<Func<TDocument, bool>> filter)
+        public static Task<T> FindOneAsync<T>(this IMongoCollection<T> collection, Expression<Func<T, bool>> filter)
         {
-            return await (await collection.FindAsync(filter)).FirstOrDefaultAsync();
+            return (collection.Find(filter)).FirstOrDefaultAsync();
         }
-        public async static Task<IEnumerable<TDocument>> FindAllAsync<TDocument>(this IMongoCollection<TDocument> collection)
+        public static Task<IAsyncCursor<T>> FindAllAsync<T>(this IMongoCollection<T> collection)
         {
-            return await (await collection.FindAsync(_ => true)).ToListAsync();
+            return collection.FindAsync(_ => true);
         }
-        public async static Task<IEnumerable<TDocument>> FindAllAsync<TDocument>(this IMongoCollection<TDocument> collection, Expression<Func<TDocument, bool>> filter)
+        public static Task<IAsyncCursor<T>> WhereAsync<T>(this IMongoCollection<T> collection, Expression<Func<T, bool>> filter)
         {
-            return await (await collection.FindAsync(filter)).ToListAsync();
+            return collection.FindAsync(filter);
+        }
+        public static Task AddAsync<T>(this IMongoCollection<T> collection, T document)
+        {
+            return collection.InsertOneAsync(document);
+        }
+        public static Task<ReplaceOneResult> UpdateAsync<T>(this IMongoCollection<T> collection, FilterDefinition<T> filter, T document)
+        {
+            return collection.ReplaceOneAsync(filter, document);
         }
         #endregion
     }
