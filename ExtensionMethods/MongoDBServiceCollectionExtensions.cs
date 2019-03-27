@@ -8,14 +8,14 @@ namespace Apteryx.MongoDB.Driver.Extend.ExtensionMethods
     {
         public static IServiceCollection AddMongoDB<T>(this IServiceCollection serviceCollection, Action<MongoDBOptions> optionsAction) where T:MongoDbService
         {
-            serviceCollection.AddScoped<T>();
+            serviceCollection.AddScoped<IMongoDbService,T>().BuildServiceProvider();
             if (optionsAction != null)
                 serviceCollection.ConfigureMongoDB(optionsAction);
             return serviceCollection;
         }
-        public static void ConfigureMongoDB(this IServiceCollection services, Action<MongoDBOptions> setupAction)
+        public static void ConfigureMongoDB(this IServiceCollection services, Action<MongoDBOptions> optionsAction)
         {
-            services.Configure(setupAction);
+            services.Configure(optionsAction);
         }
     }
 }
