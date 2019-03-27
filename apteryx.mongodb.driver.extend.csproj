@@ -2,6 +2,14 @@
 
   <PropertyGroup>
     <TargetFramework>netstandard2.0</TargetFramework>
+    <GeneratePackageOnBuild>true</GeneratePackageOnBuild>
+    <Company>Apteryx</Company>
+    <Copyright>apteryx QQ:82121500</Copyright>
+    <Authors>Apteryx</Authors>
+    <PackageId>Apteryx.MongoDB.Driver.Extend</PackageId>
+    <Product>Apteryx.MongoDB.Driver.Extend</Product>
+    <Description>apteryx QQ:82121500</Description>
+    <PackageTags>core,.netcore,aspnetcore,asp.netcore, mongodb,mongodbcore</PackageTags>
   </PropertyGroup>
 
   <ItemGroup>
