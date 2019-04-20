@@ -51,7 +51,9 @@
         }
     }
     
+    
 使用方法二：
+
     public class Account:BaseMongoEntity
     {
         public string Name { get; set; }
