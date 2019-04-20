@@ -10,7 +10,7 @@
     <Product>Apteryx.MongoDB.Driver.Extend</Product>
     <Description>apteryx QQ:82121500</Description>
     <PackageTags>core,.netcore,aspnetcore,asp.netcore, mongodb,mongodbcore</PackageTags>
-    <Version>1.0.1</Version>
+    <Version>1.0.2</Version>
     <PackageProjectUrl>https://github.com/code-institutes/Apteryx.MongoDB.Driver.Extend</PackageProjectUrl>
     <NeutralLanguage>zh-CN</NeutralLanguage>
   </PropertyGroup>
