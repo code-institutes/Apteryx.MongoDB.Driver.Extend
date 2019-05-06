@@ -1,6 +1,6 @@
 # 针对MongoDB.Driver的扩展
 
-###使用方法一：
+使用方法一：
 
     public class Account:BaseMongoEntity
     {
@@ -52,7 +52,7 @@
     }
     
     
-###使用方法二：
+使用方法二：
 
     public class Account:BaseMongoEntity
     {
