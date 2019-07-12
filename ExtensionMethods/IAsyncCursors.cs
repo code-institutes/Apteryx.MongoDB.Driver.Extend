@@ -17,12 +17,12 @@ namespace Apteryx.MongoDB.Driver.Extend.ExtensionMethods
         }
         public static IEnumerable<T> FindAll<T>(this IMongoCollection<T> collection)
         {
-            return collection.Find(_ => true).ToList();
+            return collection.Find(_ => true).ToEnumerable();
         }
 
         public static IEnumerable<T> Where<T>(this IMongoCollection<T> collection, Expression<Func<T, bool>> filte)
         {
-            return collection.Find(filte).ToList();
+            return collection.Find(filte).ToEnumerable();
         }
 
         public static void Add<T>(this IMongoCollection<T> collection, T document)

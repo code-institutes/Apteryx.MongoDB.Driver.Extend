@@ -12,15 +12,15 @@ namespace Apteryx.MongoDB.Driver.Extend
         #region 同步方法
         public IEnumerable<T> FindAll<T>() where T : BaseMongoEntity
         {
-            return _database.GetCollection<T>(typeof(T).Name).Find(_ => true).ToList();
+            return _database.GetCollection<T>(typeof(T).Name).Find(_ => true).ToEnumerable();
         }
         public IEnumerable<T> FindAll<T>(string tableName) where T : BaseMongoEntity
         {
-            return _database.GetCollection<T>(tableName).Find(_ => true).ToList();
+            return _database.GetCollection<T>(tableName).Find(_ => true).ToEnumerable();
         }
         public IEnumerable<T> Where<T>(Expression<Func<T, bool>> filter) where T : BaseMongoEntity
         {
-            return _database.GetCollection<T>(typeof(T).Name).Find(filter).ToList();
+            return _database.GetCollection<T>(typeof(T).Name).Find(filter).ToEnumerable();
         }
         public T FindOne<T>(Expression<Func<T, bool>> filter) where T : BaseMongoEntity
         {
