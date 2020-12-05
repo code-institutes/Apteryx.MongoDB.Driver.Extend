@@ -1,49 +1,118 @@
-﻿using Apteryx.MongoDB.Driver.Extend.Entities;
+﻿using System.Collections.Generic;
+using Apteryx.MongoDB.Driver.Extend.Entities;
 using System.Threading.Tasks;
 
 namespace Apteryx.MongoDB.Driver.Extend
 {
     public abstract partial class MongoDbService
     {
+
+        
+
+        public void AddManyAsync<T>(IEnumerable<T> documents) where T : BaseMongoEntity
+        {
+            throw new System.NotImplementedException();
+        }
+
+        public void AddManyAsync<T>(string tableName, IEnumerable<T> documents) where T : BaseMongoEntity
+        {
+            throw new System.NotImplementedException();
+        }
         #region 同步方法
-        public void Add<T>(T obj) where T : BaseMongoEntity
-        {
-            _database.GetCollection<T>(typeof(T).Name).InsertOne(obj);
-        }
-        public void Add<T>(string tableName, T obj) where T : BaseMongoEntity
-        {
-            _database.GetCollection<T>(tableName).InsertOne(obj);
-        }
+
         /// <summary>
-        /// 根据当前对象动态的创建该对象的数据表
+        /// 插入单条
         /// </summary>
         /// <typeparam name="T"></typeparam>
-        /// <param name="obj"></param>
-        public void DynamicTableAdd<T>(T obj) where T : BaseMongoEntity
+        /// <param name="document"></param>
+        public void Add<T>(T document) where T : BaseMongoEntity
         {
-            _database.GetCollection<T>(string.Format("{0}_{1}", typeof(T).Name,obj.Id)).InsertOne(obj);
+            _database.GetCollection<T>(typeof(T).Name).InsertOne(document);
         }
+
+        /// <summary>
+        /// 插入单条
+        /// </summary>
+        /// <typeparam name="T"></typeparam>
+        /// <param name="tableName">数据库表明</param>
+        /// <param name="document"></param>
+        public void Add<T>(string tableName, T document) where T : BaseMongoEntity
+        {
+            _database.GetCollection<T>(tableName).InsertOne(document);
+        }
+
+        /// <summary>
+        /// 插入多条
+        /// </summary>
+        /// <typeparam name="T"></typeparam>
+        /// <param name="documents"></param>
+        public void AddMany<T>(IEnumerable<T> documents) where T : BaseMongoEntity
+        {
+            _database.GetCollection<T>(typeof(T).Name).InsertMany(documents);
+        }
+
+        /// <summary>
+        /// 插入多条
+        /// </summary>
+        /// <typeparam name="T"></typeparam>
+        /// <param name="tableName">数据库表名</param>
+        /// <param name="documents"></param>
+        public void AddMany<T>(string tableName, IEnumerable<T> documents) where T : BaseMongoEntity
+        {
+            _database.GetCollection<T>(tableName).InsertMany(documents);
+        }
+
+        /// <summary>
+        /// 根据关联对象动态的创建与关联对象相关的数据表
+        /// </summary>
+        /// <typeparam name="T"></typeparam>
+        /// <param name="foreignObj">上级对象</param>
+        /// <param name="document"></param>
+        public void DynamicTableAdd<T>(T foreignObj, T document) where T : BaseMongoEntity
+        {
+            _database.GetCollection<T>($"{typeof(T).Name}_{foreignObj.Id}").InsertOne(document);
+        }
+
         #endregion
 
+
         #region 异步方法
-        public Task AddAsync<T>(T obj) where T : BaseMongoEntity
-        {
-            return  _database.GetCollection<T>(typeof(T).Name).InsertOneAsync(obj); 
-        }
-        public Task AddAsync<T>(string tableName, T obj) where T : BaseMongoEntity
-        {
-            return _database.GetCollection<T>(tableName).InsertOneAsync(obj);
-        }
+
         /// <summary>
-        /// 根据当前对象动态的创建该对象的数据表
+        /// 插入单条
         /// </summary>
         /// <typeparam name="T"></typeparam>
-        /// <param name="obj"></param> 
+        /// <param name="document"></param>
         /// <returns></returns>
-        public Task DynamicTableAddAsync<T>(T obj) where T : BaseMongoEntity
+        public Task AddAsync<T>(T document) where T : BaseMongoEntity
         {
-            return  _database.GetCollection<T>(string.Format("{0}_{1}", typeof(T).Name, obj.Id)).InsertOneAsync(obj);
+            return _database.GetCollection<T>(typeof(T).Name).InsertOneAsync(document);
         }
+
+        /// <summary>
+        /// 插入单条
+        /// </summary>
+        /// <typeparam name="T"></typeparam>
+        /// <param name="tableName">数据库表明</param>
+        /// <param name="document"></param>
+        /// <returns></returns>
+        public Task AddAsync<T>(string tableName, T document) where T : BaseMongoEntity
+        {
+            return _database.GetCollection<T>(tableName).InsertOneAsync(document);
+        }
+
+        /// <summary>
+        /// 根据关联对象动态的创建与关联对象相关的数据表
+        /// </summary>
+        /// <typeparam name="T"></typeparam>
+        /// <param name="foreignObj">上级对象</param>
+        /// <param name="document"></param>
+        /// <returns></returns>
+        public Task DynamicTableAddAsync<T>(T foreignObj, T document) where T : BaseMongoEntity
+        {
+            return _database.GetCollection<T>($"{typeof(T).Name}_{foreignObj.Id}").InsertOneAsync(document);
+        }
+
         #endregion
     }
 }

@@ -10,6 +10,7 @@ namespace Apteryx.MongoDB.Driver.Extend
     public abstract partial class MongoDbService
     {
         #region 同步方法
+
         public IEnumerable<T> FindAll<T>() where T : BaseMongoEntity
         {
             return _database.GetCollection<T>(typeof(T).Name).Find(_ => true).ToEnumerable();
@@ -30,7 +31,9 @@ namespace Apteryx.MongoDB.Driver.Extend
         {
             return _database.GetCollection<T>(tableName).Find(filter).FirstOrDefault();
         }
+
         #endregion
+
 
         #region 异步方法
         public Task<IAsyncCursor<T>> FindAllAsync<T>() where T : BaseMongoEntity
@@ -53,6 +56,7 @@ namespace Apteryx.MongoDB.Driver.Extend
         {
             return _database.GetCollection<T>(tableName).Find(filter).FirstOrDefaultAsync();
         }
+
         #endregion
     }
 }

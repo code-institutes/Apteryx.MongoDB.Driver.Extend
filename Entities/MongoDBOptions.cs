@@ -1,8 +1,4 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Text;
-
-namespace Apteryx.MongoDB.Driver.Extend.Entities
+﻿namespace Apteryx.MongoDB.Driver.Extend.Entities
 {
     public class MongoDBOptions
     {

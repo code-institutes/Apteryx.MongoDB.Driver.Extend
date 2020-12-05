@@ -7,5 +7,6 @@ namespace Apteryx.MongoDB.Driver.Extend.Entities
     {
         string Id { get; }
         DateTime CreateTime { get; }
+        DateTime UpdateTime { get; }
     }
 }
