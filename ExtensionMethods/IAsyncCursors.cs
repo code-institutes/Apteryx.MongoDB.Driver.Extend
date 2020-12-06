@@ -337,7 +337,7 @@ namespace Apteryx.MongoDB.Driver.Extend.ExtensionMethods
         /// <param name="options"></param>
         /// <param name="cancellationToken"></param>
         /// <returns></returns>
-        public static T FindOneAndUpdateOne<T>(
+        public static T FindOneAndReplaceOne<T>(
             this IMongoCollection<T> collection,
             FilterDefinition<T> filter,
             T document,
@@ -359,7 +359,7 @@ namespace Apteryx.MongoDB.Driver.Extend.ExtensionMethods
         /// <param name="options"></param>
         /// <param name="cancellationToken"></param>
         /// <returns></returns>
-        public static T FindOneAndUpdateOne<T>(
+        public static T FindOneAndReplaceOne<T>(
             this IMongoCollection<T> collection,
             Expression<Func<T, bool>> filter,
             T document,
@@ -460,7 +460,7 @@ namespace Apteryx.MongoDB.Driver.Extend.ExtensionMethods
         /// <param name="options"></param>
         /// <param name="cancellationToken"></param>
         /// <returns></returns>
-        public static Task<ReplaceOneResult> WhereUpdateOneAsync<T>(
+        public static Task<ReplaceOneResult> WhereReplaceOneAsync<T>(
             this IMongoCollection<T> collection,
             FilterDefinition<T> filter,
             T document,
@@ -482,7 +482,7 @@ namespace Apteryx.MongoDB.Driver.Extend.ExtensionMethods
         /// <param name="options"></param>
         /// <param name="cancellationToken"></param>
         /// <returns></returns>
-        public static Task<ReplaceOneResult> WhereUpdateOneAsync<T>(
+        public static Task<ReplaceOneResult> WhereReplaceOneAsync<T>(
             this IMongoCollection<T> collection,
             Expression<Func<T, bool>> filter,
             T document,
@@ -554,7 +554,7 @@ namespace Apteryx.MongoDB.Driver.Extend.ExtensionMethods
         /// <param name="options"></param>
         /// <param name="cancellationToken"></param>
         /// <returns></returns>
-        public static Task<T> FindOneAndUpdateOneAsync<T>(
+        public static Task<T> FindOneAndReplaceOneAsync<T>(
             this IMongoCollection<T> collection,
             FilterDefinition<T> filter,
             T document,
@@ -576,7 +576,7 @@ namespace Apteryx.MongoDB.Driver.Extend.ExtensionMethods
         /// <param name="options"></param>
         /// <param name="cancellationToken"></param>
         /// <returns></returns>
-        public static Task<T> FindOneAndUpdateOneAsync<T>(
+        public static Task<T> FindOneAndReplaceOneAsync<T>(
             this IMongoCollection<T> collection,
             Expression<Func<T, bool>> filter,
             T document,
