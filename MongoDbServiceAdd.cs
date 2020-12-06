@@ -27,7 +27,7 @@ namespace Apteryx.MongoDB.Driver.Extend
         /// <param name="document"></param>
         public void Add<T>(T document) where T : BaseMongoEntity
         {
-            _database.GetCollection<T>(typeof(T).Name).InsertOne(document);
+            database.GetCollection<T>(typeof(T).Name).InsertOne(document);
         }
 
         /// <summary>
@@ -38,7 +38,7 @@ namespace Apteryx.MongoDB.Driver.Extend
         /// <param name="document"></param>
         public void Add<T>(string tableName, T document) where T : BaseMongoEntity
         {
-            _database.GetCollection<T>(tableName).InsertOne(document);
+            database.GetCollection<T>(tableName).InsertOne(document);
         }
 
         /// <summary>
@@ -48,7 +48,7 @@ namespace Apteryx.MongoDB.Driver.Extend
         /// <param name="documents"></param>
         public void AddMany<T>(IEnumerable<T> documents) where T : BaseMongoEntity
         {
-            _database.GetCollection<T>(typeof(T).Name).InsertMany(documents);
+            database.GetCollection<T>(typeof(T).Name).InsertMany(documents);
         }
 
         /// <summary>
@@ -59,18 +59,21 @@ namespace Apteryx.MongoDB.Driver.Extend
         /// <param name="documents"></param>
         public void AddMany<T>(string tableName, IEnumerable<T> documents) where T : BaseMongoEntity
         {
-            _database.GetCollection<T>(tableName).InsertMany(documents);
+            database.GetCollection<T>(tableName).InsertMany(documents);
         }
 
         /// <summary>
         /// 根据关联对象动态的创建与关联对象相关的数据表
         /// </summary>
+        /// <typeparam name="TForeign"></typeparam>
         /// <typeparam name="T"></typeparam>
-        /// <param name="foreignObj">上级对象</param>
+        /// <param name="foreignDocument">上级对象</param>
         /// <param name="document"></param>
-        public void DynamicTableAdd<T>(T foreignObj, T document) where T : BaseMongoEntity
+        public void DynamicTableAdd<TForeign, T>(TForeign foreignDocument, T document)
+            where TForeign : BaseMongoEntity
+            where T : BaseMongoEntity
         {
-            _database.GetCollection<T>($"{typeof(T).Name}_{foreignObj.Id}").InsertOne(document);
+            database.GetCollection<T>($"{typeof(T).Name}_{foreignDocument.Id}").InsertOne(document);
         }
 
         #endregion
@@ -86,7 +89,7 @@ namespace Apteryx.MongoDB.Driver.Extend
         /// <returns></returns>
         public Task AddAsync<T>(T document) where T : BaseMongoEntity
         {
-            return _database.GetCollection<T>(typeof(T).Name).InsertOneAsync(document);
+            return database.GetCollection<T>(typeof(T).Name).InsertOneAsync(document);
         }
 
         /// <summary>
@@ -98,19 +101,22 @@ namespace Apteryx.MongoDB.Driver.Extend
         /// <returns></returns>
         public Task AddAsync<T>(string tableName, T document) where T : BaseMongoEntity
         {
-            return _database.GetCollection<T>(tableName).InsertOneAsync(document);
+            return database.GetCollection<T>(tableName).InsertOneAsync(document);
         }
 
         /// <summary>
         /// 根据关联对象动态的创建与关联对象相关的数据表
         /// </summary>
+        /// <typeparam name="TForeign"></typeparam>
         /// <typeparam name="T"></typeparam>
-        /// <param name="foreignObj">上级对象</param>
+        /// <param name="foreignDocument">上级对象</param>
         /// <param name="document"></param>
         /// <returns></returns>
-        public Task DynamicTableAddAsync<T>(T foreignObj, T document) where T : BaseMongoEntity
+        public Task DynamicTableAddAsync<TForeign, T>(T foreignDocument, T document)
+            where TForeign : BaseMongoEntity
+            where T : BaseMongoEntity
         {
-            return _database.GetCollection<T>($"{typeof(T).Name}_{foreignObj.Id}").InsertOneAsync(document);
+            return database.GetCollection<T>($"{typeof(T).Name}_{foreignDocument.Id}").InsertOneAsync(document);
         }
 
         #endregion

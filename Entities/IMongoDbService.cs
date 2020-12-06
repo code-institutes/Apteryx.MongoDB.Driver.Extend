@@ -15,7 +15,10 @@ namespace Apteryx.MongoDB.Driver.Extend.Entities
         void Add<T>(string tableName, T document) where T : BaseMongoEntity;
         void AddMany<T>(IEnumerable<T> documents) where T : BaseMongoEntity;
         void AddMany<T>(string tableName, IEnumerable<T> documents) where T : BaseMongoEntity;
-        void DynamicTableAdd<T>(T foreignDocument, T document) where T : BaseMongoEntity;
+
+        void DynamicTableAdd<TForeign, T>(TForeign foreignDocument, T document)
+            where TForeign : BaseMongoEntity
+            where T : BaseMongoEntity;
 
         #endregion
 
@@ -25,13 +28,16 @@ namespace Apteryx.MongoDB.Driver.Extend.Entities
         Task AddAsync<T>(string tableName, T obj) where T : BaseMongoEntity;
         void AddManyAsync<T>(IEnumerable<T> documents) where T : BaseMongoEntity;
         void AddManyAsync<T>(string tableName, IEnumerable<T> documents) where T : BaseMongoEntity;
-        Task DynamicTableAddAsync<T>(T foreignObj, T obj) where T : BaseMongoEntity;
+
+        Task DynamicTableAddAsync<TForeign, T>(T foreignDocument, T obj)
+            where TForeign : BaseMongoEntity
+            where T : BaseMongoEntity;
 
         #endregion
 
 
 
-        #region 查找(同步)
+        #region 查询(同步)
 
         IEnumerable<T> FindAll<T>() where T : BaseMongoEntity;
         IEnumerable<T> FindAll<T>(string tableName) where T : BaseMongoEntity;
@@ -41,7 +47,8 @@ namespace Apteryx.MongoDB.Driver.Extend.Entities
 
         #endregion
 
-        #region 查找(异步)
+        #region 查询(异步)
+
         Task<IAsyncCursor<T>> FindAllAsync<T>() where T : BaseMongoEntity;
         Task<IAsyncCursor<T>> FindAsync<T>(string tableName) where T : BaseMongoEntity;
         Task<IAsyncCursor<T>> WhereAsync<T>(Expression<Func<T, bool>> filter) where T : BaseMongoEntity;
@@ -115,7 +122,7 @@ namespace Apteryx.MongoDB.Driver.Extend.Entities
             CancellationToken cancellationToken = default(CancellationToken)) where T : BaseMongoEntity;
 
         /// <summary>
-        /// 查找替换单条(自动更新UpdateTime字段)
+        /// 查询替换单条(自动更新UpdateTime字段)
         /// </summary>
         /// <typeparam name="T"></typeparam>
         /// <param name="filter"></param>
@@ -131,7 +138,7 @@ namespace Apteryx.MongoDB.Driver.Extend.Entities
             where T : BaseMongoEntity;
 
         /// <summary>
-        /// 查找替换单条(自动更新UpdateTime字段)
+        /// 查询替换单条(自动更新UpdateTime字段)
         /// </summary>
         /// <typeparam name="T"></typeparam>
         /// <param name="filter"></param>
@@ -211,7 +218,7 @@ namespace Apteryx.MongoDB.Driver.Extend.Entities
             CancellationToken cancellationToken = default(CancellationToken)) where T : BaseMongoEntity;
 
         /// <summary>
-        /// 查找替换单条(自动更新UpdateTime字段)
+        /// 查询替换单条(自动更新UpdateTime字段)
         /// </summary>
         /// <typeparam name="T"></typeparam>
         /// <param name="filter"></param>
@@ -227,7 +234,7 @@ namespace Apteryx.MongoDB.Driver.Extend.Entities
             where T : BaseMongoEntity;
 
         /// <summary>
-        /// 查找替换单条(自动更新UpdateTime字段)
+        /// 查询替换单条(自动更新UpdateTime字段)
         /// </summary>
         /// <typeparam name="T"></typeparam>
         /// <param name="filter"></param>

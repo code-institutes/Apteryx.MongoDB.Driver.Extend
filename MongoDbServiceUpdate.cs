@@ -27,7 +27,7 @@ namespace Apteryx.MongoDB.Driver.Extend
             CancellationToken cancellationToken = default(CancellationToken))
             where T : BaseMongoEntity
         {
-            return _database.GetCollection<T>(typeof(T).Name).UpdateOne(filter,
+            return database.GetCollection<T>(typeof(T).Name).UpdateOne(filter,
                 update.Set(s => s.UpdateTime, DateTime.Now), options, cancellationToken);
         }
 
@@ -47,7 +47,7 @@ namespace Apteryx.MongoDB.Driver.Extend
             CancellationToken cancellationToken = default(CancellationToken))
             where T : BaseMongoEntity
         {
-            return _database.GetCollection<T>(typeof(T).Name).UpdateOne(filter,
+            return database.GetCollection<T>(typeof(T).Name).UpdateOne(filter,
                 update.Set(s => s.UpdateTime, DateTime.Now), options, cancellationToken);
         }
 
@@ -67,7 +67,7 @@ namespace Apteryx.MongoDB.Driver.Extend
             CancellationToken cancellationToken = default(CancellationToken)) where T : BaseMongoEntity
         {
             obj.UpdateTime = DateTime.Now;
-            return _database.GetCollection<T>(typeof(T).Name).ReplaceOne(filter, obj,options,cancellationToken);
+            return database.GetCollection<T>(typeof(T).Name).ReplaceOne(filter, obj,options,cancellationToken);
         }
 
         /// <summary>
@@ -87,11 +87,11 @@ namespace Apteryx.MongoDB.Driver.Extend
             where T : BaseMongoEntity
         {
             obj.UpdateTime = DateTime.Now;
-            return _database.GetCollection<T>(typeof(T).Name).ReplaceOne(filter, obj, options, cancellationToken);
+            return database.GetCollection<T>(typeof(T).Name).ReplaceOne(filter, obj, options, cancellationToken);
         }
 
         /// <summary>
-        /// 查找替换单条(自动更新UpdateTime字段)
+        /// 查询替换单条(自动更新UpdateTime字段)
         /// </summary>
         /// <typeparam name="T"></typeparam>
         /// <param name="filter"></param>
@@ -107,11 +107,11 @@ namespace Apteryx.MongoDB.Driver.Extend
             where T : BaseMongoEntity
         {
             document.UpdateTime = DateTime.Now;
-            return _database.GetCollection<T>(typeof(T).Name).FindOneAndReplace(filter, document, options, cancellationToken);
+            return database.GetCollection<T>(typeof(T).Name).FindOneAndReplace(filter, document, options, cancellationToken);
         }
 
         /// <summary>
-        /// 查找替换单条(自动更新UpdateTime字段)
+        /// 查询替换单条(自动更新UpdateTime字段)
         /// </summary>
         /// <typeparam name="T"></typeparam>
         /// <param name="filter"></param>
@@ -127,7 +127,7 @@ namespace Apteryx.MongoDB.Driver.Extend
             where T : BaseMongoEntity
         {
             document.UpdateTime = DateTime.Now;
-            return _database.GetCollection<T>(typeof(T).Name).FindOneAndReplace(filter, document, options, cancellationToken);
+            return database.GetCollection<T>(typeof(T).Name).FindOneAndReplace(filter, document, options, cancellationToken);
         }
 
         #endregion
@@ -150,7 +150,7 @@ namespace Apteryx.MongoDB.Driver.Extend
             CancellationToken cancellationToken = default(CancellationToken))
             where T : BaseMongoEntity
         {
-            return _database.GetCollection<T>(typeof(T).Name).UpdateOneAsync(filter,
+            return database.GetCollection<T>(typeof(T).Name).UpdateOneAsync(filter,
                 update.Set(s => s.UpdateTime, DateTime.Now), options, cancellationToken);
         }
 
@@ -170,7 +170,7 @@ namespace Apteryx.MongoDB.Driver.Extend
             CancellationToken cancellationToken = default(CancellationToken))
             where T : BaseMongoEntity
         {
-            return _database.GetCollection<T>(typeof(T).Name).UpdateOneAsync(filter,
+            return database.GetCollection<T>(typeof(T).Name).UpdateOneAsync(filter,
                 update.Set(s => s.UpdateTime, DateTime.Now), options, cancellationToken);
         }
 
@@ -191,7 +191,7 @@ namespace Apteryx.MongoDB.Driver.Extend
             where T : BaseMongoEntity
         {
             obj.UpdateTime = DateTime.Now;
-            return _database.GetCollection<T>(typeof(T).Name).ReplaceOneAsync(filter, obj, options, cancellationToken);
+            return database.GetCollection<T>(typeof(T).Name).ReplaceOneAsync(filter, obj, options, cancellationToken);
         }
 
         /// <summary>
@@ -211,11 +211,11 @@ namespace Apteryx.MongoDB.Driver.Extend
             where T : BaseMongoEntity
         {
             obj.UpdateTime = DateTime.Now;
-            return _database.GetCollection<T>(typeof(T).Name).ReplaceOneAsync(filter, obj, options, cancellationToken);
+            return database.GetCollection<T>(typeof(T).Name).ReplaceOneAsync(filter, obj, options, cancellationToken);
         }
 
         /// <summary>
-        /// 查找替换单条(自动更新UpdateTime字段)
+        /// 查询替换单条(自动更新UpdateTime字段)
         /// </summary>
         /// <typeparam name="T"></typeparam>
         /// <param name="filter"></param>
@@ -231,11 +231,11 @@ namespace Apteryx.MongoDB.Driver.Extend
             where T : BaseMongoEntity
         {
             document.UpdateTime = DateTime.Now;
-            return _database.GetCollection<T>(typeof(T).Name).FindOneAndReplaceAsync(filter, document, options, cancellationToken);
+            return database.GetCollection<T>(typeof(T).Name).FindOneAndReplaceAsync(filter, document, options, cancellationToken);
         }
 
         /// <summary>
-        /// 查找替换单条(自动更新UpdateTime字段)
+        /// 查询替换单条(自动更新UpdateTime字段)
         /// </summary>
         /// <typeparam name="T"></typeparam>
         /// <param name="filter"></param>
@@ -251,7 +251,7 @@ namespace Apteryx.MongoDB.Driver.Extend
             where T : BaseMongoEntity
         {
             document.UpdateTime = DateTime.Now;
-            return _database.GetCollection<T>(typeof(T).Name).FindOneAndReplaceAsync(filter, document, options, cancellationToken);
+            return database.GetCollection<T>(typeof(T).Name).FindOneAndReplaceAsync(filter, document, options, cancellationToken);
         }
 
         #endregion
