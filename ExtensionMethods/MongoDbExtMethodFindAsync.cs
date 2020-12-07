@@ -6,7 +6,7 @@ using System.Threading.Tasks;
 using Apteryx.MongoDB.Driver.Extend.Entities;
 using MongoDB.Driver;
 
-namespace apteryx.mongodb.driver.extend.ExtensionMethods
+namespace Apteryx.MongoDB.Driver.Extend.ExtensionMethods
 {
     /// <summary>
     /// MongoDb扩展方法:查询(异步)
@@ -14,6 +14,18 @@ namespace apteryx.mongodb.driver.extend.ExtensionMethods
     public static partial class MongoDbExtensionMethod
     {
         #region 查询(异步)
+
+        /// <summary>
+        /// 查询单条
+        /// </summary>
+        /// <typeparam name="T"></typeparam>
+        /// <param name="collection"></param>
+        /// <param name="filter"></param>
+        /// <returns></returns>
+        public static Task<T> FindOneAsync<T>(this IMongoCollection<T> collection, FilterDefinition<T> filter)
+        {
+            return (collection.Find(filter)).FirstOrDefaultAsync();
+        }
 
         /// <summary>
         /// 查询单条
@@ -45,10 +57,37 @@ namespace apteryx.mongodb.driver.extend.ExtensionMethods
         /// <param name="collection"></param>
         /// <param name="filter"></param>
         /// <returns></returns>
-        public static Task<IEnumerable<T>> WhereAsync<T>(this IMongoCollection<T> collection,
-            Expression<Func<T, bool>> filter)
+        public static Task<IEnumerable<T>> WhereAsync<T>(this IMongoCollection<T> collection, FilterDefinition<T> filter)
         {
             return Task.Run(() => Where(collection, filter));
+        }
+
+        /// <summary>
+        /// 根据条件查询
+        /// </summary>
+        /// <typeparam name="T"></typeparam>
+        /// <param name="collection"></param>
+        /// <param name="filter"></param>
+        /// <returns></returns>
+        public static Task<IEnumerable<T>> WhereAsync<T>(this IMongoCollection<T> collection, Expression<Func<T, bool>> filter)
+        {
+            return Task.Run(() => Where(collection, filter));
+        }
+
+        /// <summary>
+        /// 动态表查询单条
+        /// </summary>
+        /// <typeparam name="TForeign"></typeparam>
+        /// <typeparam name="T"></typeparam>
+        /// <param name="collection"></param>
+        /// <param name="foreignDocument"></param>
+        /// <param name="filter"></param>
+        /// <returns></returns>
+        public static Task<T> DynamicTableFindOneAsync<TForeign, T>(this IMongoCollection<T> collection, TForeign foreignDocument, FilterDefinition<T> filter)
+            where TForeign : BaseMongoEntity
+            where T : BaseMongoEntity
+        {
+            return collection.Database.GetCollection<T>($"{typeof(T).Name}_{foreignDocument.Id}").FindAsync(filter).Result.FirstOrDefaultAsync();
         }
 
         /// <summary>
@@ -89,6 +128,23 @@ namespace apteryx.mongodb.driver.extend.ExtensionMethods
         /// <typeparam name="T"></typeparam>
         /// <param name="collection"></param>
         /// <param name="foreignDocument"></param>
+        /// <param name="filter"></param>
+        /// <returns></returns>
+        public static Task<IEnumerable<T>> DynamicTableWhereAsync<TForeign, T>(this IMongoCollection<T> collection, TForeign foreignDocument, FilterDefinition<T> filter)
+            where TForeign : BaseMongoEntity
+            where T : BaseMongoEntity
+        {
+            return Task.Run(() => DynamicTableWhere(collection, foreignDocument, filter));
+        }
+
+        /// <summary>
+        /// 动态表条件查询
+        /// </summary>
+        /// <typeparam name="TForeign"></typeparam>
+        /// <typeparam name="T"></typeparam>
+        /// <param name="collection"></param>
+        /// <param name="foreignDocument"></param>
+        /// <param name="filter"></param>
         /// <returns></returns>
         public static Task<IEnumerable<T>> DynamicTableWhereAsync<TForeign, T>(this IMongoCollection<T> collection, TForeign foreignDocument, Expression<Func<T, bool>> filter)
             where TForeign : BaseMongoEntity

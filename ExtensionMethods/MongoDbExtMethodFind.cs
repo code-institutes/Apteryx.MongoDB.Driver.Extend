@@ -5,7 +5,7 @@ using System.Text;
 using Apteryx.MongoDB.Driver.Extend.Entities;
 using MongoDB.Driver;
 
-namespace apteryx.mongodb.driver.extend.ExtensionMethods
+namespace Apteryx.MongoDB.Driver.Extend.ExtensionMethods
 {
     /// <summary>
     /// MongoDb扩展方法:查询(同步)
@@ -129,6 +129,7 @@ namespace apteryx.mongodb.driver.extend.ExtensionMethods
         /// <typeparam name="T"></typeparam>
         /// <param name="collection"></param>
         /// <param name="foreignDocument"></param>
+        /// <param name="filter"></param>
         /// <returns></returns>
         public static IEnumerable<T> DynamicTableWhere<TForeign, T>(this IMongoCollection<T> collection, TForeign foreignDocument, FilterDefinition<T> filter)
             where TForeign : BaseMongoEntity
@@ -144,6 +145,7 @@ namespace apteryx.mongodb.driver.extend.ExtensionMethods
         /// <typeparam name="T"></typeparam>
         /// <param name="collection"></param>
         /// <param name="foreignDocument"></param>
+        /// <param name="filter"></param>
         /// <returns></returns>
         public static IEnumerable<T> DynamicTableWhere<TForeign, T>(this IMongoCollection<T> collection, TForeign foreignDocument, Expression<Func<T, bool>> filter)
             where TForeign : BaseMongoEntity

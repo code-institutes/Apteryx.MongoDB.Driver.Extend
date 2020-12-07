@@ -3,58 +3,63 @@ using MongoDB.Driver;
 using System;
 using System.Collections.Generic;
 using System.Linq.Expressions;
-using System.Threading.Tasks;
 
 namespace Apteryx.MongoDB.Driver.Extend
 {
     public abstract partial class MongoDbService
     {
-        #region 同步方法
+        #region 查询(同步)
 
-        public IEnumerable<T> FindAll<T>() where T : BaseMongoEntity
+        public T FindOne<T>(FilterDefinition<T> filter) where T : BaseMongoEntity
         {
-            return database.GetCollection<T>(typeof(T).Name).Find(_ => true).ToEnumerable();
-        }
-        public IEnumerable<T> FindAll<T>(string tableName) where T : BaseMongoEntity
-        {
-            return database.GetCollection<T>(tableName).Find(_ => true).ToEnumerable();
-        }
-        public IEnumerable<T> Where<T>(Expression<Func<T, bool>> filter) where T : BaseMongoEntity
-        {
-            return database.GetCollection<T>(typeof(T).Name).Find(filter).ToEnumerable();
+            return database.GetCollection<T>(typeof(T).Name).Find(filter).FirstOrDefault();
         }
         public T FindOne<T>(Expression<Func<T, bool>> filter) where T : BaseMongoEntity
         {
             return database.GetCollection<T>(typeof(T).Name).Find(filter).FirstOrDefault();
         }
-        public T FindOne<T>(string tableName, Expression<Func<T, bool>> filter) where T : BaseMongoEntity
+        public T DynamicTableFindOne<TForeign, T>(TForeign foreignDocument, FilterDefinition<T> filter)
+            where TForeign : BaseMongoEntity
+            where T : BaseMongoEntity
         {
-            return database.GetCollection<T>(tableName).Find(filter).FirstOrDefault();
+            return database.GetCollection<T>($"{typeof(T).Name}_{foreignDocument.Id}").Find(filter).FirstOrDefault();
+        }
+        public T DynamicTableFindOne<TForeign, T>(TForeign foreignDocument, Expression<Func<T, bool>> filter)
+            where TForeign : BaseMongoEntity
+            where T : BaseMongoEntity
+        {
+            return database.GetCollection<T>($"{typeof(T).Name}_{foreignDocument.Id}").Find(filter).FirstOrDefault();
+        }
+        public IEnumerable<T> FindAll<T>() where T : BaseMongoEntity
+        {
+            return database.GetCollection<T>(typeof(T).Name).Find(_ => true).ToEnumerable();
+        }
+        public IEnumerable<T> DynamicTableFindAll<TForeign, T>(TForeign foreignDocument)
+            where TForeign : BaseMongoEntity
+            where T : BaseMongoEntity
+        {
+            return database.GetCollection<T>($"{typeof(T).Name}_{foreignDocument.Id}").Find(_=>true).ToEnumerable();
+        }
+        public IEnumerable<T> Where<T>(FilterDefinition<T> filter) where T : BaseMongoEntity
+        {
+            return database.GetCollection<T>(typeof(T).Name).Find(filter).ToEnumerable();
+        }
+        public IEnumerable<T> Where<T>(Expression<Func<T, bool>> filter) where T : BaseMongoEntity
+        {
+            return database.GetCollection<T>(typeof(T).Name).Find(filter).ToEnumerable();
+        }
+        public IEnumerable<T> DynamicTableWhere<TForeign, T>(TForeign foreignDocument, FilterDefinition<T> filter)
+            where TForeign : BaseMongoEntity
+            where T : BaseMongoEntity
+        {
+            return database.GetCollection<T>($"{typeof(T).Name}_{foreignDocument.Id}").Find(filter).ToEnumerable();
         }
 
-        #endregion
-
-
-        #region 异步方法
-        public Task<IAsyncCursor<T>> FindAllAsync<T>() where T : BaseMongoEntity
+        public IEnumerable<T> DynamicTableWhere<TForeign, T>(TForeign foreignDocument, Expression<Func<T, bool>> filter)
+            where TForeign : BaseMongoEntity
+            where T : BaseMongoEntity
         {
-            return database.GetCollection<T>(typeof(T).Name).FindAsync(_ => true);
-        }
-        public Task<IAsyncCursor<T>> FindAsync<T>(string tableName) where T : BaseMongoEntity
-        {
-            return database.GetCollection<T>(tableName).FindAsync(_ => true);
-        }
-        public Task<IAsyncCursor<T>> WhereAsync<T>(Expression<Func<T, bool>> filter) where T : BaseMongoEntity
-        {
-            return database.GetCollection<T>(typeof(T).Name).FindAsync(filter);
-        }
-        public Task<T> FindOneAsync<T>(Expression<Func<T, bool>> filter) where T : BaseMongoEntity
-        {
-            return database.GetCollection<T>(typeof(T).Name).Find(filter).FirstOrDefaultAsync();
-        }
-        public Task<T> FindOneAsync<T>(string tableName, Expression<Func<T, bool>> filter) where T : BaseMongoEntity
-        {
-            return database.GetCollection<T>(tableName).Find(filter).FirstOrDefaultAsync();
+            return database.GetCollection<T>($"{typeof(T).Name}_{foreignDocument.Id}").Find(filter).ToEnumerable();
         }
 
         #endregion

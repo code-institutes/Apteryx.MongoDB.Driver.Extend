@@ -1,20 +1,17 @@
 ﻿using System;
-using System.Collections.Generic;
 using System.Linq.Expressions;
-using System.Text;
 using System.Threading;
-using System.Threading.Tasks;
 using Apteryx.MongoDB.Driver.Extend.Entities;
 using MongoDB.Driver;
 
-namespace apteryx.mongodb.driver.extend.ExtensionMethods
+namespace Apteryx.MongoDB.Driver.Extend.ExtensionMethods
 {
     /// <summary>
-    /// 
+    /// MongoDb扩展方法:更新(同步)
     /// </summary>
     public static partial class MongoDbExtensionMethod
     {
-        #region 更新(异步)
+        #region 更新(同步)
 
         /// <summary>
         /// 更新单条(自动更新UpdateTime字段)
@@ -26,7 +23,7 @@ namespace apteryx.mongodb.driver.extend.ExtensionMethods
         /// <param name="options"></param>
         /// <param name="cancellationToken"></param>
         /// <returns></returns>
-        public static Task<UpdateResult> WhereUpdateOneAsync<T>(
+        public static UpdateResult WhereUpdateOne<T>(
             this IMongoCollection<T> collection,
             FilterDefinition<T> filter,
             UpdateDefinition<T> update,
@@ -34,11 +31,7 @@ namespace apteryx.mongodb.driver.extend.ExtensionMethods
             CancellationToken cancellationToken = default(CancellationToken))
             where T : BaseMongoEntity
         {
-            return collection.UpdateOneAsync(
-                filter,
-                update.Set(s => s.UpdateTime, DateTime.Now),
-                options,
-                cancellationToken);
+            return collection.UpdateOne(filter, update.Set(s => s.UpdateTime, DateTime.Now), options, cancellationToken);
         }
 
         /// <summary>
@@ -51,7 +44,7 @@ namespace apteryx.mongodb.driver.extend.ExtensionMethods
         /// <param name="options"></param>
         /// <param name="cancellationToken"></param>
         /// <returns></returns>
-        public static Task<UpdateResult> WhereUpdateOneAsync<T>(
+        public static UpdateResult WhereUpdateOne<T>(
             this IMongoCollection<T> collection,
             Expression<Func<T, bool>> filter,
             UpdateDefinition<T> update,
@@ -59,11 +52,7 @@ namespace apteryx.mongodb.driver.extend.ExtensionMethods
             CancellationToken cancellationToken = default(CancellationToken))
             where T : BaseMongoEntity
         {
-            return collection.UpdateOneAsync(
-                filter,
-                update.Set(s => s.UpdateTime, DateTime.Now),
-                options,
-                cancellationToken);
+            return collection.UpdateOne(filter, update.Set(s => s.UpdateTime, DateTime.Now), options, cancellationToken);
         }
 
         /// <summary>
@@ -78,7 +67,7 @@ namespace apteryx.mongodb.driver.extend.ExtensionMethods
         /// <param name="options"></param>
         /// <param name="cancellationToken"></param>
         /// <returns></returns>
-        public static Task<UpdateResult> DynamicTableWhereUpdateOneAsync<TForeign, T>(
+        public static UpdateResult DynamicTableWhereUpdateOne<TForeign, T>(
             this IMongoCollection<T> collection,
             TForeign foreignDocument,
             FilterDefinition<T> filter,
@@ -88,11 +77,8 @@ namespace apteryx.mongodb.driver.extend.ExtensionMethods
             where TForeign : BaseMongoEntity
             where T : BaseMongoEntity
         {
-            return collection.Database.GetCollection<T>($"{typeof(T).Name}_{foreignDocument.Id}").UpdateOneAsync(
-                filter,
-                update.Set(s => s.UpdateTime, DateTime.Now),
-                options,
-                cancellationToken);
+            return collection.Database.GetCollection<T>($"{typeof(T).Name}_{foreignDocument.Id}")
+                .UpdateOne(filter, update.Set(s => s.UpdateTime, DateTime.Now), options, cancellationToken);
         }
 
         /// <summary>
@@ -107,7 +93,7 @@ namespace apteryx.mongodb.driver.extend.ExtensionMethods
         /// <param name="options"></param>
         /// <param name="cancellationToken"></param>
         /// <returns></returns>
-        public static Task<UpdateResult> DynamicTableWhereUpdateOneAsync<TForeign, T>(
+        public static UpdateResult DynamicTableWhereUpdateOne<TForeign, T>(
             this IMongoCollection<T> collection,
             TForeign foreignDocument,
             Expression<Func<T, bool>> filter,
@@ -117,11 +103,8 @@ namespace apteryx.mongodb.driver.extend.ExtensionMethods
             where TForeign : BaseMongoEntity
             where T : BaseMongoEntity
         {
-            return collection.Database.GetCollection<T>($"{typeof(T).Name}_{foreignDocument.Id}").UpdateOneAsync(
-                filter,
-                update.Set(s => s.UpdateTime, DateTime.Now),
-                options,
-                cancellationToken);
+            return collection.Database.GetCollection<T>($"{typeof(T).Name}_{foreignDocument.Id}")
+                .UpdateOne(filter, update.Set(s => s.UpdateTime, DateTime.Now), options, cancellationToken);
         }
 
         /// <summary>
@@ -134,32 +117,7 @@ namespace apteryx.mongodb.driver.extend.ExtensionMethods
         /// <param name="options"></param>
         /// <param name="cancellationToken"></param>
         /// <returns></returns>
-        public static Task<T> FindOneAndUpdateOneAsync<T>(
-            this IMongoCollection<T> collection,
-            FilterDefinition<T> filter,
-            UpdateDefinition<T> update,
-            FindOneAndUpdateOptions<T, T> options = null,
-            CancellationToken cancellationToken = default(CancellationToken))
-            where T : BaseMongoEntity
-        {
-            return collection.FindOneAndUpdateAsync(
-                filter,
-                update.Set(s => s.UpdateTime, DateTime.Now),
-                options,
-                cancellationToken);
-        }
-
-        /// <summary>
-        /// 查询更新单条(自动更新UpdateTime字段)
-        /// </summary>
-        /// <typeparam name="T"></typeparam>
-        /// <param name="collection"></param>
-        /// <param name="filter"></param>
-        /// <param name="update"></param>
-        /// <param name="options"></param>
-        /// <param name="cancellationToken"></param>
-        /// <returns></returns>
-        public static Task<T> FindOneAndUpdateOneAsync<T>(
+        public static T FindOneAndUpdateOne<T>(
             this IMongoCollection<T> collection,
             Expression<Func<T, bool>> filter,
             UpdateDefinition<T> update,
@@ -167,11 +125,28 @@ namespace apteryx.mongodb.driver.extend.ExtensionMethods
             CancellationToken cancellationToken = default(CancellationToken))
             where T : BaseMongoEntity
         {
-            return collection.FindOneAndUpdateAsync(
-                filter,
-                update.Set(s => s.UpdateTime, DateTime.Now),
-                options,
-                cancellationToken);
+            return collection.FindOneAndUpdate(filter, update.Set(s => s.UpdateTime, DateTime.Now), options, cancellationToken);
+        }
+
+        /// <summary>
+        /// 查询更新单条(自动更新UpdateTime字段)
+        /// </summary>
+        /// <typeparam name="T"></typeparam>
+        /// <param name="collection"></param>
+        /// <param name="filter"></param>
+        /// <param name="update"></param>
+        /// <param name="options"></param>
+        /// <param name="cancellationToken"></param>
+        /// <returns></returns>
+        public static T FindOneAndUpdateOne<T>(
+            this IMongoCollection<T> collection,
+            FilterDefinition<T> filter,
+            UpdateDefinition<T> update,
+            FindOneAndUpdateOptions<T, T> options = null,
+            CancellationToken cancellationToken = default(CancellationToken))
+            where T : BaseMongoEntity
+        {
+            return collection.FindOneAndUpdate(filter, update.Set(s => s.UpdateTime, DateTime.Now), options, cancellationToken);
         }
 
         /// <summary>
@@ -186,7 +161,7 @@ namespace apteryx.mongodb.driver.extend.ExtensionMethods
         /// <param name="options"></param>
         /// <param name="cancellationToken"></param>
         /// <returns></returns>
-        public static Task<T> DynamicTableFindOneAndUpdateOneAsync<TForeign, T>(
+        public static T DynamicTableFindOneAndUpdateOne<TForeign, T>(
             this IMongoCollection<T> collection,
             TForeign foreignDocument,
             FilterDefinition<T> filter,
@@ -196,11 +171,8 @@ namespace apteryx.mongodb.driver.extend.ExtensionMethods
             where TForeign : BaseMongoEntity
             where T : BaseMongoEntity
         {
-            return collection.Database.GetCollection<T>($"{typeof(T).Name}_{foreignDocument.Id}").FindOneAndUpdateAsync(
-                filter,
-                update.Set(s => s.UpdateTime, DateTime.Now),
-                options,
-                cancellationToken);
+            return collection.Database.GetCollection<T>($"{typeof(T).Name}_{foreignDocument.Id}")
+                .FindOneAndUpdate(filter, update.Set(s => s.UpdateTime, DateTime.Now), options, cancellationToken);
         }
 
         /// <summary>
@@ -215,7 +187,7 @@ namespace apteryx.mongodb.driver.extend.ExtensionMethods
         /// <param name="options"></param>
         /// <param name="cancellationToken"></param>
         /// <returns></returns>
-        public static Task<T> DynamicTableFindOneAndUpdateOneAsync<TForeign, T>(
+        public static T DynamicTableFindOneAndUpdateOne<TForeign, T>(
             this IMongoCollection<T> collection,
             TForeign foreignDocument,
             Expression<Func<T, bool>> filter,
@@ -225,11 +197,8 @@ namespace apteryx.mongodb.driver.extend.ExtensionMethods
             where TForeign : BaseMongoEntity
             where T : BaseMongoEntity
         {
-            return collection.Database.GetCollection<T>($"{typeof(T).Name}_{foreignDocument.Id}").FindOneAndUpdateAsync(
-                filter,
-                update.Set(s => s.UpdateTime, DateTime.Now),
-                options,
-                cancellationToken);
+            return collection.Database.GetCollection<T>($"{typeof(T).Name}_{foreignDocument.Id}")
+                .FindOneAndUpdate(filter, update.Set(s => s.UpdateTime, DateTime.Now), options, cancellationToken);
         }
 
         /// <summary>
@@ -242,32 +211,7 @@ namespace apteryx.mongodb.driver.extend.ExtensionMethods
         /// <param name="options"></param>
         /// <param name="cancellationToken"></param>
         /// <returns></returns>
-        public static Task<UpdateResult> WhereUpdateManyAsync<T>(
-            this IMongoCollection<T> collection,
-            FilterDefinition<T> filter,
-            UpdateDefinition<T> update,
-            UpdateOptions options = null,
-            CancellationToken cancellationToken = default(CancellationToken))
-            where T : BaseMongoEntity
-        {
-            return collection.UpdateManyAsync(
-                filter,
-                update.Set(s => s.UpdateTime, DateTime.Now),
-                options,
-                cancellationToken);
-        }
-
-        /// <summary>
-        /// 查询更新多条(自动更新UpdateTime字段)
-        /// </summary>
-        /// <typeparam name="T"></typeparam>
-        /// <param name="collection"></param>
-        /// <param name="filter"></param>
-        /// <param name="update"></param>
-        /// <param name="options"></param>
-        /// <param name="cancellationToken"></param>
-        /// <returns></returns>
-        public static Task<UpdateResult> WhereUpdateManyAsync<T>(
+        public static UpdateResult WhereUpdateMany<T>(
             this IMongoCollection<T> collection,
             Expression<Func<T, bool>> filter,
             UpdateDefinition<T> update,
@@ -275,11 +219,28 @@ namespace apteryx.mongodb.driver.extend.ExtensionMethods
             CancellationToken cancellationToken = default(CancellationToken))
             where T : BaseMongoEntity
         {
-            return collection.UpdateManyAsync(
-                filter,
-                update.Set(s => s.UpdateTime, DateTime.Now),
-                options,
-                cancellationToken);
+            return collection.UpdateMany(filter, update.Set(s => s.UpdateTime, DateTime.Now), options, cancellationToken);
+        }
+
+        /// <summary>
+        /// 查询更新多条(自动更新UpdateTime字段)
+        /// </summary>
+        /// <typeparam name="T"></typeparam>
+        /// <param name="collection"></param>
+        /// <param name="filter"></param>
+        /// <param name="update"></param>
+        /// <param name="options"></param>
+        /// <param name="cancellationToken"></param>
+        /// <returns></returns>
+        public static UpdateResult WhereUpdateMany<T>(
+            this IMongoCollection<T> collection,
+            FilterDefinition<T> filter,
+            UpdateDefinition<T> update,
+            UpdateOptions options = null,
+            CancellationToken cancellationToken = default(CancellationToken))
+            where T : BaseMongoEntity
+        {
+            return collection.UpdateMany(filter, update.Set(s => s.UpdateTime, DateTime.Now), options, cancellationToken);
         }
 
         /// <summary>
@@ -294,7 +255,7 @@ namespace apteryx.mongodb.driver.extend.ExtensionMethods
         /// <param name="options"></param>
         /// <param name="cancellationToken"></param>
         /// <returns></returns>
-        public static Task<UpdateResult> DynamicTableWhereUpdateManyAsync<TForeign, T>(
+        public static UpdateResult DynamicTableWhereUpdateMany<TForeign, T>(
             this IMongoCollection<T> collection,
             TForeign foreignDocument,
             Expression<Func<T, bool>> filter,
@@ -304,11 +265,8 @@ namespace apteryx.mongodb.driver.extend.ExtensionMethods
             where TForeign : BaseMongoEntity
             where T : BaseMongoEntity
         {
-            return collection.Database.GetCollection<T>($"{typeof(T).Name}_{foreignDocument.Id}").UpdateManyAsync(
-                filter,
-                update.Set(s => s.UpdateTime, DateTime.Now),
-                options,
-                cancellationToken);
+            return collection.Database.GetCollection<T>($"{typeof(T).Name}_{foreignDocument.Id}")
+                .UpdateMany(filter, update.Set(s => s.UpdateTime, DateTime.Now), options, cancellationToken);
         }
 
         /// <summary>
@@ -323,7 +281,7 @@ namespace apteryx.mongodb.driver.extend.ExtensionMethods
         /// <param name="options"></param>
         /// <param name="cancellationToken"></param>
         /// <returns></returns>
-        public static Task<UpdateResult> DynamicTableWhereUpdateManyAsync<TForeign, T>(
+        public static UpdateResult DynamicTableWhereUpdateMany<TForeign, T>(
             this IMongoCollection<T> collection,
             TForeign foreignDocument,
             FilterDefinition<T> filter,
@@ -333,11 +291,8 @@ namespace apteryx.mongodb.driver.extend.ExtensionMethods
             where TForeign : BaseMongoEntity
             where T : BaseMongoEntity
         {
-            return collection.Database.GetCollection<T>($"{typeof(T).Name}_{foreignDocument.Id}").UpdateManyAsync(
-                filter,
-                update.Set(s => s.UpdateTime, DateTime.Now),
-                options,
-                cancellationToken);
+            return collection.Database.GetCollection<T>($"{typeof(T).Name}_{foreignDocument.Id}")
+                .UpdateMany(filter, update.Set(s => s.UpdateTime, DateTime.Now), options, cancellationToken);
         }
 
         #endregion

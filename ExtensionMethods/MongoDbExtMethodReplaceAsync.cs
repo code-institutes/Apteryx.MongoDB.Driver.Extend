@@ -1,14 +1,15 @@
 ﻿using System;
 using System.Linq.Expressions;
 using System.Threading;
+using System.Threading.Tasks;
 using Apteryx.MongoDB.Driver.Extend.Entities;
 using MongoDB.Driver;
 
-namespace apteryx.mongodb.driver.extend.ExtensionMethods
+namespace Apteryx.MongoDB.Driver.Extend.ExtensionMethods
 {
     public static partial class MongoDbExtensionMethod
     {
-        #region 替换(同步)
+        #region 替换(异步)
 
         /// <summary>
         /// 替换单条(自动更新UpdateTime字段)
@@ -20,7 +21,7 @@ namespace apteryx.mongodb.driver.extend.ExtensionMethods
         /// <param name="options"></param>
         /// <param name="cancellationToken"></param>
         /// <returns></returns>
-        public static ReplaceOneResult WhereReplaceOne<T>(
+        public static Task<ReplaceOneResult> WhereReplaceOneAsync<T>(
             this IMongoCollection<T> collection,
             FilterDefinition<T> filter,
             T document,
@@ -29,7 +30,7 @@ namespace apteryx.mongodb.driver.extend.ExtensionMethods
             where T : BaseMongoEntity
         {
             document.UpdateTime = DateTime.Now;
-            return collection.ReplaceOne(filter, document, options, cancellationToken);
+            return collection.ReplaceOneAsync(filter, document, options, cancellationToken);
         }
 
         /// <summary>
@@ -42,7 +43,7 @@ namespace apteryx.mongodb.driver.extend.ExtensionMethods
         /// <param name="options"></param>
         /// <param name="cancellationToken"></param>
         /// <returns></returns>
-        public static ReplaceOneResult WhereReplaceOne<T>(
+        public static Task<ReplaceOneResult> WhereReplaceOneAsync<T>(
             this IMongoCollection<T> collection,
             Expression<Func<T, bool>> filter,
             T document,
@@ -51,7 +52,7 @@ namespace apteryx.mongodb.driver.extend.ExtensionMethods
             where T : BaseMongoEntity
         {
             document.UpdateTime = DateTime.Now;
-            return collection.ReplaceOne(filter, document, options, cancellationToken);
+            return collection.ReplaceOneAsync(filter, document, options, cancellationToken);
         }
 
         /// <summary>
@@ -66,7 +67,7 @@ namespace apteryx.mongodb.driver.extend.ExtensionMethods
         /// <param name="options"></param>
         /// <param name="cancellationToken"></param>
         /// <returns></returns>
-        public static ReplaceOneResult DynamicTableWhereReplaceOne<TForeign, T>(
+        public static Task<ReplaceOneResult> DynamicTableWhereReplaceOneAsync<TForeign, T>(
             this IMongoCollection<T> collection,
             TForeign foreignDocument,
             FilterDefinition<T> filter,
@@ -77,11 +78,8 @@ namespace apteryx.mongodb.driver.extend.ExtensionMethods
             where T : BaseMongoEntity
         {
             document.UpdateTime = DateTime.Now;
-            return collection.Database.GetCollection<T>($"{typeof(T).Name}_{foreignDocument.Id}").ReplaceOne(
-                filter,
-                document,
-                options,
-                cancellationToken);
+            return collection.Database.GetCollection<T>($"{typeof(T).Name}_{foreignDocument.Id}")
+                .ReplaceOneAsync(filter, document, options, cancellationToken);
         }
 
         /// <summary>
@@ -96,7 +94,7 @@ namespace apteryx.mongodb.driver.extend.ExtensionMethods
         /// <param name="options"></param>
         /// <param name="cancellationToken"></param>
         /// <returns></returns>
-        public static ReplaceOneResult DynamicTableWhereReplaceOne<TForeign, T>(
+        public static Task<ReplaceOneResult> DynamicTableWhereReplaceOneAsync<TForeign, T>(
             this IMongoCollection<T> collection,
             TForeign foreignDocument,
             Expression<Func<T, bool>> filter,
@@ -107,28 +105,22 @@ namespace apteryx.mongodb.driver.extend.ExtensionMethods
             where T : BaseMongoEntity
         {
             document.UpdateTime = DateTime.Now;
-            return collection.Database.GetCollection<T>($"{typeof(T).Name}_{foreignDocument.Id}").ReplaceOne(
-                filter,
-                document,
-                options,
-                cancellationToken);
+            return collection.Database.GetCollection<T>($"{typeof(T).Name}_{foreignDocument.Id}")
+                .ReplaceOneAsync(filter, document, options, cancellationToken);
         }
 
         /// <summary>
         /// 查询替换单条(自动更新UpdateTime字段)
         /// </summary>
-        /// <typeparam name="TForeign"></typeparam>
         /// <typeparam name="T"></typeparam>
         /// <param name="collection"></param>
-        /// <param name="foreignDocument"></param>
         /// <param name="filter"></param>
         /// <param name="document"></param>
         /// <param name="options"></param>
         /// <param name="cancellationToken"></param>
         /// <returns></returns>
-        public static T FindOneAndReplaceOne<TForeign, T>(
+        public static Task<T> FindOneAndReplaceOneAsync<T>(
             this IMongoCollection<T> collection,
-            TForeign foreignDocument,
             FilterDefinition<T> filter,
             T document,
             FindOneAndReplaceOptions<T, T> options = null,
@@ -136,7 +128,7 @@ namespace apteryx.mongodb.driver.extend.ExtensionMethods
             where T : BaseMongoEntity
         {
             document.UpdateTime = DateTime.Now;
-            return collection.FindOneAndReplace(filter, document, options, cancellationToken);
+            return collection.FindOneAndReplaceAsync(filter, document, options, cancellationToken);
         }
 
         /// <summary>
@@ -149,7 +141,7 @@ namespace apteryx.mongodb.driver.extend.ExtensionMethods
         /// <param name="options"></param>
         /// <param name="cancellationToken"></param>
         /// <returns></returns>
-        public static T FindOneAndReplaceOne<T>(
+        public static Task<T> FindOneAndReplaceOneAsync<T>(
             this IMongoCollection<T> collection,
             Expression<Func<T, bool>> filter,
             T document,
@@ -158,7 +150,7 @@ namespace apteryx.mongodb.driver.extend.ExtensionMethods
             where T : BaseMongoEntity
         {
             document.UpdateTime = DateTime.Now;
-            return collection.FindOneAndReplace(filter, document, options, cancellationToken);
+            return collection.FindOneAndReplaceAsync(filter, document, options, cancellationToken);
         }
 
         /// <summary>
@@ -173,10 +165,10 @@ namespace apteryx.mongodb.driver.extend.ExtensionMethods
         /// <param name="options"></param>
         /// <param name="cancellationToken"></param>
         /// <returns></returns>
-        public static T DynamicTableFindOneAndReplaceOne<TForeign, T>(
+        public static Task<T> DynamicTableFindOneAndReplaceOneAsync<TForeign, T>(
             this IMongoCollection<T> collection,
             TForeign foreignDocument,
-            Expression<Func<T, bool>> filter,
+            FilterDefinition<T> filter,
             T document,
             FindOneAndReplaceOptions<T> options = null,
             CancellationToken cancellationToken = default(CancellationToken))
@@ -184,11 +176,8 @@ namespace apteryx.mongodb.driver.extend.ExtensionMethods
             where T : BaseMongoEntity
         {
             document.UpdateTime = DateTime.Now;
-            return collection.Database.GetCollection<T>($"{typeof(T).Name}_{foreignDocument.Id}").FindOneAndReplace(
-                filter,
-                document,
-                options,
-                cancellationToken);
+            return collection.Database.GetCollection<T>($"{typeof(T).Name}_{foreignDocument.Id}")
+                .FindOneAndReplaceAsync(filter, document, options, cancellationToken);
         }
 
         /// <summary>
@@ -203,10 +192,10 @@ namespace apteryx.mongodb.driver.extend.ExtensionMethods
         /// <param name="options"></param>
         /// <param name="cancellationToken"></param>
         /// <returns></returns>
-        public static T DynamicTableFindOneAndUpdateOne<TForeign, T>(
+        public static Task<T> DynamicTableFindOneAndReplaceOneAsync<TForeign, T>(
             this IMongoCollection<T> collection,
             TForeign foreignDocument,
-            FilterDefinition<T> filter,
+            Expression<Func<T, bool>> filter,
             T document,
             FindOneAndReplaceOptions<T> options = null,
             CancellationToken cancellationToken = default(CancellationToken))
@@ -214,11 +203,8 @@ namespace apteryx.mongodb.driver.extend.ExtensionMethods
             where T : BaseMongoEntity
         {
             document.UpdateTime = DateTime.Now;
-            return collection.Database.GetCollection<T>($"{typeof(T).Name}_{foreignDocument.Id}").FindOneAndReplace(
-                filter,
-                document,
-                options,
-                cancellationToken);
+            return collection.Database.GetCollection<T>($"{typeof(T).Name}_{foreignDocument.Id}")
+                .FindOneAndReplaceAsync(filter, document, options, cancellationToken);
         }
 
         #endregion

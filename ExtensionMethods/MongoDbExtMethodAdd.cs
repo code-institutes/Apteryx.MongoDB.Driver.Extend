@@ -4,7 +4,7 @@ using System.Text;
 using Apteryx.MongoDB.Driver.Extend.Entities;
 using MongoDB.Driver;
 
-namespace apteryx.mongodb.driver.extend.ExtensionMethods
+namespace Apteryx.MongoDB.Driver.Extend.ExtensionMethods
 {
     /// <summary>
     /// MongoDb扩展方法:插入(同步)

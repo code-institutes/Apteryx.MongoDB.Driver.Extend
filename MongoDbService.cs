@@ -1,11 +1,15 @@
-﻿using System.Collections.Generic;
+﻿using System;
+using System.Collections.Generic;
+using System.Linq.Expressions;
+using System.Threading;
+using System.Threading.Tasks;
 using Apteryx.MongoDB.Driver.Extend.Entities;
 using Microsoft.Extensions.Options;
 using MongoDB.Driver;
 
 namespace Apteryx.MongoDB.Driver.Extend
 {
-    public abstract partial class MongoDbService: IMongoDbService
+    public abstract partial class MongoDbService : IMongoDbService
     {
         //定义数据库
         public readonly IMongoDatabase database = null;
@@ -31,5 +35,7 @@ namespace Apteryx.MongoDB.Driver.Extend
             var client = new MongoClient(connsetting.ToMongoUrl());
             database = client.GetDatabase(connsetting.DatabaseName);
         }
+
+
     }
 }
