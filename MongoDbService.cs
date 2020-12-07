@@ -35,7 +35,5 @@ namespace Apteryx.MongoDB.Driver.Extend
             var client = new MongoClient(connsetting.ToMongoUrl());
             database = client.GetDatabase(connsetting.DatabaseName);
         }
-
-
     }
 }

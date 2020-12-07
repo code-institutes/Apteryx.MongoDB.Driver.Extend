@@ -11,7 +11,7 @@ namespace Apteryx.MongoDB.Driver.Extend.Entities
     {
         #region 插入(同步)
 
-        void Add<T>(T obj) where T : BaseMongoEntity;
+        void Add<T>(T document) where T : BaseMongoEntity;
         void AddMany<T>(IEnumerable<T> documents) where T : BaseMongoEntity;
         void DynamicTableAdd<TForeign, T>(TForeign foreignDocument, T document) where TForeign : BaseMongoEntity where T : BaseMongoEntity;
         void DynamicTableAddMany<TForeign, T>(TForeign foreignDocument, IEnumerable<T> documents) where TForeign : BaseMongoEntity where T : BaseMongoEntity;
@@ -22,7 +22,7 @@ namespace Apteryx.MongoDB.Driver.Extend.Entities
 
         #region 插入(异步)
 
-        Task AddAsync<T>(T obj) where T : BaseMongoEntity;
+        Task AddAsync<T>(T document) where T : BaseMongoEntity;
         void AddManyAsync<T>(IEnumerable<T> documents) where T : BaseMongoEntity;
         Task DynamicTableAddAsync<TForeign, T>(T foreignDocument, T document) where TForeign : BaseMongoEntity where T : BaseMongoEntity;
         Task DynamicTableAddManyAsync<TForeign, T>(T foreignDocument, IEnumerable<T> documents) where TForeign : BaseMongoEntity where T : BaseMongoEntity;
@@ -35,8 +35,8 @@ namespace Apteryx.MongoDB.Driver.Extend.Entities
 
         T FindOne<T>(FilterDefinition<T> filter) where T : BaseMongoEntity;
         T FindOne<T>(Expression<Func<T, bool>> filter) where T : BaseMongoEntity;
-        T DynamicTableFindOne<TForeign, T>(TForeign foreignDocument, Expression<Func<T, bool>> filter) where TForeign : BaseMongoEntity where T : BaseMongoEntity;
         T DynamicTableFindOne<TForeign, T>(TForeign foreignDocument, FilterDefinition<T> filter) where TForeign : BaseMongoEntity where T : BaseMongoEntity;
+        T DynamicTableFindOne<TForeign, T>(TForeign foreignDocument, Expression<Func<T, bool>> filter) where TForeign : BaseMongoEntity where T : BaseMongoEntity;
         IEnumerable<T> FindAll<T>() where T : BaseMongoEntity;
         IEnumerable<T> DynamicTableFindAll<TForeign, T>(TForeign foreignDocument) where TForeign : BaseMongoEntity where T : BaseMongoEntity;
         IEnumerable<T> Where<T>(FilterDefinition<T> filter) where T : BaseMongoEntity;
@@ -145,6 +145,20 @@ namespace Apteryx.MongoDB.Driver.Extend.Entities
             ReplaceOptions options = null,
             CancellationToken cancellationToken = default(CancellationToken)) where T : BaseMongoEntity;
 
+        Task<ReplaceOneResult> DynamicTableWhereReplaceOneAsnyc<TForeign, T>(
+            TForeign foreignDocument,
+            FilterDefinition<T> filter,
+            T document,
+            ReplaceOptions options = null,
+            CancellationToken cancellationToken = default(CancellationToken)) where TForeign : BaseMongoEntity where T : BaseMongoEntity;
+
+        Task<ReplaceOneResult> DynamicTableWhereReplaceOneAsnyc<TForeign, T>(
+            TForeign foreignDocument,
+            Expression<Func<T, bool>> filter,
+            T document,
+            ReplaceOptions options = null,
+            CancellationToken cancellationToken = default(CancellationToken)) where TForeign : BaseMongoEntity where T : BaseMongoEntity;
+
         Task<T> FindOneAndReplaceOneAsync<T>(
             FilterDefinition<T> filter,
             T document,
@@ -156,6 +170,20 @@ namespace Apteryx.MongoDB.Driver.Extend.Entities
             T document,
             FindOneAndReplaceOptions<T> options = null,
             CancellationToken cancellationToken = default(CancellationToken)) where T : BaseMongoEntity;
+
+        Task<T> DynamicTableFindOneAndReplaceOneAsync<TForeign, T>(
+            TForeign foreignDocument,
+            FilterDefinition<T> filter,
+            T document,
+            FindOneAndReplaceOptions<T> options = null,
+            CancellationToken cancellationToken = default(CancellationToken)) where TForeign : BaseMongoEntity where T : BaseMongoEntity;
+
+        Task<T> DynamicTableFindOneAndReplaceOneAsync<TForeign, T>(
+            TForeign foreignDocument,
+            Expression<Func<T, bool>> filter,
+            T document,
+            FindOneAndReplaceOptions<T> options = null,
+            CancellationToken cancellationToken = default(CancellationToken)) where TForeign : BaseMongoEntity where T : BaseMongoEntity;
 
         #endregion
 
@@ -175,6 +203,20 @@ namespace Apteryx.MongoDB.Driver.Extend.Entities
             UpdateOptions options = null,
             CancellationToken cancellationToken = default(CancellationToken)) where T : BaseMongoEntity;
 
+        UpdateResult DynamicTableWhereUpdateOne<TForeign, T>(
+            TForeign foreignDocument,
+            FilterDefinition<T> filter,
+            UpdateDefinition<T> update,
+            UpdateOptions options = null,
+            CancellationToken cancellationToken = default(CancellationToken)) where TForeign : BaseMongoEntity where T : BaseMongoEntity;
+
+        UpdateResult DynamicTableWhereUpdateOne<TForeign, T>(
+            TForeign foreignDocument,
+            Expression<Func<T, bool>> filter,
+            UpdateDefinition<T> update,
+            UpdateOptions options = null,
+            CancellationToken cancellationToken = default(CancellationToken)) where TForeign : BaseMongoEntity where T : BaseMongoEntity;
+
         T FindOneAndUpdateOne<T>(
             FilterDefinition<T> filter,
             UpdateDefinition<T> update,
@@ -187,6 +229,20 @@ namespace Apteryx.MongoDB.Driver.Extend.Entities
             FindOneAndUpdateOptions<T> options = null,
             CancellationToken cancellationToken = default(CancellationToken)) where T : BaseMongoEntity;
 
+        T DynamicTableFindOneAndUpdateOne<TForeign, T>(
+            TForeign foreignDocument,
+            FilterDefinition<T> filter,
+            UpdateDefinition<T> update,
+            FindOneAndUpdateOptions<T> options = null,
+            CancellationToken cancellationToken = default(CancellationToken)) where TForeign : BaseMongoEntity where T : BaseMongoEntity;
+
+        T DynamicTableFindOneAndUpdateOne<TForeign, T>(
+            TForeign foreignDocument,
+            Expression<Func<T, bool>> filter,
+            UpdateDefinition<T> update,
+            FindOneAndUpdateOptions<T> options = null,
+            CancellationToken cancellationToken = default(CancellationToken)) where TForeign : BaseMongoEntity where T : BaseMongoEntity;
+
         UpdateResult WhereUpdateMany<T>(
             FilterDefinition<T> filter,
             UpdateDefinition<T> update,
@@ -198,6 +254,20 @@ namespace Apteryx.MongoDB.Driver.Extend.Entities
             UpdateDefinition<T> update,
             UpdateOptions options = null,
             CancellationToken cancellationToken = default(CancellationToken)) where T : BaseMongoEntity;
+
+        UpdateResult DynamicTableWhereUpdateMany<TForeign, T>(
+            TForeign foreignDocument,
+            FilterDefinition<T> filter,
+            UpdateDefinition<T> update,
+            UpdateOptions options = null,
+            CancellationToken cancellationToken = default(CancellationToken)) where TForeign : BaseMongoEntity where T : BaseMongoEntity;
+
+        UpdateResult DynamicTableWhereUpdateMany<TForeign, T>(
+            TForeign foreignDocument,
+            Expression<Func<T, bool>> filter,
+            UpdateDefinition<T> update,
+            UpdateOptions options = null,
+            CancellationToken cancellationToken = default(CancellationToken)) where TForeign : BaseMongoEntity where T : BaseMongoEntity;
 
         #endregion
 
@@ -217,6 +287,20 @@ namespace Apteryx.MongoDB.Driver.Extend.Entities
             UpdateOptions options = null,
             CancellationToken cancellationToken = default(CancellationToken)) where T : BaseMongoEntity;
 
+        Task<UpdateResult> DynamicTableWhereUpdateOneAsync<TForeign, T>(
+            TForeign foreignDocument,
+            FilterDefinition<T> filter,
+            UpdateDefinition<T> update,
+            UpdateOptions options = null,
+            CancellationToken cancellationToken = default(CancellationToken)) where TForeign : BaseMongoEntity where T : BaseMongoEntity;
+
+        Task<UpdateResult> DynamicTableWhereUpdateOneAsync<TForeign, T>(
+            TForeign foreignDocument,
+            Expression<Func<T, bool>> filter,
+            UpdateDefinition<T> update,
+            UpdateOptions options = null,
+            CancellationToken cancellationToken = default(CancellationToken)) where TForeign : BaseMongoEntity where T : BaseMongoEntity;
+
         Task<T> FindOneAndUpdateOneAsync<T>(
             FilterDefinition<T> filter,
             UpdateDefinition<T> update,
@@ -228,6 +312,19 @@ namespace Apteryx.MongoDB.Driver.Extend.Entities
             UpdateDefinition<T> update,
             FindOneAndUpdateOptions<T> options = null,
             CancellationToken cancellationToken = default(CancellationToken)) where T : BaseMongoEntity;
+        Task<T> DynamicTableFindOneAndUpdateOneAsync<TForeign, T>(
+            TForeign foreignDocument,
+            FilterDefinition<T> filter,
+            UpdateDefinition<T> update,
+            FindOneAndUpdateOptions<T> options = null,
+            CancellationToken cancellationToken = default(CancellationToken)) where TForeign : BaseMongoEntity where T : BaseMongoEntity;
+
+        Task<T> DynamicTableFindOneAndUpdateOneAsync<TForeign, T>(
+            TForeign foreignDocument,
+            Expression<Func<T, bool>> filter,
+            UpdateDefinition<T> update,
+            FindOneAndUpdateOptions<T> options = null,
+            CancellationToken cancellationToken = default(CancellationToken)) where TForeign : BaseMongoEntity where T : BaseMongoEntity;
 
         Task<UpdateResult> WhereUpdateManyAsync<T>(
             FilterDefinition<T> filter,
@@ -240,6 +337,19 @@ namespace Apteryx.MongoDB.Driver.Extend.Entities
             UpdateDefinition<T> update,
             UpdateOptions options = null,
             CancellationToken cancellationToken = default(CancellationToken)) where T : BaseMongoEntity;
+        Task<UpdateResult> DynamicTableWhereUpdateManyAsync<TForeign, T>(
+            TForeign foreignDocument,
+            FilterDefinition<T> filter,
+            UpdateDefinition<T> update,
+            UpdateOptions options = null,
+            CancellationToken cancellationToken = default(CancellationToken)) where TForeign : BaseMongoEntity where T : BaseMongoEntity;
+
+        Task<UpdateResult> DynamicTableWhereUpdateManyAsync<TForeign, T>(
+            TForeign foreignDocument,
+            Expression<Func<T, bool>> filter,
+            UpdateDefinition<T> update,
+            UpdateOptions options = null,
+            CancellationToken cancellationToken = default(CancellationToken)) where TForeign : BaseMongoEntity where T : BaseMongoEntity;
 
         #endregion
     }

@@ -52,6 +52,44 @@ namespace Apteryx.MongoDB.Driver.Extend
         }
 
         /// <summary>
+        /// 动态表更新单条(自动更新UpdateTime字段)
+        /// </summary>
+        /// <typeparam name="TForeign"></typeparam>
+        /// <typeparam name="T"></typeparam>
+        /// <param name="foreignDocument"></param>
+        /// <param name="filter"></param>
+        /// <param name="update"></param>
+        /// <param name="options"></param>
+        /// <param name="cancellationToken"></param>
+        /// <returns></returns>
+        public UpdateResult DynamicTableWhereUpdateOne<TForeign, T>(TForeign foreignDocument, FilterDefinition<T> filter, UpdateDefinition<T> update, UpdateOptions options = null, CancellationToken cancellationToken = default(CancellationToken))
+            where TForeign : BaseMongoEntity
+            where T : BaseMongoEntity
+        {
+            return database.GetCollection<T>($"{typeof(T).Name}_{foreignDocument.Id}").UpdateOne(filter,
+                update.Set(s => s.UpdateTime, DateTime.Now), options, cancellationToken);
+        }
+
+        /// <summary>
+        /// 动态表更新单条(自动更新UpdateTime字段)
+        /// </summary>
+        /// <typeparam name="TForeign"></typeparam>
+        /// <typeparam name="T"></typeparam>
+        /// <param name="foreignDocument"></param>
+        /// <param name="filter"></param>
+        /// <param name="update"></param>
+        /// <param name="options"></param>
+        /// <param name="cancellationToken"></param>
+        /// <returns></returns>
+        public UpdateResult DynamicTableWhereUpdateOne<TForeign, T>(TForeign foreignDocument, Expression<Func<T, bool>> filter, UpdateDefinition<T> update, UpdateOptions options = null, CancellationToken cancellationToken = default(CancellationToken))
+            where TForeign : BaseMongoEntity
+            where T : BaseMongoEntity
+        {
+            return database.GetCollection<T>($"{typeof(T).Name}_{foreignDocument.Id}").UpdateOne(filter,
+                update.Set(s => s.UpdateTime, DateTime.Now), options, cancellationToken);
+        }
+
+        /// <summary>
         /// 查询更新单条(自动更新UpdateTime字段)
         /// </summary>
         /// <typeparam name="T"></typeparam>
@@ -92,6 +130,53 @@ namespace Apteryx.MongoDB.Driver.Extend
         }
 
         /// <summary>
+        /// 动态表查询更新单条(自动更新UpdateTime字段)
+        /// </summary>
+        /// <typeparam name="TForeign"></typeparam>
+        /// <typeparam name="T"></typeparam>
+        /// <param name="foreignDocument"></param>
+        /// <param name="filter"></param>
+        /// <param name="update"></param>
+        /// <param name="options"></param>
+        /// <param name="cancellationToken"></param>
+        /// <returns></returns>
+        public T DynamicTableFindOneAndUpdateOne<TForeign, T>(
+            TForeign foreignDocument, FilterDefinition<T> filter,
+            UpdateDefinition<T> update,
+            FindOneAndUpdateOptions<T> options = null,
+            CancellationToken cancellationToken = default(CancellationToken))
+            where TForeign : BaseMongoEntity
+            where T : BaseMongoEntity
+        {
+            return database.GetCollection<T>($"{typeof(T).Name}_{foreignDocument.Id}").FindOneAndUpdate(filter,
+                update.Set(s => s.UpdateTime, DateTime.Now), options, cancellationToken);
+        }
+
+        /// <summary>
+        /// 动态表查询更新单条(自动更新UpdateTime字段)
+        /// </summary>
+        /// <typeparam name="TForeign"></typeparam>
+        /// <typeparam name="T"></typeparam>
+        /// <param name="foreignDocument"></param>
+        /// <param name="filter"></param>
+        /// <param name="update"></param>
+        /// <param name="options"></param>
+        /// <param name="cancellationToken"></param>
+        /// <returns></returns>
+        public T DynamicTableFindOneAndUpdateOne<TForeign, T>(
+            TForeign foreignDocument,
+            Expression<Func<T, bool>> filter,
+            UpdateDefinition<T> update,
+            FindOneAndUpdateOptions<T> options = null,
+            CancellationToken cancellationToken = default(CancellationToken))
+            where TForeign : BaseMongoEntity
+            where T : BaseMongoEntity
+        {
+            return database.GetCollection<T>($"{typeof(T).Name}_{foreignDocument.Id}").FindOneAndUpdate(filter,
+                update.Set(s => s.UpdateTime, DateTime.Now), options, cancellationToken);
+        }
+
+        /// <summary>
         /// 更新多条(自动更新UpdateTime字段)
         /// </summary>
         /// <typeparam name="T"></typeparam>
@@ -128,6 +213,44 @@ namespace Apteryx.MongoDB.Driver.Extend
             where T : BaseMongoEntity
         {
             return database.GetCollection<T>(typeof(T).Name).UpdateMany(filter,
+                update.Set(s => s.UpdateTime, DateTime.Now), options, cancellationToken);
+        }
+
+        /// <summary>
+        /// 动态表更新多条(自动更新UpdateTime字段)
+        /// </summary>
+        /// <typeparam name="TForeign"></typeparam>
+        /// <typeparam name="T"></typeparam>
+        /// <param name="foreignDocument"></param>
+        /// <param name="filter"></param>
+        /// <param name="update"></param>
+        /// <param name="options"></param>
+        /// <param name="cancellationToken"></param>
+        /// <returns></returns>
+        public UpdateResult DynamicTableWhereUpdateMany<TForeign, T>(TForeign foreignDocument, FilterDefinition<T> filter, UpdateDefinition<T> update, UpdateOptions options = null, CancellationToken cancellationToken = default(CancellationToken))
+            where TForeign : BaseMongoEntity
+            where T : BaseMongoEntity
+        {
+            return database.GetCollection<T>($"{typeof(T).Name}_{foreignDocument.Id}").UpdateMany(filter,
+                update.Set(s => s.UpdateTime, DateTime.Now), options, cancellationToken);
+        }
+
+        /// <summary>
+        /// 动态表更新多条(自动更新UpdateTime字段)
+        /// </summary>
+        /// <typeparam name="TForeign"></typeparam>
+        /// <typeparam name="T"></typeparam>
+        /// <param name="foreignDocument"></param>
+        /// <param name="filter"></param>
+        /// <param name="update"></param>
+        /// <param name="options"></param>
+        /// <param name="cancellationToken"></param>
+        /// <returns></returns>
+        public UpdateResult DynamicTableWhereUpdateMany<TForeign, T>(TForeign foreignDocument, Expression<Func<T, bool>> filter, UpdateDefinition<T> update, UpdateOptions options = null, CancellationToken cancellationToken = default(CancellationToken))
+            where TForeign : BaseMongoEntity
+            where T : BaseMongoEntity
+        {
+            return database.GetCollection<T>($"{typeof(T).Name}_{foreignDocument.Id}").UpdateMany(filter,
                 update.Set(s => s.UpdateTime, DateTime.Now), options, cancellationToken);
         }
 
