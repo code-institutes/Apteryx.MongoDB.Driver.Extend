@@ -23,8 +23,9 @@ namespace Apteryx.MongoDB.Driver.Extend.ExtensionMethods
         /// <param name="filter"></param>
         /// <returns></returns>
         public static Task<T> FindOneAsync<T>(this IMongoCollection<T> collection, FilterDefinition<T> filter)
+            where T : BaseMongoEntity
         {
-            return (collection.Find(filter)).FirstOrDefaultAsync();
+            return Task.Run(() => FindOne(collection, filter));
         }
 
         /// <summary>
@@ -35,8 +36,9 @@ namespace Apteryx.MongoDB.Driver.Extend.ExtensionMethods
         /// <param name="filter"></param>
         /// <returns></returns>
         public static Task<T> FindOneAsync<T>(this IMongoCollection<T> collection, Expression<Func<T, bool>> filter)
+            where T : BaseMongoEntity
         {
-            return (collection.Find(filter)).FirstOrDefaultAsync();
+            return Task.Run(() => FindOne(collection, filter));
         }
 
         /// <summary>
@@ -46,6 +48,7 @@ namespace Apteryx.MongoDB.Driver.Extend.ExtensionMethods
         /// <param name="collection"></param>
         /// <returns></returns>
         public static Task<IEnumerable<T>> FindAllAsync<T>(this IMongoCollection<T> collection)
+            where T : BaseMongoEntity
         {
             return Task.Run(() => FindAll(collection));
         }
@@ -58,6 +61,7 @@ namespace Apteryx.MongoDB.Driver.Extend.ExtensionMethods
         /// <param name="filter"></param>
         /// <returns></returns>
         public static Task<IEnumerable<T>> WhereAsync<T>(this IMongoCollection<T> collection, FilterDefinition<T> filter)
+            where T : BaseMongoEntity
         {
             return Task.Run(() => Where(collection, filter));
         }
@@ -70,6 +74,7 @@ namespace Apteryx.MongoDB.Driver.Extend.ExtensionMethods
         /// <param name="filter"></param>
         /// <returns></returns>
         public static Task<IEnumerable<T>> WhereAsync<T>(this IMongoCollection<T> collection, Expression<Func<T, bool>> filter)
+            where T : BaseMongoEntity
         {
             return Task.Run(() => Where(collection, filter));
         }
@@ -87,7 +92,7 @@ namespace Apteryx.MongoDB.Driver.Extend.ExtensionMethods
             where TForeign : BaseMongoEntity
             where T : BaseMongoEntity
         {
-            return collection.Database.GetCollection<T>($"{typeof(T).Name}_{foreignDocument.Id}").FindAsync(filter).Result.FirstOrDefaultAsync();
+            return Task.Run(() => DynamicTableFindOneAsync(collection, foreignDocument, filter));
         }
 
         /// <summary>
@@ -103,7 +108,7 @@ namespace Apteryx.MongoDB.Driver.Extend.ExtensionMethods
             where TForeign : BaseMongoEntity
             where T : BaseMongoEntity
         {
-            return collection.Database.GetCollection<T>($"{typeof(T).Name}_{foreignDocument.Id}").FindAsync(filter).Result.FirstOrDefaultAsync();
+            return Task.Run(() => DynamicTableFindOneAsync(collection, foreignDocument, filter));
         }
 
         /// <summary>

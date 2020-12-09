@@ -47,6 +47,7 @@ namespace Apteryx.MongoDB.Driver.Extend.ExtensionMethods
         /// <param name="collection"></param>
         /// <returns></returns>
         public static IEnumerable<T> FindAll<T>(this IMongoCollection<T> collection)
+            where T : BaseMongoEntity
         {
             return collection.Find(_ => true).ToEnumerable();
         }
@@ -59,6 +60,7 @@ namespace Apteryx.MongoDB.Driver.Extend.ExtensionMethods
         /// <param name="filte"></param>
         /// <returns></returns>
         public static IEnumerable<T> Where<T>(this IMongoCollection<T> collection, FilterDefinition<T> filte)
+            where T : BaseMongoEntity
         {
             return collection.Find(filte).ToEnumerable();
         }
@@ -71,6 +73,7 @@ namespace Apteryx.MongoDB.Driver.Extend.ExtensionMethods
         /// <param name="filte"></param>
         /// <returns></returns>
         public static IEnumerable<T> Where<T>(this IMongoCollection<T> collection, Expression<Func<T, bool>> filte)
+            where T : BaseMongoEntity
         {
             return collection.Find(filte).ToEnumerable();
         }

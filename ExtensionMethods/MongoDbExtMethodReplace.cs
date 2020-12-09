@@ -120,9 +120,8 @@ namespace Apteryx.MongoDB.Driver.Extend.ExtensionMethods
         /// <param name="options"></param>
         /// <param name="cancellationToken"></param>
         /// <returns></returns>
-        public static T FindOneAndReplaceOne<TForeign, T>(
+        public static T FindOneAndReplaceOne<T>(
             this IMongoCollection<T> collection,
-            TForeign foreignDocument,
             FilterDefinition<T> filter,
             T document,
             FindOneAndReplaceOptions<T, T> options = null,
@@ -170,7 +169,7 @@ namespace Apteryx.MongoDB.Driver.Extend.ExtensionMethods
         public static T DynamicTableFindOneAndReplaceOne<TForeign, T>(
             this IMongoCollection<T> collection,
             TForeign foreignDocument,
-            Expression<Func<T, bool>> filter,
+            FilterDefinition<T> filter,
             T document,
             FindOneAndReplaceOptions<T> options = null,
             CancellationToken cancellationToken = default(CancellationToken))
@@ -194,10 +193,10 @@ namespace Apteryx.MongoDB.Driver.Extend.ExtensionMethods
         /// <param name="options"></param>
         /// <param name="cancellationToken"></param>
         /// <returns></returns>
-        public static T DynamicTableFindOneAndUpdateOne<TForeign, T>(
+        public static T DynamicTableFindOneAndReplaceOne<TForeign, T>(
             this IMongoCollection<T> collection,
             TForeign foreignDocument,
-            FilterDefinition<T> filter,
+            Expression<Func<T, bool>> filter,
             T document,
             FindOneAndReplaceOptions<T> options = null,
             CancellationToken cancellationToken = default(CancellationToken))

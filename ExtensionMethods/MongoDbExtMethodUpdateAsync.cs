@@ -32,7 +32,7 @@ namespace Apteryx.MongoDB.Driver.Extend.ExtensionMethods
             CancellationToken cancellationToken = default(CancellationToken))
             where T : BaseMongoEntity
         {
-            return collection.UpdateOneAsync(filter, update.Set(s => s.UpdateTime, DateTime.Now), options, cancellationToken);
+            return Task.Run(() => WhereUpdateOne(collection, filter, update, options, cancellationToken));
         }
 
         /// <summary>
@@ -53,7 +53,7 @@ namespace Apteryx.MongoDB.Driver.Extend.ExtensionMethods
             CancellationToken cancellationToken = default(CancellationToken))
             where T : BaseMongoEntity
         {
-            return collection.UpdateOneAsync(filter, update.Set(s => s.UpdateTime, DateTime.Now), options, cancellationToken);
+            return Task.Run(() => WhereUpdateOne(collection, filter, update, options, cancellationToken));
         }
 
         /// <summary>
@@ -78,8 +78,7 @@ namespace Apteryx.MongoDB.Driver.Extend.ExtensionMethods
             where TForeign : BaseMongoEntity
             where T : BaseMongoEntity
         {
-            return collection.Database.GetCollection<T>($"{typeof(T).Name}_{foreignDocument.Id}")
-                .UpdateOneAsync(filter, update.Set(s => s.UpdateTime, DateTime.Now), options, cancellationToken);
+            return Task.Run(() => DynamicTableWhereUpdateOne(collection,foreignDocument, filter, update, options, cancellationToken));
         }
 
         /// <summary>
@@ -104,8 +103,7 @@ namespace Apteryx.MongoDB.Driver.Extend.ExtensionMethods
             where TForeign : BaseMongoEntity
             where T : BaseMongoEntity
         {
-            return collection.Database.GetCollection<T>($"{typeof(T).Name}_{foreignDocument.Id}")
-                .UpdateOneAsync(filter, update.Set(s => s.UpdateTime, DateTime.Now), options, cancellationToken);
+            return Task.Run(() => DynamicTableWhereUpdateOne(collection, foreignDocument, filter, update, options, cancellationToken));
         }
 
         /// <summary>
@@ -122,11 +120,11 @@ namespace Apteryx.MongoDB.Driver.Extend.ExtensionMethods
             this IMongoCollection<T> collection,
             FilterDefinition<T> filter,
             UpdateDefinition<T> update,
-            FindOneAndUpdateOptions<T, T> options = null,
+            FindOneAndUpdateOptions<T> options = null,
             CancellationToken cancellationToken = default(CancellationToken))
             where T : BaseMongoEntity
         {
-            return collection.FindOneAndUpdateAsync(filter, update.Set(s => s.UpdateTime, DateTime.Now), options, cancellationToken);
+            return Task.Run(() => FindOneAndUpdateOne(collection, filter, update, options, cancellationToken));
         }
 
         /// <summary>
@@ -143,11 +141,11 @@ namespace Apteryx.MongoDB.Driver.Extend.ExtensionMethods
             this IMongoCollection<T> collection,
             Expression<Func<T, bool>> filter,
             UpdateDefinition<T> update,
-            FindOneAndUpdateOptions<T, T> options = null,
+            FindOneAndUpdateOptions<T> options = null,
             CancellationToken cancellationToken = default(CancellationToken))
             where T : BaseMongoEntity
         {
-            return collection.FindOneAndUpdateAsync(filter, update.Set(s => s.UpdateTime, DateTime.Now), options, cancellationToken);
+            return Task.Run(() => FindOneAndUpdateOne(collection, filter, update, options, cancellationToken));
         }
 
         /// <summary>
@@ -172,8 +170,7 @@ namespace Apteryx.MongoDB.Driver.Extend.ExtensionMethods
             where TForeign : BaseMongoEntity
             where T : BaseMongoEntity
         {
-            return collection.Database.GetCollection<T>($"{typeof(T).Name}_{foreignDocument.Id}")
-                .FindOneAndUpdateAsync(filter, update.Set(s => s.UpdateTime, DateTime.Now), options, cancellationToken);
+            return Task.Run(() => DynamicTableFindOneAndUpdateOne(collection,foreignDocument, filter, update, options, cancellationToken));
         }
 
         /// <summary>
@@ -198,8 +195,7 @@ namespace Apteryx.MongoDB.Driver.Extend.ExtensionMethods
             where TForeign : BaseMongoEntity
             where T : BaseMongoEntity
         {
-            return collection.Database.GetCollection<T>($"{typeof(T).Name}_{foreignDocument.Id}")
-                .FindOneAndUpdateAsync(filter, update.Set(s => s.UpdateTime, DateTime.Now), options, cancellationToken);
+            return Task.Run(() => DynamicTableFindOneAndUpdateOne(collection, foreignDocument, filter, update, options, cancellationToken));
         }
 
         /// <summary>
@@ -220,7 +216,7 @@ namespace Apteryx.MongoDB.Driver.Extend.ExtensionMethods
             CancellationToken cancellationToken = default(CancellationToken))
             where T : BaseMongoEntity
         {
-            return collection.UpdateManyAsync(filter, update.Set(s => s.UpdateTime, DateTime.Now), options, cancellationToken);
+            return Task.Run(() => WhereUpdateMany(collection, filter, update, options, cancellationToken));
         }
 
         /// <summary>
@@ -241,7 +237,7 @@ namespace Apteryx.MongoDB.Driver.Extend.ExtensionMethods
             CancellationToken cancellationToken = default(CancellationToken))
             where T : BaseMongoEntity
         {
-            return collection.UpdateManyAsync(filter, update.Set(s => s.UpdateTime, DateTime.Now), options, cancellationToken);
+            return Task.Run(() => WhereUpdateMany(collection, filter, update, options, cancellationToken));
         }
 
         /// <summary>
@@ -266,8 +262,7 @@ namespace Apteryx.MongoDB.Driver.Extend.ExtensionMethods
             where TForeign : BaseMongoEntity
             where T : BaseMongoEntity
         {
-            return collection.Database.GetCollection<T>($"{typeof(T).Name}_{foreignDocument.Id}")
-                .UpdateManyAsync(filter, update.Set(s => s.UpdateTime, DateTime.Now), options, cancellationToken);
+            return Task.Run(() => WhereUpdateMany(collection, filter, update, options, cancellationToken));
         }
 
         /// <summary>
@@ -292,8 +287,7 @@ namespace Apteryx.MongoDB.Driver.Extend.ExtensionMethods
             where TForeign : BaseMongoEntity
             where T : BaseMongoEntity
         {
-            return collection.Database.GetCollection<T>($"{typeof(T).Name}_{foreignDocument.Id}")
-                .UpdateManyAsync(filter, update.Set(s => s.UpdateTime, DateTime.Now), options, cancellationToken);
+            return Task.Run(() => DynamicTableWhereUpdateMany(collection,foreignDocument, filter, update, options, cancellationToken));
         }
 
         #endregion
