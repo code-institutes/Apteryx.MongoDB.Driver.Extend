@@ -16,19 +16,7 @@ namespace Apteryx.MongoDB.Driver.Extend
         /// <returns></returns>
         public Task AddAsync<T>(T document) where T : BaseMongoEntity
         {
-            return database.GetCollection<T>(typeof(T).Name).InsertOneAsync(document);
-        }
-
-        /// <summary>
-        /// 插入单条
-        /// </summary>
-        /// <typeparam name="T"></typeparam>
-        /// <param name="tableName">数据库表明</param>
-        /// <param name="document"></param>
-        /// <returns></returns>
-        public Task AddAsync<T>(string tableName, T document) where T : BaseMongoEntity
-        {
-            return database.GetCollection<T>(tableName).InsertOneAsync(document);
+            return Task.Run(() => Add(document));
         }
 
         /// <summary>
@@ -36,14 +24,9 @@ namespace Apteryx.MongoDB.Driver.Extend
         /// </summary>
         /// <typeparam name="T"></typeparam>
         /// <param name="documents"></param>
-        public void AddManyAsync<T>(IEnumerable<T> documents) where T : BaseMongoEntity
+        public Task AddManyAsync<T>(IEnumerable<T> documents) where T : BaseMongoEntity
         {
-            database.GetCollection<T>(typeof(T).Name).InsertManyAsync(documents);
-        }
-
-        public void AddManyAsync<T>(string tableName, IEnumerable<T> documents) where T : BaseMongoEntity
-        {
-            database.GetCollection<T>(tableName).InsertManyAsync(documents);
+            return Task.Run(() => AddMany(documents));
         }
 
         /// <summary>
@@ -58,7 +41,7 @@ namespace Apteryx.MongoDB.Driver.Extend
             where TForeign : BaseMongoEntity
             where T : BaseMongoEntity
         {
-            return database.GetCollection<T>($"{typeof(T).Name}_{foreignDocument.Id}").InsertOneAsync(document);
+            return Task.Run(() => DynamicTableAdd(foreignDocument,document));
         }
 
         /// <summary>
@@ -73,7 +56,7 @@ namespace Apteryx.MongoDB.Driver.Extend
             where TForeign : BaseMongoEntity
             where T : BaseMongoEntity
         {
-            return database.GetCollection<T>($"{typeof(T).Name}_{foreignDocument.Id}").InsertManyAsync(documents);
+            return Task.Run(() => DynamicTableAddMany(foreignDocument, documents));
         }
 
         #endregion

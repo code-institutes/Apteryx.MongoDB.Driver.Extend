@@ -23,7 +23,7 @@ namespace Apteryx.MongoDB.Driver.Extend.Entities
         #region 插入(异步)
 
         Task AddAsync<T>(T document) where T : BaseMongoEntity;
-        void AddManyAsync<T>(IEnumerable<T> documents) where T : BaseMongoEntity;
+        Task AddManyAsync<T>(IEnumerable<T> documents) where T : BaseMongoEntity;
         Task DynamicTableAddAsync<TForeign, T>(T foreignDocument, T document) where TForeign : BaseMongoEntity where T : BaseMongoEntity;
         Task DynamicTableAddManyAsync<TForeign, T>(T foreignDocument, IEnumerable<T> documents) where TForeign : BaseMongoEntity where T : BaseMongoEntity;
 

@@ -20,8 +20,9 @@ namespace Apteryx.MongoDB.Driver.Extend.ExtensionMethods
         /// <param name="document"></param>
         /// <returns></returns>
         public static Task AddAsync<T>(this IMongoCollection<T> collection, T document)
+        where T:BaseMongoEntity
         {
-            return collection.InsertOneAsync(document);
+            return Task.Run(() => Add(collection,document));
         }
 
         /// <summary>
@@ -31,8 +32,9 @@ namespace Apteryx.MongoDB.Driver.Extend.ExtensionMethods
         /// <param name="collection"></param>
         /// <param name="documents"></param>
         public static Task AddManyAsync<T>(this IMongoCollection<T> collection, IEnumerable<T> documents)
+            where T : BaseMongoEntity
         {
-            return collection.InsertManyAsync(documents);
+            return Task.Run(() => AddMany(collection, documents));
         }
 
         /// <summary>
@@ -48,8 +50,7 @@ namespace Apteryx.MongoDB.Driver.Extend.ExtensionMethods
             where T : BaseMongoEntity
             where TForeign : BaseMongoEntity
         {
-            return collection.Database.GetCollection<T>($"{typeof(T).Name}_{foreignDocument.Id}")
-                .InsertOneAsync(document);
+            return Task.Run(() => DynamicTableAdd(collection,foreignDocument, document));
         }
 
         /// <summary>
@@ -65,8 +66,7 @@ namespace Apteryx.MongoDB.Driver.Extend.ExtensionMethods
             where T : BaseMongoEntity
             where TForeign : BaseMongoEntity
         {
-            return collection.Database.GetCollection<T>($"{typeof(T).Name}_{foreignDocument.Id}")
-                .InsertManyAsync(documents);
+            return Task.Run(() => DynamicTableAddMany(collection, foreignDocument, documents));
         }
 
         #endregion
