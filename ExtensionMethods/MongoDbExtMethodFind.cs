@@ -91,11 +91,11 @@ namespace Apteryx.MongoDB.Driver.Extend.ExtensionMethods
         }
 
         /// <summary>
-        /// 根据条件查询
+        /// 查询返回集合
         /// </summary>
-        /// <typeparam name="T"></typeparam>
-        /// <param name="collection"></param>
-        /// <param name="filte"></param>
+        /// <typeparam name="T">文档类型</typeparam>
+        /// <param name="collection">集合</param>
+        /// <param name="filte">Lambda过滤器</param>
         /// <returns></returns>
         public static IEnumerable<T> Where<T>(this IMongoCollection<T> collection, FilterDefinition<T> filte)
             where T : BaseMongoEntity
@@ -104,11 +104,11 @@ namespace Apteryx.MongoDB.Driver.Extend.ExtensionMethods
         }
 
         /// <summary>
-        /// 根据条件查询
+        /// 查询返回集合
         /// </summary>
-        /// <typeparam name="T"></typeparam>
-        /// <param name="collection"></param>
-        /// <param name="filte"></param>
+        /// <typeparam name="T">文档类型</typeparam>
+        /// <param name="collection">集合</param>
+        /// <param name="filte">Lambda过滤器</param>
         /// <returns></returns>
         public static IEnumerable<T> Where<T>(this IMongoCollection<T> collection, Expression<Func<T, bool>> filte)
             where T : BaseMongoEntity
@@ -117,13 +117,58 @@ namespace Apteryx.MongoDB.Driver.Extend.ExtensionMethods
         }
 
         /// <summary>
-        /// 动态表查询单条
+        /// 查询返回集合
         /// </summary>
-        /// <typeparam name="TForeign"></typeparam>
-        /// <typeparam name="T"></typeparam>
-        /// <param name="collection"></param>
-        /// <param name="foreignDocument"></param>
-        /// <param name="filter"></param>
+        /// <typeparam name="T">文档类型</typeparam>
+        /// <param name="collection">集合</param>
+        /// <param name="filte">Lambda过滤器</param>
+        /// <returns></returns>
+        public static IEnumerable<T> Match<T>(this IMongoCollection<T> collection, Expression<Func<T, bool>> filte)
+            where T : BaseMongoEntity
+        {
+            return collection.AsQueryable().Where(filte);
+        }
+
+        /// <summary>
+        /// 动态表查询返回单条
+        /// </summary>
+        /// <typeparam name="TForeign">文档类型</typeparam>
+        /// <typeparam name="T">文档类型</typeparam>
+        /// <param name="collection">集合</param>
+        /// <param name="foreignDocument">文档对象</param>
+        /// <param name="id">主键ID</param>
+        /// <returns></returns>
+        public static T DynamicTableFindOne<TForeign, T>(this IMongoCollection<T> collection, TForeign foreignDocument, string id)
+            where TForeign : BaseMongoEntity
+            where T : BaseMongoEntity
+        {
+            return collection.Database.GetCollection<T>($"{typeof(T).Name}_{foreignDocument.Id}").Find(f=>f.Id == id).FirstOrDefault();
+        }
+
+        /// <summary>
+        /// 动态表查询返回单条
+        /// </summary>
+        /// <typeparam name="TForeign">文档类型</typeparam>
+        /// <typeparam name="T">文档类型</typeparam>
+        /// <param name="collection">集合</param>
+        /// <param name="foreignDocument">文档对象</param>
+        /// <param name="id">主键ID</param>
+        /// <returns></returns>
+        public static T DynamicTableMatchOne<TForeign, T>(this IMongoCollection<T> collection, TForeign foreignDocument, string id)
+            where TForeign : BaseMongoEntity
+            where T : BaseMongoEntity
+        {
+            return collection.Database.GetCollection<T>($"{typeof(T).Name}_{foreignDocument.Id}").AsQueryable().FirstOrDefault(f => f.Id == id);
+        }
+
+        /// <summary>
+        /// 动态表查询返回单条
+        /// </summary>
+        /// <typeparam name="TForeign">文档类型</typeparam>
+        /// <typeparam name="T">文档类型</typeparam>
+        /// <param name="collection">集合</param>
+        /// <param name="foreignDocument">文档对象</param>
+        /// <param name="filter">过滤器</param>
         /// <returns></returns>
         public static T DynamicTableFindOne<TForeign, T>(this IMongoCollection<T> collection, TForeign foreignDocument, FilterDefinition<T> filter)
             where TForeign : BaseMongoEntity
@@ -133,13 +178,13 @@ namespace Apteryx.MongoDB.Driver.Extend.ExtensionMethods
         }
 
         /// <summary>
-        /// 动态表查询单条
+        /// 动态表查询返回单条
         /// </summary>
-        /// <typeparam name="TForeign"></typeparam>
-        /// <typeparam name="T"></typeparam>
-        /// <param name="collection"></param>
-        /// <param name="foreignDocument"></param>
-        /// <param name="filter"></param>
+        /// <typeparam name="TForeign">文档类型</typeparam>
+        /// <typeparam name="T">文档类型</typeparam>
+        /// <param name="collection">集合</param>
+        /// <param name="foreignDocument">文档对象</param>
+        /// <param name="filter">Lambda过滤器</param>
         /// <returns></returns>
         public static T DynamicTableFindOne<TForeign, T>(this IMongoCollection<T> collection, TForeign foreignDocument, Expression<Func<T, bool>> filter)
             where TForeign : BaseMongoEntity
@@ -149,12 +194,28 @@ namespace Apteryx.MongoDB.Driver.Extend.ExtensionMethods
         }
 
         /// <summary>
+        /// 动态表查询返回单条
+        /// </summary>
+        /// <typeparam name="TForeign">文档类型</typeparam>
+        /// <typeparam name="T">文档类型</typeparam>
+        /// <param name="collection">集合</param>
+        /// <param name="foreignDocument">文档对象</param>
+        /// <param name="filter">Lambda过滤器</param>
+        /// <returns></returns>
+        public static T DynamicTableMatchOne<TForeign, T>(this IMongoCollection<T> collection, TForeign foreignDocument, Expression<Func<T, bool>> filter)
+            where TForeign : BaseMongoEntity
+            where T : BaseMongoEntity
+        {
+            return collection.Database.GetCollection<T>($"{typeof(T).Name}_{foreignDocument.Id}").AsQueryable().FirstOrDefault(filter);
+        }
+
+        /// <summary>
         /// 动态表查询全部
         /// </summary>
-        /// <typeparam name="TForeign"></typeparam>
-        /// <typeparam name="T"></typeparam>
-        /// <param name="collection"></param>
-        /// <param name="foreignDocument"></param>
+        /// <typeparam name="TForeign">文档类型</typeparam>
+        /// <typeparam name="T">文档类型</typeparam>
+        /// <param name="collection">集合</param>
+        /// <param name="foreignDocument">文档对象</param>
         /// <returns></returns>
         public static IEnumerable<T> DynamicTableFindAll<TForeign, T>(this IMongoCollection<T> collection, TForeign foreignDocument)
         where TForeign : BaseMongoEntity
@@ -164,13 +225,13 @@ namespace Apteryx.MongoDB.Driver.Extend.ExtensionMethods
         }
 
         /// <summary>
-        /// 动态表条件查询
+        /// 动态表查询返回集合
         /// </summary>
-        /// <typeparam name="TForeign"></typeparam>
-        /// <typeparam name="T"></typeparam>
-        /// <param name="collection"></param>
-        /// <param name="foreignDocument"></param>
-        /// <param name="filter"></param>
+        /// <typeparam name="TForeign">文档类型</typeparam>
+        /// <typeparam name="T">文档类型</typeparam>
+        /// <param name="collection">集合</param>
+        /// <param name="foreignDocument">文档对象</param>
+        /// <param name="filter">过滤器</param>
         /// <returns></returns>
         public static IEnumerable<T> DynamicTableWhere<TForeign, T>(this IMongoCollection<T> collection, TForeign foreignDocument, FilterDefinition<T> filter)
             where TForeign : BaseMongoEntity
@@ -180,19 +241,35 @@ namespace Apteryx.MongoDB.Driver.Extend.ExtensionMethods
         }
 
         /// <summary>
-        /// 动态表条件查询
+        /// 动态表查询返回集合
         /// </summary>
-        /// <typeparam name="TForeign"></typeparam>
-        /// <typeparam name="T"></typeparam>
-        /// <param name="collection"></param>
-        /// <param name="foreignDocument"></param>
-        /// <param name="filter"></param>
+        /// <typeparam name="TForeign">文档类型</typeparam>
+        /// <typeparam name="T">文档类型</typeparam>
+        /// <param name="collection">集合</param>
+        /// <param name="foreignDocument">文档对象</param>
+        /// <param name="filter">过滤器</param>
         /// <returns></returns>
         public static IEnumerable<T> DynamicTableWhere<TForeign, T>(this IMongoCollection<T> collection, TForeign foreignDocument, Expression<Func<T, bool>> filter)
             where TForeign : BaseMongoEntity
             where T : BaseMongoEntity
         {
             return collection.Database.GetCollection<T>($"{typeof(T).Name}_{foreignDocument.Id}").Find(filter).ToEnumerable();
+        }
+
+        /// <summary>
+        /// 动态表查询返回集合
+        /// </summary>
+        /// <typeparam name="TForeign">文档类型</typeparam>
+        /// <typeparam name="T">文档类型</typeparam>
+        /// <param name="collection">集合</param>
+        /// <param name="foreignDocument">文档对象</param>
+        /// <param name="filter">过滤器</param>
+        /// <returns></returns>
+        public static IEnumerable<T> DynamicTableMatch<TForeign, T>(this IMongoCollection<T> collection, TForeign foreignDocument, Expression<Func<T, bool>> filter)
+            where TForeign : BaseMongoEntity
+            where T : BaseMongoEntity
+        {
+            return collection.Database.GetCollection<T>($"{typeof(T).Name}_{foreignDocument.Id}").AsQueryable().Where(filter);
         }
 
         #endregion
