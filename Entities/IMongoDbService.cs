@@ -32,17 +32,23 @@ namespace Apteryx.MongoDB.Driver.Extend.Entities
 
 
         #region 查询(同步)
-
-        T FindOne<T>(FilterDefinition<T> filter) where T : BaseMongoEntity;
-        T FindOne<T>(Expression<Func<T, bool>> filter) where T : BaseMongoEntity;
-        T DynamicTableFindOne<TForeign, T>(TForeign foreignDocument, FilterDefinition<T> filter) where TForeign : BaseMongoEntity where T : BaseMongoEntity;
-        T DynamicTableFindOne<TForeign, T>(TForeign foreignDocument, Expression<Func<T, bool>> filter) where TForeign : BaseMongoEntity where T : BaseMongoEntity;
-        IEnumerable<T> FindAll<T>() where T : BaseMongoEntity;
-        IEnumerable<T> DynamicTableFindAll<TForeign, T>(TForeign foreignDocument) where TForeign : BaseMongoEntity where T : BaseMongoEntity;
-        IEnumerable<T> Where<T>(FilterDefinition<T> filter) where T : BaseMongoEntity;
-        IEnumerable<T> Where<T>(Expression<Func<T, bool>> filter) where T : BaseMongoEntity;
-        IEnumerable<T> DynamicTableWhere<TForeign, T>(TForeign foreignDocument, FilterDefinition<T> filter) where TForeign : BaseMongoEntity where T : BaseMongoEntity;
-        IEnumerable<T> DynamicTableWhere<TForeign, T>(TForeign foreignDocument, Expression<Func<T, bool>> filter) where TForeign : BaseMongoEntity where T : BaseMongoEntity;
+        T FindOne<T>(string id, MongoCollectionSettings settings = null, FindOptions options = null) where T : BaseMongoEntity;
+        T FindOne<T>(string name, string id, MongoCollectionSettings settings = null, FindOptions options = null) where T : BaseMongoEntity;
+        T FindOne<T>(FilterDefinition<T> filter, MongoCollectionSettings settings = null, FindOptions options = null) where T : BaseMongoEntity;
+        T FindOne<T>(string name,FilterDefinition<T> filter, MongoCollectionSettings settings = null, FindOptions options = null) where T : BaseMongoEntity;
+        T FindOne<T>(Expression<Func<T, bool>> filter, MongoCollectionSettings settings = null, FindOptions options = null) where T : BaseMongoEntity;
+        T FindOne<T>(string name,Expression<Func<T, bool>> filter, MongoCollectionSettings settings = null, FindOptions options = null) where T : BaseMongoEntity;
+        T DynamicTableFindOne<TForeign, T>(TForeign foreignDocument, FilterDefinition<T> filter, MongoCollectionSettings settings = null, FindOptions options = null) where TForeign : BaseMongoEntity where T : BaseMongoEntity;
+        T DynamicTableFindOne<TForeign, T>(TForeign foreignDocument, Expression<Func<T, bool>> filter, MongoCollectionSettings settings = null, FindOptions options = null) where TForeign : BaseMongoEntity where T : BaseMongoEntity;
+        IEnumerable<T> FindAll<T>(MongoCollectionSettings settings = null, FindOptions options = null) where T : BaseMongoEntity;
+        IEnumerable<T> FindAll<T>(string name,MongoCollectionSettings settings = null, FindOptions options = null) where T : BaseMongoEntity;
+        IEnumerable<T> DynamicTableFindAll<TForeign, T>(TForeign foreignDocument, MongoCollectionSettings settings = null, FindOptions options = null) where TForeign : BaseMongoEntity where T : BaseMongoEntity;
+        IEnumerable<T> Where<T>(FilterDefinition<T> filter, MongoCollectionSettings settings = null, FindOptions options = null) where T : BaseMongoEntity;
+        IEnumerable<T> Where<T>(string name,FilterDefinition<T> filter, MongoCollectionSettings settings = null, FindOptions options = null) where T : BaseMongoEntity;
+        IEnumerable<T> Where<T>(Expression<Func<T, bool>> filter, MongoCollectionSettings settings = null, FindOptions options = null) where T : BaseMongoEntity;
+        IEnumerable<T> Where<T>(string name, Expression<Func<T, bool>> filter, MongoCollectionSettings settings = null, FindOptions options = null) where T : BaseMongoEntity;
+        IEnumerable<T> DynamicTableWhere<TForeign, T>(TForeign foreignDocument, FilterDefinition<T> filter, MongoCollectionSettings settings = null, FindOptions options = null) where TForeign : BaseMongoEntity where T : BaseMongoEntity;
+        IEnumerable<T> DynamicTableWhere<TForeign, T>(TForeign foreignDocument, Expression<Func<T, bool>> filter, MongoCollectionSettings settings = null, FindOptions options = null) where TForeign : BaseMongoEntity where T : BaseMongoEntity;
 
         #endregion
 
@@ -50,16 +56,23 @@ namespace Apteryx.MongoDB.Driver.Extend.Entities
 
         #region 查询(异步)
 
-        Task<T> FindOneAsync<T>(FilterDefinition<T> filter) where T : BaseMongoEntity;
-        Task<T> FindOneAsync<T>(Expression<Func<T, bool>> filter) where T : BaseMongoEntity;
-        Task<T> DynamicTableFindOneAsync<TForeign, T>(TForeign foreignDocument, FilterDefinition<T> filter) where TForeign : BaseMongoEntity where T : BaseMongoEntity;
-        Task<T> DynamicTableFindOneAsync<TForeign, T>(TForeign foreignDocument, Expression<Func<T, bool>> filter) where TForeign : BaseMongoEntity where T : BaseMongoEntity;
-        Task<IEnumerable<T>> FindAllAsync<T>() where T : BaseMongoEntity;
-        Task<IEnumerable<T>> DynamicTableFindAllAsync<TForeign, T>(TForeign foreignDocument) where TForeign : BaseMongoEntity where T : BaseMongoEntity;
-        Task<IEnumerable<T>> WhereAsync<T>(FilterDefinition<T> filter) where T : BaseMongoEntity;
-        Task<IEnumerable<T>> WhereAsync<T>(Expression<Func<T, bool>> filter) where T : BaseMongoEntity;
-        Task<IEnumerable<T>> DynamicTableWhereAsync<TForeign, T>(TForeign foreignDocument, FilterDefinition<T> filter) where TForeign : BaseMongoEntity where T : BaseMongoEntity;
-        Task<IEnumerable<T>> DynamicTableWhereAsync<TForeign, T>(TForeign foreignDocument, Expression<Func<T, bool>> filter) where TForeign : BaseMongoEntity where T : BaseMongoEntity;
+        Task<T> FindOneAsync<T>(string id, MongoCollectionSettings settings = null, FindOptions options = null) where T : BaseMongoEntity;
+        Task<T> FindOneAsync<T>(string name, string id, MongoCollectionSettings settings = null, FindOptions options = null) where T : BaseMongoEntity;
+        Task<T> FindOneAsync<T>(FilterDefinition<T> filter, MongoCollectionSettings settings = null, FindOptions options = null) where T : BaseMongoEntity;
+        Task<T> FindOneAsync<T>(string name, FilterDefinition<T> filter, MongoCollectionSettings settings = null, FindOptions options = null) where T : BaseMongoEntity;
+        Task<T> FindOneAsync<T>(Expression<Func<T, bool>> filter, MongoCollectionSettings settings = null, FindOptions options = null) where T : BaseMongoEntity;
+        Task<T> FindOneAsync<T>(string name, Expression<Func<T, bool>> filter, MongoCollectionSettings settings = null, FindOptions options = null) where T : BaseMongoEntity;
+        Task<T> DynamicTableFindOneAsync<TForeign, T>(TForeign foreignDocument, FilterDefinition<T> filter, MongoCollectionSettings settings = null, FindOptions options = null) where TForeign : BaseMongoEntity where T : BaseMongoEntity;
+        Task<T> DynamicTableFindOneAsync<TForeign, T>(TForeign foreignDocument, Expression<Func<T, bool>> filter, MongoCollectionSettings settings = null, FindOptions options = null) where TForeign : BaseMongoEntity where T : BaseMongoEntity;
+        Task<IEnumerable<T>> FindAllAsync<T>(MongoCollectionSettings settings = null, FindOptions options = null) where T : BaseMongoEntity;
+        Task<IEnumerable<T>> FindAllAsync<T>(string name, MongoCollectionSettings settings = null, FindOptions options = null) where T : BaseMongoEntity;
+        Task<IEnumerable<T>> DynamicTableFindAllAsync<TForeign, T>(TForeign foreignDocument, MongoCollectionSettings settings = null, FindOptions options = null) where TForeign : BaseMongoEntity where T : BaseMongoEntity;
+        Task<IEnumerable<T>> WhereAsync<T>(FilterDefinition<T> filter, MongoCollectionSettings settings = null, FindOptions options = null) where T : BaseMongoEntity;
+        Task<IEnumerable<T>> WhereAsync<T>(string name, FilterDefinition<T> filter, MongoCollectionSettings settings = null, FindOptions options = null) where T : BaseMongoEntity;
+        Task<IEnumerable<T>> WhereAsync<T>(Expression<Func<T, bool>> filter, MongoCollectionSettings settings = null, FindOptions options = null) where T : BaseMongoEntity;
+        Task<IEnumerable<T>> WhereAsync<T>(string name, Expression<Func<T, bool>> filter, MongoCollectionSettings settings = null, FindOptions options = null) where T : BaseMongoEntity;
+        Task<IEnumerable<T>> DynamicTableWhereAsync<TForeign, T>(TForeign foreignDocument, FilterDefinition<T> filter, MongoCollectionSettings settings = null, FindOptions options = null) where TForeign : BaseMongoEntity where T : BaseMongoEntity;
+        Task<IEnumerable<T>> DynamicTableWhereAsync<TForeign, T>(TForeign foreignDocument, Expression<Func<T, bool>> filter, MongoCollectionSettings settings = null, FindOptions options = null) where TForeign : BaseMongoEntity where T : BaseMongoEntity;
 
         #endregion
 

@@ -2,6 +2,7 @@
 using System.Collections.Generic;
 using System.Linq.Expressions;
 using System.Text;
+using System.Linq;
 using Apteryx.MongoDB.Driver.Extend.Entities;
 using MongoDB.Driver;
 
@@ -15,11 +16,37 @@ namespace Apteryx.MongoDB.Driver.Extend.ExtensionMethods
         #region 查询(同步)
 
         /// <summary>
-        /// 查询单条
+        /// 查询返回单条
         /// </summary>
-        /// <typeparam name="T"></typeparam>
-        /// <param name="collection"></param>
-        /// <param name="filter"></param>
+        /// <typeparam name="T">集合类型</typeparam>
+        /// <param name="collection">集合</param>
+        /// <param name="id">主键ID</param>
+        /// <returns></returns>
+        public static T FindOne<T>(this IMongoCollection<T> collection, string id)
+            where T : BaseMongoEntity
+        {
+            return collection.Find(f=>f.Id == id).FirstOrDefault();
+        }
+
+        /// <summary>
+        /// 查询返回单条
+        /// </summary>
+        /// <typeparam name="T">集合类型</typeparam>
+        /// <param name="collection">集合</param>
+        /// <param name="id">主键ID</param>
+        /// <returns></returns>
+        public static T MatchOne<T>(this IMongoCollection<T> collection, string id)
+            where T : BaseMongoEntity
+        {
+            return collection.AsQueryable().FirstOrDefault(f => f.Id == id);
+        }
+
+        /// <summary>
+        /// 查询返回单条
+        /// </summary>
+        /// <typeparam name="T">集合类型</typeparam>
+        /// <param name="collection">集合</param>
+        /// <param name="filter">过滤器</param>
         /// <returns></returns>
         public static T FindOne<T>(this IMongoCollection<T> collection, FilterDefinition<T> filter)
             where T : BaseMongoEntity
@@ -28,18 +55,29 @@ namespace Apteryx.MongoDB.Driver.Extend.ExtensionMethods
         }
 
         /// <summary>
-        /// 查询单条
+        /// 查询返回单条
         /// </summary>
-        /// <typeparam name="T"></typeparam>
-        /// <param name="collection"></param>
-        /// <param name="filter"></param>
+        /// <typeparam name="T">集合类型</typeparam>
+        /// <param name="collection">集合</param>
+        /// <param name="filter">Lmabda过滤器</param>
         /// <returns></returns>
         public static T FindOne<T>(this IMongoCollection<T> collection, Expression<Func<T, bool>> filter)
             where T : BaseMongoEntity
         {
             return collection.Find(filter).FirstOrDefault();
         }
-
+        /// <summary>
+        /// 查询返回单条
+        /// </summary>
+        /// <typeparam name="T">集合类型</typeparam>
+        /// <param name="collection">集合</param>
+        /// <param name="filter">Lmabda过滤器</param>
+        /// <returns></returns>
+        public static T MatchOne<T>(this IMongoCollection<T> collection, Expression<Func<T, bool>> filter)
+            where T : BaseMongoEntity
+        {
+            return collection.AsQueryable().FirstOrDefault(filter);
+        }
         /// <summary>
         /// 查询全部
         /// </summary>
