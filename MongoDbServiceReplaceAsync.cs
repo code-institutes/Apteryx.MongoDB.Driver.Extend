@@ -64,7 +64,7 @@ namespace Apteryx.MongoDB.Driver.Extend
         /// <param name="options"></param>
         /// <param name="cancellationToken"></param>
         /// <returns></returns>
-        public Task<ReplaceOneResult> DynamicTableWhereReplaceOneAsnyc<TForeign, T>(
+        public Task<ReplaceOneResult> DynamicCollectionWhereReplaceOneAsnyc<TForeign, T>(
             TForeign foreignDocument,
             FilterDefinition<T> filter,
             T document,
@@ -88,7 +88,7 @@ namespace Apteryx.MongoDB.Driver.Extend
         /// <param name="options"></param>
         /// <param name="cancellationToken"></param>
         /// <returns></returns>
-        public Task<ReplaceOneResult> DynamicTableWhereReplaceOneAsnyc<TForeign, T>(
+        public Task<ReplaceOneResult> DynamicCollectionWhereReplaceOneAsnyc<TForeign, T>(
             TForeign foreignDocument,
             Expression<Func<T, bool>> filter,
             T document,
@@ -152,7 +152,7 @@ namespace Apteryx.MongoDB.Driver.Extend
         /// <param name="options"></param>
         /// <param name="cancellationToken"></param>
         /// <returns></returns>
-        public Task<T> DynamicTableFindOneAndReplaceOneAsync<TForeign, T>(
+        public Task<T> DynamicCollectionFindOneAndReplaceOneAsync<TForeign, T>(
             TForeign foreignDocument,
             FilterDefinition<T> filter,
             T document,
@@ -176,7 +176,7 @@ namespace Apteryx.MongoDB.Driver.Extend
         /// <param name="options"></param>
         /// <param name="cancellationToken"></param>
         /// <returns></returns>
-        public Task<T> DynamicTableFindOneAndReplaceOneAsync<TForeign, T>(
+        public Task<T> DynamicCollectionFindOneAndReplaceOneAsync<TForeign, T>(
             TForeign foreignDocument,
             Expression<Func<T, bool>> filter,
             T document,

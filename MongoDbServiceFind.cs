@@ -94,7 +94,7 @@ namespace Apteryx.MongoDB.Driver.Extend
         /// <param name="settings">数据库设置</param>
         /// <param name="options">查找操作设置</param>
         /// <returns></returns>
-        public T DynamicTableFindOne<TForeign, T>(
+        public T DynamicCollectionFindOne<TForeign, T>(
             TForeign foreignDocument, 
             FilterDefinition<T> filter, 
             MongoCollectionSettings settings = null, 
@@ -114,7 +114,7 @@ namespace Apteryx.MongoDB.Driver.Extend
         /// <param name="settings">数据库设置</param>
         /// <param name="options">查找操作设置</param>
         /// <returns></returns>
-        public T DynamicTableFindOne<TForeign, T>(
+        public T DynamicCollectionFindOne<TForeign, T>(
             TForeign foreignDocument, 
             Expression<Func<T, bool>> filter, 
             MongoCollectionSettings settings = null, 
@@ -156,7 +156,7 @@ namespace Apteryx.MongoDB.Driver.Extend
         /// <param name="settings">数据库设置</param>
         /// <param name="options">查找操作设置</param>
         /// <returns></returns>
-        public IEnumerable<T> DynamicTableFindAll<TForeign, T>(TForeign foreignDocument, MongoCollectionSettings settings = null, FindOptions options = null)
+        public IEnumerable<T> DynamicCollectionFindAll<TForeign, T>(TForeign foreignDocument, MongoCollectionSettings settings = null, FindOptions options = null)
             where TForeign : BaseMongoEntity
             where T : BaseMongoEntity
         {
@@ -222,7 +222,7 @@ namespace Apteryx.MongoDB.Driver.Extend
         /// <param name="settings">数据库设置</param>
         /// <param name="options">查找操作设置</param>
         /// <returns></returns>
-        public IEnumerable<T> DynamicTableWhere<TForeign, T>(
+        public IEnumerable<T> DynamicCollectionWhere<TForeign, T>(
             TForeign foreignDocument, 
             FilterDefinition<T> filter, 
             MongoCollectionSettings settings = null, 
@@ -242,7 +242,7 @@ namespace Apteryx.MongoDB.Driver.Extend
         /// <param name="settings">数据库设置</param>
         /// <param name="options">查找操作设置</param>
         /// <returns></returns>
-        public IEnumerable<T> DynamicTableWhere<TForeign, T>(
+        public IEnumerable<T> DynamicCollectionWhere<TForeign, T>(
             TForeign foreignDocument, 
             Expression<Func<T, bool>> filter, 
             MongoCollectionSettings settings = null, 

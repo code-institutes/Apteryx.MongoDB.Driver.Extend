@@ -95,7 +95,7 @@ namespace Apteryx.MongoDB.Driver.Extend
         /// <param name="settings">数据库设置</param>
         /// <param name="options">查找操作设置</param>
         /// <returns></returns>
-        public Task<T> DynamicTableFindOneAsync<TForeign, T>(
+        public Task<T> DynamicCollectionFindOneAsync<TForeign, T>(
             TForeign foreignDocument,
             FilterDefinition<T> filter,
             MongoCollectionSettings settings = null,
@@ -103,7 +103,7 @@ namespace Apteryx.MongoDB.Driver.Extend
             where TForeign : BaseMongoEntity
             where T : BaseMongoEntity
         {
-            return Task.Run(() => DynamicTableFindOne<TForeign,T>(foreignDocument, filter, settings, options));
+            return Task.Run(() => DynamicCollectionFindOne<TForeign,T>(foreignDocument, filter, settings, options));
         }
         /// <summary>
         /// 
@@ -115,7 +115,7 @@ namespace Apteryx.MongoDB.Driver.Extend
         /// <param name="settings">数据库设置</param>
         /// <param name="options">查找操作设置</param>
         /// <returns></returns>
-        public Task<T> DynamicTableFindOneAsync<TForeign, T>(
+        public Task<T> DynamicCollectionFindOneAsync<TForeign, T>(
             TForeign foreignDocument,
             Expression<Func<T, bool>> filter,
             MongoCollectionSettings settings = null,
@@ -123,7 +123,7 @@ namespace Apteryx.MongoDB.Driver.Extend
             where TForeign : BaseMongoEntity
             where T : BaseMongoEntity
         {
-            return Task.Run(() => DynamicTableFindOne<TForeign, T>(foreignDocument, filter, settings, options));
+            return Task.Run(() => DynamicCollectionFindOne<TForeign, T>(foreignDocument, filter, settings, options));
         }
         /// <summary>
         /// 查询全部
@@ -157,11 +157,11 @@ namespace Apteryx.MongoDB.Driver.Extend
         /// <param name="settings">数据库设置</param>
         /// <param name="options">查找操作设置</param>
         /// <returns></returns>
-        public Task<IEnumerable<T>> DynamicTableFindAllAsync<TForeign, T>(TForeign foreignDocument, MongoCollectionSettings settings = null, FindOptions options = null)
+        public Task<IEnumerable<T>> DynamicCollectionFindAllAsync<TForeign, T>(TForeign foreignDocument, MongoCollectionSettings settings = null, FindOptions options = null)
             where TForeign : BaseMongoEntity
             where T : BaseMongoEntity
         {
-            return Task.Run(() => DynamicTableFindAll<TForeign,T>(foreignDocument,settings, options));
+            return Task.Run(() => DynamicCollectionFindAll<TForeign,T>(foreignDocument,settings, options));
         }
         /// <summary>
         /// 查询返回集合
@@ -223,7 +223,7 @@ namespace Apteryx.MongoDB.Driver.Extend
         /// <param name="settings">数据库设置</param>
         /// <param name="options">查找操作设置</param>
         /// <returns></returns>
-        public Task<IEnumerable<T>> DynamicTableWhereAsync<TForeign, T>(
+        public Task<IEnumerable<T>> DynamicCollectionWhereAsync<TForeign, T>(
             TForeign foreignDocument,
             FilterDefinition<T> filter,
             MongoCollectionSettings settings = null,
@@ -231,7 +231,7 @@ namespace Apteryx.MongoDB.Driver.Extend
             where TForeign : BaseMongoEntity
             where T : BaseMongoEntity
         {
-            return Task.Run(() => DynamicTableWhere<TForeign,T>(foreignDocument,filter, settings, options));
+            return Task.Run(() => DynamicCollectionWhere<TForeign,T>(foreignDocument,filter, settings, options));
         }
         /// <summary>
         /// 查询返回集合
@@ -243,7 +243,7 @@ namespace Apteryx.MongoDB.Driver.Extend
         /// <param name="settings">数据库设置</param>
         /// <param name="options">查找操作设置</param>
         /// <returns></returns>
-        public Task<IEnumerable<T>> DynamicTableWhereAsync<TForeign, T>(
+        public Task<IEnumerable<T>> DynamicCollectionWhereAsync<TForeign, T>(
             TForeign foreignDocument,
             Expression<Func<T, bool>> filter,
             MongoCollectionSettings settings = null,
@@ -251,7 +251,7 @@ namespace Apteryx.MongoDB.Driver.Extend
             where TForeign : BaseMongoEntity
             where T : BaseMongoEntity
         {
-            return Task.Run(() => DynamicTableWhere<TForeign, T>(foreignDocument, filter, settings, options));
+            return Task.Run(() => DynamicCollectionWhere<TForeign, T>(foreignDocument, filter, settings, options));
         }
 
         #endregion

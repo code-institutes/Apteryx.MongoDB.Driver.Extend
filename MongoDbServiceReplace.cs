@@ -60,7 +60,7 @@ namespace Apteryx.MongoDB.Driver.Extend
         /// <param name="options"></param>
         /// <param name="cancellationToken"></param>
         /// <returns></returns>
-        public ReplaceOneResult DynamicTableWhereReplaceOne<TForeign, T>(
+        public ReplaceOneResult DynamicCollectionWhereReplaceOne<TForeign, T>(
             TForeign foreignDocument,
             FilterDefinition<T> filter,
             T document,
@@ -85,7 +85,7 @@ namespace Apteryx.MongoDB.Driver.Extend
         /// <param name="options"></param>
         /// <param name="cancellationToken"></param>
         /// <returns></returns>
-        public ReplaceOneResult DynamicTableWhereReplaceOne<TForeign, T>(
+        public ReplaceOneResult DynamicCollectionWhereReplaceOne<TForeign, T>(
             TForeign foreignDocument,
             Expression<Func<T, bool>> filter,
             T document,
@@ -150,7 +150,7 @@ namespace Apteryx.MongoDB.Driver.Extend
         /// <param name="options"></param>
         /// <param name="cancellationToken"></param>
         /// <returns></returns>
-        public T DynamicTableFindOneAndReplaceOne<TForeign, T>(TForeign foreignDocument, FilterDefinition<T> filter,
+        public T DynamicCollectionFindOneAndReplaceOne<TForeign, T>(TForeign foreignDocument, FilterDefinition<T> filter,
             T document, FindOneAndReplaceOptions<T> options = null,
             CancellationToken cancellationToken = default(CancellationToken))
             where TForeign : BaseMongoEntity
@@ -171,7 +171,7 @@ namespace Apteryx.MongoDB.Driver.Extend
         /// <param name="options"></param>
         /// <param name="cancellationToken"></param>
         /// <returns></returns>
-        public T DynamicTableFindOneAndReplaceOne<TForeign, T>(TForeign foreignDocument,
+        public T DynamicCollectionFindOneAndReplaceOne<TForeign, T>(TForeign foreignDocument,
             Expression<Func<T, bool>> filter, T document, FindOneAndReplaceOptions<T> options = null,
             CancellationToken cancellationToken = default(CancellationToken))
             where TForeign : BaseMongoEntity

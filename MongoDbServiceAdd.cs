@@ -34,7 +34,7 @@ namespace Apteryx.MongoDB.Driver.Extend
         /// <typeparam name="T"></typeparam>
         /// <param name="foreignDocument">上级对象</param>
         /// <param name="document"></param>
-        public void DynamicTableAdd<TForeign, T>(TForeign foreignDocument, T document)
+        public void DynamicCollectionAdd<TForeign, T>(TForeign foreignDocument, T document)
             where TForeign : BaseMongoEntity
             where T : BaseMongoEntity
         {
@@ -48,7 +48,7 @@ namespace Apteryx.MongoDB.Driver.Extend
         /// <typeparam name="T"></typeparam>
         /// <param name="foreignDocument">上级对象</param>
         /// <param name="documents"></param>
-        public void DynamicTableAddMany<TForeign, T>(TForeign foreignDocument, IEnumerable<T> documents)
+        public void DynamicCollectionAddMany<TForeign, T>(TForeign foreignDocument, IEnumerable<T> documents)
             where TForeign : BaseMongoEntity
             where T : BaseMongoEntity
         {

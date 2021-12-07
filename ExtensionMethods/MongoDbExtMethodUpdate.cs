@@ -67,7 +67,7 @@ namespace Apteryx.MongoDB.Driver.Extend.ExtensionMethods
         /// <param name="options"></param>
         /// <param name="cancellationToken"></param>
         /// <returns></returns>
-        public static UpdateResult DynamicTableWhereUpdateOne<TForeign, T>(
+        public static UpdateResult DynamicCollectionWhereUpdateOne<TForeign, T>(
             this IMongoCollection<T> collection,
             TForeign foreignDocument,
             FilterDefinition<T> filter,
@@ -93,7 +93,7 @@ namespace Apteryx.MongoDB.Driver.Extend.ExtensionMethods
         /// <param name="options"></param>
         /// <param name="cancellationToken"></param>
         /// <returns></returns>
-        public static UpdateResult DynamicTableWhereUpdateOne<TForeign, T>(
+        public static UpdateResult DynamicCollectionWhereUpdateOne<TForeign, T>(
             this IMongoCollection<T> collection,
             TForeign foreignDocument,
             Expression<Func<T, bool>> filter,
@@ -161,7 +161,7 @@ namespace Apteryx.MongoDB.Driver.Extend.ExtensionMethods
         /// <param name="options"></param>
         /// <param name="cancellationToken"></param>
         /// <returns></returns>
-        public static T DynamicTableFindOneAndUpdateOne<TForeign, T>(
+        public static T DynamicCollectionFindOneAndUpdateOne<TForeign, T>(
             this IMongoCollection<T> collection,
             TForeign foreignDocument,
             FilterDefinition<T> filter,
@@ -187,7 +187,7 @@ namespace Apteryx.MongoDB.Driver.Extend.ExtensionMethods
         /// <param name="options"></param>
         /// <param name="cancellationToken"></param>
         /// <returns></returns>
-        public static T DynamicTableFindOneAndUpdateOne<TForeign, T>(
+        public static T DynamicCollectionFindOneAndUpdateOne<TForeign, T>(
             this IMongoCollection<T> collection,
             TForeign foreignDocument,
             Expression<Func<T, bool>> filter,
@@ -255,7 +255,7 @@ namespace Apteryx.MongoDB.Driver.Extend.ExtensionMethods
         /// <param name="options"></param>
         /// <param name="cancellationToken"></param>
         /// <returns></returns>
-        public static UpdateResult DynamicTableWhereUpdateMany<TForeign, T>(
+        public static UpdateResult DynamicCollectionWhereUpdateMany<TForeign, T>(
             this IMongoCollection<T> collection,
             TForeign foreignDocument,
             Expression<Func<T, bool>> filter,
@@ -281,7 +281,7 @@ namespace Apteryx.MongoDB.Driver.Extend.ExtensionMethods
         /// <param name="options"></param>
         /// <param name="cancellationToken"></param>
         /// <returns></returns>
-        public static UpdateResult DynamicTableWhereUpdateMany<TForeign, T>(
+        public static UpdateResult DynamicCollectionWhereUpdateMany<TForeign, T>(
             this IMongoCollection<T> collection,
             TForeign foreignDocument,
             FilterDefinition<T> filter,

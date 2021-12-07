@@ -140,11 +140,11 @@ namespace Apteryx.MongoDB.Driver.Extend.ExtensionMethods
         /// <param name="foreignDocument">文档对象</param>
         /// <param name="id">主键ID</param>
         /// <returns></returns>
-        public static Task<T> DynamicTableFindOneAsync<TForeign, T>(this IMongoCollection<T> collection, TForeign foreignDocument, string id)
+        public static Task<T> DynamicCollectionFindOneAsync<TForeign, T>(this IMongoCollection<T> collection, TForeign foreignDocument, string id)
             where TForeign : BaseMongoEntity
             where T : BaseMongoEntity
         {
-            return Task.Run(() => DynamicTableFindOne(collection, foreignDocument, id));
+            return Task.Run(() => DynamicCollectionFindOne(collection, foreignDocument, id));
         }
 
         /// <summary>
@@ -156,11 +156,11 @@ namespace Apteryx.MongoDB.Driver.Extend.ExtensionMethods
         /// <param name="foreignDocument">文档对象</param>
         /// <param name="id">主键ID</param>
         /// <returns></returns>
-        public static Task<T> DynamicTableMatchOneAsync<TForeign, T>(this IMongoCollection<T> collection, TForeign foreignDocument, string id)
+        public static Task<T> DynamicCollectionMatchOneAsync<TForeign, T>(this IMongoCollection<T> collection, TForeign foreignDocument, string id)
             where TForeign : BaseMongoEntity
             where T : BaseMongoEntity
         {
-            return Task.Run(() => DynamicTableMatchOne(collection, foreignDocument, id));
+            return Task.Run(() => DynamicCollectionMatchOne(collection, foreignDocument, id));
         }
 
         /// <summary>
@@ -172,11 +172,11 @@ namespace Apteryx.MongoDB.Driver.Extend.ExtensionMethods
         /// <param name="foreignDocument">文档对象</param>
         /// <param name="filter">过滤器</param>
         /// <returns></returns>
-        public static Task<T> DynamicTableFindOneAsync<TForeign, T>(this IMongoCollection<T> collection, TForeign foreignDocument, FilterDefinition<T> filter)
+        public static Task<T> DynamicCollectionFindOneAsync<TForeign, T>(this IMongoCollection<T> collection, TForeign foreignDocument, FilterDefinition<T> filter)
             where TForeign : BaseMongoEntity
             where T : BaseMongoEntity
         {
-            return Task.Run(() => DynamicTableFindOne(collection, foreignDocument, filter));
+            return Task.Run(() => DynamicCollectionFindOne(collection, foreignDocument, filter));
         }
 
         /// <summary>
@@ -188,11 +188,11 @@ namespace Apteryx.MongoDB.Driver.Extend.ExtensionMethods
         /// <param name="foreignDocument">文档对象</param>
         /// <param name="filter">Lambda过滤器</param>
         /// <returns></returns>
-        public static Task<T> DynamicTableFindOneAsync<TForeign, T>(this IMongoCollection<T> collection, TForeign foreignDocument, Expression<Func<T, bool>> filter)
+        public static Task<T> DynamicCollectionFindOneAsync<TForeign, T>(this IMongoCollection<T> collection, TForeign foreignDocument, Expression<Func<T, bool>> filter)
             where TForeign : BaseMongoEntity
             where T : BaseMongoEntity
         {
-            return Task.Run(() => DynamicTableFindOne(collection, foreignDocument, filter));
+            return Task.Run(() => DynamicCollectionFindOne(collection, foreignDocument, filter));
         }
 
         /// <summary>
@@ -204,11 +204,11 @@ namespace Apteryx.MongoDB.Driver.Extend.ExtensionMethods
         /// <param name="foreignDocument">文档对象</param>
         /// <param name="filter">Lambda过滤器</param>
         /// <returns></returns>
-        public static Task<T> DynamicTableMatchOneAsync<TForeign, T>(this IMongoCollection<T> collection, TForeign foreignDocument, Expression<Func<T, bool>> filter)
+        public static Task<T> DynamicCollectionMatchOneAsync<TForeign, T>(this IMongoCollection<T> collection, TForeign foreignDocument, Expression<Func<T, bool>> filter)
             where TForeign : BaseMongoEntity
             where T : BaseMongoEntity
         {
-            return Task.Run(() => DynamicTableMatchOne(collection, foreignDocument, filter));
+            return Task.Run(() => DynamicCollectionMatchOne(collection, foreignDocument, filter));
         }
 
         /// <summary>
@@ -219,11 +219,11 @@ namespace Apteryx.MongoDB.Driver.Extend.ExtensionMethods
         /// <param name="collection">集合</param>
         /// <param name="foreignDocument">文档对象</param>
         /// <returns></returns>
-        public static Task<IEnumerable<T>> DynamicTableFindAllAsync<TForeign, T>(this IMongoCollection<T> collection, TForeign foreignDocument)
+        public static Task<IEnumerable<T>> DynamicCollectionFindAllAsync<TForeign, T>(this IMongoCollection<T> collection, TForeign foreignDocument)
         where TForeign : BaseMongoEntity
         where T : BaseMongoEntity
         {
-            return Task.Run(() => DynamicTableFindAll(collection, foreignDocument));
+            return Task.Run(() => DynamicCollectionFindAll(collection, foreignDocument));
         }
 
         /// <summary>
@@ -235,11 +235,11 @@ namespace Apteryx.MongoDB.Driver.Extend.ExtensionMethods
         /// <param name="foreignDocument">文档对象</param>
         /// <param name="filter">过滤器</param>
         /// <returns></returns>
-        public static Task<IEnumerable<T>> DynamicTableWhereAsync<TForeign, T>(this IMongoCollection<T> collection, TForeign foreignDocument, FilterDefinition<T> filter)
+        public static Task<IEnumerable<T>> DynamicCollectionWhereAsync<TForeign, T>(this IMongoCollection<T> collection, TForeign foreignDocument, FilterDefinition<T> filter)
             where TForeign : BaseMongoEntity
             where T : BaseMongoEntity
         {
-            return Task.Run(() => DynamicTableWhere(collection, foreignDocument, filter));
+            return Task.Run(() => DynamicCollectionWhere(collection, foreignDocument, filter));
         }
 
         /// <summary>
@@ -251,11 +251,11 @@ namespace Apteryx.MongoDB.Driver.Extend.ExtensionMethods
         /// <param name="foreignDocument">文档对象</param>
         /// <param name="filter">Lambda过滤器</param>
         /// <returns></returns>
-        public static Task<IEnumerable<T>> DynamicTableWhereAsync<TForeign, T>(this IMongoCollection<T> collection, TForeign foreignDocument, Expression<Func<T, bool>> filter)
+        public static Task<IEnumerable<T>> DynamicCollectionWhereAsync<TForeign, T>(this IMongoCollection<T> collection, TForeign foreignDocument, Expression<Func<T, bool>> filter)
             where TForeign : BaseMongoEntity
             where T : BaseMongoEntity
         {
-            return Task.Run(() => DynamicTableWhere(collection, foreignDocument, filter));
+            return Task.Run(() => DynamicCollectionWhere(collection, foreignDocument, filter));
         }
 
         /// <summary>
@@ -267,11 +267,11 @@ namespace Apteryx.MongoDB.Driver.Extend.ExtensionMethods
         /// <param name="foreignDocument">文档对象</param>
         /// <param name="filter">Lambda过滤器</param>
         /// <returns></returns>
-        public static Task<IEnumerable<T>> DynamicTableMatchAsync<TForeign, T>(this IMongoCollection<T> collection, TForeign foreignDocument, Expression<Func<T, bool>> filter)
+        public static Task<IEnumerable<T>> DynamicCollectionMatchAsync<TForeign, T>(this IMongoCollection<T> collection, TForeign foreignDocument, Expression<Func<T, bool>> filter)
             where TForeign : BaseMongoEntity
             where T : BaseMongoEntity
         {
-            return Task.Run(() => DynamicTableMatch(collection, foreignDocument, filter));
+            return Task.Run(() => DynamicCollectionMatch(collection, foreignDocument, filter));
         }
 
         #endregion

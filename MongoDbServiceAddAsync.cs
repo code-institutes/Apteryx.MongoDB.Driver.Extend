@@ -37,11 +37,11 @@ namespace Apteryx.MongoDB.Driver.Extend
         /// <param name="foreignDocument">上级对象</param>
         /// <param name="document"></param>
         /// <returns></returns>
-        public Task DynamicTableAddAsync<TForeign, T>(T foreignDocument, T document)
+        public Task DynamicCollectionAddAsync<TForeign, T>(T foreignDocument, T document)
             where TForeign : BaseMongoEntity
             where T : BaseMongoEntity
         {
-            return Task.Run(() => DynamicTableAdd(foreignDocument,document));
+            return Task.Run(() => DynamicCollectionAdd(foreignDocument,document));
         }
 
         /// <summary>
@@ -52,11 +52,11 @@ namespace Apteryx.MongoDB.Driver.Extend
         /// <param name="foreignDocument">上级对象</param>
         /// <param name="documents"></param>
         /// <returns></returns>
-        public Task DynamicTableAddManyAsync<TForeign, T>(T foreignDocument, IEnumerable<T> documents)
+        public Task DynamicCollectionAddManyAsync<TForeign, T>(T foreignDocument, IEnumerable<T> documents)
             where TForeign : BaseMongoEntity
             where T : BaseMongoEntity
         {
-            return Task.Run(() => DynamicTableAddMany(foreignDocument, documents));
+            return Task.Run(() => DynamicCollectionAddMany(foreignDocument, documents));
         }
 
         #endregion

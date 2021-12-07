@@ -138,7 +138,7 @@ namespace Apteryx.MongoDB.Driver.Extend.ExtensionMethods
         /// <param name="foreignDocument">文档对象</param>
         /// <param name="id">主键ID</param>
         /// <returns></returns>
-        public static T DynamicTableFindOne<TForeign, T>(this IMongoCollection<T> collection, TForeign foreignDocument, string id)
+        public static T DynamicCollectionFindOne<TForeign, T>(this IMongoCollection<T> collection, TForeign foreignDocument, string id)
             where TForeign : BaseMongoEntity
             where T : BaseMongoEntity
         {
@@ -154,7 +154,7 @@ namespace Apteryx.MongoDB.Driver.Extend.ExtensionMethods
         /// <param name="foreignDocument">文档对象</param>
         /// <param name="id">主键ID</param>
         /// <returns></returns>
-        public static T DynamicTableMatchOne<TForeign, T>(this IMongoCollection<T> collection, TForeign foreignDocument, string id)
+        public static T DynamicCollectionMatchOne<TForeign, T>(this IMongoCollection<T> collection, TForeign foreignDocument, string id)
             where TForeign : BaseMongoEntity
             where T : BaseMongoEntity
         {
@@ -170,7 +170,7 @@ namespace Apteryx.MongoDB.Driver.Extend.ExtensionMethods
         /// <param name="foreignDocument">文档对象</param>
         /// <param name="filter">过滤器</param>
         /// <returns></returns>
-        public static T DynamicTableFindOne<TForeign, T>(this IMongoCollection<T> collection, TForeign foreignDocument, FilterDefinition<T> filter)
+        public static T DynamicCollectionFindOne<TForeign, T>(this IMongoCollection<T> collection, TForeign foreignDocument, FilterDefinition<T> filter)
             where TForeign : BaseMongoEntity
             where T : BaseMongoEntity
         {
@@ -186,7 +186,7 @@ namespace Apteryx.MongoDB.Driver.Extend.ExtensionMethods
         /// <param name="foreignDocument">文档对象</param>
         /// <param name="filter">Lambda过滤器</param>
         /// <returns></returns>
-        public static T DynamicTableFindOne<TForeign, T>(this IMongoCollection<T> collection, TForeign foreignDocument, Expression<Func<T, bool>> filter)
+        public static T DynamicCollectionFindOne<TForeign, T>(this IMongoCollection<T> collection, TForeign foreignDocument, Expression<Func<T, bool>> filter)
             where TForeign : BaseMongoEntity
             where T : BaseMongoEntity
         {
@@ -202,7 +202,7 @@ namespace Apteryx.MongoDB.Driver.Extend.ExtensionMethods
         /// <param name="foreignDocument">文档对象</param>
         /// <param name="filter">Lambda过滤器</param>
         /// <returns></returns>
-        public static T DynamicTableMatchOne<TForeign, T>(this IMongoCollection<T> collection, TForeign foreignDocument, Expression<Func<T, bool>> filter)
+        public static T DynamicCollectionMatchOne<TForeign, T>(this IMongoCollection<T> collection, TForeign foreignDocument, Expression<Func<T, bool>> filter)
             where TForeign : BaseMongoEntity
             where T : BaseMongoEntity
         {
@@ -217,7 +217,7 @@ namespace Apteryx.MongoDB.Driver.Extend.ExtensionMethods
         /// <param name="collection">集合</param>
         /// <param name="foreignDocument">文档对象</param>
         /// <returns></returns>
-        public static IEnumerable<T> DynamicTableFindAll<TForeign, T>(this IMongoCollection<T> collection, TForeign foreignDocument)
+        public static IEnumerable<T> DynamicCollectionFindAll<TForeign, T>(this IMongoCollection<T> collection, TForeign foreignDocument)
         where TForeign : BaseMongoEntity
         where T : BaseMongoEntity
         {
@@ -233,7 +233,7 @@ namespace Apteryx.MongoDB.Driver.Extend.ExtensionMethods
         /// <param name="foreignDocument">文档对象</param>
         /// <param name="filter">过滤器</param>
         /// <returns></returns>
-        public static IEnumerable<T> DynamicTableWhere<TForeign, T>(this IMongoCollection<T> collection, TForeign foreignDocument, FilterDefinition<T> filter)
+        public static IEnumerable<T> DynamicCollectionWhere<TForeign, T>(this IMongoCollection<T> collection, TForeign foreignDocument, FilterDefinition<T> filter)
             where TForeign : BaseMongoEntity
             where T : BaseMongoEntity
         {
@@ -249,7 +249,7 @@ namespace Apteryx.MongoDB.Driver.Extend.ExtensionMethods
         /// <param name="foreignDocument">文档对象</param>
         /// <param name="filter">过滤器</param>
         /// <returns></returns>
-        public static IEnumerable<T> DynamicTableWhere<TForeign, T>(this IMongoCollection<T> collection, TForeign foreignDocument, Expression<Func<T, bool>> filter)
+        public static IEnumerable<T> DynamicCollectionWhere<TForeign, T>(this IMongoCollection<T> collection, TForeign foreignDocument, Expression<Func<T, bool>> filter)
             where TForeign : BaseMongoEntity
             where T : BaseMongoEntity
         {
@@ -265,7 +265,7 @@ namespace Apteryx.MongoDB.Driver.Extend.ExtensionMethods
         /// <param name="foreignDocument">文档对象</param>
         /// <param name="filter">过滤器</param>
         /// <returns></returns>
-        public static IEnumerable<T> DynamicTableMatch<TForeign, T>(this IMongoCollection<T> collection, TForeign foreignDocument, Expression<Func<T, bool>> filter)
+        public static IEnumerable<T> DynamicCollectionMatch<TForeign, T>(this IMongoCollection<T> collection, TForeign foreignDocument, Expression<Func<T, bool>> filter)
             where TForeign : BaseMongoEntity
             where T : BaseMongoEntity
         {

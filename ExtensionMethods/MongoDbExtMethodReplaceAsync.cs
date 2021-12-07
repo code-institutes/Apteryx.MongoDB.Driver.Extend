@@ -66,7 +66,7 @@ namespace Apteryx.MongoDB.Driver.Extend.ExtensionMethods
         /// <param name="options"></param>
         /// <param name="cancellationToken"></param>
         /// <returns></returns>
-        public static Task<ReplaceOneResult> DynamicTableWhereReplaceOneAsync<TForeign, T>(
+        public static Task<ReplaceOneResult> DynamicCollectionWhereReplaceOneAsync<TForeign, T>(
             this IMongoCollection<T> collection,
             TForeign foreignDocument,
             FilterDefinition<T> filter,
@@ -76,7 +76,7 @@ namespace Apteryx.MongoDB.Driver.Extend.ExtensionMethods
             where TForeign : BaseMongoEntity
             where T : BaseMongoEntity
         {
-            return Task.Run(() => DynamicTableWhereReplaceOne(collection,foreignDocument, filter, document, options, cancellationToken));
+            return Task.Run(() => DynamicCollectionWhereReplaceOne(collection,foreignDocument, filter, document, options, cancellationToken));
 
         }
 
@@ -92,7 +92,7 @@ namespace Apteryx.MongoDB.Driver.Extend.ExtensionMethods
         /// <param name="options"></param>
         /// <param name="cancellationToken"></param>
         /// <returns></returns>
-        public static Task<ReplaceOneResult> DynamicTableWhereReplaceOneAsync<TForeign, T>(
+        public static Task<ReplaceOneResult> DynamicCollectionWhereReplaceOneAsync<TForeign, T>(
             this IMongoCollection<T> collection,
             TForeign foreignDocument,
             Expression<Func<T, bool>> filter,
@@ -102,7 +102,7 @@ namespace Apteryx.MongoDB.Driver.Extend.ExtensionMethods
             where TForeign : BaseMongoEntity
             where T : BaseMongoEntity
         {
-            return Task.Run(() => DynamicTableWhereReplaceOne(collection, foreignDocument, filter, document, options, cancellationToken));
+            return Task.Run(() => DynamicCollectionWhereReplaceOne(collection, foreignDocument, filter, document, options, cancellationToken));
 
         }
 
@@ -160,7 +160,7 @@ namespace Apteryx.MongoDB.Driver.Extend.ExtensionMethods
         /// <param name="options"></param>
         /// <param name="cancellationToken"></param>
         /// <returns></returns>
-        public static Task<T> DynamicTableFindOneAndReplaceOneAsync<TForeign, T>(
+        public static Task<T> DynamicCollectionFindOneAndReplaceOneAsync<TForeign, T>(
             this IMongoCollection<T> collection,
             TForeign foreignDocument,
             FilterDefinition<T> filter,
@@ -170,7 +170,7 @@ namespace Apteryx.MongoDB.Driver.Extend.ExtensionMethods
             where TForeign : BaseMongoEntity
             where T : BaseMongoEntity
         {
-            return Task.Run(() => DynamicTableFindOneAndReplaceOne(collection,foreignDocument, filter, document, options, cancellationToken));
+            return Task.Run(() => DynamicCollectionFindOneAndReplaceOne(collection,foreignDocument, filter, document, options, cancellationToken));
         }
 
         /// <summary>
@@ -185,7 +185,7 @@ namespace Apteryx.MongoDB.Driver.Extend.ExtensionMethods
         /// <param name="options"></param>
         /// <param name="cancellationToken"></param>
         /// <returns></returns>
-        public static Task<T> DynamicTableFindOneAndReplaceOneAsync<TForeign, T>(
+        public static Task<T> DynamicCollectionFindOneAndReplaceOneAsync<TForeign, T>(
             this IMongoCollection<T> collection,
             TForeign foreignDocument,
             Expression<Func<T, bool>> filter,
@@ -195,7 +195,7 @@ namespace Apteryx.MongoDB.Driver.Extend.ExtensionMethods
             where TForeign : BaseMongoEntity
             where T : BaseMongoEntity
         {
-            return Task.Run(() => DynamicTableFindOneAndReplaceOne(collection, foreignDocument, filter, document, options, cancellationToken));
+            return Task.Run(() => DynamicCollectionFindOneAndReplaceOne(collection, foreignDocument, filter, document, options, cancellationToken));
         }
 
         #endregion
