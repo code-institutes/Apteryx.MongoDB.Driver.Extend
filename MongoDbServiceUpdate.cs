@@ -24,7 +24,7 @@ namespace Apteryx.MongoDB.Driver.Extend
             FilterDefinition<T> filter,
             UpdateDefinition<T> update,
             UpdateOptions options = null,
-            CancellationToken cancellationToken = default(CancellationToken))
+            CancellationToken cancellationToken = default)
             where T : BaseMongoEntity
         {
             return database.GetCollection<T>(typeof(T).Name).UpdateOne(filter,
@@ -44,7 +44,7 @@ namespace Apteryx.MongoDB.Driver.Extend
             Expression<Func<T, bool>> filter,
             UpdateDefinition<T> update,
             UpdateOptions options = null,
-            CancellationToken cancellationToken = default(CancellationToken))
+            CancellationToken cancellationToken = default)
             where T : BaseMongoEntity
         {
             return database.GetCollection<T>(typeof(T).Name).UpdateOne(filter,
@@ -62,7 +62,7 @@ namespace Apteryx.MongoDB.Driver.Extend
         /// <param name="options"></param>
         /// <param name="cancellationToken"></param>
         /// <returns></returns>
-        public UpdateResult DynamicCollectionWhereUpdateOne<TForeign, T>(TForeign foreignDocument, FilterDefinition<T> filter, UpdateDefinition<T> update, UpdateOptions options = null, CancellationToken cancellationToken = default(CancellationToken))
+        public UpdateResult DynamicCollectionWhereUpdateOne<TForeign, T>(TForeign foreignDocument, FilterDefinition<T> filter, UpdateDefinition<T> update, UpdateOptions options = null, CancellationToken cancellationToken = default)
             where TForeign : BaseMongoEntity
             where T : BaseMongoEntity
         {
@@ -81,7 +81,7 @@ namespace Apteryx.MongoDB.Driver.Extend
         /// <param name="options"></param>
         /// <param name="cancellationToken"></param>
         /// <returns></returns>
-        public UpdateResult DynamicCollectionWhereUpdateOne<TForeign, T>(TForeign foreignDocument, Expression<Func<T, bool>> filter, UpdateDefinition<T> update, UpdateOptions options = null, CancellationToken cancellationToken = default(CancellationToken))
+        public UpdateResult DynamicCollectionWhereUpdateOne<TForeign, T>(TForeign foreignDocument, Expression<Func<T, bool>> filter, UpdateDefinition<T> update, UpdateOptions options = null, CancellationToken cancellationToken = default)
             where TForeign : BaseMongoEntity
             where T : BaseMongoEntity
         {
@@ -102,7 +102,7 @@ namespace Apteryx.MongoDB.Driver.Extend
             FilterDefinition<T> filter,
             UpdateDefinition<T> update,
             FindOneAndUpdateOptions<T> options = null,
-            CancellationToken cancellationToken = default(CancellationToken))
+            CancellationToken cancellationToken = default)
             where T : BaseMongoEntity
         {
             return database.GetCollection<T>(typeof(T).Name).FindOneAndUpdate(filter,
@@ -122,7 +122,7 @@ namespace Apteryx.MongoDB.Driver.Extend
             Expression<Func<T, bool>> filter,
             UpdateDefinition<T> update,
             FindOneAndUpdateOptions<T> options = null,
-            CancellationToken cancellationToken = default(CancellationToken))
+            CancellationToken cancellationToken = default)
             where T : BaseMongoEntity
         {
             return database.GetCollection<T>(typeof(T).Name).FindOneAndUpdate(filter,
@@ -144,7 +144,7 @@ namespace Apteryx.MongoDB.Driver.Extend
             TForeign foreignDocument, FilterDefinition<T> filter,
             UpdateDefinition<T> update,
             FindOneAndUpdateOptions<T> options = null,
-            CancellationToken cancellationToken = default(CancellationToken))
+            CancellationToken cancellationToken = default)
             where TForeign : BaseMongoEntity
             where T : BaseMongoEntity
         {
@@ -168,7 +168,7 @@ namespace Apteryx.MongoDB.Driver.Extend
             Expression<Func<T, bool>> filter,
             UpdateDefinition<T> update,
             FindOneAndUpdateOptions<T> options = null,
-            CancellationToken cancellationToken = default(CancellationToken))
+            CancellationToken cancellationToken = default)
             where TForeign : BaseMongoEntity
             where T : BaseMongoEntity
         {
@@ -189,7 +189,7 @@ namespace Apteryx.MongoDB.Driver.Extend
             FilterDefinition<T> filter,
             UpdateDefinition<T> update,
             UpdateOptions options = null,
-            CancellationToken cancellationToken = default(CancellationToken))
+            CancellationToken cancellationToken = default)
             where T : BaseMongoEntity
         {
             return database.GetCollection<T>(typeof(T).Name).UpdateMany(filter,
@@ -209,7 +209,7 @@ namespace Apteryx.MongoDB.Driver.Extend
             Expression<Func<T, bool>> filter,
             UpdateDefinition<T> update,
             UpdateOptions options = null,
-            CancellationToken cancellationToken = default(CancellationToken))
+            CancellationToken cancellationToken = default)
             where T : BaseMongoEntity
         {
             return database.GetCollection<T>(typeof(T).Name).UpdateMany(filter,
@@ -227,7 +227,7 @@ namespace Apteryx.MongoDB.Driver.Extend
         /// <param name="options"></param>
         /// <param name="cancellationToken"></param>
         /// <returns></returns>
-        public UpdateResult DynamicCollectionWhereUpdateMany<TForeign, T>(TForeign foreignDocument, FilterDefinition<T> filter, UpdateDefinition<T> update, UpdateOptions options = null, CancellationToken cancellationToken = default(CancellationToken))
+        public UpdateResult DynamicCollectionWhereUpdateMany<TForeign, T>(TForeign foreignDocument, FilterDefinition<T> filter, UpdateDefinition<T> update, UpdateOptions options = null, CancellationToken cancellationToken = default)
             where TForeign : BaseMongoEntity
             where T : BaseMongoEntity
         {
@@ -246,7 +246,7 @@ namespace Apteryx.MongoDB.Driver.Extend
         /// <param name="options"></param>
         /// <param name="cancellationToken"></param>
         /// <returns></returns>
-        public UpdateResult DynamicCollectionWhereUpdateMany<TForeign, T>(TForeign foreignDocument, Expression<Func<T, bool>> filter, UpdateDefinition<T> update, UpdateOptions options = null, CancellationToken cancellationToken = default(CancellationToken))
+        public UpdateResult DynamicCollectionWhereUpdateMany<TForeign, T>(TForeign foreignDocument, Expression<Func<T, bool>> filter, UpdateDefinition<T> update, UpdateOptions options = null, CancellationToken cancellationToken = default)
             where TForeign : BaseMongoEntity
             where T : BaseMongoEntity
         {

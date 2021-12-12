@@ -157,20 +157,20 @@ namespace Apteryx.MongoDB.Driver.Extend.Entities
             FilterDefinition<T> filter,
             T document,
             ReplaceOptions options = null,
-            CancellationToken cancellationToken = default(CancellationToken)) where T : BaseMongoEntity;
+            CancellationToken cancellationToken = default) where T : BaseMongoEntity;
 
         ReplaceOneResult WhereReplaceOne<T>(
             Expression<Func<T, bool>> filter,
             T document,
             ReplaceOptions options = null,
-            CancellationToken cancellationToken = default(CancellationToken)) where T : BaseMongoEntity;
+            CancellationToken cancellationToken = default) where T : BaseMongoEntity;
 
         ReplaceOneResult DynamicCollectionWhereReplaceOne<TForeign, T>(
             TForeign foreignDocument,
             FilterDefinition<T> filter,
             T document,
             ReplaceOptions options = null,
-            CancellationToken cancellationToken = default(CancellationToken)) 
+            CancellationToken cancellationToken = default) 
             where TForeign : BaseMongoEntity
             where T : BaseMongoEntity;
 
@@ -179,7 +179,7 @@ namespace Apteryx.MongoDB.Driver.Extend.Entities
             Expression<Func<T, bool>> filter,
             T document,
             ReplaceOptions options = null,
-            CancellationToken cancellationToken = default(CancellationToken))
+            CancellationToken cancellationToken = default)
             where TForeign : BaseMongoEntity
             where T : BaseMongoEntity;
 
@@ -187,20 +187,20 @@ namespace Apteryx.MongoDB.Driver.Extend.Entities
             FilterDefinition<T> filter,
             T document,
             FindOneAndReplaceOptions<T> options = null,
-            CancellationToken cancellationToken = default(CancellationToken)) where T : BaseMongoEntity;
+            CancellationToken cancellationToken = default) where T : BaseMongoEntity;
 
         T FindOneAndReplaceOne<T>(
             Expression<Func<T, bool>> filter,
             T document,
             FindOneAndReplaceOptions<T> options = null,
-            CancellationToken cancellationToken = default(CancellationToken)) where T : BaseMongoEntity;
+            CancellationToken cancellationToken = default) where T : BaseMongoEntity;
 
         T DynamicCollectionFindOneAndReplaceOne<TForeign, T>(
             TForeign foreignDocument,
             FilterDefinition<T> filter,
             T document,
             FindOneAndReplaceOptions<T> options = null,
-            CancellationToken cancellationToken = default(CancellationToken))
+            CancellationToken cancellationToken = default)
             where TForeign : BaseMongoEntity
             where T : BaseMongoEntity;
 
@@ -209,7 +209,7 @@ namespace Apteryx.MongoDB.Driver.Extend.Entities
             Expression<Func<T, bool>> filter,
             T document,
             FindOneAndReplaceOptions<T> options = null,
-            CancellationToken cancellationToken = default(CancellationToken))
+            CancellationToken cancellationToken = default)
             where TForeign : BaseMongoEntity
             where T : BaseMongoEntity;
 
@@ -223,53 +223,53 @@ namespace Apteryx.MongoDB.Driver.Extend.Entities
             FilterDefinition<T> filter,
             T document,
             ReplaceOptions options = null,
-            CancellationToken cancellationToken = default(CancellationToken)) where T : BaseMongoEntity;
+            CancellationToken cancellationToken = default) where T : BaseMongoEntity;
 
         Task<ReplaceOneResult> WhereReplaceOneAsnyc<T>(
             Expression<Func<T, bool>> filter,
             T document,
             ReplaceOptions options = null,
-            CancellationToken cancellationToken = default(CancellationToken)) where T : BaseMongoEntity;
+            CancellationToken cancellationToken = default) where T : BaseMongoEntity;
 
         Task<ReplaceOneResult> DynamicCollectionWhereReplaceOneAsnyc<TForeign, T>(
             TForeign foreignDocument,
             FilterDefinition<T> filter,
             T document,
             ReplaceOptions options = null,
-            CancellationToken cancellationToken = default(CancellationToken)) where TForeign : BaseMongoEntity where T : BaseMongoEntity;
+            CancellationToken cancellationToken = default) where TForeign : BaseMongoEntity where T : BaseMongoEntity;
 
         Task<ReplaceOneResult> DynamicCollectionWhereReplaceOneAsnyc<TForeign, T>(
             TForeign foreignDocument,
             Expression<Func<T, bool>> filter,
             T document,
             ReplaceOptions options = null,
-            CancellationToken cancellationToken = default(CancellationToken)) where TForeign : BaseMongoEntity where T : BaseMongoEntity;
+            CancellationToken cancellationToken = default) where TForeign : BaseMongoEntity where T : BaseMongoEntity;
 
         Task<T> FindOneAndReplaceOneAsync<T>(
             FilterDefinition<T> filter,
             T document,
             FindOneAndReplaceOptions<T> options = null,
-            CancellationToken cancellationToken = default(CancellationToken)) where T : BaseMongoEntity;
+            CancellationToken cancellationToken = default) where T : BaseMongoEntity;
 
         Task<T> FindOneAndReplaceOneAsync<T>(
             Expression<Func<T, bool>> filter,
             T document,
             FindOneAndReplaceOptions<T> options = null,
-            CancellationToken cancellationToken = default(CancellationToken)) where T : BaseMongoEntity;
+            CancellationToken cancellationToken = default) where T : BaseMongoEntity;
 
         Task<T> DynamicCollectionFindOneAndReplaceOneAsync<TForeign, T>(
             TForeign foreignDocument,
             FilterDefinition<T> filter,
             T document,
             FindOneAndReplaceOptions<T> options = null,
-            CancellationToken cancellationToken = default(CancellationToken)) where TForeign : BaseMongoEntity where T : BaseMongoEntity;
+            CancellationToken cancellationToken = default) where TForeign : BaseMongoEntity where T : BaseMongoEntity;
 
         Task<T> DynamicCollectionFindOneAndReplaceOneAsync<TForeign, T>(
             TForeign foreignDocument,
             Expression<Func<T, bool>> filter,
             T document,
             FindOneAndReplaceOptions<T> options = null,
-            CancellationToken cancellationToken = default(CancellationToken)) where TForeign : BaseMongoEntity where T : BaseMongoEntity;
+            CancellationToken cancellationToken = default) where TForeign : BaseMongoEntity where T : BaseMongoEntity;
 
         #endregion
 
@@ -281,79 +281,79 @@ namespace Apteryx.MongoDB.Driver.Extend.Entities
             FilterDefinition<T> filter,
             UpdateDefinition<T> update,
             UpdateOptions options = null,
-            CancellationToken cancellationToken = default(CancellationToken)) where T : BaseMongoEntity;
+            CancellationToken cancellationToken = default) where T : BaseMongoEntity;
 
         UpdateResult WhereUpdateOne<T>(
             Expression<Func<T, bool>> filter,
             UpdateDefinition<T> update,
             UpdateOptions options = null,
-            CancellationToken cancellationToken = default(CancellationToken)) where T : BaseMongoEntity;
+            CancellationToken cancellationToken = default) where T : BaseMongoEntity;
 
         UpdateResult DynamicCollectionWhereUpdateOne<TForeign, T>(
             TForeign foreignDocument,
             FilterDefinition<T> filter,
             UpdateDefinition<T> update,
             UpdateOptions options = null,
-            CancellationToken cancellationToken = default(CancellationToken)) where TForeign : BaseMongoEntity where T : BaseMongoEntity;
+            CancellationToken cancellationToken = default) where TForeign : BaseMongoEntity where T : BaseMongoEntity;
 
         UpdateResult DynamicCollectionWhereUpdateOne<TForeign, T>(
             TForeign foreignDocument,
             Expression<Func<T, bool>> filter,
             UpdateDefinition<T> update,
             UpdateOptions options = null,
-            CancellationToken cancellationToken = default(CancellationToken)) where TForeign : BaseMongoEntity where T : BaseMongoEntity;
+            CancellationToken cancellationToken = default) where TForeign : BaseMongoEntity where T : BaseMongoEntity;
 
         T FindOneAndUpdateOne<T>(
             FilterDefinition<T> filter,
             UpdateDefinition<T> update,
             FindOneAndUpdateOptions<T> options = null,
-            CancellationToken cancellationToken = default(CancellationToken)) where T : BaseMongoEntity;
+            CancellationToken cancellationToken = default) where T : BaseMongoEntity;
 
         T FindOneAndUpdateOne<T>(
             Expression<Func<T, bool>> filter,
             UpdateDefinition<T> update,
             FindOneAndUpdateOptions<T> options = null,
-            CancellationToken cancellationToken = default(CancellationToken)) where T : BaseMongoEntity;
+            CancellationToken cancellationToken = default) where T : BaseMongoEntity;
 
         T DynamicCollectionFindOneAndUpdateOne<TForeign, T>(
             TForeign foreignDocument,
             FilterDefinition<T> filter,
             UpdateDefinition<T> update,
             FindOneAndUpdateOptions<T> options = null,
-            CancellationToken cancellationToken = default(CancellationToken)) where TForeign : BaseMongoEntity where T : BaseMongoEntity;
+            CancellationToken cancellationToken = default) where TForeign : BaseMongoEntity where T : BaseMongoEntity;
 
         T DynamicCollectionFindOneAndUpdateOne<TForeign, T>(
             TForeign foreignDocument,
             Expression<Func<T, bool>> filter,
             UpdateDefinition<T> update,
             FindOneAndUpdateOptions<T> options = null,
-            CancellationToken cancellationToken = default(CancellationToken)) where TForeign : BaseMongoEntity where T : BaseMongoEntity;
+            CancellationToken cancellationToken = default) where TForeign : BaseMongoEntity where T : BaseMongoEntity;
 
         UpdateResult WhereUpdateMany<T>(
             FilterDefinition<T> filter,
             UpdateDefinition<T> update,
             UpdateOptions options = null,
-            CancellationToken cancellationToken = default(CancellationToken)) where T : BaseMongoEntity;
+            CancellationToken cancellationToken = default) where T : BaseMongoEntity;
 
         UpdateResult WhereUpdateMany<T>(
             Expression<Func<T, bool>> filter,
             UpdateDefinition<T> update,
             UpdateOptions options = null,
-            CancellationToken cancellationToken = default(CancellationToken)) where T : BaseMongoEntity;
+            CancellationToken cancellationToken = default) where T : BaseMongoEntity;
 
         UpdateResult DynamicCollectionWhereUpdateMany<TForeign, T>(
             TForeign foreignDocument,
             FilterDefinition<T> filter,
             UpdateDefinition<T> update,
             UpdateOptions options = null,
-            CancellationToken cancellationToken = default(CancellationToken)) where TForeign : BaseMongoEntity where T : BaseMongoEntity;
+            CancellationToken cancellationToken = default) where TForeign : BaseMongoEntity where T : BaseMongoEntity;
 
         UpdateResult DynamicCollectionWhereUpdateMany<TForeign, T>(
             TForeign foreignDocument,
             Expression<Func<T, bool>> filter,
             UpdateDefinition<T> update,
             UpdateOptions options = null,
-            CancellationToken cancellationToken = default(CancellationToken)) where TForeign : BaseMongoEntity where T : BaseMongoEntity;
+            CancellationToken cancellationToken = default) where TForeign : BaseMongoEntity where T : BaseMongoEntity;
 
         #endregion
 
@@ -365,77 +365,77 @@ namespace Apteryx.MongoDB.Driver.Extend.Entities
             FilterDefinition<T> filter,
             UpdateDefinition<T> update,
             UpdateOptions options = null,
-            CancellationToken cancellationToken = default(CancellationToken)) where T : BaseMongoEntity;
+            CancellationToken cancellationToken = default) where T : BaseMongoEntity;
 
         Task<UpdateResult> WhereUpdateOneAsync<T>(
             Expression<Func<T, bool>> filter,
             UpdateDefinition<T> update,
             UpdateOptions options = null,
-            CancellationToken cancellationToken = default(CancellationToken)) where T : BaseMongoEntity;
+            CancellationToken cancellationToken = default) where T : BaseMongoEntity;
 
         Task<UpdateResult> DynamicCollectionWhereUpdateOneAsync<TForeign, T>(
             TForeign foreignDocument,
             FilterDefinition<T> filter,
             UpdateDefinition<T> update,
             UpdateOptions options = null,
-            CancellationToken cancellationToken = default(CancellationToken)) where TForeign : BaseMongoEntity where T : BaseMongoEntity;
+            CancellationToken cancellationToken = default) where TForeign : BaseMongoEntity where T : BaseMongoEntity;
 
         Task<UpdateResult> DynamicCollectionWhereUpdateOneAsync<TForeign, T>(
             TForeign foreignDocument,
             Expression<Func<T, bool>> filter,
             UpdateDefinition<T> update,
             UpdateOptions options = null,
-            CancellationToken cancellationToken = default(CancellationToken)) where TForeign : BaseMongoEntity where T : BaseMongoEntity;
+            CancellationToken cancellationToken = default) where TForeign : BaseMongoEntity where T : BaseMongoEntity;
 
         Task<T> FindOneAndUpdateOneAsync<T>(
             FilterDefinition<T> filter,
             UpdateDefinition<T> update,
             FindOneAndUpdateOptions<T> options = null,
-            CancellationToken cancellationToken = default(CancellationToken)) where T : BaseMongoEntity;
+            CancellationToken cancellationToken = default) where T : BaseMongoEntity;
 
         Task<T> FindOneAndUpdateOneAsync<T>(
             Expression<Func<T, bool>> filter,
             UpdateDefinition<T> update,
             FindOneAndUpdateOptions<T> options = null,
-            CancellationToken cancellationToken = default(CancellationToken)) where T : BaseMongoEntity;
+            CancellationToken cancellationToken = default) where T : BaseMongoEntity;
         Task<T> DynamicCollectionFindOneAndUpdateOneAsync<TForeign, T>(
             TForeign foreignDocument,
             FilterDefinition<T> filter,
             UpdateDefinition<T> update,
             FindOneAndUpdateOptions<T> options = null,
-            CancellationToken cancellationToken = default(CancellationToken)) where TForeign : BaseMongoEntity where T : BaseMongoEntity;
+            CancellationToken cancellationToken = default) where TForeign : BaseMongoEntity where T : BaseMongoEntity;
 
         Task<T> DynamicCollectionFindOneAndUpdateOneAsync<TForeign, T>(
             TForeign foreignDocument,
             Expression<Func<T, bool>> filter,
             UpdateDefinition<T> update,
             FindOneAndUpdateOptions<T> options = null,
-            CancellationToken cancellationToken = default(CancellationToken)) where TForeign : BaseMongoEntity where T : BaseMongoEntity;
+            CancellationToken cancellationToken = default) where TForeign : BaseMongoEntity where T : BaseMongoEntity;
 
         Task<UpdateResult> WhereUpdateManyAsync<T>(
             FilterDefinition<T> filter,
             UpdateDefinition<T> update,
             UpdateOptions options = null,
-            CancellationToken cancellationToken = default(CancellationToken)) where T : BaseMongoEntity;
+            CancellationToken cancellationToken = default) where T : BaseMongoEntity;
 
         Task<UpdateResult> WhereUpdateManyAsync<T>(
             Expression<Func<T, bool>> filter,
             UpdateDefinition<T> update,
             UpdateOptions options = null,
-            CancellationToken cancellationToken = default(CancellationToken)) where T : BaseMongoEntity;
+            CancellationToken cancellationToken = default) where T : BaseMongoEntity;
         Task<UpdateResult> DynamicCollectionWhereUpdateManyAsync<TForeign, T>(
             TForeign foreignDocument,
             FilterDefinition<T> filter,
             UpdateDefinition<T> update,
             UpdateOptions options = null,
-            CancellationToken cancellationToken = default(CancellationToken)) where TForeign : BaseMongoEntity where T : BaseMongoEntity;
+            CancellationToken cancellationToken = default) where TForeign : BaseMongoEntity where T : BaseMongoEntity;
 
         Task<UpdateResult> DynamicCollectionWhereUpdateManyAsync<TForeign, T>(
             TForeign foreignDocument,
             Expression<Func<T, bool>> filter,
             UpdateDefinition<T> update,
             UpdateOptions options = null,
-            CancellationToken cancellationToken = default(CancellationToken)) where TForeign : BaseMongoEntity where T : BaseMongoEntity;
+            CancellationToken cancellationToken = default) where TForeign : BaseMongoEntity where T : BaseMongoEntity;
 
         #endregion
     }

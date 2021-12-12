@@ -16,19 +16,63 @@ namespace Apteryx.MongoDB.Driver.Extend.ExtensionMethods
         /// <summary>
         /// 更新单条(自动更新UpdateTime字段)
         /// </summary>
-        /// <typeparam name="T"></typeparam>
-        /// <param name="collection"></param>
-        /// <param name="filter"></param>
-        /// <param name="update"></param>
-        /// <param name="options"></param>
-        /// <param name="cancellationToken"></param>
+        /// <typeparam name="T">文档类型</typeparam>
+        /// <param name="collection">集合</param>
+        /// <param name="id">主键ID</param>
+        /// <param name="update">更新定义</param>
+        /// <param name="options">更新操作设置</param>
+        /// <param name="cancellationToken">取消操作设置</param>
+        /// <returns></returns>
+        public static UpdateResult WhereUpdateOne<T>(
+            this IMongoCollection<T> collection,
+            string id,
+            UpdateDefinition<T> update,
+            UpdateOptions options = null,
+            CancellationToken cancellationToken = default)
+            where T : BaseMongoEntity
+        {
+            return collection.UpdateOne(u => u.Id == id, update.Set(s => s.UpdateTime, DateTime.Now), options, cancellationToken);
+        }
+
+        /// <summary>
+        /// 更新单条(自动更新UpdateTime字段)
+        /// </summary>
+        /// <typeparam name="T">文档类型</typeparam>
+        /// <param name="collection">集合</param>
+        /// <param name="session">会话句柄(作用于事务)</param>
+        /// <param name="id">主键ID</param>
+        /// <param name="update">更新定义</param>
+        /// <param name="options">更新操作设置</param>
+        /// <param name="cancellationToken">取消操作设置</param>
+        /// <returns></returns>
+        public static UpdateResult WhereUpdateOne<T>(
+            this IMongoCollection<T> collection,
+            IClientSessionHandle session,
+            string id,
+            UpdateDefinition<T> update,
+            UpdateOptions options = null,
+            CancellationToken cancellationToken = default)
+            where T : BaseMongoEntity
+        {
+            return collection.UpdateOne(session, u => u.Id == id, update.Set(s => s.UpdateTime, DateTime.Now), options, cancellationToken);
+        }
+
+        /// <summary>
+        /// 更新单条(自动更新UpdateTime字段)
+        /// </summary>
+        /// <typeparam name="T">文档类型</typeparam>
+        /// <param name="collection">集合</param>
+        /// <param name="filter">过滤器</param>
+        /// <param name="update">更新定义</param>
+        /// <param name="options">更新操作设置</param>
+        /// <param name="cancellationToken">取消操作设置</param>
         /// <returns></returns>
         public static UpdateResult WhereUpdateOne<T>(
             this IMongoCollection<T> collection,
             FilterDefinition<T> filter,
             UpdateDefinition<T> update,
             UpdateOptions options = null,
-            CancellationToken cancellationToken = default(CancellationToken))
+            CancellationToken cancellationToken = default)
             where T : BaseMongoEntity
         {
             return collection.UpdateOne(filter, update.Set(s => s.UpdateTime, DateTime.Now), options, cancellationToken);
@@ -37,92 +81,107 @@ namespace Apteryx.MongoDB.Driver.Extend.ExtensionMethods
         /// <summary>
         /// 更新单条(自动更新UpdateTime字段)
         /// </summary>
-        /// <typeparam name="T"></typeparam>
-        /// <param name="collection"></param>
-        /// <param name="filter"></param>
-        /// <param name="update"></param>
-        /// <param name="options"></param>
-        /// <param name="cancellationToken"></param>
+        /// <typeparam name="T">文档类型</typeparam>
+        /// <param name="collection">集合</param>
+        /// <param name="session">会话句柄(作用于事务)</param>
+        /// <param name="filter">过滤器</param>
+        /// <param name="update">更新定义</param>
+        /// <param name="options">更新操作设置</param>
+        /// <param name="cancellationToken">取消操作设置</param>
+        /// <returns></returns>
+        public static UpdateResult WhereUpdateOne<T>(
+            this IMongoCollection<T> collection,
+            IClientSessionHandle session,
+            FilterDefinition<T> filter,
+            UpdateDefinition<T> update,
+            UpdateOptions options = null,
+            CancellationToken cancellationToken = default)
+            where T : BaseMongoEntity
+        {
+            return collection.UpdateOne(session, filter, update.Set(s => s.UpdateTime, DateTime.Now), options, cancellationToken);
+        }
+
+        /// <summary>
+        /// 更新单条(自动更新UpdateTime字段)
+        /// </summary>
+        /// <typeparam name="T">文档类型</typeparam>
+        /// <param name="collection">集合</param>
+        /// <param name="filter">Lambda过滤器</param>
+        /// <param name="update">更新定义</param>
+        /// <param name="options">更新操作设置</param>
+        /// <param name="cancellationToken">取消操作设置</param>
         /// <returns></returns>
         public static UpdateResult WhereUpdateOne<T>(
             this IMongoCollection<T> collection,
             Expression<Func<T, bool>> filter,
             UpdateDefinition<T> update,
             UpdateOptions options = null,
-            CancellationToken cancellationToken = default(CancellationToken))
+            CancellationToken cancellationToken = default)
             where T : BaseMongoEntity
         {
             return collection.UpdateOne(filter, update.Set(s => s.UpdateTime, DateTime.Now), options, cancellationToken);
         }
 
         /// <summary>
-        /// 动态表更新单条(自动更新UpdateTime字段)
+        /// 更新单条(自动更新UpdateTime字段)
         /// </summary>
-        /// <typeparam name="TForeign"></typeparam>
-        /// <typeparam name="T"></typeparam>
-        /// <param name="collection"></param>
-        /// <param name="foreignDocument"></param>
-        /// <param name="filter"></param>
-        /// <param name="update"></param>
-        /// <param name="options"></param>
-        /// <param name="cancellationToken"></param>
+        /// <typeparam name="T">文档类型</typeparam>
+        /// <param name="collection">集合</param>
+        /// <param name="session">会话句柄(作用于事务)</param>
+        /// <param name="filter">Lambda过滤器</param>
+        /// <param name="update">更新定义</param>
+        /// <param name="options">更新操作设置</param>
+        /// <param name="cancellationToken">取消操作设置</param>
         /// <returns></returns>
-        public static UpdateResult DynamicCollectionWhereUpdateOne<TForeign, T>(
+        public static UpdateResult WhereUpdateOne<T>(
             this IMongoCollection<T> collection,
-            TForeign foreignDocument,
-            FilterDefinition<T> filter,
-            UpdateDefinition<T> update,
-            UpdateOptions options = null,
-            CancellationToken cancellationToken = default(CancellationToken))
-            where TForeign : BaseMongoEntity
-            where T : BaseMongoEntity
-        {
-            return collection.Database.GetCollection<T>($"{typeof(T).Name}_{foreignDocument.Id}")
-                .UpdateOne(filter, update.Set(s => s.UpdateTime, DateTime.Now), options, cancellationToken);
-        }
-
-        /// <summary>
-        /// 动态表更新单条(自动更新UpdateTime字段)
-        /// </summary>
-        /// <typeparam name="TForeign"></typeparam>
-        /// <typeparam name="T"></typeparam>
-        /// <param name="collection"></param>
-        /// <param name="foreignDocument"></param>
-        /// <param name="filter"></param>
-        /// <param name="update"></param>
-        /// <param name="options"></param>
-        /// <param name="cancellationToken"></param>
-        /// <returns></returns>
-        public static UpdateResult DynamicCollectionWhereUpdateOne<TForeign, T>(
-            this IMongoCollection<T> collection,
-            TForeign foreignDocument,
+            IClientSessionHandle session,
             Expression<Func<T, bool>> filter,
             UpdateDefinition<T> update,
             UpdateOptions options = null,
-            CancellationToken cancellationToken = default(CancellationToken))
-            where TForeign : BaseMongoEntity
+            CancellationToken cancellationToken = default)
             where T : BaseMongoEntity
         {
-            return collection.Database.GetCollection<T>($"{typeof(T).Name}_{foreignDocument.Id}")
-                .UpdateOne(filter, update.Set(s => s.UpdateTime, DateTime.Now), options, cancellationToken);
+            return collection.UpdateOne(session, filter, update.Set(s => s.UpdateTime, DateTime.Now), options, cancellationToken);
         }
+
+        ///// <summary>
+        ///// 查询更新单条(自动更新UpdateTime字段)
+        ///// </summary>
+        ///// <typeparam name="T">文档类型</typeparam>
+        ///// <param name="collection">集合</param>
+        ///// <param name="id">主键ID</param>
+        ///// <param name="update">更新定义</param>
+        ///// <param name="options">更新操作设置</param>
+        ///// <param name="cancellationToken">取消操作设置</param>
+        ///// <returns></returns>
+        //public static T FindOneAndUpdateOne<T>(
+        //    this IMongoCollection<T> collection,
+        //    string id,
+        //    UpdateDefinition<T> update,
+        //    FindOneAndUpdateOptions<T, T> options = null,
+        //    CancellationToken cancellationToken = default)
+        //    where T : BaseMongoEntity
+        //{
+        //    return collection.FindOneAndUpdate( f=>f.Id == id, update.Set(s => s.UpdateTime, DateTime.Now), options, cancellationToken);
+        //}
 
         /// <summary>
         /// 查询更新单条(自动更新UpdateTime字段)
         /// </summary>
-        /// <typeparam name="T"></typeparam>
-        /// <param name="collection"></param>
-        /// <param name="filter"></param>
-        /// <param name="update"></param>
-        /// <param name="options"></param>
-        /// <param name="cancellationToken"></param>
+        /// <typeparam name="T">文档类型</typeparam>
+        /// <param name="collection">集合</param>
+        /// <param name="filter">Lambda过滤器</param>
+        /// <param name="update">更新定义</param>
+        /// <param name="options">更新操作设置</param>
+        /// <param name="cancellationToken">取消操作设置</param>
         /// <returns></returns>
         public static T FindOneAndUpdateOne<T>(
             this IMongoCollection<T> collection,
             Expression<Func<T, bool>> filter,
             UpdateDefinition<T> update,
             FindOneAndUpdateOptions<T, T> options = null,
-            CancellationToken cancellationToken = default(CancellationToken))
+            CancellationToken cancellationToken = default)
             where T : BaseMongoEntity
         {
             return collection.FindOneAndUpdate(filter, update.Set(s => s.UpdateTime, DateTime.Now), options, cancellationToken);
@@ -131,168 +190,200 @@ namespace Apteryx.MongoDB.Driver.Extend.ExtensionMethods
         /// <summary>
         /// 查询更新单条(自动更新UpdateTime字段)
         /// </summary>
-        /// <typeparam name="T"></typeparam>
-        /// <param name="collection"></param>
-        /// <param name="filter"></param>
-        /// <param name="update"></param>
-        /// <param name="options"></param>
-        /// <param name="cancellationToken"></param>
+        /// <typeparam name="T">文档类型</typeparam>
+        /// <param name="collection">集合</param>
+        /// <param name="session">会话句柄(作用于事务)</param>
+        /// <param name="filter">Lambda过滤器</param>
+        /// <param name="update">更新定义</param>
+        /// <param name="options">更新操作设置</param>
+        /// <param name="cancellationToken">取消操作设置</param>
+        /// <returns></returns>
+        public static T FindOneAndUpdateOne<T>(
+            this IMongoCollection<T> collection,
+            IClientSessionHandle session,
+            Expression<Func<T, bool>> filter,
+            UpdateDefinition<T> update,
+            FindOneAndUpdateOptions<T, T> options = null,
+            CancellationToken cancellationToken = default)
+            where T : BaseMongoEntity
+        {
+            return collection.FindOneAndUpdate(session, filter, update.Set(s => s.UpdateTime, DateTime.Now), options, cancellationToken);
+        }
+
+        /// <summary>
+        /// 查询更新单条(自动更新UpdateTime字段)
+        /// </summary>
+        /// <typeparam name="T">文档类型</typeparam>
+        /// <param name="collection">集合</param>
+        /// <param name="filter">过滤器</param>
+        /// <param name="update">更新定义</param>
+        /// <param name="options">更新操作设置</param>
+        /// <param name="cancellationToken">取消操作设置</param>
         /// <returns></returns>
         public static T FindOneAndUpdateOne<T>(
             this IMongoCollection<T> collection,
             FilterDefinition<T> filter,
             UpdateDefinition<T> update,
             FindOneAndUpdateOptions<T, T> options = null,
-            CancellationToken cancellationToken = default(CancellationToken))
+            CancellationToken cancellationToken = default)
             where T : BaseMongoEntity
         {
             return collection.FindOneAndUpdate(filter, update.Set(s => s.UpdateTime, DateTime.Now), options, cancellationToken);
         }
 
         /// <summary>
-        /// 动态表查询更新单条(自动更新UpdateTime字段)
+        /// 查询更新单条(自动更新UpdateTime字段)
         /// </summary>
-        /// <typeparam name="TForeign"></typeparam>
-        /// <typeparam name="T"></typeparam>
-        /// <param name="collection"></param>
-        /// <param name="foreignDocument"></param>
-        /// <param name="filter"></param>
-        /// <param name="update"></param>
-        /// <param name="options"></param>
-        /// <param name="cancellationToken"></param>
+        /// <typeparam name="T">文档类型</typeparam>
+        /// <param name="collection">集合</param>
+        /// <param name="session">会话句柄(作用于事务)</param>
+        /// <param name="filter">Lambda过滤器</param>
+        /// <param name="update">更新定义</param>
+        /// <param name="options">更新操作设置</param>
+        /// <param name="cancellationToken">取消操作设置</param>
         /// <returns></returns>
-        public static T DynamicCollectionFindOneAndUpdateOne<TForeign, T>(
+        public static T FindOneAndUpdateOne<T>(
             this IMongoCollection<T> collection,
-            TForeign foreignDocument,
+            IClientSessionHandle session,
             FilterDefinition<T> filter,
             UpdateDefinition<T> update,
-            FindOneAndUpdateOptions<T> options = null,
-            CancellationToken cancellationToken = default(CancellationToken))
-            where TForeign : BaseMongoEntity
+            FindOneAndUpdateOptions<T, T> options = null,
+            CancellationToken cancellationToken = default)
             where T : BaseMongoEntity
         {
-            return collection.Database.GetCollection<T>($"{typeof(T).Name}_{foreignDocument.Id}")
-                .FindOneAndUpdate(filter, update.Set(s => s.UpdateTime, DateTime.Now), options, cancellationToken);
+            return collection.FindOneAndUpdate(session, filter, update.Set(s => s.UpdateTime, DateTime.Now), options, cancellationToken);
         }
 
         /// <summary>
-        /// 动态表查询更新单条(自动更新UpdateTime字段)
+        /// 更新多条(自动更新UpdateTime字段)
         /// </summary>
-        /// <typeparam name="TForeign"></typeparam>
-        /// <typeparam name="T"></typeparam>
-        /// <param name="collection"></param>
-        /// <param name="foreignDocument"></param>
-        /// <param name="filter"></param>
-        /// <param name="update"></param>
-        /// <param name="options"></param>
-        /// <param name="cancellationToken"></param>
+        /// <typeparam name="T">文档类型</typeparam>
+        /// <param name="collection">集合</param>
+        /// <param name="id">主键ID</param>
+        /// <param name="update">更新定义</param>
+        /// <param name="options">更新操作设置</param>
+        /// <param name="cancellationToken">取消操作设置</param>
         /// <returns></returns>
-        public static T DynamicCollectionFindOneAndUpdateOne<TForeign, T>(
+        public static UpdateResult WhereUpdateMany<T>(
             this IMongoCollection<T> collection,
-            TForeign foreignDocument,
-            Expression<Func<T, bool>> filter,
+            string id,
             UpdateDefinition<T> update,
-            FindOneAndUpdateOptions<T> options = null,
-            CancellationToken cancellationToken = default(CancellationToken))
-            where TForeign : BaseMongoEntity
+            UpdateOptions options = null,
+            CancellationToken cancellationToken = default)
             where T : BaseMongoEntity
         {
-            return collection.Database.GetCollection<T>($"{typeof(T).Name}_{foreignDocument.Id}")
-                .FindOneAndUpdate(filter, update.Set(s => s.UpdateTime, DateTime.Now), options, cancellationToken);
+            return collection.UpdateMany(u=>u.Id == id, update.Set(s => s.UpdateTime, DateTime.Now), options, cancellationToken);
         }
 
         /// <summary>
-        /// 查询更新多条(自动更新UpdateTime字段)
+        /// 更新多条(自动更新UpdateTime字段)
         /// </summary>
-        /// <typeparam name="T"></typeparam>
-        /// <param name="collection"></param>
-        /// <param name="filter"></param>
-        /// <param name="update"></param>
-        /// <param name="options"></param>
-        /// <param name="cancellationToken"></param>
+        /// <typeparam name="T">文档类型</typeparam>
+        /// <param name="collection">集合</param>
+        /// <param name="session">会话句柄(作用于事务)</param>
+        /// <param name="id">主键ID</param>
+        /// <param name="update">更新定义</param>
+        /// <param name="options">更新操作设置</param>
+        /// <param name="cancellationToken">取消操作设置</param>
+        /// <returns></returns>
+        public static UpdateResult WhereUpdateMany<T>(
+            this IMongoCollection<T> collection,
+            IClientSessionHandle session,
+            string id,
+            UpdateDefinition<T> update,
+            UpdateOptions options = null,
+            CancellationToken cancellationToken = default)
+            where T : BaseMongoEntity
+        {
+            return collection.UpdateMany(session,u => u.Id == id, update.Set(s => s.UpdateTime, DateTime.Now), options, cancellationToken);
+        }
+
+        /// <summary>
+        /// 更新多条(自动更新UpdateTime字段)
+        /// </summary>
+        /// <typeparam name="T">文档类型</typeparam>
+        /// <param name="collection">集合</param>
+        /// <param name="filter">Lambda过滤器</param>
+        /// <param name="update">更新定义</param>
+        /// <param name="options">更新操作设置</param>
+        /// <param name="cancellationToken">取消操作设置</param>
         /// <returns></returns>
         public static UpdateResult WhereUpdateMany<T>(
             this IMongoCollection<T> collection,
             Expression<Func<T, bool>> filter,
             UpdateDefinition<T> update,
             UpdateOptions options = null,
-            CancellationToken cancellationToken = default(CancellationToken))
+            CancellationToken cancellationToken = default)
             where T : BaseMongoEntity
         {
             return collection.UpdateMany(filter, update.Set(s => s.UpdateTime, DateTime.Now), options, cancellationToken);
         }
 
         /// <summary>
-        /// 查询更新多条(自动更新UpdateTime字段)
+        /// 更新多条(自动更新UpdateTime字段)
         /// </summary>
-        /// <typeparam name="T"></typeparam>
-        /// <param name="collection"></param>
-        /// <param name="filter"></param>
-        /// <param name="update"></param>
-        /// <param name="options"></param>
-        /// <param name="cancellationToken"></param>
+        /// <typeparam name="T">文档类型</typeparam>
+        /// <param name="collection">集合</param>
+        /// <param name="session">会话句柄(作用于事务)</param>
+        /// <param name="filter">Lambda过滤器</param>
+        /// <param name="update">更新定义</param>
+        /// <param name="options">更新操作设置</param>
+        /// <param name="cancellationToken">取消操作设置</param>
+        /// <returns></returns>
+        public static UpdateResult WhereUpdateMany<T>(
+            this IMongoCollection<T> collection,
+            IClientSessionHandle session,
+            Expression<Func<T, bool>> filter,
+            UpdateDefinition<T> update,
+            UpdateOptions options = null,
+            CancellationToken cancellationToken = default)
+            where T : BaseMongoEntity
+        {
+            return collection.UpdateMany(session, filter, update.Set(s => s.UpdateTime, DateTime.Now), options, cancellationToken);
+        }
+
+        /// <summary>
+        /// 更新多条(自动更新UpdateTime字段)
+        /// </summary>
+        /// <typeparam name="T">文档类型</typeparam>
+        /// <param name="collection">集合</param>
+        /// <param name="filter">过滤器</param>
+        /// <param name="update">更新定义</param>
+        /// <param name="options">更新操作设置</param>
+        /// <param name="cancellationToken">取消操作设置</param>
         /// <returns></returns>
         public static UpdateResult WhereUpdateMany<T>(
             this IMongoCollection<T> collection,
             FilterDefinition<T> filter,
             UpdateDefinition<T> update,
             UpdateOptions options = null,
-            CancellationToken cancellationToken = default(CancellationToken))
+            CancellationToken cancellationToken = default)
             where T : BaseMongoEntity
         {
             return collection.UpdateMany(filter, update.Set(s => s.UpdateTime, DateTime.Now), options, cancellationToken);
         }
 
         /// <summary>
-        /// 动态表查询更新多条(自动更新UpdateTime字段)
+        /// 更新多条(自动更新UpdateTime字段)
         /// </summary>
-        /// <typeparam name="TForeign"></typeparam>
-        /// <typeparam name="T"></typeparam>
-        /// <param name="collection"></param>
-        /// <param name="foreignDocument"></param>
-        /// <param name="filter"></param>
-        /// <param name="update"></param>
-        /// <param name="options"></param>
-        /// <param name="cancellationToken"></param>
+        /// <typeparam name="T">文档类型</typeparam>
+        /// <param name="collection">集合</param>
+        /// <param name="session">会话句柄(作用于事务)</param>
+        /// <param name="filter">过滤器</param>
+        /// <param name="update">更新定义</param>
+        /// <param name="options">更新操作设置</param>
+        /// <param name="cancellationToken">取消操作设置</param>
         /// <returns></returns>
-        public static UpdateResult DynamicCollectionWhereUpdateMany<TForeign, T>(
+        public static UpdateResult WhereUpdateMany<T>(
             this IMongoCollection<T> collection,
-            TForeign foreignDocument,
-            Expression<Func<T, bool>> filter,
-            UpdateDefinition<T> update,
-            UpdateOptions options = null,
-            CancellationToken cancellationToken = default(CancellationToken))
-            where TForeign : BaseMongoEntity
-            where T : BaseMongoEntity
-        {
-            return collection.Database.GetCollection<T>($"{typeof(T).Name}_{foreignDocument.Id}")
-                .UpdateMany(filter, update.Set(s => s.UpdateTime, DateTime.Now), options, cancellationToken);
-        }
-
-        /// <summary>
-        /// 动态表查询更新多条(自动更新UpdateTime字段)
-        /// </summary>
-        /// <typeparam name="TForeign"></typeparam>
-        /// <typeparam name="T"></typeparam>
-        /// <param name="collection"></param>
-        /// <param name="foreignDocument"></param>
-        /// <param name="filter"></param>
-        /// <param name="update"></param>
-        /// <param name="options"></param>
-        /// <param name="cancellationToken"></param>
-        /// <returns></returns>
-        public static UpdateResult DynamicCollectionWhereUpdateMany<TForeign, T>(
-            this IMongoCollection<T> collection,
-            TForeign foreignDocument,
+            IClientSessionHandle session,
             FilterDefinition<T> filter,
             UpdateDefinition<T> update,
             UpdateOptions options = null,
-            CancellationToken cancellationToken = default(CancellationToken))
-            where TForeign : BaseMongoEntity
+            CancellationToken cancellationToken = default)
             where T : BaseMongoEntity
         {
-            return collection.Database.GetCollection<T>($"{typeof(T).Name}_{foreignDocument.Id}")
-                .UpdateMany(filter, update.Set(s => s.UpdateTime, DateTime.Now), options, cancellationToken);
+            return collection.UpdateMany(session, filter, update.Set(s => s.UpdateTime, DateTime.Now), options, cancellationToken);
         }
 
         #endregion

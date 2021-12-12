@@ -16,106 +16,174 @@ namespace Apteryx.MongoDB.Driver.Extend.ExtensionMethods
         #region 查询(异步)
 
         /// <summary>
-        ///  查询返回单条
+        /// 查询返回单条
         /// </summary>
-        /// <typeparam name="T">文档类型</typeparam>
+        /// <typeparam name="T">集合类型</typeparam>
         /// <param name="collection">集合</param>
         /// <param name="id">主键ID</param>
+        /// <param name="options">查询操作设置</param>
         /// <returns></returns>
-        public static Task<T> FindOneAsync<T>(this IMongoCollection<T> collection, string id)
+        public static Task<T> FindOneAsync<T>(this IMongoCollection<T> collection, string id,FindOptions options = null)
             where T : BaseMongoEntity
         {
-            return Task.Run(() => FindOne(collection, id));
-        }
-
-        /// <summary>
-        ///  查询返回单条
-        /// </summary>
-        /// <typeparam name="T">文档类型</typeparam>
-        /// <param name="collection">集合</param>
-        /// <param name="id">主键ID</param>
-        /// <returns></returns>
-        public static Task<T> MatchOneAsync<T>(this IMongoCollection<T> collection, string id)
-            where T : BaseMongoEntity
-        {
-            return Task.Run(() => MatchOne(collection, id));
+            return Task.Run(() => FindOne(collection, id,options));
         }
 
         /// <summary>
         /// 查询返回单条
         /// </summary>
-        /// <typeparam name="T">文档类型</typeparam>
+        /// <typeparam name="T">集合类型</typeparam>
+        /// <param name="collection">集合</param>
+        /// <param name="session">会话句柄(作用于事务)</param>
+        /// <param name="id">主键ID</param>
+        /// <param name="options">查询操作设置</param>
+        public static Task<T> FindOneAsync<T>(this IMongoCollection<T> collection,IClientSessionHandle session, string id, FindOptions options = null)
+            where T : BaseMongoEntity
+        {
+            return Task.Run(() => FindOne(collection,session, id, options));
+        }
+
+        /// <summary>
+        /// 查询返回单条
+        /// </summary>
+        /// <typeparam name="T">集合类型</typeparam>
+        /// <param name="collection">集合</param>
+        /// <param name="id">主键ID</param>
+        /// <param name="options">聚合操作设置</param>
+        /// <returns></returns>
+        public static Task<T> MatchOneAsync<T>(this IMongoCollection<T> collection, string id,AggregateOptions options = null)
+            where T : BaseMongoEntity
+        {
+            return Task.Run(() => MatchOne(collection, id,options));
+        }
+
+        /// <summary>
+        /// 查询返回单条
+        /// </summary>
+        /// <typeparam name="T">集合类型</typeparam>
+        /// <param name="collection">集合</param>
+        /// <param name="session">会话句柄(作用于事务)</param>
+        /// <param name="id">主键ID</param>
+        /// <param name="options">聚合操作设置</param>
+        /// <returns></returns>
+        public static Task<T> MatchOneAsync<T>(this IMongoCollection<T> collection,IClientSessionHandle session, string id, AggregateOptions options = null)
+            where T : BaseMongoEntity
+        {
+            return Task.Run(() => MatchOne(collection,session, id, options));
+        }
+
+        /// <summary>
+        /// 查询返回单条
+        /// </summary>
+        /// <typeparam name="T">集合类型</typeparam>
         /// <param name="collection">集合</param>
         /// <param name="filter">过滤器</param>
+        /// <param name="options">查询操作设置</param>
         /// <returns></returns>
-        public static Task<T> FindOneAsync<T>(this IMongoCollection<T> collection, FilterDefinition<T> filter)
+        public static Task<T> FindOneAsync<T>(this IMongoCollection<T> collection, FilterDefinition<T> filter,FindOptions options = null)
             where T : BaseMongoEntity
         {
-            return Task.Run(() => FindOne(collection, filter));
+            return Task.Run(() => FindOne(collection, filter,options));
         }
 
         /// <summary>
         /// 查询返回单条
         /// </summary>
-        /// <typeparam name="T">文档类型</typeparam>
+        /// <typeparam name="T">集合类型</typeparam>
         /// <param name="collection">集合</param>
-        /// <param name="filter">Lambda过滤器</param>
+        /// <param name="session">会话句柄(作用于事务)</param>
+        /// <param name="filter">过滤器</param>
+        /// <param name="options">查询操作设置</param>
         /// <returns></returns>
-        public static Task<T> FindOneAsync<T>(this IMongoCollection<T> collection, Expression<Func<T, bool>> filter)
+        public static Task<T> FindOneAsync<T>(this IMongoCollection<T> collection,IClientSessionHandle session, FilterDefinition<T> filter, FindOptions options = null)
             where T : BaseMongoEntity
         {
-            return Task.Run(() => FindOne(collection, filter));
+            return Task.Run(() => FindOne(collection,session, filter, options));
         }
 
         /// <summary>
         /// 查询返回单条
         /// </summary>
-        /// <typeparam name="T">文档类型</typeparam>
+        /// <typeparam name="T">集合类型</typeparam>
         /// <param name="collection">集合</param>
-        /// <param name="filter">Lambda过滤器</param>
+        /// <param name="filter">Lmabda过滤器</param>
+        /// <param name="options">查询操作设置</param>
         /// <returns></returns>
-        public static Task<T> MatchOneAsync<T>(this IMongoCollection<T> collection, Expression<Func<T, bool>> filter)
+        public static Task<T> FindOneAsync<T>(this IMongoCollection<T> collection, Expression<Func<T, bool>> filter,FindOptions options = null)
             where T : BaseMongoEntity
         {
-            return Task.Run(() => MatchOne(collection, filter));
+            return Task.Run(() => FindOne(collection, filter,options));
+        }
+
+        /// <summary>
+        /// 查询返回单条
+        /// </summary>
+        /// <typeparam name="T">集合类型</typeparam>
+        /// <param name="collection">集合</param>
+        /// <param name="session">会话句柄(作用于事务)</param>
+        /// <param name="filter">Lmabda过滤器</param>
+        /// <param name="options">查询操作设置</param>
+        /// <returns></returns>
+        public static Task<T> FindOneAsync<T>(this IMongoCollection<T> collection,IClientSessionHandle session, Expression<Func<T, bool>> filter, FindOptions options = null)
+            where T : BaseMongoEntity
+        {
+            return Task.Run(() => FindOne(collection,session, filter, options));
+        }
+
+        /// <summary>
+        /// 查询返回单条
+        /// </summary>
+        /// <typeparam name="T">集合类型</typeparam>
+        /// <param name="collection">集合</param>
+        /// <param name="filter">Lmabda过滤器</param>
+        /// <param name="options">聚合操作设置</param>
+        /// <returns></returns>
+        public static Task<T> MatchOneAsync<T>(this IMongoCollection<T> collection, Expression<Func<T, bool>> filter,AggregateOptions options = null)
+            where T : BaseMongoEntity
+        {
+            return Task.Run(() => MatchOne(collection, filter,options));
+        }
+
+        /// <summary>
+        /// 查询返回单条
+        /// </summary>
+        /// <typeparam name="T">集合类型</typeparam>
+        /// <param name="collection">集合</param>
+        /// <param name="session">会话句柄(作用于事务)</param>
+        /// <param name="filter">Lmabda过滤器</param>
+        /// <param name="options">聚合操作设置</param>
+        /// <returns></returns>
+        public static Task<T> MatchOneAsync<T>(this IMongoCollection<T> collection,IClientSessionHandle session, Expression<Func<T, bool>> filter, AggregateOptions options = null)
+            where T : BaseMongoEntity
+        {
+            return Task.Run(() => MatchOne(collection,session, filter, options));
         }
 
         /// <summary>
         /// 查询全部
         /// </summary>
-        /// <typeparam name="T"></typeparam>
-        /// <param name="collection"></param>
+        /// <typeparam name="T">文档类型</typeparam>
+        /// <param name="collection">集合</param>
+        /// <param name="options">查询操作设置</param>
         /// <returns></returns>
-        public static Task<IEnumerable<T>> FindAllAsync<T>(this IMongoCollection<T> collection)
+        public static Task<IEnumerable<T>> FindAllAsync<T>(this IMongoCollection<T> collection,FindOptions options = null)
             where T : BaseMongoEntity
         {
-            return Task.Run(() => FindAll(collection));
+            return Task.Run(() => FindAll(collection,options));
         }
 
         /// <summary>
-        /// 查询返回集合
+        /// 查询全部
         /// </summary>
-        /// <typeparam name="T"></typeparam>
-        /// <param name="collection"></param>
-        /// <param name="filter"></param>
+        /// <typeparam name="T">文档类型</typeparam>
+        /// <param name="collection">集合</param>
+        /// <param name="session">会话句柄(作用于事务)</param>
+        /// <param name="options">查询操作设置</param>
         /// <returns></returns>
-        public static Task<IEnumerable<T>> WhereAsync<T>(this IMongoCollection<T> collection, FilterDefinition<T> filter)
+        public static Task<IEnumerable<T>> FindAllAsync<T>(this IMongoCollection<T> collection,IClientSessionHandle session, FindOptions options = null)
             where T : BaseMongoEntity
         {
-            return Task.Run(() => Where(collection, filter));
-        }
-
-        /// <summary>
-        /// 查询返回集合
-        /// </summary>
-        /// <typeparam name="T"></typeparam>
-        /// <param name="collection"></param>
-        /// <param name="filter"></param>
-        /// <returns></returns>
-        public static Task<IEnumerable<T>> WhereAsync<T>(this IMongoCollection<T> collection, Expression<Func<T, bool>> filter)
-            where T : BaseMongoEntity
-        {
-            return Task.Run(() => Where(collection, filter));
+            return Task.Run(() => FindAll(collection,session, options));
         }
 
         /// <summary>
@@ -123,155 +191,86 @@ namespace Apteryx.MongoDB.Driver.Extend.ExtensionMethods
         /// </summary>
         /// <typeparam name="T">文档类型</typeparam>
         /// <param name="collection">集合</param>
-        /// <param name="filter">Lambda过滤器</param>
+        /// <param name="filte">过滤器</param>
+        /// <param name="options">查询操作设置</param>
         /// <returns></returns>
-        public static Task<IEnumerable<T>> MatchAsync<T>(this IMongoCollection<T> collection, Expression<Func<T, bool>> filter)
+        public static Task<IEnumerable<T>> WhereAsync<T>(this IMongoCollection<T> collection, FilterDefinition<T> filter,FindOptions options = null)
             where T : BaseMongoEntity
         {
-            return Task.Run(() => Match(collection, filter));
+            return Task.Run(() => Where(collection, filter,options));
         }
 
         /// <summary>
-        /// 动态表查询单条
+        /// 查询返回集合
         /// </summary>
-        /// <typeparam name="TForeign">文档类型</typeparam>
         /// <typeparam name="T">文档类型</typeparam>
         /// <param name="collection">集合</param>
-        /// <param name="foreignDocument">文档对象</param>
-        /// <param name="id">主键ID</param>
+        /// <param name="session">会话句柄(作用于事务)</param>
+        /// <param name="filte">过滤器</param>
+        /// <param name="options">查询操作设置</param>
         /// <returns></returns>
-        public static Task<T> DynamicCollectionFindOneAsync<TForeign, T>(this IMongoCollection<T> collection, TForeign foreignDocument, string id)
-            where TForeign : BaseMongoEntity
+        public static Task<IEnumerable<T>> WhereAsync<T>(this IMongoCollection<T> collection,IClientSessionHandle session, FilterDefinition<T> filter, FindOptions options = null)
             where T : BaseMongoEntity
         {
-            return Task.Run(() => DynamicCollectionFindOne(collection, foreignDocument, id));
+            return Task.Run(() => Where(collection,session, filter, options));
         }
 
         /// <summary>
-        /// 动态表查询单条
+        /// 查询返回集合
         /// </summary>
-        /// <typeparam name="TForeign">文档类型</typeparam>
         /// <typeparam name="T">文档类型</typeparam>
         /// <param name="collection">集合</param>
-        /// <param name="foreignDocument">文档对象</param>
-        /// <param name="id">主键ID</param>
+        /// <param name="filte">Lambda过滤器</param>
+        /// <param name="options">查询操作设置</param>
         /// <returns></returns>
-        public static Task<T> DynamicCollectionMatchOneAsync<TForeign, T>(this IMongoCollection<T> collection, TForeign foreignDocument, string id)
-            where TForeign : BaseMongoEntity
+        public static Task<IEnumerable<T>> WhereAsync<T>(this IMongoCollection<T> collection, Expression<Func<T, bool>> filter,FindOptions options = null)
             where T : BaseMongoEntity
         {
-            return Task.Run(() => DynamicCollectionMatchOne(collection, foreignDocument, id));
+            return Task.Run(() => Where(collection, filter,options));
         }
 
         /// <summary>
-        /// 动态表查询单条
+        /// 查询返回集合
         /// </summary>
-        /// <typeparam name="TForeign">文档类型</typeparam>
         /// <typeparam name="T">文档类型</typeparam>
         /// <param name="collection">集合</param>
-        /// <param name="foreignDocument">文档对象</param>
-        /// <param name="filter">过滤器</param>
+        /// <param name="session">会话句柄(作用于事务)</param>
+        /// <param name="filte">Lambda过滤器</param>
+        /// <param name="options">查询操作设置</param>
         /// <returns></returns>
-        public static Task<T> DynamicCollectionFindOneAsync<TForeign, T>(this IMongoCollection<T> collection, TForeign foreignDocument, FilterDefinition<T> filter)
-            where TForeign : BaseMongoEntity
+        public static Task<IEnumerable<T>> WhereAsync<T>(this IMongoCollection<T> collection,IClientSessionHandle session, Expression<Func<T, bool>> filter, FindOptions options = null)
             where T : BaseMongoEntity
         {
-            return Task.Run(() => DynamicCollectionFindOne(collection, foreignDocument, filter));
+            return Task.Run(() => Where(collection,session, filter, options));
         }
 
         /// <summary>
-        /// 动态表查询单条
+        /// 查询返回集合
         /// </summary>
-        /// <typeparam name="TForeign">文档类型</typeparam>
         /// <typeparam name="T">文档类型</typeparam>
         /// <param name="collection">集合</param>
-        /// <param name="foreignDocument">文档对象</param>
-        /// <param name="filter">Lambda过滤器</param>
+        /// <param name="filte">Lambda过滤器</param>
+        /// <param name="options">聚合操作设置</param>
         /// <returns></returns>
-        public static Task<T> DynamicCollectionFindOneAsync<TForeign, T>(this IMongoCollection<T> collection, TForeign foreignDocument, Expression<Func<T, bool>> filter)
-            where TForeign : BaseMongoEntity
+        public static Task<IEnumerable<T>> MatchAsync<T>(this IMongoCollection<T> collection, Expression<Func<T, bool>> filter,AggregateOptions options = null)
             where T : BaseMongoEntity
         {
-            return Task.Run(() => DynamicCollectionFindOne(collection, foreignDocument, filter));
+            return Task.Run(() => Match(collection, filter,options));
         }
 
         /// <summary>
-        /// 动态表查询单条
+        /// 查询返回集合
         /// </summary>
-        /// <typeparam name="TForeign">文档类型</typeparam>
         /// <typeparam name="T">文档类型</typeparam>
         /// <param name="collection">集合</param>
-        /// <param name="foreignDocument">文档对象</param>
-        /// <param name="filter">Lambda过滤器</param>
+        /// <param name="session">会话句柄(作用于事务)</param>
+        /// <param name="filte">Lambda过滤器</param>
+        /// <param name="options">聚合操作设置</param>
         /// <returns></returns>
-        public static Task<T> DynamicCollectionMatchOneAsync<TForeign, T>(this IMongoCollection<T> collection, TForeign foreignDocument, Expression<Func<T, bool>> filter)
-            where TForeign : BaseMongoEntity
+        public static Task<IEnumerable<T>> MatchAsync<T>(this IMongoCollection<T> collection,IClientSessionHandle session, Expression<Func<T, bool>> filter, AggregateOptions options = null)
             where T : BaseMongoEntity
         {
-            return Task.Run(() => DynamicCollectionMatchOne(collection, foreignDocument, filter));
-        }
-
-        /// <summary>
-        /// 动态表查询全部
-        /// </summary>
-        /// <typeparam name="TForeign">文档类型</typeparam>
-        /// <typeparam name="T">文档类型</typeparam>
-        /// <param name="collection">集合</param>
-        /// <param name="foreignDocument">文档对象</param>
-        /// <returns></returns>
-        public static Task<IEnumerable<T>> DynamicCollectionFindAllAsync<TForeign, T>(this IMongoCollection<T> collection, TForeign foreignDocument)
-        where TForeign : BaseMongoEntity
-        where T : BaseMongoEntity
-        {
-            return Task.Run(() => DynamicCollectionFindAll(collection, foreignDocument));
-        }
-
-        /// <summary>
-        /// 动态表条件查询
-        /// </summary>
-        /// <typeparam name="TForeign">文档类型</typeparam>
-        /// <typeparam name="T">文档类型</typeparam>
-        /// <param name="collection">集合</param>
-        /// <param name="foreignDocument">文档对象</param>
-        /// <param name="filter">过滤器</param>
-        /// <returns></returns>
-        public static Task<IEnumerable<T>> DynamicCollectionWhereAsync<TForeign, T>(this IMongoCollection<T> collection, TForeign foreignDocument, FilterDefinition<T> filter)
-            where TForeign : BaseMongoEntity
-            where T : BaseMongoEntity
-        {
-            return Task.Run(() => DynamicCollectionWhere(collection, foreignDocument, filter));
-        }
-
-        /// <summary>
-        /// 动态表条件查询
-        /// </summary>
-        /// <typeparam name="TForeign">文档类型</typeparam>
-        /// <typeparam name="T">文档类型</typeparam>
-        /// <param name="collection">集合</param>
-        /// <param name="foreignDocument">文档对象</param>
-        /// <param name="filter">Lambda过滤器</param>
-        /// <returns></returns>
-        public static Task<IEnumerable<T>> DynamicCollectionWhereAsync<TForeign, T>(this IMongoCollection<T> collection, TForeign foreignDocument, Expression<Func<T, bool>> filter)
-            where TForeign : BaseMongoEntity
-            where T : BaseMongoEntity
-        {
-            return Task.Run(() => DynamicCollectionWhere(collection, foreignDocument, filter));
-        }
-
-        /// <summary>
-        /// 动态表条件查询
-        /// </summary>
-        /// <typeparam name="TForeign">文档类型</typeparam>
-        /// <typeparam name="T">文档类型</typeparam>
-        /// <param name="collection">集合</param>
-        /// <param name="foreignDocument">文档对象</param>
-        /// <param name="filter">Lambda过滤器</param>
-        /// <returns></returns>
-        public static Task<IEnumerable<T>> DynamicCollectionMatchAsync<TForeign, T>(this IMongoCollection<T> collection, TForeign foreignDocument, Expression<Func<T, bool>> filter)
-            where TForeign : BaseMongoEntity
-            where T : BaseMongoEntity
-        {
-            return Task.Run(() => DynamicCollectionMatch(collection, foreignDocument, filter));
+            return Task.Run(() => Match(collection,session, filter, options));
         }
 
         #endregion

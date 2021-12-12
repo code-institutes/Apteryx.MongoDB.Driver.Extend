@@ -1,4 +1,5 @@
 ﻿using System.Collections.Generic;
+using System.Threading;
 using System.Threading.Tasks;
 using Apteryx.MongoDB.Driver.Extend.Entities;
 using MongoDB.Driver;
@@ -15,58 +16,71 @@ namespace Apteryx.MongoDB.Driver.Extend.ExtensionMethods
         /// <summary>
         /// 插入
         /// </summary>
-        /// <typeparam name="T"></typeparam>
-        /// <param name="collection"></param>
-        /// <param name="document"></param>
-        /// <returns></returns>
-        public static Task AddAsync<T>(this IMongoCollection<T> collection, T document)
-        where T:BaseMongoEntity
+        /// <typeparam name="T">文档类型</typeparam>
+        /// <param name="collection">集合</param>
+        /// <param name="document">文档</param>
+        /// <param name="options">插入操作设置</param>
+        /// <param name="cancellationToken">取消操作设置</param>
+        public static Task AddAsync<T>(this IMongoCollection<T> collection,
+            T document,
+            InsertOneOptions options = null,
+            CancellationToken cancellationToken = default)
+        where T : BaseMongoEntity
         {
-            return Task.Run(() => Add(collection,document));
+            return Task.Run(() => Add(collection, document, options, cancellationToken));
+        }
+
+        /// <summary>
+        /// 插入
+        /// </summary>
+        /// <typeparam name="T">文档类型</typeparam>
+        /// <param name="collection">集合</param>
+        /// <param name="session">会话句柄(作用于事务)</param>
+        /// <param name="document">文档</param>
+        /// <param name="options">插入操作设置</param>
+        /// <param name="cancellationToken">取消操作设置</param>
+        public static Task AddAsync<T>(this IMongoCollection<T> collection,
+            IClientSessionHandle session,
+            T document,
+            InsertOneOptions options = null,
+            CancellationToken cancellationToken = default)
+        {
+            return Task.Run(() => Add(collection, session, document, options, cancellationToken));
         }
 
         /// <summary>
         /// 插入多条
         /// </summary>
-        /// <typeparam name="T"></typeparam>
-        /// <param name="collection"></param>
-        /// <param name="documents"></param>
-        public static Task AddManyAsync<T>(this IMongoCollection<T> collection, IEnumerable<T> documents)
+        /// <typeparam name="T">文档类型</typeparam>
+        /// <param name="collection">集合</param>
+        /// <param name="documents">文档</param>
+        /// <param name="options">插入操作设置</param>
+        /// <param name="cancellationToken">取消操作设置</param>
+        public static Task AddManyAsync<T>(this IMongoCollection<T> collection,
+            IEnumerable<T> documents,
+            InsertManyOptions options = null,
+            CancellationToken cancellationToken = default)
             where T : BaseMongoEntity
         {
-            return Task.Run(() => AddMany(collection, documents));
+            return Task.Run(() => AddMany(collection, documents, options, cancellationToken));
         }
 
         /// <summary>
-        /// 动态表插入单条
+        /// 插入多条
         /// </summary>
-        /// <typeparam name="TForeign"></typeparam>
-        /// <typeparam name="T"></typeparam>
-        /// <param name="collection"></param>
-        /// <param name="foreignDocument">上级对象</param>
-        /// <param name="document"></param>
-        public static Task DynamicCollectionAddAsync<TForeign, T>(this IMongoCollection<T> collection,
-            TForeign foreignDocument, T document)
+        /// <typeparam name="T">文档类型</typeparam>
+        /// <param name="collection">集合</param>
+        /// <param name="session">会话句柄(作用于事务)</param>
+        /// <param name="options">插入操作设置</param>
+        /// <param name="cancellationToken">取消操作设置</param>
+        public static Task AddManyAsync<T>(this IMongoCollection<T> collection,
+            IEnumerable<T> documents,
+            IClientSessionHandle session,
+            InsertManyOptions options = null,
+            CancellationToken cancellationToken = default)
             where T : BaseMongoEntity
-            where TForeign : BaseMongoEntity
         {
-            return Task.Run(() => DynamicCollectionAdd(collection,foreignDocument, document));
-        }
-
-        /// <summary>
-        /// 动态表插入多条
-        /// </summary>
-        /// <typeparam name="TForeign"></typeparam>
-        /// <typeparam name="T"></typeparam>
-        /// <param name="collection"></param>
-        /// <param name="foreignDocument">上级对象</param>
-        /// <param name="documents"></param>
-        public static Task DynamicCollectionAddManyAsync<TForeign, T>(this IMongoCollection<T> collection,
-            TForeign foreignDocument, IEnumerable<T> documents)
-            where T : BaseMongoEntity
-            where TForeign : BaseMongoEntity
-        {
-            return Task.Run(() => DynamicCollectionAddMany(collection, foreignDocument, documents));
+            return Task.Run(() => AddMany(collection, session, documents, options, cancellationToken));
         }
 
         #endregion

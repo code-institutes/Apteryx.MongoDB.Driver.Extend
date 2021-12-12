@@ -5,6 +5,7 @@ using System.Text;
 using System.Linq;
 using Apteryx.MongoDB.Driver.Extend.Entities;
 using MongoDB.Driver;
+using System.Threading;
 
 namespace Apteryx.MongoDB.Driver.Extend.ExtensionMethods
 {
@@ -21,11 +22,26 @@ namespace Apteryx.MongoDB.Driver.Extend.ExtensionMethods
         /// <typeparam name="T">集合类型</typeparam>
         /// <param name="collection">集合</param>
         /// <param name="id">主键ID</param>
+        /// <param name="options">查询操作设置</param>
         /// <returns></returns>
-        public static T FindOne<T>(this IMongoCollection<T> collection, string id)
+        public static T FindOne<T>(this IMongoCollection<T> collection, string id, FindOptions options = null)
             where T : BaseMongoEntity
         {
-            return collection.Find(f=>f.Id == id).FirstOrDefault();
+            return collection.Find(f => f.Id == id, options).FirstOrDefault();
+        }
+
+        /// <summary>
+        /// 查询返回单条
+        /// </summary>
+        /// <typeparam name="T">集合类型</typeparam>
+        /// <param name="collection">集合</param>
+        /// <param name="session">会话句柄(作用于事务)</param>
+        /// <param name="id">主键ID</param>
+        /// <param name="options">查询操作设置</param>
+        public static T FindOne<T>(this IMongoCollection<T> collection, IClientSessionHandle session, string id, FindOptions options = null)
+            where T : BaseMongoEntity
+        {
+            return collection.Find(session, f => f.Id == id, options).FirstOrDefault();
         }
 
         /// <summary>
@@ -34,11 +50,27 @@ namespace Apteryx.MongoDB.Driver.Extend.ExtensionMethods
         /// <typeparam name="T">集合类型</typeparam>
         /// <param name="collection">集合</param>
         /// <param name="id">主键ID</param>
+        /// <param name="options">聚合操作设置</param>
         /// <returns></returns>
-        public static T MatchOne<T>(this IMongoCollection<T> collection, string id)
+        public static T MatchOne<T>(this IMongoCollection<T> collection, string id, AggregateOptions options = null)
             where T : BaseMongoEntity
         {
-            return collection.AsQueryable().FirstOrDefault(f => f.Id == id);
+            return collection.AsQueryable(options).FirstOrDefault(f => f.Id == id);
+        }
+
+        /// <summary>
+        /// 查询返回单条
+        /// </summary>
+        /// <typeparam name="T">集合类型</typeparam>
+        /// <param name="collection">集合</param>
+        /// <param name="session">会话句柄(作用于事务)</param>
+        /// <param name="id">主键ID</param>
+        /// <param name="options">聚合操作设置</param>
+        /// <returns></returns>
+        public static T MatchOne<T>(this IMongoCollection<T> collection, IClientSessionHandle session, string id, AggregateOptions options = null)
+            where T : BaseMongoEntity
+        {
+            return collection.AsQueryable(session, options).FirstOrDefault(f => f.Id == id);
         }
 
         /// <summary>
@@ -47,11 +79,27 @@ namespace Apteryx.MongoDB.Driver.Extend.ExtensionMethods
         /// <typeparam name="T">集合类型</typeparam>
         /// <param name="collection">集合</param>
         /// <param name="filter">过滤器</param>
+        /// <param name="options">查询操作设置</param>
         /// <returns></returns>
-        public static T FindOne<T>(this IMongoCollection<T> collection, FilterDefinition<T> filter)
+        public static T FindOne<T>(this IMongoCollection<T> collection, FilterDefinition<T> filter, FindOptions options = null)
             where T : BaseMongoEntity
         {
-            return collection.Find(filter).FirstOrDefault();
+            return collection.Find(filter, options).FirstOrDefault();
+        }
+
+        /// <summary>
+        /// 查询返回单条
+        /// </summary>
+        /// <typeparam name="T">集合类型</typeparam>
+        /// <param name="collection">集合</param>
+        /// <param name="session">会话句柄(作用于事务)</param>
+        /// <param name="filter">过滤器</param>
+        /// <param name="options">查询操作设置</param>
+        /// <returns></returns>
+        public static T FindOne<T>(this IMongoCollection<T> collection, IClientSessionHandle session, FilterDefinition<T> filter, FindOptions options = null)
+            where T : BaseMongoEntity
+        {
+            return collection.Find(session, filter, options).FirstOrDefault();
         }
 
         /// <summary>
@@ -60,34 +108,112 @@ namespace Apteryx.MongoDB.Driver.Extend.ExtensionMethods
         /// <typeparam name="T">集合类型</typeparam>
         /// <param name="collection">集合</param>
         /// <param name="filter">Lmabda过滤器</param>
+        /// <param name="options">查询操作设置</param>
         /// <returns></returns>
-        public static T FindOne<T>(this IMongoCollection<T> collection, Expression<Func<T, bool>> filter)
+        public static T FindOne<T>(this IMongoCollection<T> collection, Expression<Func<T, bool>> filter, FindOptions options = null)
             where T : BaseMongoEntity
         {
-            return collection.Find(filter).FirstOrDefault();
+            return collection.Find(filter, options).FirstOrDefault();
         }
+
+        /// <summary>
+        /// 查询返回单条
+        /// </summary>
+        /// <typeparam name="T">集合类型</typeparam>
+        /// <param name="collection">集合</param>
+        /// <param name="session">会话句柄(作用于事务)</param>
+        /// <param name="filter">Lmabda过滤器</param>
+        /// <param name="options">查询操作设置</param>
+        /// <returns></returns>
+        public static T FindOne<T>(this IMongoCollection<T> collection, IClientSessionHandle session, Expression<Func<T, bool>> filter, FindOptions options = null)
+            where T : BaseMongoEntity
+        {
+            return collection.Find(session, filter, options).FirstOrDefault();
+        }
+
         /// <summary>
         /// 查询返回单条
         /// </summary>
         /// <typeparam name="T">集合类型</typeparam>
         /// <param name="collection">集合</param>
         /// <param name="filter">Lmabda过滤器</param>
+        /// <param name="options">聚合操作设置</param>
         /// <returns></returns>
-        public static T MatchOne<T>(this IMongoCollection<T> collection, Expression<Func<T, bool>> filter)
+        public static T MatchOne<T>(this IMongoCollection<T> collection, Expression<Func<T, bool>> filter, AggregateOptions options = null)
             where T : BaseMongoEntity
         {
-            return collection.AsQueryable().FirstOrDefault(filter);
+            return collection.AsQueryable(options).FirstOrDefault(filter);
         }
+
+        /// <summary>
+        /// 查询返回单条
+        /// </summary>
+        /// <typeparam name="T">集合类型</typeparam>
+        /// <param name="collection">集合</param>
+        /// <param name="session">会话句柄(作用于事务)</param>
+        /// <param name="filter">Lmabda过滤器</param>
+        /// <param name="options">聚合操作设置</param>
+        /// <returns></returns>
+        public static T MatchOne<T>(this IMongoCollection<T> collection, IClientSessionHandle session, Expression<Func<T, bool>> filter, AggregateOptions options = null)
+            where T : BaseMongoEntity
+        {
+            return collection.AsQueryable(session, options).FirstOrDefault(filter);
+        }
+
         /// <summary>
         /// 查询全部
         /// </summary>
-        /// <typeparam name="T"></typeparam>
-        /// <param name="collection"></param>
+        /// <typeparam name="T">文档类型</typeparam>
+        /// <param name="collection">集合</param>
+        /// <param name="options">查询操作设置</param>
         /// <returns></returns>
-        public static IEnumerable<T> FindAll<T>(this IMongoCollection<T> collection)
+        public static IEnumerable<T> FindAll<T>(this IMongoCollection<T> collection, FindOptions options = null)
             where T : BaseMongoEntity
         {
-            return collection.Find(_ => true).ToEnumerable();
+            return collection.Find(_ => true, options).ToEnumerable();
+        }
+
+        /// <summary>
+        /// 查询全部
+        /// </summary>
+        /// <typeparam name="T">文档类型</typeparam>
+        /// <param name="collection">集合</param>
+        /// <param name="session">会话句柄(作用于事务)</param>
+        /// <param name="options">查询操作设置</param>
+        /// <returns></returns>
+        public static IEnumerable<T> FindAll<T>(this IMongoCollection<T> collection, IClientSessionHandle session, FindOptions options = null)
+            where T : BaseMongoEntity
+        {
+            return collection.Find(session, _ => true, options).ToEnumerable();
+        }
+
+        /// <summary>
+        /// 查询返回集合
+        /// </summary>
+        /// <typeparam name="T">文档类型</typeparam>
+        /// <param name="collection">集合</param>
+        /// <param name="filte">过滤器</param>
+        /// <param name="options">查询操作设置</param>
+        /// <returns></returns>
+        public static IEnumerable<T> Where<T>(this IMongoCollection<T> collection, FilterDefinition<T> filte, FindOptions options = null)
+            where T : BaseMongoEntity
+        {
+            return collection.Find(filte, options).ToEnumerable();
+        }
+
+        /// <summary>
+        /// 查询返回集合
+        /// </summary>
+        /// <typeparam name="T">文档类型</typeparam>
+        /// <param name="collection">集合</param>
+        /// <param name="session">会话句柄(作用于事务)</param>
+        /// <param name="filte">过滤器</param>
+        /// <param name="options">查询操作设置</param>
+        /// <returns></returns>
+        public static IEnumerable<T> Where<T>(this IMongoCollection<T> collection, IClientSessionHandle session, FilterDefinition<T> filte, FindOptions options = null)
+            where T : BaseMongoEntity
+        {
+            return collection.Find(session, filte, options).ToEnumerable();
         }
 
         /// <summary>
@@ -96,11 +222,27 @@ namespace Apteryx.MongoDB.Driver.Extend.ExtensionMethods
         /// <typeparam name="T">文档类型</typeparam>
         /// <param name="collection">集合</param>
         /// <param name="filte">Lambda过滤器</param>
+        /// <param name="options">查询操作设置</param>
         /// <returns></returns>
-        public static IEnumerable<T> Where<T>(this IMongoCollection<T> collection, FilterDefinition<T> filte)
+        public static IEnumerable<T> Where<T>(this IMongoCollection<T> collection, Expression<Func<T, bool>> filte, FindOptions options = null)
             where T : BaseMongoEntity
         {
-            return collection.Find(filte).ToEnumerable();
+            return collection.Find(filte, options).ToEnumerable();
+        }
+
+        /// <summary>
+        /// 查询返回集合
+        /// </summary>
+        /// <typeparam name="T">文档类型</typeparam>
+        /// <param name="collection">集合</param>
+        /// <param name="session">会话句柄(作用于事务)</param>
+        /// <param name="filte">Lambda过滤器</param>
+        /// <param name="options">查询操作设置</param>
+        /// <returns></returns>
+        public static IEnumerable<T> Where<T>(this IMongoCollection<T> collection, IClientSessionHandle session, Expression<Func<T, bool>> filte, FindOptions options = null)
+            where T : BaseMongoEntity
+        {
+            return collection.Find(session, filte, options).ToEnumerable();
         }
 
         /// <summary>
@@ -109,11 +251,12 @@ namespace Apteryx.MongoDB.Driver.Extend.ExtensionMethods
         /// <typeparam name="T">文档类型</typeparam>
         /// <param name="collection">集合</param>
         /// <param name="filte">Lambda过滤器</param>
+        /// <param name="options">聚合操作设置</param>
         /// <returns></returns>
-        public static IEnumerable<T> Where<T>(this IMongoCollection<T> collection, Expression<Func<T, bool>> filte)
+        public static IEnumerable<T> Match<T>(this IMongoCollection<T> collection, Expression<Func<T, bool>> filte, AggregateOptions options = null)
             where T : BaseMongoEntity
         {
-            return collection.Find(filte).ToEnumerable();
+            return collection.AsQueryable(options).Where(filte);
         }
 
         /// <summary>
@@ -121,155 +264,14 @@ namespace Apteryx.MongoDB.Driver.Extend.ExtensionMethods
         /// </summary>
         /// <typeparam name="T">文档类型</typeparam>
         /// <param name="collection">集合</param>
+        /// <param name="session">会话句柄(作用于事务)</param>
         /// <param name="filte">Lambda过滤器</param>
+        /// <param name="options">聚合操作设置</param>
         /// <returns></returns>
-        public static IEnumerable<T> Match<T>(this IMongoCollection<T> collection, Expression<Func<T, bool>> filte)
+        public static IEnumerable<T> Match<T>(this IMongoCollection<T> collection,IClientSessionHandle session, Expression<Func<T, bool>> filte, AggregateOptions options = null)
             where T : BaseMongoEntity
         {
-            return collection.AsQueryable().Where(filte);
-        }
-
-        /// <summary>
-        /// 动态表查询返回单条
-        /// </summary>
-        /// <typeparam name="TForeign">文档类型</typeparam>
-        /// <typeparam name="T">文档类型</typeparam>
-        /// <param name="collection">集合</param>
-        /// <param name="foreignDocument">文档对象</param>
-        /// <param name="id">主键ID</param>
-        /// <returns></returns>
-        public static T DynamicCollectionFindOne<TForeign, T>(this IMongoCollection<T> collection, TForeign foreignDocument, string id)
-            where TForeign : BaseMongoEntity
-            where T : BaseMongoEntity
-        {
-            return collection.Database.GetCollection<T>($"{typeof(T).Name}_{foreignDocument.Id}").Find(f=>f.Id == id).FirstOrDefault();
-        }
-
-        /// <summary>
-        /// 动态表查询返回单条
-        /// </summary>
-        /// <typeparam name="TForeign">文档类型</typeparam>
-        /// <typeparam name="T">文档类型</typeparam>
-        /// <param name="collection">集合</param>
-        /// <param name="foreignDocument">文档对象</param>
-        /// <param name="id">主键ID</param>
-        /// <returns></returns>
-        public static T DynamicCollectionMatchOne<TForeign, T>(this IMongoCollection<T> collection, TForeign foreignDocument, string id)
-            where TForeign : BaseMongoEntity
-            where T : BaseMongoEntity
-        {
-            return collection.Database.GetCollection<T>($"{typeof(T).Name}_{foreignDocument.Id}").AsQueryable().FirstOrDefault(f => f.Id == id);
-        }
-
-        /// <summary>
-        /// 动态表查询返回单条
-        /// </summary>
-        /// <typeparam name="TForeign">文档类型</typeparam>
-        /// <typeparam name="T">文档类型</typeparam>
-        /// <param name="collection">集合</param>
-        /// <param name="foreignDocument">文档对象</param>
-        /// <param name="filter">过滤器</param>
-        /// <returns></returns>
-        public static T DynamicCollectionFindOne<TForeign, T>(this IMongoCollection<T> collection, TForeign foreignDocument, FilterDefinition<T> filter)
-            where TForeign : BaseMongoEntity
-            where T : BaseMongoEntity
-        {
-            return collection.Database.GetCollection<T>($"{typeof(T).Name}_{foreignDocument.Id}").Find(filter).FirstOrDefault();
-        }
-
-        /// <summary>
-        /// 动态表查询返回单条
-        /// </summary>
-        /// <typeparam name="TForeign">文档类型</typeparam>
-        /// <typeparam name="T">文档类型</typeparam>
-        /// <param name="collection">集合</param>
-        /// <param name="foreignDocument">文档对象</param>
-        /// <param name="filter">Lambda过滤器</param>
-        /// <returns></returns>
-        public static T DynamicCollectionFindOne<TForeign, T>(this IMongoCollection<T> collection, TForeign foreignDocument, Expression<Func<T, bool>> filter)
-            where TForeign : BaseMongoEntity
-            where T : BaseMongoEntity
-        {
-            return collection.Database.GetCollection<T>($"{typeof(T).Name}_{foreignDocument.Id}").Find(filter).FirstOrDefault();
-        }
-
-        /// <summary>
-        /// 动态表查询返回单条
-        /// </summary>
-        /// <typeparam name="TForeign">文档类型</typeparam>
-        /// <typeparam name="T">文档类型</typeparam>
-        /// <param name="collection">集合</param>
-        /// <param name="foreignDocument">文档对象</param>
-        /// <param name="filter">Lambda过滤器</param>
-        /// <returns></returns>
-        public static T DynamicCollectionMatchOne<TForeign, T>(this IMongoCollection<T> collection, TForeign foreignDocument, Expression<Func<T, bool>> filter)
-            where TForeign : BaseMongoEntity
-            where T : BaseMongoEntity
-        {
-            return collection.Database.GetCollection<T>($"{typeof(T).Name}_{foreignDocument.Id}").AsQueryable().FirstOrDefault(filter);
-        }
-
-        /// <summary>
-        /// 动态表查询全部
-        /// </summary>
-        /// <typeparam name="TForeign">文档类型</typeparam>
-        /// <typeparam name="T">文档类型</typeparam>
-        /// <param name="collection">集合</param>
-        /// <param name="foreignDocument">文档对象</param>
-        /// <returns></returns>
-        public static IEnumerable<T> DynamicCollectionFindAll<TForeign, T>(this IMongoCollection<T> collection, TForeign foreignDocument)
-        where TForeign : BaseMongoEntity
-        where T : BaseMongoEntity
-        {
-            return collection.Database.GetCollection<T>($"{typeof(T).Name}_{foreignDocument.Id}").Find(_ => true).ToEnumerable();
-        }
-
-        /// <summary>
-        /// 动态表查询返回集合
-        /// </summary>
-        /// <typeparam name="TForeign">文档类型</typeparam>
-        /// <typeparam name="T">文档类型</typeparam>
-        /// <param name="collection">集合</param>
-        /// <param name="foreignDocument">文档对象</param>
-        /// <param name="filter">过滤器</param>
-        /// <returns></returns>
-        public static IEnumerable<T> DynamicCollectionWhere<TForeign, T>(this IMongoCollection<T> collection, TForeign foreignDocument, FilterDefinition<T> filter)
-            where TForeign : BaseMongoEntity
-            where T : BaseMongoEntity
-        {
-            return collection.Database.GetCollection<T>($"{typeof(T).Name}_{foreignDocument.Id}").Find(filter).ToEnumerable();
-        }
-
-        /// <summary>
-        /// 动态表查询返回集合
-        /// </summary>
-        /// <typeparam name="TForeign">文档类型</typeparam>
-        /// <typeparam name="T">文档类型</typeparam>
-        /// <param name="collection">集合</param>
-        /// <param name="foreignDocument">文档对象</param>
-        /// <param name="filter">过滤器</param>
-        /// <returns></returns>
-        public static IEnumerable<T> DynamicCollectionWhere<TForeign, T>(this IMongoCollection<T> collection, TForeign foreignDocument, Expression<Func<T, bool>> filter)
-            where TForeign : BaseMongoEntity
-            where T : BaseMongoEntity
-        {
-            return collection.Database.GetCollection<T>($"{typeof(T).Name}_{foreignDocument.Id}").Find(filter).ToEnumerable();
-        }
-
-        /// <summary>
-        /// 动态表查询返回集合
-        /// </summary>
-        /// <typeparam name="TForeign">文档类型</typeparam>
-        /// <typeparam name="T">文档类型</typeparam>
-        /// <param name="collection">集合</param>
-        /// <param name="foreignDocument">文档对象</param>
-        /// <param name="filter">过滤器</param>
-        /// <returns></returns>
-        public static IEnumerable<T> DynamicCollectionMatch<TForeign, T>(this IMongoCollection<T> collection, TForeign foreignDocument, Expression<Func<T, bool>> filter)
-            where TForeign : BaseMongoEntity
-            where T : BaseMongoEntity
-        {
-            return collection.Database.GetCollection<T>($"{typeof(T).Name}_{foreignDocument.Id}").AsQueryable().Where(filter);
+            return collection.AsQueryable(session,options).Where(filte);
         }
 
         #endregion

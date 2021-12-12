@@ -23,7 +23,7 @@ namespace Apteryx.MongoDB.Driver.Extend
             FilterDefinition<T> filter,
             T document,
             ReplaceOptions options = null,
-            CancellationToken cancellationToken = default(CancellationToken)) where T : BaseMongoEntity
+            CancellationToken cancellationToken = default) where T : BaseMongoEntity
         {
             document.UpdateTime = DateTime.Now;
             return database.GetCollection<T>(typeof(T).Name).ReplaceOne(filter, document, options, cancellationToken);
@@ -42,7 +42,7 @@ namespace Apteryx.MongoDB.Driver.Extend
             Expression<Func<T, bool>> filter,
             T document,
             ReplaceOptions options = null,
-            CancellationToken cancellationToken = default(CancellationToken))
+            CancellationToken cancellationToken = default)
             where T : BaseMongoEntity
         {
             document.UpdateTime = DateTime.Now;
@@ -65,7 +65,7 @@ namespace Apteryx.MongoDB.Driver.Extend
             FilterDefinition<T> filter,
             T document,
             ReplaceOptions options = null,
-            CancellationToken cancellationToken = default(CancellationToken))
+            CancellationToken cancellationToken = default)
             where TForeign : BaseMongoEntity
             where T : BaseMongoEntity
         {
@@ -90,7 +90,7 @@ namespace Apteryx.MongoDB.Driver.Extend
             Expression<Func<T, bool>> filter,
             T document,
             ReplaceOptions options = null,
-            CancellationToken cancellationToken = default(CancellationToken))
+            CancellationToken cancellationToken = default)
             where TForeign : BaseMongoEntity
             where T : BaseMongoEntity
         {
@@ -112,7 +112,7 @@ namespace Apteryx.MongoDB.Driver.Extend
             FilterDefinition<T> filter,
             T document,
             FindOneAndReplaceOptions<T> options = null,
-            CancellationToken cancellationToken = default(CancellationToken))
+            CancellationToken cancellationToken = default)
             where T : BaseMongoEntity
         {
             document.UpdateTime = DateTime.Now;
@@ -132,7 +132,7 @@ namespace Apteryx.MongoDB.Driver.Extend
             Expression<Func<T, bool>> filter,
             T document,
             FindOneAndReplaceOptions<T> options = null,
-            CancellationToken cancellationToken = default(CancellationToken))
+            CancellationToken cancellationToken = default)
             where T : BaseMongoEntity
         {
             document.UpdateTime = DateTime.Now;
@@ -152,7 +152,7 @@ namespace Apteryx.MongoDB.Driver.Extend
         /// <returns></returns>
         public T DynamicCollectionFindOneAndReplaceOne<TForeign, T>(TForeign foreignDocument, FilterDefinition<T> filter,
             T document, FindOneAndReplaceOptions<T> options = null,
-            CancellationToken cancellationToken = default(CancellationToken))
+            CancellationToken cancellationToken = default)
             where TForeign : BaseMongoEntity
             where T : BaseMongoEntity
         {
@@ -173,7 +173,7 @@ namespace Apteryx.MongoDB.Driver.Extend
         /// <returns></returns>
         public T DynamicCollectionFindOneAndReplaceOne<TForeign, T>(TForeign foreignDocument,
             Expression<Func<T, bool>> filter, T document, FindOneAndReplaceOptions<T> options = null,
-            CancellationToken cancellationToken = default(CancellationToken))
+            CancellationToken cancellationToken = default)
             where TForeign : BaseMongoEntity
             where T : BaseMongoEntity
         {

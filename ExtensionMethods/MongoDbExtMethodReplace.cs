@@ -13,19 +13,65 @@ namespace Apteryx.MongoDB.Driver.Extend.ExtensionMethods
         /// <summary>
         /// 替换单条(自动更新UpdateTime字段)
         /// </summary>
-        /// <typeparam name="T"></typeparam>
-        /// <param name="collection"></param>
-        /// <param name="filter"></param>
-        /// <param name="document"></param>
-        /// <param name="options"></param>
-        /// <param name="cancellationToken"></param>
+        /// <typeparam name="T">文档类型</typeparam>
+        /// <param name="collection">集合</param>
+        /// <param name="id">主键ID</param>
+        /// <param name="document">文档</param>
+        /// <param name="options">替换操作设置</param>
+        /// <param name="cancellationToken">取消操作设置</param>
+        /// <returns></returns>
+        public static ReplaceOneResult WhereReplaceOne<T>(
+            this IMongoCollection<T> collection,
+            string id,
+            T document,
+            ReplaceOptions options = null,
+            CancellationToken cancellationToken = default)
+            where T : BaseMongoEntity
+        {
+            document.UpdateTime = DateTime.Now;
+            return collection.ReplaceOne(r => r.Id == id, document, options, cancellationToken);
+        }
+
+        /// <summary>
+        /// 替换单条(自动更新UpdateTime字段)
+        /// </summary>
+        /// <typeparam name="T">文档类型</typeparam>
+        /// <param name="collection">集合</param>
+        /// <param name="session">会话句柄(作用于事务)</param>
+        /// <param name="id">主键ID</param>
+        /// <param name="document">文档</param>
+        /// <param name="options">替换操作设置</param>
+        /// <param name="cancellationToken">取消操作设置</param>
+        /// <returns></returns>
+        public static ReplaceOneResult WhereReplaceOne<T>(
+            this IMongoCollection<T> collection,
+            IClientSessionHandle session,
+            string id,
+            T document,
+            ReplaceOptions options = null,
+            CancellationToken cancellationToken = default)
+            where T : BaseMongoEntity
+        {
+            document.UpdateTime = DateTime.Now;
+            return collection.ReplaceOne(session,r => r.Id == id, document, options, cancellationToken);
+        }
+
+        /// <summary>
+        /// 替换单条(自动更新UpdateTime字段)
+        /// </summary>
+        /// <typeparam name="T">文档类型</typeparam>
+        /// <param name="collection">集合</param>
+        /// <param name="filter">过滤器</param>
+        /// <param name="document">文档</param>
+        /// <param name="options">替换操作设置</param>
+        /// <param name="cancellationToken">取消操作设置</param>
         /// <returns></returns>
         public static ReplaceOneResult WhereReplaceOne<T>(
             this IMongoCollection<T> collection,
             FilterDefinition<T> filter,
             T document,
             ReplaceOptions options = null,
-            CancellationToken cancellationToken = default(CancellationToken))
+            CancellationToken cancellationToken = default)
             where T : BaseMongoEntity
         {
             document.UpdateTime = DateTime.Now;
@@ -35,19 +81,43 @@ namespace Apteryx.MongoDB.Driver.Extend.ExtensionMethods
         /// <summary>
         /// 替换单条(自动更新UpdateTime字段)
         /// </summary>
-        /// <typeparam name="T"></typeparam>
-        /// <param name="collection"></param>
-        /// <param name="filter"></param>
-        /// <param name="document"></param>
-        /// <param name="options"></param>
-        /// <param name="cancellationToken"></param>
+        /// <typeparam name="T">文档类型</typeparam>
+        /// <param name="collection">集合</param>
+        /// <param name="session">会话句柄(作用于事务)</param>
+        /// <param name="filter">过滤器</param>
+        /// <param name="document">文档</param>
+        /// <param name="options">替换操作设置</param>
+        /// <param name="cancellationToken">取消操作设置</param>
+        /// <returns></returns>
+        public static ReplaceOneResult WhereReplaceOne<T>(
+            this IMongoCollection<T> collection,
+            IClientSessionHandle session,
+            FilterDefinition<T> filter,
+            T document,
+            ReplaceOptions options = null,
+            CancellationToken cancellationToken = default)
+            where T : BaseMongoEntity
+        {
+            document.UpdateTime = DateTime.Now;
+            return collection.ReplaceOne(session, filter, document, options, cancellationToken);
+        }
+
+        /// <summary>
+        /// 替换单条(自动更新UpdateTime字段)
+        /// </summary>
+        /// <typeparam name="T">文档类型</typeparam>
+        /// <param name="collection">集合</param>
+        /// <param name="filter">Lambda过滤器</param>
+        /// <param name="document">文档</param>
+        /// <param name="options">替换操作设置</param>
+        /// <param name="cancellationToken">取消操作设置</param>
         /// <returns></returns>
         public static ReplaceOneResult WhereReplaceOne<T>(
             this IMongoCollection<T> collection,
             Expression<Func<T, bool>> filter,
             T document,
             ReplaceOptions options = null,
-            CancellationToken cancellationToken = default(CancellationToken))
+            CancellationToken cancellationToken = default)
             where T : BaseMongoEntity
         {
             document.UpdateTime = DateTime.Now;
@@ -55,77 +125,45 @@ namespace Apteryx.MongoDB.Driver.Extend.ExtensionMethods
         }
 
         /// <summary>
-        /// 动态表替换单条(自动更新UpdateTime字段)
+        /// 替换单条(自动更新UpdateTime字段)
         /// </summary>
-        /// <typeparam name="TForeign"></typeparam>
-        /// <typeparam name="T"></typeparam>
-        /// <param name="collection"></param>
-        /// <param name="foreignDocument"></param>
-        /// <param name="filter"></param>
-        /// <param name="document"></param>
-        /// <param name="options"></param>
-        /// <param name="cancellationToken"></param>
+        /// <typeparam name="T">文档类型</typeparam>
+        /// <param name="collection">集合</param>
+        /// <param name="session">会话句柄(作用于事务)</param>
+        /// <param name="filter">Lambda过滤器</param>
+        /// <param name="document">文档</param>
+        /// <param name="options">替换操作设置</param>
+        /// <param name="cancellationToken">取消操作设置</param>
         /// <returns></returns>
-        public static ReplaceOneResult DynamicCollectionWhereReplaceOne<TForeign, T>(
+        public static ReplaceOneResult WhereReplaceOne<T>(
             this IMongoCollection<T> collection,
-            TForeign foreignDocument,
-            FilterDefinition<T> filter,
-            T document,
-            ReplaceOptions options = null,
-            CancellationToken cancellationToken = default(CancellationToken))
-            where TForeign : BaseMongoEntity
-            where T : BaseMongoEntity
-        {
-            document.UpdateTime = DateTime.Now;
-            return collection.Database.GetCollection<T>($"{typeof(T).Name}_{foreignDocument.Id}")
-                .ReplaceOne(filter, document, options, cancellationToken);
-        }
-
-        /// <summary>
-        /// 动态表替换单条(自动更新UpdateTime字段)
-        /// </summary>
-        /// <typeparam name="TForeign"></typeparam>
-        /// <typeparam name="T"></typeparam>
-        /// <param name="collection"></param>
-        /// <param name="foreignDocument"></param>
-        /// <param name="filter"></param>
-        /// <param name="document"></param>
-        /// <param name="options"></param>
-        /// <param name="cancellationToken"></param>
-        /// <returns></returns>
-        public static ReplaceOneResult DynamicCollectionWhereReplaceOne<TForeign, T>(
-            this IMongoCollection<T> collection,
-            TForeign foreignDocument,
+            IClientSessionHandle session,
             Expression<Func<T, bool>> filter,
             T document,
             ReplaceOptions options = null,
-            CancellationToken cancellationToken = default(CancellationToken))
-            where TForeign : BaseMongoEntity
+            CancellationToken cancellationToken = default)
             where T : BaseMongoEntity
         {
             document.UpdateTime = DateTime.Now;
-            return collection.Database.GetCollection<T>($"{typeof(T).Name}_{foreignDocument.Id}")
-                .ReplaceOne(filter, document, options, cancellationToken);
+            return collection.ReplaceOne(session, filter, document, options, cancellationToken);
         }
 
         /// <summary>
         /// 查询替换单条(自动更新UpdateTime字段)
         /// </summary>
-        /// <typeparam name="TForeign"></typeparam>
-        /// <typeparam name="T"></typeparam>
-        /// <param name="collection"></param>
-        /// <param name="foreignDocument"></param>
-        /// <param name="filter"></param>
-        /// <param name="document"></param>
-        /// <param name="options"></param>
-        /// <param name="cancellationToken"></param>
+        /// <typeparam name="T">文档类型</typeparam>
+        /// <param name="collection">集合</param>
+        /// <param name="filter">过滤器</param>
+        /// <param name="document">文档</param>
+        /// <param name="options">查询替换操作设置</param>
+        /// <param name="cancellationToken">取消操作设置</param>
         /// <returns></returns>
         public static T FindOneAndReplaceOne<T>(
             this IMongoCollection<T> collection,
             FilterDefinition<T> filter,
             T document,
             FindOneAndReplaceOptions<T, T> options = null,
-            CancellationToken cancellationToken = default(CancellationToken))
+            CancellationToken cancellationToken = default)
             where T : BaseMongoEntity
         {
             document.UpdateTime = DateTime.Now;
@@ -135,19 +173,43 @@ namespace Apteryx.MongoDB.Driver.Extend.ExtensionMethods
         /// <summary>
         /// 查询替换单条(自动更新UpdateTime字段)
         /// </summary>
-        /// <typeparam name="T"></typeparam>
-        /// <param name="collection"></param>
-        /// <param name="filter"></param>
-        /// <param name="document"></param>
-        /// <param name="options"></param>
-        /// <param name="cancellationToken"></param>
+        /// <typeparam name="T">文档类型</typeparam>
+        /// <param name="collection">集合</param>
+        /// <param name="session">会话句柄(作用于事务)</param>
+        /// <param name="filter">过滤器</param>
+        /// <param name="document">文档</param>
+        /// <param name="options">查询替换操作设置</param>
+        /// <param name="cancellationToken">取消操作设置</param>
+        /// <returns></returns>
+        public static T FindOneAndReplaceOne<T>(
+            this IMongoCollection<T> collection,
+            IClientSessionHandle session,
+            FilterDefinition<T> filter,
+            T document,
+            FindOneAndReplaceOptions<T, T> options = null,
+            CancellationToken cancellationToken = default)
+            where T : BaseMongoEntity
+        {
+            document.UpdateTime = DateTime.Now;
+            return collection.FindOneAndReplace(session, filter, document, options, cancellationToken);
+        }
+
+        /// <summary>
+        /// 查询替换单条(自动更新UpdateTime字段)
+        /// </summary>
+        /// <typeparam name="T">文档类型</typeparam>
+        /// <param name="collection">集合</param>
+        /// <param name="filter">Lambda过滤器</param>
+        /// <param name="document">文档</param>
+        /// <param name="options">查询替换操作设置</param>
+        /// <param name="cancellationToken">取消操作设置</param>
         /// <returns></returns>
         public static T FindOneAndReplaceOne<T>(
             this IMongoCollection<T> collection,
             Expression<Func<T, bool>> filter,
             T document,
             FindOneAndReplaceOptions<T, T> options = null,
-            CancellationToken cancellationToken = default(CancellationToken))
+            CancellationToken cancellationToken = default)
             where T : BaseMongoEntity
         {
             document.UpdateTime = DateTime.Now;
@@ -155,57 +217,27 @@ namespace Apteryx.MongoDB.Driver.Extend.ExtensionMethods
         }
 
         /// <summary>
-        /// 动态表查询替换单条(自动更新UpdateTime字段)
+        /// 查询替换单条(自动更新UpdateTime字段)
         /// </summary>
-        /// <typeparam name="TForeign"></typeparam>
-        /// <typeparam name="T"></typeparam>
-        /// <param name="collection"></param>
-        /// <param name="foreignDocument"></param>
-        /// <param name="filter"></param>
-        /// <param name="document"></param>
-        /// <param name="options"></param>
-        /// <param name="cancellationToken"></param>
+        /// <typeparam name="T">文档类型</typeparam>
+        /// <param name="collection">集合</param>
+        /// <param name="session">会话句柄(作用于事务)</param>
+        /// <param name="filter">Lambda过滤器</param>
+        /// <param name="document">文档</param>
+        /// <param name="options">查询替换操作设置</param>
+        /// <param name="cancellationToken">取消操作设置</param>
         /// <returns></returns>
-        public static T DynamicCollectionFindOneAndReplaceOne<TForeign, T>(
+        public static T FindOneAndReplaceOne<T>(
             this IMongoCollection<T> collection,
-            TForeign foreignDocument,
-            FilterDefinition<T> filter,
-            T document,
-            FindOneAndReplaceOptions<T> options = null,
-            CancellationToken cancellationToken = default(CancellationToken))
-            where TForeign : BaseMongoEntity
-            where T : BaseMongoEntity
-        {
-            document.UpdateTime = DateTime.Now;
-            return collection.Database.GetCollection<T>($"{typeof(T).Name}_{foreignDocument.Id}")
-                .FindOneAndReplace(filter, document, options, cancellationToken);
-        }
-
-        /// <summary>
-        /// 动态表查询替换单条(自动更新UpdateTime字段)
-        /// </summary>
-        /// <typeparam name="TForeign"></typeparam>
-        /// <typeparam name="T"></typeparam>
-        /// <param name="collection"></param>
-        /// <param name="foreignDocument"></param>
-        /// <param name="filter"></param>
-        /// <param name="document"></param>
-        /// <param name="options"></param>
-        /// <param name="cancellationToken"></param>
-        /// <returns></returns>
-        public static T DynamicCollectionFindOneAndReplaceOne<TForeign, T>(
-            this IMongoCollection<T> collection,
-            TForeign foreignDocument,
+            IClientSessionHandle session,
             Expression<Func<T, bool>> filter,
             T document,
-            FindOneAndReplaceOptions<T> options = null,
-            CancellationToken cancellationToken = default(CancellationToken))
-            where TForeign : BaseMongoEntity
+            FindOneAndReplaceOptions<T, T> options = null,
+            CancellationToken cancellationToken = default)
             where T : BaseMongoEntity
         {
             document.UpdateTime = DateTime.Now;
-            return collection.Database.GetCollection<T>($"{typeof(T).Name}_{foreignDocument.Id}")
-                .FindOneAndReplace(filter, document, options, cancellationToken);
+            return collection.FindOneAndReplace(session, filter, document, options, cancellationToken);
         }
 
         #endregion
