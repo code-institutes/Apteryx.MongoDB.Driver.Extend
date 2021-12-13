@@ -25,7 +25,7 @@ namespace Apteryx.MongoDB.Driver.Extend
             CancellationToken cancellationToken = default)
             where T : BaseMongoEntity
         {
-            return database.GetCollection<T>(typeof(T).Name).UpdateOne(u => u.Id == id,
+            return Database.GetCollection<T>(typeof(T).Name).UpdateOne(u => u.Id == id,
                 update.Set(s => s.UpdateTime, DateTime.Now), options, cancellationToken);
         }
         /// <summary>
@@ -46,7 +46,7 @@ namespace Apteryx.MongoDB.Driver.Extend
             CancellationToken cancellationToken = default)
             where T : BaseMongoEntity
         {
-            return database.GetCollection<T>(typeof(T).Name).UpdateOne(session, u => u.Id == id,
+            return Database.GetCollection<T>(typeof(T).Name).UpdateOne(session, u => u.Id == id,
                 update.Set(s => s.UpdateTime, DateTime.Now), options, cancellationToken);
         }
         /// <summary>
@@ -65,7 +65,7 @@ namespace Apteryx.MongoDB.Driver.Extend
             CancellationToken cancellationToken = default)
             where T : BaseMongoEntity
         {
-            return database.GetCollection<T>(typeof(T).Name).UpdateOne(filter,
+            return Database.GetCollection<T>(typeof(T).Name).UpdateOne(filter,
                 update.Set(s => s.UpdateTime, DateTime.Now), options, cancellationToken);
         }
         /// <summary>
@@ -86,7 +86,7 @@ namespace Apteryx.MongoDB.Driver.Extend
             CancellationToken cancellationToken = default)
             where T : BaseMongoEntity
         {
-            return database.GetCollection<T>(typeof(T).Name).UpdateOne(session, filter,
+            return Database.GetCollection<T>(typeof(T).Name).UpdateOne(session, filter,
                 update.Set(s => s.UpdateTime, DateTime.Now), options, cancellationToken);
         }
         /// <summary>
@@ -105,7 +105,7 @@ namespace Apteryx.MongoDB.Driver.Extend
             CancellationToken cancellationToken = default)
             where T : BaseMongoEntity
         {
-            return database.GetCollection<T>(typeof(T).Name).UpdateOne(filter,
+            return Database.GetCollection<T>(typeof(T).Name).UpdateOne(filter,
                 update.Set(s => s.UpdateTime, DateTime.Now), options, cancellationToken);
         }
         /// <summary>
@@ -126,7 +126,7 @@ namespace Apteryx.MongoDB.Driver.Extend
             CancellationToken cancellationToken = default)
             where T : BaseMongoEntity
         {
-            return database.GetCollection<T>(typeof(T).Name).UpdateOne(session, filter,
+            return Database.GetCollection<T>(typeof(T).Name).UpdateOne(session, filter,
                 update.Set(s => s.UpdateTime, DateTime.Now), options, cancellationToken);
         }
         /// <summary>
@@ -149,7 +149,7 @@ namespace Apteryx.MongoDB.Driver.Extend
             where TForeign : BaseMongoEntity
             where T : BaseMongoEntity
         {
-            return database.GetCollection<T>($"{typeof(T).Name}_{foreignDocument.Id}").UpdateOne(u => u.Id == id,
+            return Database.GetCollection<T>($"{typeof(T).Name}_{foreignDocument.Id}").UpdateOne(u => u.Id == id,
                 update.Set(s => s.UpdateTime, DateTime.Now), options, cancellationToken);
         }
         /// <summary>
@@ -173,7 +173,7 @@ namespace Apteryx.MongoDB.Driver.Extend
             where TForeign : BaseMongoEntity
             where T : BaseMongoEntity
         {
-            return database.GetCollection<T>($"{typeof(T).Name}_{foreignDocument.Id}").UpdateOne(session, u => u.Id == id,
+            return Database.GetCollection<T>($"{typeof(T).Name}_{foreignDocument.Id}").UpdateOne(session, u => u.Id == id,
                 update.Set(s => s.UpdateTime, DateTime.Now), options, cancellationToken);
         }
         /// <summary>
@@ -196,7 +196,7 @@ namespace Apteryx.MongoDB.Driver.Extend
             where TForeign : BaseMongoEntity
             where T : BaseMongoEntity
         {
-            return database.GetCollection<T>($"{typeof(T).Name}_{foreignDocument.Id}").UpdateOne(filter,
+            return Database.GetCollection<T>($"{typeof(T).Name}_{foreignDocument.Id}").UpdateOne(filter,
                 update.Set(s => s.UpdateTime, DateTime.Now), options, cancellationToken);
         }
         /// <summary>
@@ -220,7 +220,7 @@ namespace Apteryx.MongoDB.Driver.Extend
             where TForeign : BaseMongoEntity
             where T : BaseMongoEntity
         {
-            return database.GetCollection<T>($"{typeof(T).Name}_{foreignDocument.Id}").UpdateOne(session, filter,
+            return Database.GetCollection<T>($"{typeof(T).Name}_{foreignDocument.Id}").UpdateOne(session, filter,
                 update.Set(s => s.UpdateTime, DateTime.Now), options, cancellationToken);
         }
         /// <summary>
@@ -243,7 +243,7 @@ namespace Apteryx.MongoDB.Driver.Extend
             where TForeign : BaseMongoEntity
             where T : BaseMongoEntity
         {
-            return database.GetCollection<T>($"{typeof(T).Name}_{foreignDocument.Id}").UpdateOne(filter,
+            return Database.GetCollection<T>($"{typeof(T).Name}_{foreignDocument.Id}").UpdateOne(filter,
                 update.Set(s => s.UpdateTime, DateTime.Now), options, cancellationToken);
         }
         /// <summary>
@@ -267,7 +267,7 @@ namespace Apteryx.MongoDB.Driver.Extend
             where TForeign : BaseMongoEntity
             where T : BaseMongoEntity
         {
-            return database.GetCollection<T>($"{typeof(T).Name}_{foreignDocument.Id}").UpdateOne(session, filter,
+            return Database.GetCollection<T>($"{typeof(T).Name}_{foreignDocument.Id}").UpdateOne(session, filter,
                 update.Set(s => s.UpdateTime, DateTime.Now), options, cancellationToken);
         }
         /// <summary>
@@ -286,7 +286,7 @@ namespace Apteryx.MongoDB.Driver.Extend
             CancellationToken cancellationToken = default)
             where T : BaseMongoEntity
         {
-            return database.GetCollection<T>(typeof(T).Name).FindOneAndUpdate<T>(u => u.Id == id,
+            return Database.GetCollection<T>(typeof(T).Name).FindOneAndUpdate<T>(u => u.Id == id,
                 update.Set(s => s.UpdateTime, DateTime.Now), options, cancellationToken);
         }
         /// <summary>
@@ -307,7 +307,7 @@ namespace Apteryx.MongoDB.Driver.Extend
             CancellationToken cancellationToken = default)
             where T : BaseMongoEntity
         {
-            return database.GetCollection<T>(typeof(T).Name).FindOneAndUpdate<T>(session, u => u.Id == id,
+            return Database.GetCollection<T>(typeof(T).Name).FindOneAndUpdate<T>(session, u => u.Id == id,
                 update.Set(s => s.UpdateTime, DateTime.Now), options, cancellationToken);
         }
         /// <summary>
@@ -326,7 +326,7 @@ namespace Apteryx.MongoDB.Driver.Extend
             CancellationToken cancellationToken = default)
             where T : BaseMongoEntity
         {
-            return database.GetCollection<T>(typeof(T).Name).FindOneAndUpdate(filter,
+            return Database.GetCollection<T>(typeof(T).Name).FindOneAndUpdate(filter,
                 update.Set(s => s.UpdateTime, DateTime.Now), options, cancellationToken);
         }
         /// <summary>
@@ -347,7 +347,7 @@ namespace Apteryx.MongoDB.Driver.Extend
             CancellationToken cancellationToken = default)
             where T : BaseMongoEntity
         {
-            return database.GetCollection<T>(typeof(T).Name).FindOneAndUpdate(session, filter,
+            return Database.GetCollection<T>(typeof(T).Name).FindOneAndUpdate(session, filter,
                 update.Set(s => s.UpdateTime, DateTime.Now), options, cancellationToken);
         }
         /// <summary>
@@ -366,7 +366,7 @@ namespace Apteryx.MongoDB.Driver.Extend
             CancellationToken cancellationToken = default)
             where T : BaseMongoEntity
         {
-            return database.GetCollection<T>(typeof(T).Name).FindOneAndUpdate(filter,
+            return Database.GetCollection<T>(typeof(T).Name).FindOneAndUpdate(filter,
                 update.Set(s => s.UpdateTime, DateTime.Now), options, cancellationToken);
         }
         /// <summary>
@@ -387,7 +387,7 @@ namespace Apteryx.MongoDB.Driver.Extend
             CancellationToken cancellationToken = default)
             where T : BaseMongoEntity
         {
-            return database.GetCollection<T>(typeof(T).Name).FindOneAndUpdate(filter,
+            return Database.GetCollection<T>(typeof(T).Name).FindOneAndUpdate(filter,
                 update.Set(s => s.UpdateTime, DateTime.Now), options, cancellationToken);
         }
         /// <summary>
@@ -410,7 +410,7 @@ namespace Apteryx.MongoDB.Driver.Extend
             where TForeign : BaseMongoEntity
             where T : BaseMongoEntity
         {
-            return database.GetCollection<T>($"{typeof(T).Name}_{foreignDocument.Id}").FindOneAndUpdate<T>(u => u.Id == id,
+            return Database.GetCollection<T>($"{typeof(T).Name}_{foreignDocument.Id}").FindOneAndUpdate<T>(u => u.Id == id,
                 update.Set(s => s.UpdateTime, DateTime.Now), options, cancellationToken);
         }
         /// <summary>
@@ -434,7 +434,7 @@ namespace Apteryx.MongoDB.Driver.Extend
             where TForeign : BaseMongoEntity
             where T : BaseMongoEntity
         {
-            return database.GetCollection<T>($"{typeof(T).Name}_{foreignDocument.Id}").FindOneAndUpdate<T>(session, u => u.Id == id,
+            return Database.GetCollection<T>($"{typeof(T).Name}_{foreignDocument.Id}").FindOneAndUpdate<T>(session, u => u.Id == id,
                 update.Set(s => s.UpdateTime, DateTime.Now), options, cancellationToken);
         }
         /// <summary>
@@ -457,7 +457,7 @@ namespace Apteryx.MongoDB.Driver.Extend
             where TForeign : BaseMongoEntity
             where T : BaseMongoEntity
         {
-            return database.GetCollection<T>($"{typeof(T).Name}_{foreignDocument.Id}").FindOneAndUpdate(filter,
+            return Database.GetCollection<T>($"{typeof(T).Name}_{foreignDocument.Id}").FindOneAndUpdate(filter,
                 update.Set(s => s.UpdateTime, DateTime.Now), options, cancellationToken);
         }
         /// <summary>
@@ -482,7 +482,7 @@ namespace Apteryx.MongoDB.Driver.Extend
             where TForeign : BaseMongoEntity
             where T : BaseMongoEntity
         {
-            return database.GetCollection<T>($"{typeof(T).Name}_{foreignDocument.Id}").FindOneAndUpdate(session, filter,
+            return Database.GetCollection<T>($"{typeof(T).Name}_{foreignDocument.Id}").FindOneAndUpdate(session, filter,
                 update.Set(s => s.UpdateTime, DateTime.Now), options, cancellationToken);
         }
         /// <summary>
@@ -505,7 +505,7 @@ namespace Apteryx.MongoDB.Driver.Extend
             where TForeign : BaseMongoEntity
             where T : BaseMongoEntity
         {
-            return database.GetCollection<T>($"{typeof(T).Name}_{foreignDocument.Id}").FindOneAndUpdate(filter,
+            return Database.GetCollection<T>($"{typeof(T).Name}_{foreignDocument.Id}").FindOneAndUpdate(filter,
                 update.Set(s => s.UpdateTime, DateTime.Now), options, cancellationToken);
         }
         /// <summary>
@@ -530,7 +530,7 @@ namespace Apteryx.MongoDB.Driver.Extend
             where TForeign : BaseMongoEntity
             where T : BaseMongoEntity
         {
-            return database.GetCollection<T>($"{typeof(T).Name}_{foreignDocument.Id}").FindOneAndUpdate(filter,
+            return Database.GetCollection<T>($"{typeof(T).Name}_{foreignDocument.Id}").FindOneAndUpdate(filter,
                 update.Set(s => s.UpdateTime, DateTime.Now), options, cancellationToken);
         }
         /// <summary>
@@ -549,7 +549,7 @@ namespace Apteryx.MongoDB.Driver.Extend
             CancellationToken cancellationToken = default)
             where T : BaseMongoEntity
         {
-            return database.GetCollection<T>(typeof(T).Name).UpdateMany(filter,
+            return Database.GetCollection<T>(typeof(T).Name).UpdateMany(filter,
                 update.Set(s => s.UpdateTime, DateTime.Now), options, cancellationToken);
         }
         /// <summary>
@@ -570,7 +570,7 @@ namespace Apteryx.MongoDB.Driver.Extend
             CancellationToken cancellationToken = default)
             where T : BaseMongoEntity
         {
-            return database.GetCollection<T>(typeof(T).Name).UpdateMany(session, filter,
+            return Database.GetCollection<T>(typeof(T).Name).UpdateMany(session, filter,
                 update.Set(s => s.UpdateTime, DateTime.Now), options, cancellationToken);
         }
         /// <summary>
@@ -589,7 +589,7 @@ namespace Apteryx.MongoDB.Driver.Extend
             CancellationToken cancellationToken = default)
             where T : BaseMongoEntity
         {
-            return database.GetCollection<T>(typeof(T).Name).UpdateMany(filter,
+            return Database.GetCollection<T>(typeof(T).Name).UpdateMany(filter,
                 update.Set(s => s.UpdateTime, DateTime.Now), options, cancellationToken);
         }
         /// <summary>
@@ -610,7 +610,7 @@ namespace Apteryx.MongoDB.Driver.Extend
             CancellationToken cancellationToken = default)
             where T : BaseMongoEntity
         {
-            return database.GetCollection<T>(typeof(T).Name).UpdateMany(session, filter,
+            return Database.GetCollection<T>(typeof(T).Name).UpdateMany(session, filter,
                 update.Set(s => s.UpdateTime, DateTime.Now), options, cancellationToken);
         }
         /// <summary>
@@ -633,7 +633,7 @@ namespace Apteryx.MongoDB.Driver.Extend
             where TForeign : BaseMongoEntity
             where T : BaseMongoEntity
         {
-            return database.GetCollection<T>($"{typeof(T).Name}_{foreignDocument.Id}").UpdateMany(filter,
+            return Database.GetCollection<T>($"{typeof(T).Name}_{foreignDocument.Id}").UpdateMany(filter,
                 update.Set(s => s.UpdateTime, DateTime.Now), options, cancellationToken);
         }
         /// <summary>
@@ -658,7 +658,7 @@ namespace Apteryx.MongoDB.Driver.Extend
             where TForeign : BaseMongoEntity
             where T : BaseMongoEntity
         {
-            return database.GetCollection<T>($"{typeof(T).Name}_{foreignDocument.Id}").UpdateMany(session, filter,
+            return Database.GetCollection<T>($"{typeof(T).Name}_{foreignDocument.Id}").UpdateMany(session, filter,
                 update.Set(s => s.UpdateTime, DateTime.Now), options, cancellationToken);
         }
         /// <summary>
@@ -681,7 +681,7 @@ namespace Apteryx.MongoDB.Driver.Extend
             where TForeign : BaseMongoEntity
             where T : BaseMongoEntity
         {
-            return database.GetCollection<T>($"{typeof(T).Name}_{foreignDocument.Id}").UpdateMany(filter,
+            return Database.GetCollection<T>($"{typeof(T).Name}_{foreignDocument.Id}").UpdateMany(filter,
                 update.Set(s => s.UpdateTime, DateTime.Now), options, cancellationToken);
         }
         /// <summary>
@@ -706,7 +706,7 @@ namespace Apteryx.MongoDB.Driver.Extend
             where TForeign : BaseMongoEntity
             where T : BaseMongoEntity
         {
-            return database.GetCollection<T>($"{typeof(T).Name}_{foreignDocument.Id}").UpdateMany(session, filter,
+            return Database.GetCollection<T>($"{typeof(T).Name}_{foreignDocument.Id}").UpdateMany(session, filter,
                 update.Set(s => s.UpdateTime, DateTime.Now), options, cancellationToken);
         }
 

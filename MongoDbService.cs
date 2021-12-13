@@ -6,7 +6,8 @@ namespace Apteryx.MongoDB.Driver.Extend
     public abstract partial class MongoDbService : IMongoDbService
     {
         //定义数据库
-        public readonly IMongoDatabase database = null;
+        public IMongoDatabase Database { get; set; }
+        public MongoClient Client {get; set;}
 
         /// <summary>
         /// 
@@ -16,7 +17,7 @@ namespace Apteryx.MongoDB.Driver.Extend
         {
             var connsetting = new MongoUrlBuilder(conn);
             var client = new MongoClient(connsetting.ToMongoUrl());
-            database = client.GetDatabase(connsetting.DatabaseName);
+            Database = client.GetDatabase(connsetting.DatabaseName);
         }
 
         /// <summary>
@@ -26,8 +27,8 @@ namespace Apteryx.MongoDB.Driver.Extend
         public MongoDbService(IOptionsMonitor<MongoDBOptions> options)
         {
             var connsetting = new MongoUrlBuilder(options.CurrentValue.ConnectionString);
-            var client = new MongoClient(connsetting.ToMongoUrl());
-            database = client.GetDatabase(connsetting.DatabaseName);
+            Client = new MongoClient(connsetting.ToMongoUrl());
+            Database = Client.GetDatabase(connsetting.DatabaseName);
         }
     }
 }

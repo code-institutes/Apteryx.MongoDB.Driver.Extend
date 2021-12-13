@@ -17,7 +17,7 @@ namespace Apteryx.MongoDB.Driver.Extend
         /// <param name="cancellationToken">取消操作设置</param>
         public void Add<T>(T document, InsertOneOptions options = null, CancellationToken cancellationToken = default) where T : BaseMongoEntity
         {
-            database.GetCollection<T>(typeof(T).Name).InsertOne(document, options, cancellationToken);
+            Database.GetCollection<T>(typeof(T).Name).InsertOne(document, options, cancellationToken);
         }
 
         /// <summary>
@@ -30,7 +30,7 @@ namespace Apteryx.MongoDB.Driver.Extend
         /// <param name="cancellationToken">取消操作设置</param>
         public void Add<T>(IClientSessionHandle session, T document, InsertOneOptions options = null, CancellationToken cancellationToken = default) where T : BaseMongoEntity
         {
-            database.GetCollection<T>(typeof(T).Name).InsertOne(session, document, options, cancellationToken);
+            Database.GetCollection<T>(typeof(T).Name).InsertOne(session, document, options, cancellationToken);
         }
 
         /// <summary>
@@ -42,7 +42,7 @@ namespace Apteryx.MongoDB.Driver.Extend
         /// <param name="cancellationToken">取消操作设置</param>
         public void AddMany<T>(IEnumerable<T> documents, InsertManyOptions options = null, CancellationToken cancellationToken = default) where T : BaseMongoEntity
         {
-            database.GetCollection<T>(typeof(T).Name).InsertMany(documents, options, cancellationToken);
+            Database.GetCollection<T>(typeof(T).Name).InsertMany(documents, options, cancellationToken);
         }
 
         /// <summary>
@@ -55,7 +55,7 @@ namespace Apteryx.MongoDB.Driver.Extend
         /// <param name="cancellationToken">取消操作设置</param>
         public void AddMany<T>(IClientSessionHandle session, IEnumerable<T> documents, InsertManyOptions options = null, CancellationToken cancellationToken = default) where T : BaseMongoEntity
         {
-            database.GetCollection<T>(typeof(T).Name).InsertMany(session, documents, options, cancellationToken);
+            Database.GetCollection<T>(typeof(T).Name).InsertMany(session, documents, options, cancellationToken);
         }
 
         /// <summary>
@@ -69,7 +69,7 @@ namespace Apteryx.MongoDB.Driver.Extend
             where TForeign : BaseMongoEntity
             where T : BaseMongoEntity
         {
-            database.GetCollection<T>($"{typeof(T).Name}_{foreignDocument.Id}").InsertOne(document, options, cancellationToken);
+            Database.GetCollection<T>($"{typeof(T).Name}_{foreignDocument.Id}").InsertOne(document, options, cancellationToken);
         }
 
         /// <summary>
@@ -84,7 +84,7 @@ namespace Apteryx.MongoDB.Driver.Extend
             where TForeign : BaseMongoEntity
             where T : BaseMongoEntity
         {
-            database.GetCollection<T>($"{typeof(T).Name}_{foreignDocument.Id}").InsertOne(session, document, options, cancellationToken);
+            Database.GetCollection<T>($"{typeof(T).Name}_{foreignDocument.Id}").InsertOne(session, document, options, cancellationToken);
         }
 
         /// <summary>
@@ -98,7 +98,7 @@ namespace Apteryx.MongoDB.Driver.Extend
             where TForeign : BaseMongoEntity
             where T : BaseMongoEntity
         {
-            database.GetCollection<T>($"{typeof(T).Name}_{foreignDocument.Id}").InsertMany(documents, options, cancellationToken);
+            Database.GetCollection<T>($"{typeof(T).Name}_{foreignDocument.Id}").InsertMany(documents, options, cancellationToken);
         }
 
         /// <summary>
@@ -113,7 +113,7 @@ namespace Apteryx.MongoDB.Driver.Extend
             where TForeign : BaseMongoEntity
             where T : BaseMongoEntity
         {
-            database.GetCollection<T>($"{typeof(T).Name}_{foreignDocument.Id}").InsertMany(session, documents, options, cancellationToken);
+            Database.GetCollection<T>($"{typeof(T).Name}_{foreignDocument.Id}").InsertMany(session, documents, options, cancellationToken);
         }
 
         #endregion

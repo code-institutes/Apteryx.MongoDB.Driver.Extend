@@ -18,7 +18,7 @@ namespace Apteryx.MongoDB.Driver.Extend
         /// <returns></returns>
         public T FindOne<T>(string id, MongoCollectionSettings settings = null, FindOptions options = null) where T : BaseMongoEntity
         {
-            return database.GetCollection<T>(typeof(T).Name, settings).Find(f => f.Id == id, options).FirstOrDefault();
+            return Database.GetCollection<T>(typeof(T).Name, settings).Find(f => f.Id == id, options).FirstOrDefault();
         }
         /// <summary>
         /// 查询返回单条
@@ -31,7 +31,7 @@ namespace Apteryx.MongoDB.Driver.Extend
         /// <returns></returns>
         public T FindOne<T>(IClientSessionHandle session, string id, MongoCollectionSettings settings = null, FindOptions options = null) where T : BaseMongoEntity
         {
-            return database.GetCollection<T>(typeof(T).Name, settings).Find(session, f => f.Id == id, options).FirstOrDefault();
+            return Database.GetCollection<T>(typeof(T).Name, settings).Find(session, f => f.Id == id, options).FirstOrDefault();
         }
         /// <summary>
         /// 查询返回单条
@@ -44,7 +44,7 @@ namespace Apteryx.MongoDB.Driver.Extend
         /// <returns></returns>
         public T FindOne<T>(string collectionName, string id, MongoCollectionSettings settings = null, FindOptions options = null) where T : BaseMongoEntity
         {
-            return database.GetCollection<T>(collectionName, settings).Find(f => f.Id == id, options).FirstOrDefault();
+            return Database.GetCollection<T>(collectionName, settings).Find(f => f.Id == id, options).FirstOrDefault();
         }
         /// <summary>
         /// 查询返回单条
@@ -58,7 +58,7 @@ namespace Apteryx.MongoDB.Driver.Extend
         /// <returns></returns>
         public T FindOne<T>(string collectionName, IClientSessionHandle session, string id, MongoCollectionSettings settings = null, FindOptions options = null) where T : BaseMongoEntity
         {
-            return database.GetCollection<T>(collectionName, settings).Find(session, f => f.Id == id, options).FirstOrDefault();
+            return Database.GetCollection<T>(collectionName, settings).Find(session, f => f.Id == id, options).FirstOrDefault();
         }
         /// <summary>
         /// 查询返回单条
@@ -70,7 +70,7 @@ namespace Apteryx.MongoDB.Driver.Extend
         /// <returns></returns>
         public T FindOne<T>(FilterDefinition<T> filter, MongoCollectionSettings settings = null, FindOptions options = null) where T : BaseMongoEntity
         {
-            return database.GetCollection<T>(typeof(T).Name, settings).Find(filter, options).FirstOrDefault();
+            return Database.GetCollection<T>(typeof(T).Name, settings).Find(filter, options).FirstOrDefault();
         }
         /// <summary>
         /// 查询返回单条
@@ -82,7 +82,7 @@ namespace Apteryx.MongoDB.Driver.Extend
         /// <returns></returns>
         public T FindOne<T>(IClientSessionHandle session, FilterDefinition<T> filter, MongoCollectionSettings settings = null, FindOptions options = null) where T : BaseMongoEntity
         {
-            return database.GetCollection<T>(typeof(T).Name, settings).Find(session, filter, options).FirstOrDefault();
+            return Database.GetCollection<T>(typeof(T).Name, settings).Find(session, filter, options).FirstOrDefault();
         }
         /// <summary>
         /// 查询返回单条
@@ -95,7 +95,7 @@ namespace Apteryx.MongoDB.Driver.Extend
         /// <returns></returns>
         public T FindOne<T>(string collectionName, FilterDefinition<T> filter, MongoCollectionSettings settings = null, FindOptions options = null) where T : BaseMongoEntity
         {
-            return database.GetCollection<T>(collectionName, settings).Find(filter, options).FirstOrDefault();
+            return Database.GetCollection<T>(collectionName, settings).Find(filter, options).FirstOrDefault();
         }
         /// <summary>
         /// 查询返回单条
@@ -109,7 +109,7 @@ namespace Apteryx.MongoDB.Driver.Extend
         /// <returns></returns>
         public T FindOne<T>(string collectionName, IClientSessionHandle session, FilterDefinition<T> filter, MongoCollectionSettings settings = null, FindOptions options = null) where T : BaseMongoEntity
         {
-            return database.GetCollection<T>(collectionName, settings).Find(session, filter, options).FirstOrDefault();
+            return Database.GetCollection<T>(collectionName, settings).Find(session, filter, options).FirstOrDefault();
         }
         /// <summary>
         /// 查询返回单条
@@ -121,7 +121,7 @@ namespace Apteryx.MongoDB.Driver.Extend
         /// <returns></returns>
         public T FindOne<T>(Expression<Func<T, bool>> filter, MongoCollectionSettings settings = null, FindOptions options = null) where T : BaseMongoEntity
         {
-            return database.GetCollection<T>(typeof(T).Name, settings).Find(filter, options).FirstOrDefault();
+            return Database.GetCollection<T>(typeof(T).Name, settings).Find(filter, options).FirstOrDefault();
         }
         /// <summary>
         /// 查询返回单条
@@ -134,7 +134,7 @@ namespace Apteryx.MongoDB.Driver.Extend
         /// <returns></returns>
         public T FindOne<T>(IClientSessionHandle session, Expression<Func<T, bool>> filter, MongoCollectionSettings settings = null, FindOptions options = null) where T : BaseMongoEntity
         {
-            return database.GetCollection<T>(typeof(T).Name, settings).Find(session, filter, options).FirstOrDefault();
+            return Database.GetCollection<T>(typeof(T).Name, settings).Find(session, filter, options).FirstOrDefault();
         }
         /// <summary>
         /// 查询返回单条
@@ -147,7 +147,7 @@ namespace Apteryx.MongoDB.Driver.Extend
         /// <returns></returns>
         public T FindOne<T>(string collectionName, Expression<Func<T, bool>> filter, MongoCollectionSettings settings = null, FindOptions options = null) where T : BaseMongoEntity
         {
-            return database.GetCollection<T>(collectionName, settings).Find(filter, options).FirstOrDefault();
+            return Database.GetCollection<T>(collectionName, settings).Find(filter, options).FirstOrDefault();
         }
         /// <summary>
         /// 查询返回单条
@@ -161,7 +161,7 @@ namespace Apteryx.MongoDB.Driver.Extend
         /// <returns></returns>
         public T FindOne<T>(string collectionName, IClientSessionHandle session, Expression<Func<T, bool>> filter, MongoCollectionSettings settings = null, FindOptions options = null) where T : BaseMongoEntity
         {
-            return database.GetCollection<T>(collectionName, settings).Find(session, filter, options).FirstOrDefault();
+            return Database.GetCollection<T>(collectionName, settings).Find(session, filter, options).FirstOrDefault();
         }
         /// <summary>
         /// 查询返回单条
@@ -181,7 +181,7 @@ namespace Apteryx.MongoDB.Driver.Extend
             where TForeign : BaseMongoEntity
             where T : BaseMongoEntity
         {
-            return database.GetCollection<T>($"{typeof(T).Name}_{foreignDocument.Id}", settings).Find(filter, options).FirstOrDefault();
+            return Database.GetCollection<T>($"{typeof(T).Name}_{foreignDocument.Id}", settings).Find(filter, options).FirstOrDefault();
         }
         /// <summary>
         /// 查询返回单条
@@ -203,7 +203,7 @@ namespace Apteryx.MongoDB.Driver.Extend
             where TForeign : BaseMongoEntity
             where T : BaseMongoEntity
         {
-            return database.GetCollection<T>($"{typeof(T).Name}_{foreignDocument.Id}", settings).Find(session, filter, options).FirstOrDefault();
+            return Database.GetCollection<T>($"{typeof(T).Name}_{foreignDocument.Id}", settings).Find(session, filter, options).FirstOrDefault();
         }
         /// <summary>
         /// 查询返回单条
@@ -223,7 +223,7 @@ namespace Apteryx.MongoDB.Driver.Extend
             where TForeign : BaseMongoEntity
             where T : BaseMongoEntity
         {
-            return database.GetCollection<T>($"{typeof(T).Name}_{foreignDocument.Id}", settings).Find(filter, options).FirstOrDefault();
+            return Database.GetCollection<T>($"{typeof(T).Name}_{foreignDocument.Id}", settings).Find(filter, options).FirstOrDefault();
         }
         /// <summary>
         /// 查询返回单条
@@ -244,7 +244,7 @@ namespace Apteryx.MongoDB.Driver.Extend
             where TForeign : BaseMongoEntity
             where T : BaseMongoEntity
         {
-            return database.GetCollection<T>($"{typeof(T).Name}_{foreignDocument.Id}", settings).Find(session, filter, options).FirstOrDefault();
+            return Database.GetCollection<T>($"{typeof(T).Name}_{foreignDocument.Id}", settings).Find(session, filter, options).FirstOrDefault();
         }
         /// <summary>
         /// 查询全部
@@ -255,7 +255,7 @@ namespace Apteryx.MongoDB.Driver.Extend
         /// <returns></returns>
         public IEnumerable<T> FindAll<T>(MongoCollectionSettings settings = null, FindOptions options = null) where T : BaseMongoEntity
         {
-            return database.GetCollection<T>(typeof(T).Name, settings).Find(_ => true, options).ToEnumerable();
+            return Database.GetCollection<T>(typeof(T).Name, settings).Find(_ => true, options).ToEnumerable();
         }
         /// <summary>
         /// 查询全部
@@ -267,7 +267,7 @@ namespace Apteryx.MongoDB.Driver.Extend
         /// <returns></returns>
         public IEnumerable<T> FindAll<T>(IClientSessionHandle session,MongoCollectionSettings settings = null, FindOptions options = null) where T : BaseMongoEntity
         {
-            return database.GetCollection<T>(typeof(T).Name, settings).Find(session,_ => true, options).ToEnumerable();
+            return Database.GetCollection<T>(typeof(T).Name, settings).Find(session,_ => true, options).ToEnumerable();
         }
         /// <summary>
         /// 查询全部
@@ -279,7 +279,7 @@ namespace Apteryx.MongoDB.Driver.Extend
         /// <returns></returns>
         public IEnumerable<T> FindAll<T>(string collectionName, MongoCollectionSettings settings = null, FindOptions options = null) where T : BaseMongoEntity
         {
-            return database.GetCollection<T>(collectionName, settings).Find(_ => true, options).ToEnumerable();
+            return Database.GetCollection<T>(collectionName, settings).Find(_ => true, options).ToEnumerable();
         }
         /// <summary>
         /// 查询全部
@@ -292,7 +292,7 @@ namespace Apteryx.MongoDB.Driver.Extend
         /// <returns></returns>
         public IEnumerable<T> FindAll<T>(string collectionName,IClientSessionHandle session, MongoCollectionSettings settings = null, FindOptions options = null) where T : BaseMongoEntity
         {
-            return database.GetCollection<T>(collectionName, settings).Find(session,_ => true, options).ToEnumerable();
+            return Database.GetCollection<T>(collectionName, settings).Find(session,_ => true, options).ToEnumerable();
         }
         /// <summary>
         /// 查询全部
@@ -307,7 +307,7 @@ namespace Apteryx.MongoDB.Driver.Extend
             where TForeign : BaseMongoEntity
             where T : BaseMongoEntity
         {
-            return database.GetCollection<T>($"{typeof(T).Name}_{foreignDocument.Id}", settings).Find(_ => true, options).ToEnumerable();
+            return Database.GetCollection<T>($"{typeof(T).Name}_{foreignDocument.Id}", settings).Find(_ => true, options).ToEnumerable();
         }
         /// <summary>
         /// 查询全部
@@ -323,7 +323,7 @@ namespace Apteryx.MongoDB.Driver.Extend
             where TForeign : BaseMongoEntity
             where T : BaseMongoEntity
         {
-            return database.GetCollection<T>($"{typeof(T).Name}_{foreignDocument.Id}", settings).Find(session,_ => true, options).ToEnumerable();
+            return Database.GetCollection<T>($"{typeof(T).Name}_{foreignDocument.Id}", settings).Find(session,_ => true, options).ToEnumerable();
         }
         /// <summary>
         /// 查询返回集合
@@ -335,7 +335,7 @@ namespace Apteryx.MongoDB.Driver.Extend
         /// <returns></returns>
         public IEnumerable<T> Where<T>(FilterDefinition<T> filter, MongoCollectionSettings settings = null, FindOptions options = null) where T : BaseMongoEntity
         {
-            return database.GetCollection<T>(typeof(T).Name, settings).Find(filter, options).ToEnumerable();
+            return Database.GetCollection<T>(typeof(T).Name, settings).Find(filter, options).ToEnumerable();
         }
         /// <summary>
         /// 查询返回集合
@@ -348,7 +348,7 @@ namespace Apteryx.MongoDB.Driver.Extend
         /// <returns></returns>
         public IEnumerable<T> Where<T>(IClientSessionHandle session,FilterDefinition<T> filter, MongoCollectionSettings settings = null, FindOptions options = null) where T : BaseMongoEntity
         {
-            return database.GetCollection<T>(typeof(T).Name, settings).Find(session,filter, options).ToEnumerable();
+            return Database.GetCollection<T>(typeof(T).Name, settings).Find(session,filter, options).ToEnumerable();
         }
         /// <summary>
         /// 查询返回集合
@@ -361,7 +361,7 @@ namespace Apteryx.MongoDB.Driver.Extend
         /// <returns></returns>
         public IEnumerable<T> Where<T>(string collectionName, FilterDefinition<T> filter, MongoCollectionSettings settings = null, FindOptions options = null) where T : BaseMongoEntity
         {
-            return database.GetCollection<T>(collectionName, settings).Find(filter, options).ToEnumerable();
+            return Database.GetCollection<T>(collectionName, settings).Find(filter, options).ToEnumerable();
         }
         /// <summary>
         /// 查询返回集合
@@ -375,7 +375,7 @@ namespace Apteryx.MongoDB.Driver.Extend
         /// <returns></returns>
         public IEnumerable<T> Where<T>(string collectionName,IClientSessionHandle session, FilterDefinition<T> filter, MongoCollectionSettings settings = null, FindOptions options = null) where T : BaseMongoEntity
         {
-            return database.GetCollection<T>(collectionName, settings).Find(session,filter, options).ToEnumerable();
+            return Database.GetCollection<T>(collectionName, settings).Find(session,filter, options).ToEnumerable();
         }
         /// <summary>
         /// 查询返回集合
@@ -387,7 +387,7 @@ namespace Apteryx.MongoDB.Driver.Extend
         /// <returns></returns>
         public IEnumerable<T> Where<T>(Expression<Func<T, bool>> filter, MongoCollectionSettings settings = null, FindOptions options = null) where T : BaseMongoEntity
         {
-            return database.GetCollection<T>(typeof(T).Name, settings).Find(filter, options).ToEnumerable();
+            return Database.GetCollection<T>(typeof(T).Name, settings).Find(filter, options).ToEnumerable();
         }
         /// <summary>
         /// 查询返回集合
@@ -400,7 +400,7 @@ namespace Apteryx.MongoDB.Driver.Extend
         /// <returns></returns>
         public IEnumerable<T> Where<T>(IClientSessionHandle session,Expression<Func<T, bool>> filter, MongoCollectionSettings settings = null, FindOptions options = null) where T : BaseMongoEntity
         {
-            return database.GetCollection<T>(typeof(T).Name, settings).Find(session,filter, options).ToEnumerable();
+            return Database.GetCollection<T>(typeof(T).Name, settings).Find(session,filter, options).ToEnumerable();
         }
         /// <summary>
         /// 查询返回集合
@@ -413,7 +413,7 @@ namespace Apteryx.MongoDB.Driver.Extend
         /// <returns></returns>
         public IEnumerable<T> Where<T>(string collectionName, Expression<Func<T, bool>> filter, MongoCollectionSettings settings = null, FindOptions options = null) where T : BaseMongoEntity
         {
-            return database.GetCollection<T>(collectionName, settings).Find(filter, options).ToEnumerable();
+            return Database.GetCollection<T>(collectionName, settings).Find(filter, options).ToEnumerable();
         }
         /// <summary>
         /// 查询返回集合
@@ -427,7 +427,7 @@ namespace Apteryx.MongoDB.Driver.Extend
         /// <returns></returns>
         public IEnumerable<T> Where<T>(string collectionName,IClientSessionHandle session, Expression<Func<T, bool>> filter, MongoCollectionSettings settings = null, FindOptions options = null) where T : BaseMongoEntity
         {
-            return database.GetCollection<T>(collectionName, settings).Find(session,filter, options).ToEnumerable();
+            return Database.GetCollection<T>(collectionName, settings).Find(session,filter, options).ToEnumerable();
         }
         /// <summary>
         /// 查询返回集合
@@ -447,7 +447,7 @@ namespace Apteryx.MongoDB.Driver.Extend
             where TForeign : BaseMongoEntity
             where T : BaseMongoEntity
         {
-            return database.GetCollection<T>($"{typeof(T).Name}_{foreignDocument.Id}", settings).Find(filter, options).ToEnumerable();
+            return Database.GetCollection<T>($"{typeof(T).Name}_{foreignDocument.Id}", settings).Find(filter, options).ToEnumerable();
         }
         /// <summary>
         /// 查询返回集合
@@ -469,7 +469,7 @@ namespace Apteryx.MongoDB.Driver.Extend
             where TForeign : BaseMongoEntity
             where T : BaseMongoEntity
         {
-            return database.GetCollection<T>($"{typeof(T).Name}_{foreignDocument.Id}", settings).Find(session,filter, options).ToEnumerable();
+            return Database.GetCollection<T>($"{typeof(T).Name}_{foreignDocument.Id}", settings).Find(session,filter, options).ToEnumerable();
         }
         /// <summary>
         /// 查询返回集合
@@ -489,7 +489,7 @@ namespace Apteryx.MongoDB.Driver.Extend
             where TForeign : BaseMongoEntity
             where T : BaseMongoEntity
         {
-            return database.GetCollection<T>($"{typeof(T).Name}_{foreignDocument.Id}", settings).Find(filter, options).ToEnumerable();
+            return Database.GetCollection<T>($"{typeof(T).Name}_{foreignDocument.Id}", settings).Find(filter, options).ToEnumerable();
         }
         /// <summary>
         /// 查询返回集合
@@ -511,7 +511,7 @@ namespace Apteryx.MongoDB.Driver.Extend
             where TForeign : BaseMongoEntity
             where T : BaseMongoEntity
         {
-            return database.GetCollection<T>($"{typeof(T).Name}_{foreignDocument.Id}", settings).Find(session,filter, options).ToEnumerable();
+            return Database.GetCollection<T>($"{typeof(T).Name}_{foreignDocument.Id}", settings).Find(session,filter, options).ToEnumerable();
         }
 
         #endregion

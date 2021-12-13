@@ -25,7 +25,7 @@ namespace Apteryx.MongoDB.Driver.Extend
             CancellationToken cancellationToken = default) where T : BaseMongoEntity
         {
             document.UpdateTime = DateTime.Now;
-            return database.GetCollection<T>(typeof(T).Name).ReplaceOne(r=>r.Id == id, document, options, cancellationToken);
+            return Database.GetCollection<T>(typeof(T).Name).ReplaceOne(r=>r.Id == id, document, options, cancellationToken);
         }
         /// <summary>
         /// 替换单条(自动更新UpdateTime字段)
@@ -45,7 +45,7 @@ namespace Apteryx.MongoDB.Driver.Extend
             CancellationToken cancellationToken = default) where T : BaseMongoEntity
         {
             document.UpdateTime = DateTime.Now;
-            return database.GetCollection<T>(typeof(T).Name).ReplaceOne(session, r => r.Id == id, document, options, cancellationToken);
+            return Database.GetCollection<T>(typeof(T).Name).ReplaceOne(session, r => r.Id == id, document, options, cancellationToken);
         }
         /// <summary>
         /// 替换单条(自动更新UpdateTime字段)
@@ -63,7 +63,7 @@ namespace Apteryx.MongoDB.Driver.Extend
             CancellationToken cancellationToken = default) where T : BaseMongoEntity
         {
             document.UpdateTime = DateTime.Now;
-            return database.GetCollection<T>(typeof(T).Name).ReplaceOne(filter, document, options, cancellationToken);
+            return Database.GetCollection<T>(typeof(T).Name).ReplaceOne(filter, document, options, cancellationToken);
         }
         /// <summary>
         /// 替换单条(自动更新UpdateTime字段)
@@ -83,7 +83,7 @@ namespace Apteryx.MongoDB.Driver.Extend
             CancellationToken cancellationToken = default) where T : BaseMongoEntity
         {
             document.UpdateTime = DateTime.Now;
-            return database.GetCollection<T>(typeof(T).Name).ReplaceOne(session, filter, document, options, cancellationToken);
+            return Database.GetCollection<T>(typeof(T).Name).ReplaceOne(session, filter, document, options, cancellationToken);
         }
         /// <summary>
         /// 替换单条(自动更新UpdateTime字段)
@@ -102,7 +102,7 @@ namespace Apteryx.MongoDB.Driver.Extend
             where T : BaseMongoEntity
         {
             document.UpdateTime = DateTime.Now;
-            return database.GetCollection<T>(typeof(T).Name).ReplaceOne(filter, document, options, cancellationToken);
+            return Database.GetCollection<T>(typeof(T).Name).ReplaceOne(filter, document, options, cancellationToken);
         }
 
         /// <summary>
@@ -124,7 +124,7 @@ namespace Apteryx.MongoDB.Driver.Extend
             where T : BaseMongoEntity
         {
             document.UpdateTime = DateTime.Now;
-            return database.GetCollection<T>(typeof(T).Name).ReplaceOne(session, filter, document, options, cancellationToken);
+            return Database.GetCollection<T>(typeof(T).Name).ReplaceOne(session, filter, document, options, cancellationToken);
         }
         /// <summary>
         /// 动态表替换单条(自动更新UpdateTime字段)
@@ -147,7 +147,7 @@ namespace Apteryx.MongoDB.Driver.Extend
             where T : BaseMongoEntity
         {
             document.UpdateTime = DateTime.Now;
-            return database.GetCollection<T>($"{typeof(T).Name}_{foreignDocument.Id}")
+            return Database.GetCollection<T>($"{typeof(T).Name}_{foreignDocument.Id}")
                 .ReplaceOne(filter, document, options, cancellationToken);
         }
         /// <summary>
@@ -173,7 +173,7 @@ namespace Apteryx.MongoDB.Driver.Extend
             where T : BaseMongoEntity
         {
             document.UpdateTime = DateTime.Now;
-            return database.GetCollection<T>($"{typeof(T).Name}_{foreignDocument.Id}")
+            return Database.GetCollection<T>($"{typeof(T).Name}_{foreignDocument.Id}")
                 .ReplaceOne(session, filter, document, options, cancellationToken);
         }
         /// <summary>
@@ -197,7 +197,7 @@ namespace Apteryx.MongoDB.Driver.Extend
             where T : BaseMongoEntity
         {
             document.UpdateTime = DateTime.Now;
-            return database.GetCollection<T>($"{typeof(T).Name}_{foreignDocument.Id}")
+            return Database.GetCollection<T>($"{typeof(T).Name}_{foreignDocument.Id}")
                 .ReplaceOne(filter, document, options, cancellationToken);
         }
         /// <summary>
@@ -223,7 +223,7 @@ namespace Apteryx.MongoDB.Driver.Extend
             where T : BaseMongoEntity
         {
             document.UpdateTime = DateTime.Now;
-            return database.GetCollection<T>($"{typeof(T).Name}_{foreignDocument.Id}")
+            return Database.GetCollection<T>($"{typeof(T).Name}_{foreignDocument.Id}")
                 .ReplaceOne(session, filter, document, options, cancellationToken);
         }
         /// <summary>
@@ -243,7 +243,7 @@ namespace Apteryx.MongoDB.Driver.Extend
             where T : BaseMongoEntity
         {
             document.UpdateTime = DateTime.Now;
-            return database.GetCollection<T>(typeof(T).Name).FindOneAndReplace<T>(r=>r.Id == id, document, options, cancellationToken);
+            return Database.GetCollection<T>(typeof(T).Name).FindOneAndReplace<T>(r=>r.Id == id, document, options, cancellationToken);
         }
         /// <summary>
         /// 查询替换单条(自动更新UpdateTime字段)
@@ -264,7 +264,7 @@ namespace Apteryx.MongoDB.Driver.Extend
             where T : BaseMongoEntity
         {
             document.UpdateTime = DateTime.Now;
-            return database.GetCollection<T>(typeof(T).Name).FindOneAndReplace<T>(session, r=>r.Id == id, document, options, cancellationToken);
+            return Database.GetCollection<T>(typeof(T).Name).FindOneAndReplace<T>(session, r=>r.Id == id, document, options, cancellationToken);
         }
         /// <summary>
         /// 查询替换单条(自动更新UpdateTime字段)
@@ -283,7 +283,7 @@ namespace Apteryx.MongoDB.Driver.Extend
             where T : BaseMongoEntity
         {
             document.UpdateTime = DateTime.Now;
-            return database.GetCollection<T>(typeof(T).Name).FindOneAndReplace(filter, document, options, cancellationToken);
+            return Database.GetCollection<T>(typeof(T).Name).FindOneAndReplace(filter, document, options, cancellationToken);
         }
         /// <summary>
         /// 查询替换单条(自动更新UpdateTime字段)
@@ -304,7 +304,7 @@ namespace Apteryx.MongoDB.Driver.Extend
             where T : BaseMongoEntity
         {
             document.UpdateTime = DateTime.Now;
-            return database.GetCollection<T>(typeof(T).Name).FindOneAndReplace(session, filter, document, options, cancellationToken);
+            return Database.GetCollection<T>(typeof(T).Name).FindOneAndReplace(session, filter, document, options, cancellationToken);
         }
         /// <summary>
         /// 查询替换单条(自动更新UpdateTime字段)
@@ -323,7 +323,7 @@ namespace Apteryx.MongoDB.Driver.Extend
             where T : BaseMongoEntity
         {
             document.UpdateTime = DateTime.Now;
-            return database.GetCollection<T>(typeof(T).Name).FindOneAndReplace(filter, document, options, cancellationToken);
+            return Database.GetCollection<T>(typeof(T).Name).FindOneAndReplace(filter, document, options, cancellationToken);
         }
         /// <summary>
         /// 查询替换单条(自动更新UpdateTime字段)
@@ -344,7 +344,7 @@ namespace Apteryx.MongoDB.Driver.Extend
             where T : BaseMongoEntity
         {
             document.UpdateTime = DateTime.Now;
-            return database.GetCollection<T>(typeof(T).Name).FindOneAndReplace(session, filter, document, options, cancellationToken);
+            return Database.GetCollection<T>(typeof(T).Name).FindOneAndReplace(session, filter, document, options, cancellationToken);
         }
         /// <summary>
         /// 动态表查询替换单条(自动更新UpdateTime字段)
@@ -366,7 +366,7 @@ namespace Apteryx.MongoDB.Driver.Extend
             where T : BaseMongoEntity
         {
             document.UpdateTime = DateTime.Now;
-            return database.GetCollection<T>($"{typeof(T).Name}_{foreignDocument.Id}").FindOneAndReplace<T>(r=>r.Id == id, document, options, cancellationToken);
+            return Database.GetCollection<T>($"{typeof(T).Name}_{foreignDocument.Id}").FindOneAndReplace<T>(r=>r.Id == id, document, options, cancellationToken);
         }
         /// <summary>
         /// 动态表查询替换单条(自动更新UpdateTime字段)
@@ -391,7 +391,7 @@ namespace Apteryx.MongoDB.Driver.Extend
             where T : BaseMongoEntity
         {
             document.UpdateTime = DateTime.Now;
-            return database.GetCollection<T>($"{typeof(T).Name}_{foreignDocument.Id}").FindOneAndReplace<T>(session, r=>r.Id == id, document, options, cancellationToken);
+            return Database.GetCollection<T>($"{typeof(T).Name}_{foreignDocument.Id}").FindOneAndReplace<T>(session, r=>r.Id == id, document, options, cancellationToken);
         }
         /// <summary>
         /// 动态表查询替换单条(自动更新UpdateTime字段)
@@ -411,7 +411,7 @@ namespace Apteryx.MongoDB.Driver.Extend
             where T : BaseMongoEntity
         {
             document.UpdateTime = DateTime.Now;
-            return database.GetCollection<T>($"{typeof(T).Name}_{foreignDocument.Id}").FindOneAndReplace(filter, document, options, cancellationToken);
+            return Database.GetCollection<T>($"{typeof(T).Name}_{foreignDocument.Id}").FindOneAndReplace(filter, document, options, cancellationToken);
         }
         /// <summary>
         /// 动态表查询替换单条(自动更新UpdateTime字段)
@@ -436,7 +436,7 @@ namespace Apteryx.MongoDB.Driver.Extend
             where T : BaseMongoEntity
         {
             document.UpdateTime = DateTime.Now;
-            return database.GetCollection<T>($"{typeof(T).Name}_{foreignDocument.Id}").FindOneAndReplace(session,filter, document, options, cancellationToken);
+            return Database.GetCollection<T>($"{typeof(T).Name}_{foreignDocument.Id}").FindOneAndReplace(session,filter, document, options, cancellationToken);
         }
         /// <summary>
         /// 动态表查询替换单条(自动更新UpdateTime字段)
@@ -459,7 +459,7 @@ namespace Apteryx.MongoDB.Driver.Extend
             where T : BaseMongoEntity
         {
             document.UpdateTime = DateTime.Now;
-            return database.GetCollection<T>($"{typeof(T).Name}_{foreignDocument.Id}").FindOneAndReplace(filter, document, options, cancellationToken);
+            return Database.GetCollection<T>($"{typeof(T).Name}_{foreignDocument.Id}").FindOneAndReplace(filter, document, options, cancellationToken);
         }
         /// <summary>
         /// 动态表查询替换单条(自动更新UpdateTime字段)
@@ -484,7 +484,7 @@ namespace Apteryx.MongoDB.Driver.Extend
             where T : BaseMongoEntity
         {
             document.UpdateTime = DateTime.Now;
-            return database.GetCollection<T>($"{typeof(T).Name}_{foreignDocument.Id}").FindOneAndReplace(session,filter, document, options, cancellationToken);
+            return Database.GetCollection<T>($"{typeof(T).Name}_{foreignDocument.Id}").FindOneAndReplace(session,filter, document, options, cancellationToken);
         }
 
         #endregion
