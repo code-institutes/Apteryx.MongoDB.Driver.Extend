@@ -1,8 +1,8 @@
 ﻿using System;
 using Microsoft.Extensions.DependencyInjection;
-using Apteryx.MongoDB.Driver.Extend.Entities;
+using Apteryx.MongoDB.Driver.Extend;
 
-namespace Apteryx.MongoDB.Driver.Extend.ExtensionMethods
+namespace Apteryx.MongoDB.Driver.Extend
 {
     public static class MongoDBServiceCollectionExtensions
     {

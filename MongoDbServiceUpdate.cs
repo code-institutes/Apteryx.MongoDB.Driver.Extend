@@ -2,7 +2,6 @@
 using System;
 using System.Linq.Expressions;
 using System.Threading;
-using Apteryx.MongoDB.Driver.Extend.Entities;
 
 namespace Apteryx.MongoDB.Driver.Extend
 {

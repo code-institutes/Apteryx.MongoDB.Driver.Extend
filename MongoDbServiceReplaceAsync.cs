@@ -1,10 +1,7 @@
 ﻿using System;
-using System.Collections.Generic;
 using System.Linq.Expressions;
-using System.Text;
 using System.Threading;
 using System.Threading.Tasks;
-using Apteryx.MongoDB.Driver.Extend.Entities;
 using MongoDB.Driver;
 
 namespace Apteryx.MongoDB.Driver.Extend

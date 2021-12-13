@@ -1,4 +1,4 @@
-﻿namespace Apteryx.MongoDB.Driver.Extend.Entities
+﻿namespace Apteryx.MongoDB.Driver.Extend
 {
     public class MongoDBOptions
     {

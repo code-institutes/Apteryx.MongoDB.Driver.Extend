@@ -1,10 +1,10 @@
 ﻿using System.Collections.Generic;
 using System.Threading;
 using System.Threading.Tasks;
-using Apteryx.MongoDB.Driver.Extend.Entities;
+using Apteryx.MongoDB.Driver.Extend;
 using MongoDB.Driver;
 
-namespace Apteryx.MongoDB.Driver.Extend.ExtensionMethods
+namespace Apteryx.MongoDB.Driver.Extend
 {
     /// <summary>
     /// MongoDb扩展方法:插入(异步)
@@ -21,7 +21,8 @@ namespace Apteryx.MongoDB.Driver.Extend.ExtensionMethods
         /// <param name="document">文档对象</param>
         /// <param name="options">插入操作设置</param>
         /// <param name="cancellationToken">取消操作设置</param>
-        public static Task AddAsync<T>(this IMongoCollection<T> collection,
+        public static Task AddAsync<T>(
+            this IMongoCollection<T> collection,
             T document,
             InsertOneOptions options = null,
             CancellationToken cancellationToken = default)
@@ -39,7 +40,8 @@ namespace Apteryx.MongoDB.Driver.Extend.ExtensionMethods
         /// <param name="document">文档对象</param>
         /// <param name="options">插入操作设置</param>
         /// <param name="cancellationToken">取消操作设置</param>
-        public static Task AddAsync<T>(this IMongoCollection<T> collection,
+        public static Task AddAsync<T>(
+            this IMongoCollection<T> collection,
             IClientSessionHandle session,
             T document,
             InsertOneOptions options = null,
@@ -56,7 +58,8 @@ namespace Apteryx.MongoDB.Driver.Extend.ExtensionMethods
         /// <param name="documents">文档对象</param>
         /// <param name="options">插入操作设置</param>
         /// <param name="cancellationToken">取消操作设置</param>
-        public static Task AddManyAsync<T>(this IMongoCollection<T> collection,
+        public static Task AddManyAsync<T>(
+            this IMongoCollection<T> collection,
             IEnumerable<T> documents,
             InsertManyOptions options = null,
             CancellationToken cancellationToken = default)
@@ -73,7 +76,8 @@ namespace Apteryx.MongoDB.Driver.Extend.ExtensionMethods
         /// <param name="session">会话句柄(作用于事务)</param>
         /// <param name="options">插入操作设置</param>
         /// <param name="cancellationToken">取消操作设置</param>
-        public static Task AddManyAsync<T>(this IMongoCollection<T> collection,
+        public static Task AddManyAsync<T>(
+            this IMongoCollection<T> collection,
             IEnumerable<T> documents,
             IClientSessionHandle session,
             InsertManyOptions options = null,

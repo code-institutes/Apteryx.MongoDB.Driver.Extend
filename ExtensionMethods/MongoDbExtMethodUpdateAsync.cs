@@ -2,10 +2,10 @@
 using System.Linq.Expressions;
 using System.Threading;
 using System.Threading.Tasks;
-using Apteryx.MongoDB.Driver.Extend.Entities;
+using Apteryx.MongoDB.Driver.Extend;
 using MongoDB.Driver;
 
-namespace Apteryx.MongoDB.Driver.Extend.ExtensionMethods
+namespace Apteryx.MongoDB.Driver.Extend
 {
     /// <summary>
     /// 

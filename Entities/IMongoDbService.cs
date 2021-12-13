@@ -5,7 +5,7 @@ using System.Threading;
 using System.Threading.Tasks;
 using MongoDB.Driver;
 
-namespace Apteryx.MongoDB.Driver.Extend.Entities
+namespace Apteryx.MongoDB.Driver.Extend
 {
     public interface IMongoDbService
     {

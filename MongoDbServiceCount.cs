@@ -1,5 +1,4 @@
-﻿using Apteryx.MongoDB.Driver.Extend.Entities;
-using MongoDB.Driver;
+﻿using MongoDB.Driver;
 using System;
 using System.Linq.Expressions;
 using System.Threading;

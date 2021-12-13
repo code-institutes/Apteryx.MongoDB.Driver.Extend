@@ -3,11 +3,11 @@ using System.Collections.Generic;
 using System.Linq.Expressions;
 using System.Text;
 using System.Linq;
-using Apteryx.MongoDB.Driver.Extend.Entities;
+using Apteryx.MongoDB.Driver.Extend;
 using MongoDB.Driver;
 using System.Threading;
 
-namespace Apteryx.MongoDB.Driver.Extend.ExtensionMethods
+namespace Apteryx.MongoDB.Driver.Extend
 {
     /// <summary>
     /// MongoDb扩展方法:查询(同步)

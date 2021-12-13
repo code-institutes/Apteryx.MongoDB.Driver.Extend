@@ -2,10 +2,10 @@
 using System.Collections.Generic;
 using System.Text;
 using System.Threading;
-using Apteryx.MongoDB.Driver.Extend.Entities;
+using Apteryx.MongoDB.Driver.Extend;
 using MongoDB.Driver;
 
-namespace Apteryx.MongoDB.Driver.Extend.ExtensionMethods
+namespace Apteryx.MongoDB.Driver.Extend
 {
     /// <summary>
     /// MongoDb扩展方法:插入(同步)

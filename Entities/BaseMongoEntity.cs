@@ -2,7 +2,7 @@
 using System;
 using MongoDB.Bson;
 
-namespace Apteryx.MongoDB.Driver.Extend.Entities
+namespace Apteryx.MongoDB.Driver.Extend
 {
     public abstract class BaseMongoEntity : IEntity
     {

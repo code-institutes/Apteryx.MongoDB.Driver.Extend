@@ -1,6 +1,5 @@
 ﻿using System.Collections.Generic;
 using System.Threading;
-using Apteryx.MongoDB.Driver.Extend.Entities;
 using MongoDB.Driver;
 
 namespace Apteryx.MongoDB.Driver.Extend
