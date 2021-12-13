@@ -15,8 +15,8 @@ namespace Apteryx.MongoDB.Driver.Extend.ExtensionMethods
         /// </summary>
         /// <typeparam name="T">文档类型</typeparam>
         /// <param name="collection">集合</param>
-        /// <param name="id">主键ID</param>
-        /// <param name="document">文档</param>
+        /// <param name="id">文档默认ID</param>
+        /// <param name="document">文档对象</param>
         /// <param name="options">替换操作设置</param>
         /// <param name="cancellationToken">取消操作设置</param>
         /// <returns></returns>
@@ -38,8 +38,8 @@ namespace Apteryx.MongoDB.Driver.Extend.ExtensionMethods
         /// <typeparam name="T">文档类型</typeparam>
         /// <param name="collection">集合</param>
         /// <param name="session">会话句柄(作用于事务)</param>
-        /// <param name="id">主键ID</param>
-        /// <param name="document">文档</param>
+        /// <param name="id">文档默认ID</param>
+        /// <param name="document">文档对象</param>
         /// <param name="options">替换操作设置</param>
         /// <param name="cancellationToken">取消操作设置</param>
         /// <returns></returns>
@@ -53,7 +53,7 @@ namespace Apteryx.MongoDB.Driver.Extend.ExtensionMethods
             where T : BaseMongoEntity
         {
             document.UpdateTime = DateTime.Now;
-            return collection.ReplaceOne(session,r => r.Id == id, document, options, cancellationToken);
+            return collection.ReplaceOne(session, r => r.Id == id, document, options, cancellationToken);
         }
 
         /// <summary>
@@ -62,7 +62,7 @@ namespace Apteryx.MongoDB.Driver.Extend.ExtensionMethods
         /// <typeparam name="T">文档类型</typeparam>
         /// <param name="collection">集合</param>
         /// <param name="filter">过滤器</param>
-        /// <param name="document">文档</param>
+        /// <param name="document">文档对象</param>
         /// <param name="options">替换操作设置</param>
         /// <param name="cancellationToken">取消操作设置</param>
         /// <returns></returns>
@@ -85,7 +85,7 @@ namespace Apteryx.MongoDB.Driver.Extend.ExtensionMethods
         /// <param name="collection">集合</param>
         /// <param name="session">会话句柄(作用于事务)</param>
         /// <param name="filter">过滤器</param>
-        /// <param name="document">文档</param>
+        /// <param name="document">文档对象</param>
         /// <param name="options">替换操作设置</param>
         /// <param name="cancellationToken">取消操作设置</param>
         /// <returns></returns>
@@ -108,7 +108,7 @@ namespace Apteryx.MongoDB.Driver.Extend.ExtensionMethods
         /// <typeparam name="T">文档类型</typeparam>
         /// <param name="collection">集合</param>
         /// <param name="filter">Lambda过滤器</param>
-        /// <param name="document">文档</param>
+        /// <param name="document">文档对象</param>
         /// <param name="options">替换操作设置</param>
         /// <param name="cancellationToken">取消操作设置</param>
         /// <returns></returns>
@@ -131,7 +131,7 @@ namespace Apteryx.MongoDB.Driver.Extend.ExtensionMethods
         /// <param name="collection">集合</param>
         /// <param name="session">会话句柄(作用于事务)</param>
         /// <param name="filter">Lambda过滤器</param>
-        /// <param name="document">文档</param>
+        /// <param name="document">文档对象</param>
         /// <param name="options">替换操作设置</param>
         /// <param name="cancellationToken">取消操作设置</param>
         /// <returns></returns>
@@ -153,8 +153,54 @@ namespace Apteryx.MongoDB.Driver.Extend.ExtensionMethods
         /// </summary>
         /// <typeparam name="T">文档类型</typeparam>
         /// <param name="collection">集合</param>
+        /// <param name="id">文档默认ID</param>
+        /// <param name="document">文档对象</param>
+        /// <param name="options">查询替换操作设置</param>
+        /// <param name="cancellationToken">取消操作设置</param>
+        /// <returns></returns>
+        public static T FindOneAndReplaceOne<T>(
+            this IMongoCollection<T> collection,
+            string id,
+            T document,
+            FindOneAndReplaceOptions<T, T> options = null,
+            CancellationToken cancellationToken = default)
+            where T : BaseMongoEntity
+        {
+            document.UpdateTime = DateTime.Now;
+            return collection.FindOneAndReplace<T, T>(fr => fr.Id == id, document, options, cancellationToken);
+        }
+
+        /// <summary>
+        /// 查询替换单条(自动更新UpdateTime字段)
+        /// </summary>
+        /// <typeparam name="T">文档类型</typeparam>
+        /// <param name="collection">集合</param>
+        /// <param name="session">会话句柄(作用于事务)</param>
+        /// <param name="id">文档默认ID</param>
+        /// <param name="document">文档对象</param>
+        /// <param name="options">查询替换操作设置</param>
+        /// <param name="cancellationToken">取消操作设置</param>
+        /// <returns></returns>
+        public static T FindOneAndReplaceOne<T>(
+            this IMongoCollection<T> collection,
+            IClientSessionHandle session,
+            string id,
+            T document,
+            FindOneAndReplaceOptions<T, T> options = null,
+            CancellationToken cancellationToken = default)
+            where T : BaseMongoEntity
+        {
+            document.UpdateTime = DateTime.Now;
+            return collection.FindOneAndReplace<T, T>(session, fr => fr.Id == id, document, options, cancellationToken);
+        }
+
+        /// <summary>
+        /// 查询替换单条(自动更新UpdateTime字段)
+        /// </summary>
+        /// <typeparam name="T">文档类型</typeparam>
+        /// <param name="collection">集合</param>
         /// <param name="filter">过滤器</param>
-        /// <param name="document">文档</param>
+        /// <param name="document">文档对象</param>
         /// <param name="options">查询替换操作设置</param>
         /// <param name="cancellationToken">取消操作设置</param>
         /// <returns></returns>
@@ -177,7 +223,7 @@ namespace Apteryx.MongoDB.Driver.Extend.ExtensionMethods
         /// <param name="collection">集合</param>
         /// <param name="session">会话句柄(作用于事务)</param>
         /// <param name="filter">过滤器</param>
-        /// <param name="document">文档</param>
+        /// <param name="document">文档对象</param>
         /// <param name="options">查询替换操作设置</param>
         /// <param name="cancellationToken">取消操作设置</param>
         /// <returns></returns>
@@ -200,7 +246,7 @@ namespace Apteryx.MongoDB.Driver.Extend.ExtensionMethods
         /// <typeparam name="T">文档类型</typeparam>
         /// <param name="collection">集合</param>
         /// <param name="filter">Lambda过滤器</param>
-        /// <param name="document">文档</param>
+        /// <param name="document">文档对象</param>
         /// <param name="options">查询替换操作设置</param>
         /// <param name="cancellationToken">取消操作设置</param>
         /// <returns></returns>
@@ -223,7 +269,7 @@ namespace Apteryx.MongoDB.Driver.Extend.ExtensionMethods
         /// <param name="collection">集合</param>
         /// <param name="session">会话句柄(作用于事务)</param>
         /// <param name="filter">Lambda过滤器</param>
-        /// <param name="document">文档</param>
+        /// <param name="document">文档对象</param>
         /// <param name="options">查询替换操作设置</param>
         /// <param name="cancellationToken">取消操作设置</param>
         /// <returns></returns>

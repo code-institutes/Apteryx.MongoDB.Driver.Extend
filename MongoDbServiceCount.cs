@@ -24,7 +24,7 @@ namespace Apteryx.MongoDB.Driver.Extend
         /// 
         /// </summary>
         /// <typeparam name="T">文档类型</typeparam>
-        /// <param name="session">客户端会话句柄</param>
+        /// <param name="session">会话句柄(作用于事务)</param>
         /// <param name="filter">过滤器</param>
         /// <param name="options">设置</param>
         /// <param name="cancellationToken">标记</param>
@@ -51,7 +51,7 @@ namespace Apteryx.MongoDB.Driver.Extend
         /// </summary>
         /// <typeparam name="T">文档类型</typeparam>
         /// <param name="collectionName">集合名称</param>
-        /// <param name="session">客户端会话句柄</param>
+        /// <param name="session">会话句柄(作用于事务)</param>
         /// <param name="filter">过滤器</param>
         /// <param name="options">设置</param>
         /// <param name="cancellationToken">标记</param>
@@ -78,7 +78,7 @@ namespace Apteryx.MongoDB.Driver.Extend
         /// </summary>
         /// <typeparam name="T">文档类型</typeparam>
         /// <param name="collectionName">集合名称</param>
-        /// <param name="session">客户端会话句柄</param>
+        /// <param name="session">会话句柄(作用于事务)</param>
         /// <param name="filter">过滤器</param>
         /// <param name="options">设置</param>
         /// <param name="cancellationToken">标记</param>
@@ -112,15 +112,15 @@ namespace Apteryx.MongoDB.Driver.Extend
         /// </summary>
         /// <typeparam name="TForeign">文档类型</typeparam>
         /// <typeparam name="T">文档类型</typeparam>
+        /// <param name="session">会话句柄(作用于事务)</param>
         /// <param name="foreignDocument">文档对象</param>
-        /// <param name="session">客户端会话句柄</param>
         /// <param name="filter">过滤器</param>
         /// <param name="options">设置</param>
         /// <param name="cancellationToken">标记</param>
         /// <returns></returns>
         public long DynamicCollectionCountDocuments<TForeign, T>(
-            TForeign foreignDocument,
             IClientSessionHandle session,
+            TForeign foreignDocument,
             FilterDefinition<T> filter,
             CountOptions options = null,
             CancellationToken cancellationToken = default)
@@ -154,15 +154,15 @@ namespace Apteryx.MongoDB.Driver.Extend
         /// </summary>
         /// <typeparam name="TForeign">文档类型</typeparam>
         /// <typeparam name="T">文档类型</typeparam>
-        /// <param name="foreignDocument">文档对象</param>
         /// <param name="session">客户端会话句柄</param>
+        /// <param name="foreignDocument">文档对象</param>
         /// <param name="filter">过滤器</param>
         /// <param name="options">设置</param>
         /// <param name="cancellationToken">标记</param>
         /// <returns></returns>
         public long DynamicCollectionCountDocuments<TForeign, T>(
-            TForeign foreignDocument,
             IClientSessionHandle session,
+            TForeign foreignDocument,
             Expression<Func<T, bool>> filter,
             CountOptions options = null,
             CancellationToken cancellationToken = default)

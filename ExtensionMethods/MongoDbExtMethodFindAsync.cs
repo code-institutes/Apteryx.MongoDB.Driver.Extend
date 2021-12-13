@@ -20,7 +20,7 @@ namespace Apteryx.MongoDB.Driver.Extend.ExtensionMethods
         /// </summary>
         /// <typeparam name="T">集合类型</typeparam>
         /// <param name="collection">集合</param>
-        /// <param name="id">主键ID</param>
+        /// <param name="id">文档默认ID</param>
         /// <param name="options">查询操作设置</param>
         /// <returns></returns>
         public static Task<T> FindOneAsync<T>(this IMongoCollection<T> collection, string id,FindOptions options = null)
@@ -35,7 +35,7 @@ namespace Apteryx.MongoDB.Driver.Extend.ExtensionMethods
         /// <typeparam name="T">集合类型</typeparam>
         /// <param name="collection">集合</param>
         /// <param name="session">会话句柄(作用于事务)</param>
-        /// <param name="id">主键ID</param>
+        /// <param name="id">文档默认ID</param>
         /// <param name="options">查询操作设置</param>
         public static Task<T> FindOneAsync<T>(this IMongoCollection<T> collection,IClientSessionHandle session, string id, FindOptions options = null)
             where T : BaseMongoEntity
@@ -48,7 +48,7 @@ namespace Apteryx.MongoDB.Driver.Extend.ExtensionMethods
         /// </summary>
         /// <typeparam name="T">集合类型</typeparam>
         /// <param name="collection">集合</param>
-        /// <param name="id">主键ID</param>
+        /// <param name="id">文档默认ID</param>
         /// <param name="options">聚合操作设置</param>
         /// <returns></returns>
         public static Task<T> MatchOneAsync<T>(this IMongoCollection<T> collection, string id,AggregateOptions options = null)
@@ -63,7 +63,7 @@ namespace Apteryx.MongoDB.Driver.Extend.ExtensionMethods
         /// <typeparam name="T">集合类型</typeparam>
         /// <param name="collection">集合</param>
         /// <param name="session">会话句柄(作用于事务)</param>
-        /// <param name="id">主键ID</param>
+        /// <param name="id">文档默认ID</param>
         /// <param name="options">聚合操作设置</param>
         /// <returns></returns>
         public static Task<T> MatchOneAsync<T>(this IMongoCollection<T> collection,IClientSessionHandle session, string id, AggregateOptions options = null)

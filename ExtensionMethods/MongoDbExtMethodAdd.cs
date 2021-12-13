@@ -19,7 +19,7 @@ namespace Apteryx.MongoDB.Driver.Extend.ExtensionMethods
         /// </summary>
         /// <typeparam name="T">文档类型</typeparam>
         /// <param name="collection">集合</param>
-        /// <param name="document">文档</param>
+        /// <param name="document">文档对象</param>
         /// <param name="options">插入操作设置</param>
         /// <param name="cancellationToken">取消操作设置</param>
         public static void Add<T>(this IMongoCollection<T> collection,
@@ -36,7 +36,7 @@ namespace Apteryx.MongoDB.Driver.Extend.ExtensionMethods
         /// <typeparam name="T">文档类型</typeparam>
         /// <param name="collection">集合</param>
         /// <param name="session">会话句柄(作用于事务)</param>
-        /// <param name="document">文档</param>
+        /// <param name="document">文档对象</param>
         /// <param name="options">插入操作设置</param>
         /// <param name="cancellationToken">取消操作设置</param>
         public static void Add<T>(this IMongoCollection<T> collection,
@@ -53,7 +53,7 @@ namespace Apteryx.MongoDB.Driver.Extend.ExtensionMethods
         /// </summary>
         /// <typeparam name="T">文档类型</typeparam>
         /// <param name="collection">集合</param>
-        /// <param name="documents">文档</param>
+        /// <param name="documents">文档对象</param>
         /// <param name="options">插入操作设置</param>
         /// <param name="cancellationToken">取消操作设置</param>
         public static void AddMany<T>(this IMongoCollection<T> collection,

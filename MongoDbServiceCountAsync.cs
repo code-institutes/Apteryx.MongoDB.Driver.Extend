@@ -120,15 +120,15 @@ namespace Apteryx.MongoDB.Driver.Extend
         /// <param name="cancellationToken">标记</param>
         /// <returns></returns>
         public Task<long> DynamicCollectionCountDocumentsAsync<TForeign, T>(
-            TForeign foreignDocument,
             IClientSessionHandle session,
+            TForeign foreignDocument,
             FilterDefinition<T> filter,
             CountOptions options = null,
             CancellationToken cancellationToken = default)
             where TForeign : BaseMongoEntity
             where T : BaseMongoEntity
         {
-            return Task.Run(() => DynamicCollectionCountDocuments(foreignDocument, session, filter, options, cancellationToken));
+            return Task.Run(() => DynamicCollectionCountDocuments(session, foreignDocument, filter, options, cancellationToken));
         }
         /// <summary>
         /// 
@@ -162,15 +162,15 @@ namespace Apteryx.MongoDB.Driver.Extend
         /// <param name="cancellationToken">标记</param>
         /// <returns></returns>
         public Task<long> DynamicCollectionCountDocumentsAsync<TForeign, T>(
-            TForeign foreignDocument,
             IClientSessionHandle session,
+            TForeign foreignDocument,
             Expression<Func<T, bool>> filter,
             CountOptions options = null,
             CancellationToken cancellationToken = default)
             where TForeign : BaseMongoEntity
             where T : BaseMongoEntity
         {
-            return Task.Run(() => DynamicCollectionCountDocuments(foreignDocument, session, filter, options, cancellationToken));
+            return Task.Run(() => DynamicCollectionCountDocuments(session, foreignDocument, filter, options, cancellationToken));
         }
     }
 }
