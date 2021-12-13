@@ -42,39 +42,39 @@ namespace Apteryx.MongoDB.Driver.Extend.Entities
         #region 查询(同步)
 
         T FindOne<T>(string id, MongoCollectionSettings settings = null, FindOptions options = null) where T : BaseMongoEntity;
-        T FindOne<T>(IClientSessionHandle session,string id, MongoCollectionSettings settings = null, FindOptions options = null) where T : BaseMongoEntity;
+        T FindOne<T>(IClientSessionHandle session, string id, MongoCollectionSettings settings = null, FindOptions options = null) where T : BaseMongoEntity;
         T FindOne<T>(string collectionName, string id, MongoCollectionSettings settings = null, FindOptions options = null) where T : BaseMongoEntity;
-        T FindOne<T>(string collectionName, IClientSessionHandle session,string id, MongoCollectionSettings settings = null, FindOptions options = null) where T : BaseMongoEntity;
+        T FindOne<T>(string collectionName, IClientSessionHandle session, string id, MongoCollectionSettings settings = null, FindOptions options = null) where T : BaseMongoEntity;
         T FindOne<T>(FilterDefinition<T> filter, MongoCollectionSettings settings = null, FindOptions options = null) where T : BaseMongoEntity;
-        T FindOne<T>(IClientSessionHandle session,FilterDefinition<T> filter, MongoCollectionSettings settings = null, FindOptions options = null) where T : BaseMongoEntity;
+        T FindOne<T>(IClientSessionHandle session, FilterDefinition<T> filter, MongoCollectionSettings settings = null, FindOptions options = null) where T : BaseMongoEntity;
         T FindOne<T>(string collectionName, FilterDefinition<T> filter, MongoCollectionSettings settings = null, FindOptions options = null) where T : BaseMongoEntity;
-        T FindOne<T>(string collectionName, IClientSessionHandle session,FilterDefinition<T> filter, MongoCollectionSettings settings = null, FindOptions options = null) where T : BaseMongoEntity;
+        T FindOne<T>(string collectionName, IClientSessionHandle session, FilterDefinition<T> filter, MongoCollectionSettings settings = null, FindOptions options = null) where T : BaseMongoEntity;
         T FindOne<T>(Expression<Func<T, bool>> filter, MongoCollectionSettings settings = null, FindOptions options = null) where T : BaseMongoEntity;
-        T FindOne<T>(IClientSessionHandle session,Expression<Func<T, bool>> filter, MongoCollectionSettings settings = null, FindOptions options = null) where T : BaseMongoEntity;
+        T FindOne<T>(IClientSessionHandle session, Expression<Func<T, bool>> filter, MongoCollectionSettings settings = null, FindOptions options = null) where T : BaseMongoEntity;
         T FindOne<T>(string collectionName, Expression<Func<T, bool>> filter, MongoCollectionSettings settings = null, FindOptions options = null) where T : BaseMongoEntity;
-        T FindOne<T>(string collectionName, IClientSessionHandle session,Expression<Func<T, bool>> filter, MongoCollectionSettings settings = null, FindOptions options = null) where T : BaseMongoEntity;
+        T FindOne<T>(string collectionName, IClientSessionHandle session, Expression<Func<T, bool>> filter, MongoCollectionSettings settings = null, FindOptions options = null) where T : BaseMongoEntity;
         T DynamicCollectionFindOne<TForeign, T>(TForeign foreignDocument, FilterDefinition<T> filter, MongoCollectionSettings settings = null, FindOptions options = null) where TForeign : BaseMongoEntity where T : BaseMongoEntity;
-        T DynamicCollectionFindOne<TForeign, T>(IClientSessionHandle session,TForeign foreignDocument, FilterDefinition<T> filter, MongoCollectionSettings settings = null, FindOptions options = null) where TForeign : BaseMongoEntity where T : BaseMongoEntity;
+        T DynamicCollectionFindOne<TForeign, T>(IClientSessionHandle session, TForeign foreignDocument, FilterDefinition<T> filter, MongoCollectionSettings settings = null, FindOptions options = null) where TForeign : BaseMongoEntity where T : BaseMongoEntity;
         T DynamicCollectionFindOne<TForeign, T>(TForeign foreignDocument, Expression<Func<T, bool>> filter, MongoCollectionSettings settings = null, FindOptions options = null) where TForeign : BaseMongoEntity where T : BaseMongoEntity;
-        T DynamicCollectionFindOne<TForeign, T>(IClientSessionHandle session,TForeign foreignDocument, Expression<Func<T, bool>> filter, MongoCollectionSettings settings = null, FindOptions options = null) where TForeign : BaseMongoEntity where T : BaseMongoEntity;
+        T DynamicCollectionFindOne<TForeign, T>(IClientSessionHandle session, TForeign foreignDocument, Expression<Func<T, bool>> filter, MongoCollectionSettings settings = null, FindOptions options = null) where TForeign : BaseMongoEntity where T : BaseMongoEntity;
         IEnumerable<T> FindAll<T>(MongoCollectionSettings settings = null, FindOptions options = null) where T : BaseMongoEntity;
-        IEnumerable<T> FindAll<T>(IClientSessionHandle session,MongoCollectionSettings settings = null, FindOptions options = null) where T : BaseMongoEntity;
+        IEnumerable<T> FindAll<T>(IClientSessionHandle session, MongoCollectionSettings settings = null, FindOptions options = null) where T : BaseMongoEntity;
         IEnumerable<T> FindAll<T>(string collectionName, MongoCollectionSettings settings = null, FindOptions options = null) where T : BaseMongoEntity;
-        IEnumerable<T> FindAll<T>(string collectionName, IClientSessionHandle session,MongoCollectionSettings settings = null, FindOptions options = null) where T : BaseMongoEntity;
+        IEnumerable<T> FindAll<T>(string collectionName, IClientSessionHandle session, MongoCollectionSettings settings = null, FindOptions options = null) where T : BaseMongoEntity;
         IEnumerable<T> DynamicCollectionFindAll<TForeign, T>(TForeign foreignDocument, MongoCollectionSettings settings = null, FindOptions options = null) where TForeign : BaseMongoEntity where T : BaseMongoEntity;
-        IEnumerable<T> DynamicCollectionFindAll<TForeign, T>(IClientSessionHandle session,TForeign foreignDocument, MongoCollectionSettings settings = null, FindOptions options = null) where TForeign : BaseMongoEntity where T : BaseMongoEntity;
+        IEnumerable<T> DynamicCollectionFindAll<TForeign, T>(IClientSessionHandle session, TForeign foreignDocument, MongoCollectionSettings settings = null, FindOptions options = null) where TForeign : BaseMongoEntity where T : BaseMongoEntity;
         IEnumerable<T> Where<T>(FilterDefinition<T> filter, MongoCollectionSettings settings = null, FindOptions options = null) where T : BaseMongoEntity;
-        IEnumerable<T> Where<T>(IClientSessionHandle session,FilterDefinition<T> filter, MongoCollectionSettings settings = null, FindOptions options = null) where T : BaseMongoEntity;
+        IEnumerable<T> Where<T>(IClientSessionHandle session, FilterDefinition<T> filter, MongoCollectionSettings settings = null, FindOptions options = null) where T : BaseMongoEntity;
         IEnumerable<T> Where<T>(string collectionName, FilterDefinition<T> filter, MongoCollectionSettings settings = null, FindOptions options = null) where T : BaseMongoEntity;
-        IEnumerable<T> Where<T>(string collectionName,IClientSessionHandle session, FilterDefinition<T> filter, MongoCollectionSettings settings = null, FindOptions options = null) where T : BaseMongoEntity;
+        IEnumerable<T> Where<T>(string collectionName, IClientSessionHandle session, FilterDefinition<T> filter, MongoCollectionSettings settings = null, FindOptions options = null) where T : BaseMongoEntity;
         IEnumerable<T> Where<T>(Expression<Func<T, bool>> filter, MongoCollectionSettings settings = null, FindOptions options = null) where T : BaseMongoEntity;
-        IEnumerable<T> Where<T>(IClientSessionHandle session,Expression<Func<T, bool>> filter, MongoCollectionSettings settings = null, FindOptions options = null) where T : BaseMongoEntity;
+        IEnumerable<T> Where<T>(IClientSessionHandle session, Expression<Func<T, bool>> filter, MongoCollectionSettings settings = null, FindOptions options = null) where T : BaseMongoEntity;
         IEnumerable<T> Where<T>(string collectionName, Expression<Func<T, bool>> filter, MongoCollectionSettings settings = null, FindOptions options = null) where T : BaseMongoEntity;
-        IEnumerable<T> Where<T>(string collectionName,IClientSessionHandle session, Expression<Func<T, bool>> filter, MongoCollectionSettings settings = null, FindOptions options = null) where T : BaseMongoEntity;
+        IEnumerable<T> Where<T>(string collectionName, IClientSessionHandle session, Expression<Func<T, bool>> filter, MongoCollectionSettings settings = null, FindOptions options = null) where T : BaseMongoEntity;
         IEnumerable<T> DynamicCollectionWhere<TForeign, T>(TForeign foreignDocument, FilterDefinition<T> filter, MongoCollectionSettings settings = null, FindOptions options = null) where TForeign : BaseMongoEntity where T : BaseMongoEntity;
-        IEnumerable<T> DynamicCollectionWhere<TForeign, T>(IClientSessionHandle session,TForeign foreignDocument, FilterDefinition<T> filter, MongoCollectionSettings settings = null, FindOptions options = null) where TForeign : BaseMongoEntity where T : BaseMongoEntity;
+        IEnumerable<T> DynamicCollectionWhere<TForeign, T>(IClientSessionHandle session, TForeign foreignDocument, FilterDefinition<T> filter, MongoCollectionSettings settings = null, FindOptions options = null) where TForeign : BaseMongoEntity where T : BaseMongoEntity;
         IEnumerable<T> DynamicCollectionWhere<TForeign, T>(TForeign foreignDocument, Expression<Func<T, bool>> filter, MongoCollectionSettings settings = null, FindOptions options = null) where TForeign : BaseMongoEntity where T : BaseMongoEntity;
-        IEnumerable<T> DynamicCollectionWhere<TForeign, T>(IClientSessionHandle session,TForeign foreignDocument, Expression<Func<T, bool>> filter, MongoCollectionSettings settings = null, FindOptions options = null) where TForeign : BaseMongoEntity where T : BaseMongoEntity;
+        IEnumerable<T> DynamicCollectionWhere<TForeign, T>(IClientSessionHandle session, TForeign foreignDocument, Expression<Func<T, bool>> filter, MongoCollectionSettings settings = null, FindOptions options = null) where TForeign : BaseMongoEntity where T : BaseMongoEntity;
         long CountDocuments<T>(FilterDefinition<T> filter, CountOptions options = null, CancellationToken cancellationToken = default) where T : BaseMongoEntity;
         long CountDocuments<T>(IClientSessionHandle session, FilterDefinition<T> filter, CountOptions options = null, CancellationToken cancellationToken = default) where T : BaseMongoEntity;
         long CountDocuments<T>(string collectionName, FilterDefinition<T> filter, CountOptions options = null, CancellationToken cancellationToken = default) where T : BaseMongoEntity;
@@ -119,39 +119,39 @@ namespace Apteryx.MongoDB.Driver.Extend.Entities
         #region 查询(异步)
 
         Task<T> FindOneAsync<T>(string id, MongoCollectionSettings settings = null, FindOptions options = null) where T : BaseMongoEntity;
-        Task<T> FindOneAsync<T>(IClientSessionHandle session,string id, MongoCollectionSettings settings = null, FindOptions options = null) where T : BaseMongoEntity;
+        Task<T> FindOneAsync<T>(IClientSessionHandle session, string id, MongoCollectionSettings settings = null, FindOptions options = null) where T : BaseMongoEntity;
         Task<T> FindOneAsync<T>(string collectionName, string id, MongoCollectionSettings settings = null, FindOptions options = null) where T : BaseMongoEntity;
-        Task<T> FindOneAsync<T>(string collectionName,IClientSessionHandle session, string id, MongoCollectionSettings settings = null, FindOptions options = null) where T : BaseMongoEntity;
+        Task<T> FindOneAsync<T>(string collectionName, IClientSessionHandle session, string id, MongoCollectionSettings settings = null, FindOptions options = null) where T : BaseMongoEntity;
         Task<T> FindOneAsync<T>(FilterDefinition<T> filter, MongoCollectionSettings settings = null, FindOptions options = null) where T : BaseMongoEntity;
-        Task<T> FindOneAsync<T>(IClientSessionHandle session,FilterDefinition<T> filter, MongoCollectionSettings settings = null, FindOptions options = null) where T : BaseMongoEntity;
+        Task<T> FindOneAsync<T>(IClientSessionHandle session, FilterDefinition<T> filter, MongoCollectionSettings settings = null, FindOptions options = null) where T : BaseMongoEntity;
         Task<T> FindOneAsync<T>(string collectionName, FilterDefinition<T> filter, MongoCollectionSettings settings = null, FindOptions options = null) where T : BaseMongoEntity;
-        Task<T> FindOneAsync<T>(string collectionName,IClientSessionHandle session, FilterDefinition<T> filter, MongoCollectionSettings settings = null, FindOptions options = null) where T : BaseMongoEntity;
+        Task<T> FindOneAsync<T>(string collectionName, IClientSessionHandle session, FilterDefinition<T> filter, MongoCollectionSettings settings = null, FindOptions options = null) where T : BaseMongoEntity;
         Task<T> FindOneAsync<T>(Expression<Func<T, bool>> filter, MongoCollectionSettings settings = null, FindOptions options = null) where T : BaseMongoEntity;
-        Task<T> FindOneAsync<T>(IClientSessionHandle session,Expression<Func<T, bool>> filter, MongoCollectionSettings settings = null, FindOptions options = null) where T : BaseMongoEntity;
+        Task<T> FindOneAsync<T>(IClientSessionHandle session, Expression<Func<T, bool>> filter, MongoCollectionSettings settings = null, FindOptions options = null) where T : BaseMongoEntity;
         Task<T> FindOneAsync<T>(string collectionName, Expression<Func<T, bool>> filter, MongoCollectionSettings settings = null, FindOptions options = null) where T : BaseMongoEntity;
-        Task<T> FindOneAsync<T>(string collectionName,IClientSessionHandle session, Expression<Func<T, bool>> filter, MongoCollectionSettings settings = null, FindOptions options = null) where T : BaseMongoEntity;
+        Task<T> FindOneAsync<T>(string collectionName, IClientSessionHandle session, Expression<Func<T, bool>> filter, MongoCollectionSettings settings = null, FindOptions options = null) where T : BaseMongoEntity;
         Task<T> DynamicCollectionFindOneAsync<TForeign, T>(TForeign foreignDocument, FilterDefinition<T> filter, MongoCollectionSettings settings = null, FindOptions options = null) where TForeign : BaseMongoEntity where T : BaseMongoEntity;
-        Task<T> DynamicCollectionFindOneAsync<TForeign, T>(IClientSessionHandle session,TForeign foreignDocument, FilterDefinition<T> filter, MongoCollectionSettings settings = null, FindOptions options = null) where TForeign : BaseMongoEntity where T : BaseMongoEntity;
+        Task<T> DynamicCollectionFindOneAsync<TForeign, T>(IClientSessionHandle session, TForeign foreignDocument, FilterDefinition<T> filter, MongoCollectionSettings settings = null, FindOptions options = null) where TForeign : BaseMongoEntity where T : BaseMongoEntity;
         Task<T> DynamicCollectionFindOneAsync<TForeign, T>(TForeign foreignDocument, Expression<Func<T, bool>> filter, MongoCollectionSettings settings = null, FindOptions options = null) where TForeign : BaseMongoEntity where T : BaseMongoEntity;
-        Task<T> DynamicCollectionFindOneAsync<TForeign, T>(IClientSessionHandle session,TForeign foreignDocument, Expression<Func<T, bool>> filter, MongoCollectionSettings settings = null, FindOptions options = null) where TForeign : BaseMongoEntity where T : BaseMongoEntity;
+        Task<T> DynamicCollectionFindOneAsync<TForeign, T>(IClientSessionHandle session, TForeign foreignDocument, Expression<Func<T, bool>> filter, MongoCollectionSettings settings = null, FindOptions options = null) where TForeign : BaseMongoEntity where T : BaseMongoEntity;
         Task<IEnumerable<T>> FindAllAsync<T>(MongoCollectionSettings settings = null, FindOptions options = null) where T : BaseMongoEntity;
-        Task<IEnumerable<T>> FindAllAsync<T>(IClientSessionHandle session,MongoCollectionSettings settings = null, FindOptions options = null) where T : BaseMongoEntity;
+        Task<IEnumerable<T>> FindAllAsync<T>(IClientSessionHandle session, MongoCollectionSettings settings = null, FindOptions options = null) where T : BaseMongoEntity;
         Task<IEnumerable<T>> FindAllAsync<T>(string collectionName, MongoCollectionSettings settings = null, FindOptions options = null) where T : BaseMongoEntity;
-        Task<IEnumerable<T>> FindAllAsync<T>(string collectionName,IClientSessionHandle session, MongoCollectionSettings settings = null, FindOptions options = null) where T : BaseMongoEntity;
+        Task<IEnumerable<T>> FindAllAsync<T>(string collectionName, IClientSessionHandle session, MongoCollectionSettings settings = null, FindOptions options = null) where T : BaseMongoEntity;
         Task<IEnumerable<T>> DynamicCollectionFindAllAsync<TForeign, T>(TForeign foreignDocument, MongoCollectionSettings settings = null, FindOptions options = null) where TForeign : BaseMongoEntity where T : BaseMongoEntity;
-        Task<IEnumerable<T>> DynamicCollectionFindAllAsync<TForeign, T>(IClientSessionHandle session,TForeign foreignDocument, MongoCollectionSettings settings = null, FindOptions options = null) where TForeign : BaseMongoEntity where T : BaseMongoEntity;
+        Task<IEnumerable<T>> DynamicCollectionFindAllAsync<TForeign, T>(IClientSessionHandle session, TForeign foreignDocument, MongoCollectionSettings settings = null, FindOptions options = null) where TForeign : BaseMongoEntity where T : BaseMongoEntity;
         Task<IEnumerable<T>> WhereAsync<T>(FilterDefinition<T> filter, MongoCollectionSettings settings = null, FindOptions options = null) where T : BaseMongoEntity;
-        Task<IEnumerable<T>> WhereAsync<T>(IClientSessionHandle session,FilterDefinition<T> filter, MongoCollectionSettings settings = null, FindOptions options = null) where T : BaseMongoEntity;
+        Task<IEnumerable<T>> WhereAsync<T>(IClientSessionHandle session, FilterDefinition<T> filter, MongoCollectionSettings settings = null, FindOptions options = null) where T : BaseMongoEntity;
         Task<IEnumerable<T>> WhereAsync<T>(string collectionName, FilterDefinition<T> filter, MongoCollectionSettings settings = null, FindOptions options = null) where T : BaseMongoEntity;
-        Task<IEnumerable<T>> WhereAsync<T>(string collectionName,IClientSessionHandle session, FilterDefinition<T> filter, MongoCollectionSettings settings = null, FindOptions options = null) where T : BaseMongoEntity;
+        Task<IEnumerable<T>> WhereAsync<T>(string collectionName, IClientSessionHandle session, FilterDefinition<T> filter, MongoCollectionSettings settings = null, FindOptions options = null) where T : BaseMongoEntity;
         Task<IEnumerable<T>> WhereAsync<T>(Expression<Func<T, bool>> filter, MongoCollectionSettings settings = null, FindOptions options = null) where T : BaseMongoEntity;
-        Task<IEnumerable<T>> WhereAsync<T>(IClientSessionHandle session,Expression<Func<T, bool>> filter, MongoCollectionSettings settings = null, FindOptions options = null) where T : BaseMongoEntity;
+        Task<IEnumerable<T>> WhereAsync<T>(IClientSessionHandle session, Expression<Func<T, bool>> filter, MongoCollectionSettings settings = null, FindOptions options = null) where T : BaseMongoEntity;
         Task<IEnumerable<T>> WhereAsync<T>(string collectionName, Expression<Func<T, bool>> filter, MongoCollectionSettings settings = null, FindOptions options = null) where T : BaseMongoEntity;
-        Task<IEnumerable<T>> WhereAsync<T>(string collectionName,IClientSessionHandle session, Expression<Func<T, bool>> filter, MongoCollectionSettings settings = null, FindOptions options = null) where T : BaseMongoEntity;
+        Task<IEnumerable<T>> WhereAsync<T>(string collectionName, IClientSessionHandle session, Expression<Func<T, bool>> filter, MongoCollectionSettings settings = null, FindOptions options = null) where T : BaseMongoEntity;
         Task<IEnumerable<T>> DynamicCollectionWhereAsync<TForeign, T>(TForeign foreignDocument, FilterDefinition<T> filter, MongoCollectionSettings settings = null, FindOptions options = null) where TForeign : BaseMongoEntity where T : BaseMongoEntity;
-        Task<IEnumerable<T>> DynamicCollectionWhereAsync<TForeign, T>(IClientSessionHandle session,TForeign foreignDocument, FilterDefinition<T> filter, MongoCollectionSettings settings = null, FindOptions options = null) where TForeign : BaseMongoEntity where T : BaseMongoEntity;
+        Task<IEnumerable<T>> DynamicCollectionWhereAsync<TForeign, T>(IClientSessionHandle session, TForeign foreignDocument, FilterDefinition<T> filter, MongoCollectionSettings settings = null, FindOptions options = null) where TForeign : BaseMongoEntity where T : BaseMongoEntity;
         Task<IEnumerable<T>> DynamicCollectionWhereAsync<TForeign, T>(TForeign foreignDocument, Expression<Func<T, bool>> filter, MongoCollectionSettings settings = null, FindOptions options = null) where TForeign : BaseMongoEntity where T : BaseMongoEntity;
-        Task<IEnumerable<T>> DynamicCollectionWhereAsync<TForeign, T>(IClientSessionHandle session,TForeign foreignDocument, Expression<Func<T, bool>> filter, MongoCollectionSettings settings = null, FindOptions options = null) where TForeign : BaseMongoEntity where T : BaseMongoEntity;
+        Task<IEnumerable<T>> DynamicCollectionWhereAsync<TForeign, T>(IClientSessionHandle session, TForeign foreignDocument, Expression<Func<T, bool>> filter, MongoCollectionSettings settings = null, FindOptions options = null) where TForeign : BaseMongoEntity where T : BaseMongoEntity;
         Task<long> CountDocumentsAsync<T>(FilterDefinition<T> filter, CountOptions options = null, CancellationToken cancellationToken = default) where T : BaseMongoEntity;
         Task<long> CountDocumentsAsync<T>(IClientSessionHandle session, FilterDefinition<T> filter, CountOptions options = null, CancellationToken cancellationToken = default) where T : BaseMongoEntity;
         Task<long> CountDocumentsAsync<T>(string collectionName, FilterDefinition<T> filter, CountOptions options = null, CancellationToken cancellationToken = default) where T : BaseMongoEntity;
@@ -520,8 +520,8 @@ namespace Apteryx.MongoDB.Driver.Extend.Entities
             FilterDefinition<T> filter,
             T document,
             FindOneAndReplaceOptions<T> options = null,
-            CancellationToken cancellationToken = default) 
-            where TForeign : BaseMongoEntity 
+            CancellationToken cancellationToken = default)
+            where TForeign : BaseMongoEntity
             where T : BaseMongoEntity;
 
         Task<T> DynamicCollectionFindOneAndReplaceOneAsync<TForeign, T>(
@@ -530,8 +530,8 @@ namespace Apteryx.MongoDB.Driver.Extend.Entities
             FilterDefinition<T> filter,
             T document,
             FindOneAndReplaceOptions<T> options = null,
-            CancellationToken cancellationToken = default) 
-            where TForeign : BaseMongoEntity 
+            CancellationToken cancellationToken = default)
+            where TForeign : BaseMongoEntity
             where T : BaseMongoEntity;
 
         Task<T> DynamicCollectionFindOneAndReplaceOneAsync<TForeign, T>(
@@ -556,6 +556,26 @@ namespace Apteryx.MongoDB.Driver.Extend.Entities
         #region 更新(同步)
 
         UpdateResult WhereUpdateOne<T>(
+            string id,
+            UpdateDefinition<T> update,
+            UpdateOptions options = null,
+            CancellationToken cancellationToken = default) where T : BaseMongoEntity;
+
+        UpdateResult WhereUpdateOne<T>(
+            IClientSessionHandle session,
+            string id,
+            UpdateDefinition<T> update,
+            UpdateOptions options = null,
+            CancellationToken cancellationToken = default) where T : BaseMongoEntity;
+
+        UpdateResult WhereUpdateOne<T>(
+            FilterDefinition<T> filter,
+            UpdateDefinition<T> update,
+            UpdateOptions options = null,
+            CancellationToken cancellationToken = default) where T : BaseMongoEntity;
+
+        UpdateResult WhereUpdateOne<T>(
+            IClientSessionHandle session,
             FilterDefinition<T> filter,
             UpdateDefinition<T> update,
             UpdateOptions options = null,
@@ -567,19 +587,82 @@ namespace Apteryx.MongoDB.Driver.Extend.Entities
             UpdateOptions options = null,
             CancellationToken cancellationToken = default) where T : BaseMongoEntity;
 
+        UpdateResult WhereUpdateOne<T>(
+            IClientSessionHandle session,
+            Expression<Func<T, bool>> filter,
+            UpdateDefinition<T> update,
+            UpdateOptions options = null,
+            CancellationToken cancellationToken = default) where T : BaseMongoEntity;
+
+        UpdateResult DynamicCollectionWhereUpdateOne<TForeign, T>(
+            TForeign foreignDocument,
+            string id,
+            UpdateDefinition<T> update,
+            UpdateOptions options = null,
+            CancellationToken cancellationToken = default)
+            where TForeign : BaseMongoEntity
+            where T : BaseMongoEntity;
+
+        UpdateResult DynamicCollectionWhereUpdateOne<TForeign, T>(
+            IClientSessionHandle session,
+            TForeign foreignDocument,
+            string id,
+            UpdateDefinition<T> update,
+            UpdateOptions options = null,
+            CancellationToken cancellationToken = default)
+            where TForeign : BaseMongoEntity
+            where T : BaseMongoEntity;
+
         UpdateResult DynamicCollectionWhereUpdateOne<TForeign, T>(
             TForeign foreignDocument,
             FilterDefinition<T> filter,
             UpdateDefinition<T> update,
             UpdateOptions options = null,
-            CancellationToken cancellationToken = default) where TForeign : BaseMongoEntity where T : BaseMongoEntity;
+            CancellationToken cancellationToken = default) 
+            where TForeign : BaseMongoEntity 
+            where T : BaseMongoEntity;
+
+        UpdateResult DynamicCollectionWhereUpdateOne<TForeign, T>(
+            IClientSessionHandle session,
+            TForeign foreignDocument,
+            FilterDefinition<T> filter,
+            UpdateDefinition<T> update,
+            UpdateOptions options = null,
+            CancellationToken cancellationToken = default)
+            where TForeign : BaseMongoEntity
+            where T : BaseMongoEntity;
 
         UpdateResult DynamicCollectionWhereUpdateOne<TForeign, T>(
             TForeign foreignDocument,
             Expression<Func<T, bool>> filter,
             UpdateDefinition<T> update,
             UpdateOptions options = null,
-            CancellationToken cancellationToken = default) where TForeign : BaseMongoEntity where T : BaseMongoEntity;
+            CancellationToken cancellationToken = default) 
+            where TForeign : BaseMongoEntity 
+            where T : BaseMongoEntity;
+
+        UpdateResult DynamicCollectionWhereUpdateOne<TForeign, T>(
+            IClientSessionHandle session,
+            TForeign foreignDocument,
+            Expression<Func<T, bool>> filter,
+            UpdateDefinition<T> update,
+            UpdateOptions options = null,
+            CancellationToken cancellationToken = default)
+            where TForeign : BaseMongoEntity
+            where T : BaseMongoEntity;
+
+        T FindOneAndUpdateOne<T>(
+            string id,
+            UpdateDefinition<T> update,
+            FindOneAndUpdateOptions<T> options = null,
+            CancellationToken cancellationToken = default) where T : BaseMongoEntity;
+
+        T FindOneAndUpdateOne<T>(
+            IClientSessionHandle session,
+            string id,
+            UpdateDefinition<T> update,
+            FindOneAndUpdateOptions<T> options = null,
+            CancellationToken cancellationToken = default) where T : BaseMongoEntity;
 
         T FindOneAndUpdateOne<T>(
             FilterDefinition<T> filter,
@@ -588,6 +671,20 @@ namespace Apteryx.MongoDB.Driver.Extend.Entities
             CancellationToken cancellationToken = default) where T : BaseMongoEntity;
 
         T FindOneAndUpdateOne<T>(
+            IClientSessionHandle session,
+            FilterDefinition<T> filter,
+            UpdateDefinition<T> update,
+            FindOneAndUpdateOptions<T> options = null,
+            CancellationToken cancellationToken = default) where T : BaseMongoEntity;
+
+        T FindOneAndUpdateOne<T>(
+            Expression<Func<T, bool>> filter,
+            UpdateDefinition<T> update,
+            FindOneAndUpdateOptions<T> options = null,
+            CancellationToken cancellationToken = default) where T : BaseMongoEntity;
+
+        T FindOneAndUpdateOne<T>(
+            IClientSessionHandle session,
             Expression<Func<T, bool>> filter,
             UpdateDefinition<T> update,
             FindOneAndUpdateOptions<T> options = null,
@@ -598,16 +695,47 @@ namespace Apteryx.MongoDB.Driver.Extend.Entities
             FilterDefinition<T> filter,
             UpdateDefinition<T> update,
             FindOneAndUpdateOptions<T> options = null,
-            CancellationToken cancellationToken = default) where TForeign : BaseMongoEntity where T : BaseMongoEntity;
+            CancellationToken cancellationToken = default) 
+            where TForeign : BaseMongoEntity 
+            where T : BaseMongoEntity;
+
+        T DynamicCollectionFindOneAndUpdateOne<TForeign, T>(
+            IClientSessionHandle session,
+            TForeign foreignDocument,
+            FilterDefinition<T> filter,
+            UpdateDefinition<T> update,
+            FindOneAndUpdateOptions<T> options = null,
+            CancellationToken cancellationToken = default)
+            where TForeign : BaseMongoEntity
+            where T : BaseMongoEntity;
 
         T DynamicCollectionFindOneAndUpdateOne<TForeign, T>(
             TForeign foreignDocument,
             Expression<Func<T, bool>> filter,
             UpdateDefinition<T> update,
             FindOneAndUpdateOptions<T> options = null,
-            CancellationToken cancellationToken = default) where TForeign : BaseMongoEntity where T : BaseMongoEntity;
+            CancellationToken cancellationToken = default) 
+            where TForeign : BaseMongoEntity 
+            where T : BaseMongoEntity;
+
+        T DynamicCollectionFindOneAndUpdateOne<TForeign, T>(
+            IClientSessionHandle session,
+            TForeign foreignDocument,
+            Expression<Func<T, bool>> filter,
+            UpdateDefinition<T> update,
+            FindOneAndUpdateOptions<T> options = null,
+            CancellationToken cancellationToken = default)
+            where TForeign : BaseMongoEntity
+            where T : BaseMongoEntity;
 
         UpdateResult WhereUpdateMany<T>(
+            FilterDefinition<T> filter,
+            UpdateDefinition<T> update,
+            UpdateOptions options = null,
+            CancellationToken cancellationToken = default) where T : BaseMongoEntity;
+
+        UpdateResult WhereUpdateMany<T>(
+            IClientSessionHandle session,
             FilterDefinition<T> filter,
             UpdateDefinition<T> update,
             UpdateOptions options = null,
@@ -619,19 +747,50 @@ namespace Apteryx.MongoDB.Driver.Extend.Entities
             UpdateOptions options = null,
             CancellationToken cancellationToken = default) where T : BaseMongoEntity;
 
+        UpdateResult WhereUpdateMany<T>(
+            IClientSessionHandle session,
+            Expression<Func<T, bool>> filter,
+            UpdateDefinition<T> update,
+            UpdateOptions options = null,
+            CancellationToken cancellationToken = default) where T : BaseMongoEntity;
+
         UpdateResult DynamicCollectionWhereUpdateMany<TForeign, T>(
             TForeign foreignDocument,
             FilterDefinition<T> filter,
             UpdateDefinition<T> update,
             UpdateOptions options = null,
-            CancellationToken cancellationToken = default) where TForeign : BaseMongoEntity where T : BaseMongoEntity;
+            CancellationToken cancellationToken = default) 
+            where TForeign : BaseMongoEntity 
+            where T : BaseMongoEntity;
+
+        UpdateResult DynamicCollectionWhereUpdateMany<TForeign, T>(
+            IClientSessionHandle session,
+            TForeign foreignDocument,
+            FilterDefinition<T> filter,
+            UpdateDefinition<T> update,
+            UpdateOptions options = null,
+            CancellationToken cancellationToken = default)
+            where TForeign : BaseMongoEntity
+            where T : BaseMongoEntity;
 
         UpdateResult DynamicCollectionWhereUpdateMany<TForeign, T>(
             TForeign foreignDocument,
             Expression<Func<T, bool>> filter,
             UpdateDefinition<T> update,
             UpdateOptions options = null,
-            CancellationToken cancellationToken = default) where TForeign : BaseMongoEntity where T : BaseMongoEntity;
+            CancellationToken cancellationToken = default) 
+            where TForeign : BaseMongoEntity 
+            where T : BaseMongoEntity;
+
+        UpdateResult DynamicCollectionWhereUpdateMany<TForeign, T>(
+            IClientSessionHandle session,
+            TForeign foreignDocument,
+            Expression<Func<T, bool>> filter,
+            UpdateDefinition<T> update,
+            UpdateOptions options = null,
+            CancellationToken cancellationToken = default)
+            where TForeign : BaseMongoEntity
+            where T : BaseMongoEntity;
 
         #endregion
 
@@ -640,6 +799,26 @@ namespace Apteryx.MongoDB.Driver.Extend.Entities
         #region 更新(异步)
 
         Task<UpdateResult> WhereUpdateOneAsync<T>(
+            string id,
+            UpdateDefinition<T> update,
+            UpdateOptions options = null,
+            CancellationToken cancellationToken = default) where T : BaseMongoEntity;
+
+        Task<UpdateResult> WhereUpdateOneAsync<T>(
+            IClientSessionHandle session,
+            string id,
+            UpdateDefinition<T> update,
+            UpdateOptions options = null,
+            CancellationToken cancellationToken = default) where T : BaseMongoEntity;
+
+        Task<UpdateResult> WhereUpdateOneAsync<T>(
+            FilterDefinition<T> filter,
+            UpdateDefinition<T> update,
+            UpdateOptions options = null,
+            CancellationToken cancellationToken = default) where T : BaseMongoEntity;
+
+        Task<UpdateResult> WhereUpdateOneAsync<T>(
+            IClientSessionHandle session,
             FilterDefinition<T> filter,
             UpdateDefinition<T> update,
             UpdateOptions options = null,
@@ -651,19 +830,82 @@ namespace Apteryx.MongoDB.Driver.Extend.Entities
             UpdateOptions options = null,
             CancellationToken cancellationToken = default) where T : BaseMongoEntity;
 
+        Task<UpdateResult> WhereUpdateOneAsync<T>(
+            IClientSessionHandle session,
+            Expression<Func<T, bool>> filter,
+            UpdateDefinition<T> update,
+            UpdateOptions options = null,
+            CancellationToken cancellationToken = default) where T : BaseMongoEntity;
+
+        Task<UpdateResult> DynamicCollectionWhereUpdateOneAsync<TForeign, T>(
+            TForeign foreignDocument,
+            string id,
+            UpdateDefinition<T> update,
+            UpdateOptions options = null,
+            CancellationToken cancellationToken = default)
+            where TForeign : BaseMongoEntity
+            where T : BaseMongoEntity;
+
+        Task<UpdateResult> DynamicCollectionWhereUpdateOneAsync<TForeign, T>(
+            IClientSessionHandle session,
+            TForeign foreignDocument,
+            string id,
+            UpdateDefinition<T> update,
+            UpdateOptions options = null,
+            CancellationToken cancellationToken = default)
+            where TForeign : BaseMongoEntity
+            where T : BaseMongoEntity;
+
         Task<UpdateResult> DynamicCollectionWhereUpdateOneAsync<TForeign, T>(
             TForeign foreignDocument,
             FilterDefinition<T> filter,
             UpdateDefinition<T> update,
             UpdateOptions options = null,
-            CancellationToken cancellationToken = default) where TForeign : BaseMongoEntity where T : BaseMongoEntity;
+            CancellationToken cancellationToken = default) 
+            where TForeign : BaseMongoEntity 
+            where T : BaseMongoEntity;
+
+        Task<UpdateResult> DynamicCollectionWhereUpdateOneAsync<TForeign, T>(
+            IClientSessionHandle session,
+            TForeign foreignDocument,
+            FilterDefinition<T> filter,
+            UpdateDefinition<T> update,
+            UpdateOptions options = null,
+            CancellationToken cancellationToken = default)
+            where TForeign : BaseMongoEntity
+            where T : BaseMongoEntity;
 
         Task<UpdateResult> DynamicCollectionWhereUpdateOneAsync<TForeign, T>(
             TForeign foreignDocument,
             Expression<Func<T, bool>> filter,
             UpdateDefinition<T> update,
             UpdateOptions options = null,
-            CancellationToken cancellationToken = default) where TForeign : BaseMongoEntity where T : BaseMongoEntity;
+            CancellationToken cancellationToken = default) 
+            where TForeign : BaseMongoEntity 
+            where T : BaseMongoEntity;
+
+        Task<UpdateResult> DynamicCollectionWhereUpdateOneAsync<TForeign, T>(
+            IClientSessionHandle session,
+            TForeign foreignDocument,
+            Expression<Func<T, bool>> filter,
+            UpdateDefinition<T> update,
+            UpdateOptions options = null,
+            CancellationToken cancellationToken = default)
+            where TForeign : BaseMongoEntity
+            where T : BaseMongoEntity;
+
+        Task<T> FindOneAndUpdateOneAsync<T>(
+            string id,
+            UpdateDefinition<T> update,
+            FindOneAndUpdateOptions<T> options = null,
+            CancellationToken cancellationToken = default) where T : BaseMongoEntity;
+
+        Task<T> FindOneAndUpdateOneAsync<T>(
+            IClientSessionHandle session,
+            string id,
+            UpdateDefinition<T> update,
+            FindOneAndUpdateOptions<T> options = null,
+            CancellationToken cancellationToken = default) where T : BaseMongoEntity;
 
         Task<T> FindOneAndUpdateOneAsync<T>(
             FilterDefinition<T> filter,
@@ -672,23 +914,62 @@ namespace Apteryx.MongoDB.Driver.Extend.Entities
             CancellationToken cancellationToken = default) where T : BaseMongoEntity;
 
         Task<T> FindOneAndUpdateOneAsync<T>(
+            IClientSessionHandle session,
+            FilterDefinition<T> filter,
+            UpdateDefinition<T> update,
+            FindOneAndUpdateOptions<T> options = null,
+            CancellationToken cancellationToken = default) where T : BaseMongoEntity;
+
+        Task<T> FindOneAndUpdateOneAsync<T>(
             Expression<Func<T, bool>> filter,
             UpdateDefinition<T> update,
             FindOneAndUpdateOptions<T> options = null,
             CancellationToken cancellationToken = default) where T : BaseMongoEntity;
+
+        Task<T> FindOneAndUpdateOneAsync<T>(
+            IClientSessionHandle session,
+            Expression<Func<T, bool>> filter,
+            UpdateDefinition<T> update,
+            FindOneAndUpdateOptions<T> options = null,
+            CancellationToken cancellationToken = default) where T : BaseMongoEntity;
+
         Task<T> DynamicCollectionFindOneAndUpdateOneAsync<TForeign, T>(
             TForeign foreignDocument,
             FilterDefinition<T> filter,
             UpdateDefinition<T> update,
             FindOneAndUpdateOptions<T> options = null,
-            CancellationToken cancellationToken = default) where TForeign : BaseMongoEntity where T : BaseMongoEntity;
+            CancellationToken cancellationToken = default) 
+            where TForeign : BaseMongoEntity 
+            where T : BaseMongoEntity;
+
+        Task<T> DynamicCollectionFindOneAndUpdateOneAsync<TForeign, T>(
+            IClientSessionHandle session,
+            TForeign foreignDocument,
+            FilterDefinition<T> filter,
+            UpdateDefinition<T> update,
+            FindOneAndUpdateOptions<T> options = null,
+            CancellationToken cancellationToken = default)
+            where TForeign : BaseMongoEntity
+            where T : BaseMongoEntity;
 
         Task<T> DynamicCollectionFindOneAndUpdateOneAsync<TForeign, T>(
             TForeign foreignDocument,
             Expression<Func<T, bool>> filter,
             UpdateDefinition<T> update,
             FindOneAndUpdateOptions<T> options = null,
-            CancellationToken cancellationToken = default) where TForeign : BaseMongoEntity where T : BaseMongoEntity;
+            CancellationToken cancellationToken = default) 
+            where TForeign : BaseMongoEntity 
+            where T : BaseMongoEntity;
+
+        Task<T> DynamicCollectionFindOneAndUpdateOneAsync<TForeign, T>(
+            IClientSessionHandle session,
+            TForeign foreignDocument,
+            Expression<Func<T, bool>> filter,
+            UpdateDefinition<T> update,
+            FindOneAndUpdateOptions<T> options = null,
+            CancellationToken cancellationToken = default)
+            where TForeign : BaseMongoEntity
+            where T : BaseMongoEntity;
 
         Task<UpdateResult> WhereUpdateManyAsync<T>(
             FilterDefinition<T> filter,
@@ -697,23 +978,62 @@ namespace Apteryx.MongoDB.Driver.Extend.Entities
             CancellationToken cancellationToken = default) where T : BaseMongoEntity;
 
         Task<UpdateResult> WhereUpdateManyAsync<T>(
+            IClientSessionHandle session,
+            FilterDefinition<T> filter,
+            UpdateDefinition<T> update,
+            UpdateOptions options = null,
+            CancellationToken cancellationToken = default) where T : BaseMongoEntity;
+
+        Task<UpdateResult> WhereUpdateManyAsync<T>(
             Expression<Func<T, bool>> filter,
             UpdateDefinition<T> update,
             UpdateOptions options = null,
             CancellationToken cancellationToken = default) where T : BaseMongoEntity;
+
+        Task<UpdateResult> WhereUpdateManyAsync<T>(
+            IClientSessionHandle session,
+            Expression<Func<T, bool>> filter,
+            UpdateDefinition<T> update,
+            UpdateOptions options = null,
+            CancellationToken cancellationToken = default) where T : BaseMongoEntity;
+
         Task<UpdateResult> DynamicCollectionWhereUpdateManyAsync<TForeign, T>(
             TForeign foreignDocument,
             FilterDefinition<T> filter,
             UpdateDefinition<T> update,
             UpdateOptions options = null,
-            CancellationToken cancellationToken = default) where TForeign : BaseMongoEntity where T : BaseMongoEntity;
+            CancellationToken cancellationToken = default) 
+            where TForeign : BaseMongoEntity 
+            where T : BaseMongoEntity;
+
+        Task<UpdateResult> DynamicCollectionWhereUpdateManyAsync<TForeign, T>(
+            IClientSessionHandle session,
+            TForeign foreignDocument,
+            FilterDefinition<T> filter,
+            UpdateDefinition<T> update,
+            UpdateOptions options = null,
+            CancellationToken cancellationToken = default)
+            where TForeign : BaseMongoEntity
+            where T : BaseMongoEntity;
 
         Task<UpdateResult> DynamicCollectionWhereUpdateManyAsync<TForeign, T>(
             TForeign foreignDocument,
             Expression<Func<T, bool>> filter,
             UpdateDefinition<T> update,
             UpdateOptions options = null,
-            CancellationToken cancellationToken = default) where TForeign : BaseMongoEntity where T : BaseMongoEntity;
+            CancellationToken cancellationToken = default) 
+            where TForeign : BaseMongoEntity 
+            where T : BaseMongoEntity;
+
+        Task<UpdateResult> DynamicCollectionWhereUpdateManyAsync<TForeign, T>(
+            IClientSessionHandle session,
+            TForeign foreignDocument,
+            Expression<Func<T, bool>> filter,
+            UpdateDefinition<T> update,
+            UpdateOptions options = null,
+            CancellationToken cancellationToken = default)
+            where TForeign : BaseMongoEntity
+            where T : BaseMongoEntity;
 
         #endregion
     }
