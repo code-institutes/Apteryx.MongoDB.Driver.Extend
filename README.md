@@ -8,7 +8,7 @@
         public string Mobile { get; set; }
     }
 
-    public class MyDbService:MongoDbService
+    public class MyDbService:MongoDbProvider
     {
         public MyDbService(IOptionsMonitor<MongoDBOptions> options) : base(options){}
         public IMongoCollection<Account> Account => _database.GetCollection<Account>("Account");
@@ -37,16 +37,16 @@
     [ApiController]
     public class ValuesController : ControllerBase
     {
-        private MyDbService db = null;
-        public ValuesController(IMongoDbService db)
+        private MyDbService _db = null;
+        public ValuesController(MyDbService db)
         {
-            this.db = (MyDbService)db;
+            this._db = db;
         }
         // GET api/values
         [HttpGet]
         public ActionResult<IEnumerable<string>> Get()
         {
-            db.Account.Add(new Account(){Name = "张三",Mobile = "13812345678"});
+            _db.Account.Add(new Account(){Name = "张三",Mobile = "13812345678"});
             return new string[] { "value1", "value2" };
         }
     }
@@ -60,7 +60,7 @@
         public string Mobile { get; set; }
     }
 
-    public class MyDbService:MongoDbService
+    public class MyDbService:MongoDbProvider
     {        
         public MyDbService(string conn):base(conn){}
         //public MyDbService(IOptionsMonitor<MongoDBOptions> options) : base(options){}
