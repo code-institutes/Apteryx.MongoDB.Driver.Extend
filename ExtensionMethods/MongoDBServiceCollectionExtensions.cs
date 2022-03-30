@@ -5,9 +5,9 @@ namespace Apteryx.MongoDB.Driver.Extend
 {
     public static class MongoDBServiceCollectionExtensions
     {
-        public static IServiceCollection AddMongoDB<T>(this IServiceCollection serviceCollection, Action<MongoDBOptions> optionsAction) where T:MongoDbService
+        public static IServiceCollection AddMongoDB<T>(this IServiceCollection serviceCollection, Action<MongoDBOptions> optionsAction) where T:MongoDbProvider
         {
-            serviceCollection.AddScoped<MongoDbService,T>().BuildServiceProvider();
+            serviceCollection.AddScoped<T>();
             if (optionsAction != null)
                 serviceCollection.ConfigureMongoDB(optionsAction);
             return serviceCollection;

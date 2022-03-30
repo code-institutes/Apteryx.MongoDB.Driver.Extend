@@ -5,7 +5,7 @@ using System.Linq.Expressions;
 
 namespace Apteryx.MongoDB.Driver.Extend
 {
-    public abstract partial class MongoDbService
+    public abstract partial class MongoDbProvider
     {
         #region 查询(同步)
         /// <summary>

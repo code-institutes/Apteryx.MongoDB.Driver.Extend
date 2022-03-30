@@ -5,7 +5,7 @@ using System.Threading;
 
 namespace Apteryx.MongoDB.Driver.Extend
 {
-    public abstract partial class MongoDbService
+    public abstract partial class MongoDbProvider
     {
         #region 更新(同步)
 

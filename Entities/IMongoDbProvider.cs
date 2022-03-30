@@ -7,7 +7,7 @@ using MongoDB.Driver;
 
 namespace Apteryx.MongoDB.Driver.Extend
 {
-    public interface IMongoDbService
+    public interface IMongoDbProvider
     {
         #region 插入(同步)
 

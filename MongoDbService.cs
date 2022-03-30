@@ -3,7 +3,7 @@ using MongoDB.Driver;
 
 namespace Apteryx.MongoDB.Driver.Extend
 {
-    public abstract partial class MongoDbService : IMongoDbService
+    public abstract partial class MongoDbProvider : IMongoDbProvider
     {
         //定义数据库
         public IMongoDatabase Database { get; set; }
@@ -13,7 +13,7 @@ namespace Apteryx.MongoDB.Driver.Extend
         /// 
         /// </summary>
         /// <param name="conn"></param>
-        public MongoDbService(string conn)
+        public MongoDbProvider(string conn)
         {
             var connsetting = new MongoUrlBuilder(conn);
             var client = new MongoClient(connsetting.ToMongoUrl());
@@ -24,7 +24,7 @@ namespace Apteryx.MongoDB.Driver.Extend
         /// 
         /// </summary>
         /// <param name="options"></param>
-        public MongoDbService(IOptionsMonitor<MongoDBOptions> options):this(options.CurrentValue.ConnectionString)
+        public MongoDbProvider(IOptionsMonitor<MongoDBOptions> options):this(options.CurrentValue.ConnectionString)
         {
         }
     }

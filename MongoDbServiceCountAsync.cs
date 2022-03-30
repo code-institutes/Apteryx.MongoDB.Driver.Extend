@@ -6,7 +6,7 @@ using System.Threading.Tasks;
 
 namespace Apteryx.MongoDB.Driver.Extend
 {
-    public abstract partial class MongoDbService
+    public abstract partial class MongoDbProvider
     {
         /// <summary>
         /// 
