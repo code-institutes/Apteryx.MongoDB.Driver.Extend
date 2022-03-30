@@ -24,11 +24,8 @@ namespace Apteryx.MongoDB.Driver.Extend
         /// 
         /// </summary>
         /// <param name="options"></param>
-        public MongoDbService(IOptionsMonitor<MongoDBOptions> options)
+        public MongoDbService(IOptionsMonitor<MongoDBOptions> options):this(options.CurrentValue.ConnectionString)
         {
-            var connsetting = new MongoUrlBuilder(options.CurrentValue.ConnectionString);
-            Client = new MongoClient(connsetting.ToMongoUrl());
-            Database = Client.GetDatabase(connsetting.DatabaseName);
         }
     }
 }
