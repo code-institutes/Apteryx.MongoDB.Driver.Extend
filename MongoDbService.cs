@@ -16,8 +16,8 @@ namespace Apteryx.MongoDB.Driver.Extend
         public MongoDbProvider(string conn)
         {
             var connsetting = new MongoUrlBuilder(conn);
-            var client = new MongoClient(connsetting.ToMongoUrl());
-            Database = client.GetDatabase(connsetting.DatabaseName);
+            Client = new MongoClient(connsetting.ToMongoUrl());
+            Database = Client.GetDatabase(connsetting.DatabaseName);
         }
 
         /// <summary>
