@@ -1,7 +1,6 @@
 ﻿using System.Collections.Generic;
 using System.Threading;
 using System.Threading.Tasks;
-using Apteryx.MongoDB.Driver.Extend;
 using MongoDB.Driver;
 
 namespace Apteryx.MongoDB.Driver.Extend
@@ -26,7 +25,7 @@ namespace Apteryx.MongoDB.Driver.Extend
             T document,
             InsertOneOptions options = null,
             CancellationToken cancellationToken = default)
-        where T : BaseMongoEntity
+            where T : BaseMongoEntity
         {
             return Task.Run(() => Add(collection, document, options, cancellationToken));
         }
@@ -46,6 +45,7 @@ namespace Apteryx.MongoDB.Driver.Extend
             T document,
             InsertOneOptions options = null,
             CancellationToken cancellationToken = default)
+            where T : BaseMongoEntity
         {
             return Task.Run(() => Add(collection, session, document, options, cancellationToken));
         }

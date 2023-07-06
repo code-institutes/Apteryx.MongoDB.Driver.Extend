@@ -1,8 +1,5 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Text;
+﻿using System.Collections.Generic;
 using System.Threading;
-using Apteryx.MongoDB.Driver.Extend;
 using MongoDB.Driver;
 
 namespace Apteryx.MongoDB.Driver.Extend
@@ -26,6 +23,7 @@ namespace Apteryx.MongoDB.Driver.Extend
             T document,
             InsertOneOptions options = null,
             CancellationToken cancellationToken = default)
+            where T : BaseMongoEntity
         {
             collection.InsertOne(document, options, cancellationToken);
         }
@@ -44,6 +42,7 @@ namespace Apteryx.MongoDB.Driver.Extend
             T document,
             InsertOneOptions options = null,
             CancellationToken cancellationToken = default)
+            where T : BaseMongoEntity
         {
             collection.InsertOne(session, document, options, cancellationToken);
         }
@@ -60,6 +59,7 @@ namespace Apteryx.MongoDB.Driver.Extend
             IEnumerable<T> documents,
             InsertManyOptions options = null,
             CancellationToken cancellationToken = default)
+            where T : BaseMongoEntity
         {
             collection.InsertMany(documents, options, cancellationToken);
         }
@@ -77,6 +77,7 @@ namespace Apteryx.MongoDB.Driver.Extend
             IEnumerable<T> documents,
             InsertManyOptions options = null,
             CancellationToken cancellationToken = default)
+            where T : BaseMongoEntity
         {
             collection.InsertMany(session, documents, options, cancellationToken);
         }
