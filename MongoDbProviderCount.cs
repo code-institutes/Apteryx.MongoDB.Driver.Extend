@@ -19,6 +19,7 @@ namespace Apteryx.MongoDB.Driver.Extend
         {
             return Database.GetCollection<T>(typeof(T).Name).CountDocuments(filter, options, cancellationToken);
         }
+
         /// <summary>
         /// 
         /// </summary>
@@ -32,6 +33,7 @@ namespace Apteryx.MongoDB.Driver.Extend
         {
             return Database.GetCollection<T>(typeof(T).Name).CountDocuments(session, filter, options, cancellationToken);
         }
+
         /// <summary>
         /// 
         /// </summary>
@@ -45,6 +47,7 @@ namespace Apteryx.MongoDB.Driver.Extend
         {
             return Database.GetCollection<T>(collectionName).CountDocuments(filter, options, cancellationToken);
         }
+
         /// <summary>
         /// 
         /// </summary>
@@ -59,6 +62,7 @@ namespace Apteryx.MongoDB.Driver.Extend
         {
             return Database.GetCollection<T>(collectionName).CountDocuments(session, filter, options, cancellationToken);
         }
+
         /// <summary>
         /// 
         /// </summary>
@@ -72,6 +76,7 @@ namespace Apteryx.MongoDB.Driver.Extend
         {
             return Database.GetCollection<T>(collectionName).CountDocuments(filter, options, cancellationToken);
         }
+
         /// <summary>
         /// 
         /// </summary>
@@ -86,6 +91,7 @@ namespace Apteryx.MongoDB.Driver.Extend
         {
             return Database.GetCollection<T>(collectionName).CountDocuments(session, filter, options, cancellationToken);
         }
+
         /// <summary>
         /// 
         /// </summary>
@@ -106,6 +112,7 @@ namespace Apteryx.MongoDB.Driver.Extend
         {
             return Database.GetCollection<T>($"{typeof(T).Name}_{foreignDocument.Id}").CountDocuments(filter, options, cancellationToken);
         }
+
         /// <summary>
         /// 
         /// </summary>
@@ -128,6 +135,7 @@ namespace Apteryx.MongoDB.Driver.Extend
         {
             return Database.GetCollection<T>($"{typeof(T).Name}_{foreignDocument.Id}").CountDocuments(session, filter, options, cancellationToken);
         }
+
         /// <summary>
         /// 
         /// </summary>
@@ -148,6 +156,7 @@ namespace Apteryx.MongoDB.Driver.Extend
         {
             return Database.GetCollection<T>($"{typeof(T).Name}_{foreignDocument.Id}").CountDocuments(filter, options, cancellationToken);
         }
+
         /// <summary>
         /// 
         /// </summary>

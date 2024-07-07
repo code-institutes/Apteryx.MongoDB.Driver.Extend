@@ -5,16 +5,17 @@ namespace Apteryx.MongoDB.Driver.Extend
 {
     public static class MongoDBServiceCollectionExtensions
     {
-        public static IServiceCollection AddMongoDB<T>(this IServiceCollection serviceCollection, Action<MongoDBOptions> optionsAction) where T:MongoDbProvider
+        public static IServiceCollection AddMongoDB<T>(this IServiceCollection services, Action<MongoDBOptions> options) where T:MongoDbProvider
         {
-            serviceCollection.AddScoped<T>();
-            if (optionsAction != null)
-                serviceCollection.ConfigureMongoDB(optionsAction);
-            return serviceCollection;
+            services.AddSingleton<T>();
+            if (options != null)
+                services.ConfigureMongoDB(options);
+            return services;
         }
-        public static void ConfigureMongoDB(this IServiceCollection services, Action<MongoDBOptions> optionsAction)
+        public static void ConfigureMongoDB(this IServiceCollection services, Action<MongoDBOptions> options)
         {
-            services.Configure(optionsAction);
+            services.Configure(options);
+            services.AddSingleton(typeof(DbSet<>));
         }
     }
 }
