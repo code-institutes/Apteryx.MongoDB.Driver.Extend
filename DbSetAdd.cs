@@ -9,7 +9,7 @@ namespace Apteryx.MongoDB.Driver.Extend
         #region 添加（同步）
 
         /// <summary>
-        /// 插入单条
+        /// 插入（单个）
         /// </summary>
         /// <param name="document">文档对象</param>
         /// <param name="options">插入操作设置</param>
@@ -20,7 +20,7 @@ namespace Apteryx.MongoDB.Driver.Extend
         }
 
         /// <summary>
-        /// 插入单条
+        /// 插入（单个）
         /// </summary>
         /// <param name="session">会话句柄(作用于事务)</param>
         /// <param name="document">文档对象</param>
@@ -32,7 +32,7 @@ namespace Apteryx.MongoDB.Driver.Extend
         }
 
         /// <summary>
-        /// 插入多条
+        /// 插入（批量）
         /// </summary>
         /// <param name="documents">文档对象</param>
         /// <param name="options">插入操作设置</param>
@@ -43,7 +43,7 @@ namespace Apteryx.MongoDB.Driver.Extend
         }
 
         /// <summary>
-        /// 插入多条
+        /// 插入（批量）
         /// </summary>
         /// <param name="session">会话句柄(作用于事务)</param>
         /// <param name="documents">文档对象</param>

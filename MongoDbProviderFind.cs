@@ -9,7 +9,7 @@
 //    {
 //        #region 查询(同步)
 //        /// <summary>
-//        /// 查询返回单条
+//        /// 查询返回（单个）
 //        /// </summary>
 //        /// <typeparam name="T">文档类型</typeparam>
 //        /// <param name="id">文档默认ID</param>
@@ -21,7 +21,7 @@
 //            return Database.GetCollection<T>(typeof(T).Name, settings).Find(f => f.Id == id, options).FirstOrDefault();
 //        }
 //        /// <summary>
-//        /// 查询返回单条
+//        /// 查询返回（单个）
 //        /// </summary>
 //        /// <typeparam name="T">文档类型</typeparam>
 //        /// <param name="session">会话句柄(作用于事务)</param>
@@ -34,7 +34,7 @@
 //            return Database.GetCollection<T>(typeof(T).Name, settings).Find(session, f => f.Id == id, options).FirstOrDefault();
 //        }
 //        /// <summary>
-//        /// 查询返回单条
+//        /// 查询返回（单个）
 //        /// </summary>
 //        /// <typeparam name="T">文档类型</typeparam>
 //        /// <param name="collectionName">集合名称</param>
@@ -47,7 +47,7 @@
 //            return Database.GetCollection<T>(collectionName, settings).Find(f => f.Id == id, options).FirstOrDefault();
 //        }
 //        /// <summary>
-//        /// 查询返回单条
+//        /// 查询返回（单个）
 //        /// </summary>
 //        /// <typeparam name="T">文档类型</typeparam>
 //        /// <param name="collectionName">集合名称</param>
@@ -61,7 +61,7 @@
 //            return Database.GetCollection<T>(collectionName, settings).Find(session, f => f.Id == id, options).FirstOrDefault();
 //        }
 //        /// <summary>
-//        /// 查询返回单条
+//        /// 查询返回（单个）
 //        /// </summary>
 //        /// <typeparam name="T">文档类型</typeparam>
 //        /// <param name="filter">过滤器</param>
@@ -73,7 +73,7 @@
 //            return Database.GetCollection<T>(typeof(T).Name, settings).Find(filter, options).FirstOrDefault();
 //        }
 //        /// <summary>
-//        /// 查询返回单条
+//        /// 查询返回（单个）
 //        /// </summary>
 //        /// <typeparam name="T">文档类型</typeparam>
 //        /// <param name="filter">过滤器</param>
@@ -85,7 +85,7 @@
 //            return Database.GetCollection<T>(typeof(T).Name, settings).Find(session, filter, options).FirstOrDefault();
 //        }
 //        /// <summary>
-//        /// 查询返回单条
+//        /// 查询返回（单个）
 //        /// </summary>
 //        /// <typeparam name="T">文档类型</typeparam>
 //        /// <param name="collectionName">集合名称</param>
@@ -98,7 +98,7 @@
 //            return Database.GetCollection<T>(collectionName, settings).Find(filter, options).FirstOrDefault();
 //        }
 //        /// <summary>
-//        /// 查询返回单条
+//        /// 查询返回（单个）
 //        /// </summary>
 //        /// <typeparam name="T">文档类型</typeparam>
 //        /// <param name="collectionName">集合名称</param>
@@ -112,7 +112,7 @@
 //            return Database.GetCollection<T>(collectionName, settings).Find(session, filter, options).FirstOrDefault();
 //        }
 //        /// <summary>
-//        /// 查询返回单条
+//        /// 查询返回（单个）
 //        /// </summary>
 //        /// <typeparam name="T">文档类型</typeparam>
 //        /// <param name="filter">Lambda过滤器</param>
@@ -124,7 +124,7 @@
 //            return Database.GetCollection<T>(typeof(T).Name, settings).Find(filter, options).FirstOrDefault();
 //        }
 //        /// <summary>
-//        /// 查询返回单条
+//        /// 查询返回（单个）
 //        /// </summary>
 //        /// <typeparam name="T">文档类型</typeparam>
 //        /// <param name="session">会话句柄(作用于事务)</param>
@@ -137,7 +137,7 @@
 //            return Database.GetCollection<T>(typeof(T).Name, settings).Find(session, filter, options).FirstOrDefault();
 //        }
 //        /// <summary>
-//        /// 查询返回单条
+//        /// 查询返回（单个）
 //        /// </summary>
 //        /// <typeparam name="T"></typeparam>
 //        /// <param name="collectionName">集合名称</param>
@@ -150,7 +150,7 @@
 //            return Database.GetCollection<T>(collectionName, settings).Find(filter, options).FirstOrDefault();
 //        }
 //        /// <summary>
-//        /// 查询返回单条
+//        /// 查询返回（单个）
 //        /// </summary>
 //        /// <typeparam name="T"></typeparam>
 //        /// <param name="collectionName">集合名称</param>
@@ -164,7 +164,7 @@
 //            return Database.GetCollection<T>(collectionName, settings).Find(session, filter, options).FirstOrDefault();
 //        }
 //        /// <summary>
-//        /// 查询返回单条
+//        /// 查询返回（单个）
 //        /// </summary>
 //        /// <typeparam name="TForeign">文档类型</typeparam>
 //        /// <typeparam name="T">文档类型</typeparam>
@@ -184,7 +184,7 @@
 //            return Database.GetCollection<T>($"{foreignDocument.Id}_{_collectionName}", settings).Find(filter, options).FirstOrDefault();
 //        }
 //        /// <summary>
-//        /// 查询返回单条
+//        /// 查询返回（单个）
 //        /// </summary>
 //        /// <typeparam name="TForeign">文档类型</typeparam>
 //        /// <typeparam name="T">文档类型</typeparam>
@@ -206,7 +206,7 @@
 //            return Database.GetCollection<T>($"{foreignDocument.Id}_{_collectionName}", settings).Find(session, filter, options).FirstOrDefault();
 //        }
 //        /// <summary>
-//        /// 查询返回单条
+//        /// 查询返回（单个）
 //        /// </summary>
 //        /// <typeparam name="TForeign">文档类型</typeparam>
 //        /// <typeparam name="T">文档类型</typeparam>
@@ -226,7 +226,7 @@
 //            return Database.GetCollection<T>($"{foreignDocument.Id}_{_collectionName}", settings).Find(filter, options).FirstOrDefault();
 //        }
 //        /// <summary>
-//        /// 查询返回单条
+//        /// 查询返回（单个）
 //        /// </summary>
 //        /// <typeparam name="TForeign">文档类型</typeparam>
 //        /// <typeparam name="T">文档类型</typeparam>

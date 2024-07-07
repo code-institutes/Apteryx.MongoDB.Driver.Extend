@@ -10,7 +10,7 @@
 //        #region 更新(同步)
 
 //        /// <summary>
-//        /// 更新单条(自动更新UpdateTime字段)
+//        /// 更新（单个）(自动更新UpdateTime字段)
 //        /// </summary>
 //        /// <typeparam name="T">文档类型</typeparam>
 //        /// <param name="id">文档默认ID</param>
@@ -29,7 +29,7 @@
 //                update.Set(s => s.UpdateTime, DateTime.Now), options, cancellationToken);
 //        }
 //        /// <summary>
-//        /// 更新单条(自动更新UpdateTime字段)
+//        /// 更新（单个）(自动更新UpdateTime字段)
 //        /// </summary>
 //        /// <typeparam name="T">文档类型</typeparam>
 //        /// <param name="session">会话句柄(作用于事务)</param>
@@ -50,7 +50,7 @@
 //                update.Set(s => s.UpdateTime, DateTime.Now), options, cancellationToken);
 //        }
 //        /// <summary>
-//        /// 更新单条(自动更新UpdateTime字段)
+//        /// 更新（单个）(自动更新UpdateTime字段)
 //        /// </summary>
 //        /// <typeparam name="T">文档类型</typeparam>
 //        /// <param name="filter">过滤器</param>
@@ -69,7 +69,7 @@
 //                update.Set(s => s.UpdateTime, DateTime.Now), options, cancellationToken);
 //        }
 //        /// <summary>
-//        /// 更新单条(自动更新UpdateTime字段)
+//        /// 更新（单个）(自动更新UpdateTime字段)
 //        /// </summary>
 //        /// <typeparam name="T">文档类型</typeparam>
 //        /// <param name="session">会话句柄(作用于事务)</param>
@@ -90,7 +90,7 @@
 //                update.Set(s => s.UpdateTime, DateTime.Now), options, cancellationToken);
 //        }
 //        /// <summary>
-//        /// 更新单条(自动更新UpdateTime字段)
+//        /// 更新（单个）(自动更新UpdateTime字段)
 //        /// </summary>
 //        /// <typeparam name="T">文档类型</typeparam>
 //        /// <param name="filter">Lambda过滤器</param>
@@ -109,7 +109,7 @@
 //                update.Set(s => s.UpdateTime, DateTime.Now), options, cancellationToken);
 //        }
 //        /// <summary>
-//        /// 更新单条(自动更新UpdateTime字段)
+//        /// 更新（单个）(自动更新UpdateTime字段)
 //        /// </summary>
 //        /// <typeparam name="T">文档类型</typeparam>
 //        /// <param name="session">会话句柄(作用于事务)</param>
@@ -130,7 +130,7 @@
 //                update.Set(s => s.UpdateTime, DateTime.Now), options, cancellationToken);
 //        }
 //        /// <summary>
-//        /// 动态表更新单条(自动更新UpdateTime字段)
+//        /// 动态表更新（单个）(自动更新UpdateTime字段)
 //        /// </summary>
 //        /// <typeparam name="TForeign">文档类型</typeparam>
 //        /// <typeparam name="T">文档类型</typeparam>
@@ -153,7 +153,7 @@
 //                update.Set(s => s.UpdateTime, DateTime.Now), options, cancellationToken);
 //        }
 //        /// <summary>
-//        /// 动态表更新单条(自动更新UpdateTime字段)
+//        /// 动态表更新（单个）(自动更新UpdateTime字段)
 //        /// </summary>
 //        /// <typeparam name="TForeign">文档类型</typeparam>
 //        /// <typeparam name="T">文档类型</typeparam>
@@ -177,7 +177,7 @@
 //                update.Set(s => s.UpdateTime, DateTime.Now), options, cancellationToken);
 //        }
 //        /// <summary>
-//        /// 动态表更新单条(自动更新UpdateTime字段)
+//        /// 动态表更新（单个）(自动更新UpdateTime字段)
 //        /// </summary>
 //        /// <typeparam name="TForeign">文档类型</typeparam>
 //        /// <typeparam name="T">文档类型</typeparam>
@@ -200,7 +200,7 @@
 //                update.Set(s => s.UpdateTime, DateTime.Now), options, cancellationToken);
 //        }
 //        /// <summary>
-//        /// 动态表更新单条(自动更新UpdateTime字段)
+//        /// 动态表更新（单个）(自动更新UpdateTime字段)
 //        /// </summary>
 //        /// <typeparam name="TForeign">文档类型</typeparam>
 //        /// <typeparam name="T">文档类型</typeparam>
@@ -224,7 +224,7 @@
 //                update.Set(s => s.UpdateTime, DateTime.Now), options, cancellationToken);
 //        }
 //        /// <summary>
-//        /// 动态表更新单条(自动更新UpdateTime字段)
+//        /// 动态表更新（单个）(自动更新UpdateTime字段)
 //        /// </summary>
 //        /// <typeparam name="TForeign">文档类型</typeparam>
 //        /// <typeparam name="T">文档类型</typeparam>
@@ -247,7 +247,7 @@
 //                update.Set(s => s.UpdateTime, DateTime.Now), options, cancellationToken);
 //        }
 //        /// <summary>
-//        /// 动态表更新单条(自动更新UpdateTime字段)
+//        /// 动态表更新（单个）(自动更新UpdateTime字段)
 //        /// </summary>
 //        /// <typeparam name="TForeign">文档类型</typeparam>
 //        /// <typeparam name="T">文档类型</typeparam>
@@ -271,7 +271,7 @@
 //                update.Set(s => s.UpdateTime, DateTime.Now), options, cancellationToken);
 //        }
 //        /// <summary>
-//        /// 查询更新单条(自动更新UpdateTime字段)
+//        /// 查询更新（单个）(自动更新UpdateTime字段)
 //        /// </summary>
 //        /// <typeparam name="T">文档类型</typeparam>
 //        /// <param name="id">文档默认ID</param>
@@ -290,7 +290,7 @@
 //                update.Set(s => s.UpdateTime, DateTime.Now), options, cancellationToken);
 //        }
 //        /// <summary>
-//        /// 查询更新单条(自动更新UpdateTime字段)
+//        /// 查询更新（单个）(自动更新UpdateTime字段)
 //        /// </summary>
 //        /// <typeparam name="T">文档类型</typeparam>
 //        /// <param name="session">会话句柄(作用于事务)</param>
@@ -311,7 +311,7 @@
 //                update.Set(s => s.UpdateTime, DateTime.Now), options, cancellationToken);
 //        }
 //        /// <summary>
-//        /// 查询更新单条(自动更新UpdateTime字段)
+//        /// 查询更新（单个）(自动更新UpdateTime字段)
 //        /// </summary>
 //        /// <typeparam name="T">文档类型</typeparam>
 //        /// <param name="filter">过滤器</param>
@@ -330,7 +330,7 @@
 //                update.Set(s => s.UpdateTime, DateTime.Now), options, cancellationToken);
 //        }
 //        /// <summary>
-//        /// 查询更新单条(自动更新UpdateTime字段)
+//        /// 查询更新（单个）(自动更新UpdateTime字段)
 //        /// </summary>
 //        /// <typeparam name="T">文档类型</typeparam>
 //        /// <param name="session">会话句柄(作用于事务)</param>
@@ -351,7 +351,7 @@
 //                update.Set(s => s.UpdateTime, DateTime.Now), options, cancellationToken);
 //        }
 //        /// <summary>
-//        /// 查询更新单条(自动更新UpdateTime字段)
+//        /// 查询更新（单个）(自动更新UpdateTime字段)
 //        /// </summary>
 //        /// <typeparam name="T">文档类型</typeparam>
 //        /// <param name="filter">Lambda过滤器</param>
@@ -370,7 +370,7 @@
 //                update.Set(s => s.UpdateTime, DateTime.Now), options, cancellationToken);
 //        }
 //        /// <summary>
-//        /// 查询更新单条(自动更新UpdateTime字段)
+//        /// 查询更新（单个）(自动更新UpdateTime字段)
 //        /// </summary>
 //        /// <typeparam name="T">文档类型</typeparam>
 //        /// <param name="session">会话句柄(作用于事务)</param>
@@ -391,7 +391,7 @@
 //                update.Set(s => s.UpdateTime, DateTime.Now), options, cancellationToken);
 //        }
 //        /// <summary>
-//        /// 动态表查询更新单条(自动更新UpdateTime字段)
+//        /// 动态表查询更新（单个）(自动更新UpdateTime字段)
 //        /// </summary>
 //        /// <typeparam name="TForeign">文档类型</typeparam>
 //        /// <typeparam name="T">文档类型</typeparam>
@@ -414,7 +414,7 @@
 //                update.Set(s => s.UpdateTime, DateTime.Now), options, cancellationToken);
 //        }
 //        /// <summary>
-//        /// 动态表查询更新单条(自动更新UpdateTime字段)
+//        /// 动态表查询更新（单个）(自动更新UpdateTime字段)
 //        /// </summary>
 //        /// <typeparam name="TForeign">文档类型</typeparam>
 //        /// <typeparam name="T">文档类型</typeparam>
@@ -438,7 +438,7 @@
 //                update.Set(s => s.UpdateTime, DateTime.Now), options, cancellationToken);
 //        }
 //        /// <summary>
-//        /// 动态表查询更新单条(自动更新UpdateTime字段)
+//        /// 动态表查询更新（单个）(自动更新UpdateTime字段)
 //        /// </summary>
 //        /// <typeparam name="TForeign">文档类型</typeparam>
 //        /// <typeparam name="T">文档类型</typeparam>
@@ -461,7 +461,7 @@
 //                update.Set(s => s.UpdateTime, DateTime.Now), options, cancellationToken);
 //        }
 //        /// <summary>
-//        /// 动态表查询更新单条(自动更新UpdateTime字段)
+//        /// 动态表查询更新（单个）(自动更新UpdateTime字段)
 //        /// </summary>
 //        /// <typeparam name="TForeign">文档类型</typeparam>
 //        /// <typeparam name="T">文档类型</typeparam>
@@ -486,7 +486,7 @@
 //                update.Set(s => s.UpdateTime, DateTime.Now), options, cancellationToken);
 //        }
 //        /// <summary>
-//        /// 动态表查询更新单条(自动更新UpdateTime字段)
+//        /// 动态表查询更新（单个）(自动更新UpdateTime字段)
 //        /// </summary>
 //        /// <typeparam name="TForeign">文档类型</typeparam>
 //        /// <typeparam name="T">文档类型</typeparam>
@@ -509,7 +509,7 @@
 //                update.Set(s => s.UpdateTime, DateTime.Now), options, cancellationToken);
 //        }
 //        /// <summary>
-//        /// 动态表查询更新单条(自动更新UpdateTime字段)
+//        /// 动态表查询更新（单个）(自动更新UpdateTime字段)
 //        /// </summary>
 //        /// <typeparam name="TForeign">文档类型</typeparam>
 //        /// <typeparam name="T">文档类型</typeparam>
@@ -534,7 +534,7 @@
 //                update.Set(s => s.UpdateTime, DateTime.Now), options, cancellationToken);
 //        }
 //        /// <summary>
-//        /// 更新多条(自动更新UpdateTime字段)
+//        /// 更新（批量）(自动更新UpdateTime字段)
 //        /// </summary>
 //        /// <typeparam name="T">文档类型</typeparam>
 //        /// <param name="filter">过滤器</param>
@@ -553,7 +553,7 @@
 //                update.Set(s => s.UpdateTime, DateTime.Now), options, cancellationToken);
 //        }
 //        /// <summary>
-//        /// 更新多条(自动更新UpdateTime字段)
+//        /// 更新（批量）(自动更新UpdateTime字段)
 //        /// </summary>
 //        /// <typeparam name="T">文档类型</typeparam>
 //        /// <param name="session">会话句柄(作用于事务)</param>
@@ -574,7 +574,7 @@
 //                update.Set(s => s.UpdateTime, DateTime.Now), options, cancellationToken);
 //        }
 //        /// <summary>
-//        /// 更新多条(自动更新UpdateTime字段)
+//        /// 更新（批量）(自动更新UpdateTime字段)
 //        /// </summary>
 //        /// <typeparam name="T">文档类型</typeparam>
 //        /// <param name="filter">Lambda过滤器</param>
@@ -593,7 +593,7 @@
 //                update.Set(s => s.UpdateTime, DateTime.Now), options, cancellationToken);
 //        }
 //        /// <summary>
-//        /// 更新多条(自动更新UpdateTime字段)
+//        /// 更新（批量）(自动更新UpdateTime字段)
 //        /// </summary>
 //        /// <typeparam name="T">文档类型</typeparam>
 //        /// <param name="session">会话句柄(作用于事务)</param>
@@ -614,7 +614,7 @@
 //                update.Set(s => s.UpdateTime, DateTime.Now), options, cancellationToken);
 //        }
 //        /// <summary>
-//        /// 动态表更新多条(自动更新UpdateTime字段)
+//        /// 动态表更新（批量）(自动更新UpdateTime字段)
 //        /// </summary>
 //        /// <typeparam name="TForeign">文档类型</typeparam>
 //        /// <typeparam name="T">文档类型</typeparam>
@@ -637,7 +637,7 @@
 //                update.Set(s => s.UpdateTime, DateTime.Now), options, cancellationToken);
 //        }
 //        /// <summary>
-//        /// 动态表更新多条(自动更新UpdateTime字段)
+//        /// 动态表更新（批量）(自动更新UpdateTime字段)
 //        /// </summary>
 //        /// <typeparam name="TForeign">文档类型</typeparam>
 //        /// <typeparam name="T">文档类型</typeparam>
@@ -662,7 +662,7 @@
 //                update.Set(s => s.UpdateTime, DateTime.Now), options, cancellationToken);
 //        }
 //        /// <summary>
-//        /// 动态表更新多条(自动更新UpdateTime字段)
+//        /// 动态表更新（批量）(自动更新UpdateTime字段)
 //        /// </summary>
 //        /// <typeparam name="TForeign">文档类型</typeparam>
 //        /// <typeparam name="T">文档类型</typeparam>
@@ -685,7 +685,7 @@
 //                update.Set(s => s.UpdateTime, DateTime.Now), options, cancellationToken);
 //        }
 //        /// <summary>
-//        /// 动态表更新多条(自动更新UpdateTime字段)
+//        /// 动态表更新（批量）(自动更新UpdateTime字段)
 //        /// </summary>
 //        /// <typeparam name="TForeign">文档类型</typeparam>
 //        /// <typeparam name="T">文档类型</typeparam>

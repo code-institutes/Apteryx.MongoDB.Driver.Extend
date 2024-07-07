@@ -9,7 +9,7 @@ namespace Apteryx.MongoDB.Driver.Extend
     {
         #region 查询(同步)
         /// <summary>
-        /// 查询返回单条
+        /// 查询返回（单个）
         /// </summary>        
         /// <param name="id">文档默认ID</param>
         /// <param name="settings">数据库设置</param>
@@ -20,7 +20,7 @@ namespace Apteryx.MongoDB.Driver.Extend
             return _collection.Find(f => f.Id == id, options).FirstOrDefault();
         }
         /// <summary>
-        /// 查询返回单条
+        /// 查询返回（单个）
         /// </summary>        
         /// <param name="session">会话句柄(作用于事务)</param>
         /// <param name="id">文档默认ID</param>
@@ -32,7 +32,7 @@ namespace Apteryx.MongoDB.Driver.Extend
             return _collection.Find(session, f => f.Id == id, options).FirstOrDefault();
         }
         /// <summary>
-        /// 查询返回单条
+        /// 查询返回（单个）
         /// </summary>        
         /// <param name="collectionName">集合名称</param>
         /// <param name="id">文档默认ID</param>
@@ -44,7 +44,7 @@ namespace Apteryx.MongoDB.Driver.Extend
             return _collection.Find(f => f.Id == id, options).FirstOrDefault();
         }
         /// <summary>
-        /// 查询返回单条
+        /// 查询返回（单个）
         /// </summary>        
         /// <param name="collectionName">集合名称</param>
         /// <param name="session">会话句柄(作用于事务)</param>
@@ -57,7 +57,7 @@ namespace Apteryx.MongoDB.Driver.Extend
             return _collection.Find(session, f => f.Id == id, options).FirstOrDefault();
         }
         /// <summary>
-        /// 查询返回单条
+        /// 查询返回（单个）
         /// </summary>
         /// <param name="filter">过滤器</param>
         /// <param name="settings">数据库设置</param>
@@ -68,7 +68,7 @@ namespace Apteryx.MongoDB.Driver.Extend
             return _collection.Find(filter, options).FirstOrDefault();
         }
         /// <summary>
-        /// 查询返回单条
+        /// 查询返回（单个）
         /// </summary>
         /// <param name="filter">过滤器</param>
         /// <param name="settings">数据库设置</param>
@@ -79,7 +79,7 @@ namespace Apteryx.MongoDB.Driver.Extend
             return _collection.Find(session, filter, options).FirstOrDefault();
         }
         /// <summary>
-        /// 查询返回单条
+        /// 查询返回（单个）
         /// </summary>
         /// <param name="collectionName">集合名称</param>
         /// <param name="filter">过滤器</param>
@@ -91,7 +91,7 @@ namespace Apteryx.MongoDB.Driver.Extend
             return _collection.Find(filter, options).FirstOrDefault();
         }
         /// <summary>
-        /// 查询返回单条
+        /// 查询返回（单个）
         /// </summary>
         /// <param name="collectionName">集合名称</param>
         /// <param name="session">会话句柄(作用于事务)</param>
@@ -104,7 +104,7 @@ namespace Apteryx.MongoDB.Driver.Extend
             return _collection.Find(session, filter, options).FirstOrDefault();
         }
         /// <summary>
-        /// 查询返回单条
+        /// 查询返回（单个）
         /// </summary>
         /// <param name="filter">Lambda过滤器</param>
         /// <param name="settings">数据库设置</param>
@@ -115,7 +115,7 @@ namespace Apteryx.MongoDB.Driver.Extend
             return _collection.Find(filter, options).FirstOrDefault();
         }
         /// <summary>
-        /// 查询返回单条
+        /// 查询返回（单个）
         /// </summary>
         /// <param name="session">会话句柄(作用于事务)</param>
         /// <param name="filter">Lambda过滤器</param>
@@ -127,7 +127,7 @@ namespace Apteryx.MongoDB.Driver.Extend
             return _collection.Find(session, filter, options).FirstOrDefault();
         }
         /// <summary>
-        /// 查询返回单条
+        /// 查询返回（单个）
         /// </summary>        
         /// <param name="collectionName">集合名称</param>
         /// <param name="filter">Lambda过滤器</param>
@@ -139,7 +139,7 @@ namespace Apteryx.MongoDB.Driver.Extend
             return _collection.Find(filter, options).FirstOrDefault();
         }
         /// <summary>
-        /// 查询返回单条
+        /// 查询返回（单个）
         /// </summary>        
         /// <param name="collectionName">集合名称</param>
         /// <param name="session">会话句柄(作用于事务)</param>
@@ -152,7 +152,7 @@ namespace Apteryx.MongoDB.Driver.Extend
             return _collection.Find(session, filter, options).FirstOrDefault();
         }
         /// <summary>
-        /// 查询返回单条
+        /// 查询返回（单个）
         /// </summary>
         /// <typeparam name="TForeign">文档类型</typeparam>
         /// <param name="foreignDocument">文档对象</param>
@@ -171,7 +171,7 @@ namespace Apteryx.MongoDB.Driver.Extend
             return _database.GetCollection<T>($"{foreignDocument.Id}_{_collectionName}", settings).Find(filter, options).FirstOrDefault();
         }
         /// <summary>
-        /// 查询返回单条
+        /// 查询返回（单个）
         /// </summary>
         /// <typeparam name="TForeign">文档类型</typeparam>
         /// <param name="session">会话句柄(作用于事务)</param>
@@ -192,7 +192,7 @@ namespace Apteryx.MongoDB.Driver.Extend
             return _database.GetCollection<T>($"{foreignDocument.Id}_{_collectionName}", settings).Find(session, filter, options).FirstOrDefault();
         }
         /// <summary>
-        /// 查询返回单条
+        /// 查询返回（单个）
         /// </summary>
         /// <typeparam name="TForeign">文档类型</typeparam>
         /// <param name="foreignDocument">文档对象</param>
@@ -211,7 +211,7 @@ namespace Apteryx.MongoDB.Driver.Extend
             return _database.GetCollection<T>($"{foreignDocument.Id}_{_collectionName}", settings).Find(filter, options).FirstOrDefault();
         }
         /// <summary>
-        /// 查询返回单条
+        /// 查询返回（单个）
         /// </summary>
         /// <typeparam name="TForeign">文档类型</typeparam>
         /// <param name="foreignDocument">文档对象</param>

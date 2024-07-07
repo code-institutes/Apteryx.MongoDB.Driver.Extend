@@ -51,7 +51,7 @@ namespace Apteryx.MongoDB.Driver.Extend
         }
 
         /// <summary>
-        /// 插入多条
+        /// 插入（批量）
         /// </summary>
         /// <typeparam name="T">文档类型</typeparam>
         /// <param name="collection">集合</param>
@@ -69,7 +69,7 @@ namespace Apteryx.MongoDB.Driver.Extend
         }
 
         /// <summary>
-        /// 插入多条
+        /// 插入（批量）
         /// </summary>
         /// <typeparam name="T">文档类型</typeparam>
         /// <param name="collection">集合</param>

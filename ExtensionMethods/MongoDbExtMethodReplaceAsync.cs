@@ -11,7 +11,7 @@ namespace Apteryx.MongoDB.Driver.Extend
         #region 替换(异步)
 
         /// <summary>
-        /// 替换单条(自动更新UpdateTime字段)
+        /// 替换（单个）(自动更新UpdateTime字段)
         /// </summary>
         /// <typeparam name="T">文档类型</typeparam>
         /// <param name="collection">集合</param>
@@ -32,7 +32,7 @@ namespace Apteryx.MongoDB.Driver.Extend
         }
 
         /// <summary>
-        /// 替换单条(自动更新UpdateTime字段)
+        /// 替换（单个）(自动更新UpdateTime字段)
         /// </summary>
         /// <typeparam name="T">文档类型</typeparam>
         /// <param name="collection">集合</param>
@@ -55,7 +55,7 @@ namespace Apteryx.MongoDB.Driver.Extend
         }
 
         /// <summary>
-        /// 替换单条(自动更新UpdateTime字段)
+        /// 替换（单个）(自动更新UpdateTime字段)
         /// </summary>
         /// <typeparam name="T">文档类型</typeparam>
         /// <param name="collection">集合</param>
@@ -76,7 +76,7 @@ namespace Apteryx.MongoDB.Driver.Extend
         }
 
         /// <summary>
-        /// 替换单条(自动更新UpdateTime字段)
+        /// 替换（单个）(自动更新UpdateTime字段)
         /// </summary>
         /// <typeparam name="T">文档类型</typeparam>
         /// <param name="collection">集合</param>
@@ -99,7 +99,7 @@ namespace Apteryx.MongoDB.Driver.Extend
         }
 
         /// <summary>
-        /// 替换单条(自动更新UpdateTime字段)
+        /// 替换（单个）(自动更新UpdateTime字段)
         /// </summary>
         /// <typeparam name="T">文档类型</typeparam>
         /// <param name="collection">集合</param>
@@ -121,7 +121,7 @@ namespace Apteryx.MongoDB.Driver.Extend
         }
 
         /// <summary>
-        /// 替换单条(自动更新UpdateTime字段)
+        /// 替换（单个）(自动更新UpdateTime字段)
         /// </summary>
         /// <typeparam name="T">文档类型</typeparam>
         /// <param name="collection">集合</param>
@@ -144,7 +144,7 @@ namespace Apteryx.MongoDB.Driver.Extend
         }
 
         /// <summary>
-        /// 查询替换单条(自动更新UpdateTime字段)
+        /// 查询替换（单个）(自动更新UpdateTime字段)
         /// </summary>
         /// <typeparam name="T">文档类型</typeparam>
         /// <param name="collection">集合</param>
@@ -165,7 +165,7 @@ namespace Apteryx.MongoDB.Driver.Extend
         }
 
         /// <summary>
-        /// 查询替换单条(自动更新UpdateTime字段)
+        /// 查询替换（单个）(自动更新UpdateTime字段)
         /// </summary>
         /// <typeparam name="T">文档类型</typeparam>
         /// <param name="collection">集合</param>
@@ -188,7 +188,7 @@ namespace Apteryx.MongoDB.Driver.Extend
         }
 
         /// <summary>
-        /// 查询替换单条(自动更新UpdateTime字段)
+        /// 查询替换（单个）(自动更新UpdateTime字段)
         /// </summary>
         /// <typeparam name="T">文档类型</typeparam>
         /// <param name="collection">集合</param>
@@ -209,7 +209,7 @@ namespace Apteryx.MongoDB.Driver.Extend
         }
 
         /// <summary>
-        /// 查询替换单条(自动更新UpdateTime字段)
+        /// 查询替换（单个）(自动更新UpdateTime字段)
         /// </summary>
         /// <typeparam name="T">文档类型</typeparam>
         /// <param name="collection">集合</param>
@@ -232,7 +232,7 @@ namespace Apteryx.MongoDB.Driver.Extend
         }
 
         /// <summary>
-        /// 查询替换单条(自动更新UpdateTime字段)
+        /// 查询替换（单个）(自动更新UpdateTime字段)
         /// </summary>
         /// <typeparam name="T">文档类型</typeparam>
         /// <param name="collection">集合</param>
@@ -253,7 +253,7 @@ namespace Apteryx.MongoDB.Driver.Extend
         }
 
         /// <summary>
-        /// 查询替换单条(自动更新UpdateTime字段)
+        /// 查询替换（单个）(自动更新UpdateTime字段)
         /// </summary>
         /// <typeparam name="T">文档类型</typeparam>
         /// <param name="collection">集合</param>

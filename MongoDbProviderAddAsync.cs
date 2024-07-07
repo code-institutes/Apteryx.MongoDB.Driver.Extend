@@ -10,7 +10,7 @@
 //        #region 异步方法
 
 //        /// <summary>
-//        /// 插入单条
+//        /// 插入（单个）
 //        /// </summary>
 //        /// <typeparam name="T">文档类型</typeparam>
 //        /// <param name="document">文档对象</param>
@@ -22,7 +22,7 @@
 //        }
 
 //        /// <summary>
-//        /// 插入单条
+//        /// 插入（单个）
 //        /// </summary>
 //        /// <typeparam name="T">文档类型</typeparam>
 //        /// <param name="session">会话句柄(作用于事务)</param>
@@ -35,7 +35,7 @@
 //        }
 
 //        /// <summary>
-//        /// 插入多条
+//        /// 插入（批量）
 //        /// </summary>
 //        /// <typeparam name="T">文档类型</typeparam>
 //        /// <param name="documents">文档对象</param>
@@ -47,7 +47,7 @@
 //        }
 
 //        /// <summary>
-//        /// 插入多条
+//        /// 插入（批量）
 //        /// </summary>
 //        /// <typeparam name="T">文档类型</typeparam>
 //        /// <param name="session">会话句柄(作用于事务)</param>

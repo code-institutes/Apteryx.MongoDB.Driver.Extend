@@ -15,7 +15,7 @@ namespace Apteryx.MongoDB.Driver.Extend
         #region 查询(同步)
 
         /// <summary>
-        /// 查询返回单条
+        /// 查询返回（单个）
         /// </summary>
         /// <typeparam name="T">集合类型</typeparam>
         /// <param name="collection">集合</param>
@@ -29,7 +29,7 @@ namespace Apteryx.MongoDB.Driver.Extend
         }
 
         /// <summary>
-        /// 查询返回单条
+        /// 查询返回（单个）
         /// </summary>
         /// <typeparam name="T">集合类型</typeparam>
         /// <param name="collection">集合</param>
@@ -43,7 +43,7 @@ namespace Apteryx.MongoDB.Driver.Extend
         }
 
         /// <summary>
-        /// 查询返回单条
+        /// 查询返回（单个）
         /// </summary>
         /// <typeparam name="T">集合类型</typeparam>
         /// <param name="collection">集合</param>
@@ -57,7 +57,7 @@ namespace Apteryx.MongoDB.Driver.Extend
         }
 
         /// <summary>
-        /// 查询返回单条
+        /// 查询返回（单个）
         /// </summary>
         /// <typeparam name="T">集合类型</typeparam>
         /// <param name="collection">集合</param>
@@ -72,7 +72,7 @@ namespace Apteryx.MongoDB.Driver.Extend
         }
 
         /// <summary>
-        /// 查询返回单条
+        /// 查询返回（单个）
         /// </summary>
         /// <typeparam name="T">集合类型</typeparam>
         /// <param name="collection">集合</param>
@@ -86,7 +86,7 @@ namespace Apteryx.MongoDB.Driver.Extend
         }
 
         /// <summary>
-        /// 查询返回单条
+        /// 查询返回（单个）
         /// </summary>
         /// <typeparam name="T">集合类型</typeparam>
         /// <param name="collection">集合</param>
@@ -101,7 +101,7 @@ namespace Apteryx.MongoDB.Driver.Extend
         }
 
         /// <summary>
-        /// 查询返回单条
+        /// 查询返回（单个）
         /// </summary>
         /// <typeparam name="T">集合类型</typeparam>
         /// <param name="collection">集合</param>
@@ -115,7 +115,7 @@ namespace Apteryx.MongoDB.Driver.Extend
         }
 
         /// <summary>
-        /// 查询返回单条
+        /// 查询返回（单个）
         /// </summary>
         /// <typeparam name="T">集合类型</typeparam>
         /// <param name="collection">集合</param>
@@ -130,7 +130,7 @@ namespace Apteryx.MongoDB.Driver.Extend
         }
 
         /// <summary>
-        /// 查询返回单条
+        /// 查询返回（单个）
         /// </summary>
         /// <typeparam name="T">集合类型</typeparam>
         /// <param name="collection">集合</param>
@@ -144,7 +144,7 @@ namespace Apteryx.MongoDB.Driver.Extend
         }
 
         /// <summary>
-        /// 查询返回单条
+        /// 查询返回（单个）
         /// </summary>
         /// <typeparam name="T">集合类型</typeparam>
         /// <param name="collection">集合</param>

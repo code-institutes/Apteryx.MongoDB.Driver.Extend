@@ -10,7 +10,7 @@
 //        #region 替换(同步)
 
 //        /// <summary>
-//        /// 替换单条(自动更新UpdateTime字段)
+//        /// 替换（单个）(自动更新UpdateTime字段)
 //        /// </summary>
 //        /// <typeparam name="T">文档类型</typeparam>
 //        /// <param name="id">文档默认ID</param>
@@ -28,7 +28,7 @@
 //            return Database.GetCollection<T>(typeof(T).Name).ReplaceOne(r=>r.Id == id, document, options, cancellationToken);
 //        }
 //        /// <summary>
-//        /// 替换单条(自动更新UpdateTime字段)
+//        /// 替换（单个）(自动更新UpdateTime字段)
 //        /// </summary>
 //        /// <typeparam name="T">文档类型</typeparam>
 //        /// <param name="session">会话句柄(作用于事务)</param>
@@ -48,7 +48,7 @@
 //            return Database.GetCollection<T>(typeof(T).Name).ReplaceOne(session, r => r.Id == id, document, options, cancellationToken);
 //        }
 //        /// <summary>
-//        /// 替换单条(自动更新UpdateTime字段)
+//        /// 替换（单个）(自动更新UpdateTime字段)
 //        /// </summary>
 //        /// <typeparam name="T">文档类型</typeparam>
 //        /// <param name="filter">过滤器</param>
@@ -66,7 +66,7 @@
 //            return Database.GetCollection<T>(typeof(T).Name).ReplaceOne(filter, document, options, cancellationToken);
 //        }
 //        /// <summary>
-//        /// 替换单条(自动更新UpdateTime字段)
+//        /// 替换（单个）(自动更新UpdateTime字段)
 //        /// </summary>
 //        /// <typeparam name="T">文档类型</typeparam>
 //        /// <param name="session">会话句柄(作用于事务)</param>
@@ -86,7 +86,7 @@
 //            return Database.GetCollection<T>(typeof(T).Name).ReplaceOne(session, filter, document, options, cancellationToken);
 //        }
 //        /// <summary>
-//        /// 替换单条(自动更新UpdateTime字段)
+//        /// 替换（单个）(自动更新UpdateTime字段)
 //        /// </summary>
 //        /// <typeparam name="T">文档类型</typeparam>
 //        /// <param name="filter">Lambda过滤器</param>
@@ -106,7 +106,7 @@
 //        }
 
 //        /// <summary>
-//        /// 替换单条(自动更新UpdateTime字段)
+//        /// 替换（单个）(自动更新UpdateTime字段)
 //        /// </summary>
 //        /// <typeparam name="T">文档类型</typeparam>
 //        /// <param name="session">会话句柄(作用于事务)</param>
@@ -127,7 +127,7 @@
 //            return Database.GetCollection<T>(typeof(T).Name).ReplaceOne(session, filter, document, options, cancellationToken);
 //        }
 //        /// <summary>
-//        /// 动态表替换单条(自动更新UpdateTime字段)
+//        /// 动态表替换（单个）(自动更新UpdateTime字段)
 //        /// </summary>
 //        /// <typeparam name="TForeign">文档类型</typeparam>
 //        /// <typeparam name="T">文档类型</typeparam>
@@ -151,7 +151,7 @@
 //                .ReplaceOne(filter, document, options, cancellationToken);
 //        }
 //        /// <summary>
-//        /// 动态表替换单条(自动更新UpdateTime字段)
+//        /// 动态表替换（单个）(自动更新UpdateTime字段)
 //        /// </summary>
 //        /// <typeparam name="TForeign">文档类型</typeparam>
 //        /// <typeparam name="T">文档类型</typeparam>
@@ -177,7 +177,7 @@
 //                .ReplaceOne(session, filter, document, options, cancellationToken);
 //        }
 //        /// <summary>
-//        /// 动态表替换单条(自动更新UpdateTime字段)
+//        /// 动态表替换（单个）(自动更新UpdateTime字段)
 //        /// </summary>
 //        /// <typeparam name="TForeign">文档类型</typeparam>
 //        /// <typeparam name="T">文档类型</typeparam>
@@ -201,7 +201,7 @@
 //                .ReplaceOne(filter, document, options, cancellationToken);
 //        }
 //        /// <summary>
-//        /// 动态表替换单条(自动更新UpdateTime字段)
+//        /// 动态表替换（单个）(自动更新UpdateTime字段)
 //        /// </summary>
 //        /// <typeparam name="TForeign">文档类型</typeparam>
 //        /// <typeparam name="T">文档类型</typeparam>
@@ -227,7 +227,7 @@
 //                .ReplaceOne(session, filter, document, options, cancellationToken);
 //        }
 //        /// <summary>
-//        /// 查询替换单条(自动更新UpdateTime字段)
+//        /// 查询替换（单个）(自动更新UpdateTime字段)
 //        /// </summary>
 //        /// <typeparam name="T">文档类型</typeparam>
 //        /// <param name="id">文档默认ID</param>
@@ -246,7 +246,7 @@
 //            return Database.GetCollection<T>(typeof(T).Name).FindOneAndReplace<T>(r=>r.Id == id, document, options, cancellationToken);
 //        }
 //        /// <summary>
-//        /// 查询替换单条(自动更新UpdateTime字段)
+//        /// 查询替换（单个）(自动更新UpdateTime字段)
 //        /// </summary>
 //        /// <typeparam name="T">文档类型</typeparam>
 //        /// <param name="session">会话句柄(作用于事务)</param>
@@ -267,7 +267,7 @@
 //            return Database.GetCollection<T>(typeof(T).Name).FindOneAndReplace<T>(session, r=>r.Id == id, document, options, cancellationToken);
 //        }
 //        /// <summary>
-//        /// 查询替换单条(自动更新UpdateTime字段)
+//        /// 查询替换（单个）(自动更新UpdateTime字段)
 //        /// </summary>
 //        /// <typeparam name="T">文档类型</typeparam>
 //        /// <param name="filter">过滤器</param>
@@ -286,7 +286,7 @@
 //            return Database.GetCollection<T>(typeof(T).Name).FindOneAndReplace(filter, document, options, cancellationToken);
 //        }
 //        /// <summary>
-//        /// 查询替换单条(自动更新UpdateTime字段)
+//        /// 查询替换（单个）(自动更新UpdateTime字段)
 //        /// </summary>
 //        /// <typeparam name="T">文档类型</typeparam>
 //        /// <param name="session">会话句柄(作用于事务)</param>
@@ -307,7 +307,7 @@
 //            return Database.GetCollection<T>(typeof(T).Name).FindOneAndReplace(session, filter, document, options, cancellationToken);
 //        }
 //        /// <summary>
-//        /// 查询替换单条(自动更新UpdateTime字段)
+//        /// 查询替换（单个）(自动更新UpdateTime字段)
 //        /// </summary>
 //        /// <typeparam name="T">文档类型</typeparam>
 //        /// <param name="filter">Lambda过滤器</param>
@@ -326,7 +326,7 @@
 //            return Database.GetCollection<T>(typeof(T).Name).FindOneAndReplace(filter, document, options, cancellationToken);
 //        }
 //        /// <summary>
-//        /// 查询替换单条(自动更新UpdateTime字段)
+//        /// 查询替换（单个）(自动更新UpdateTime字段)
 //        /// </summary>
 //        /// <typeparam name="T">文档类型</typeparam>
 //        /// <param name="session">会话句柄(作用于事务)</param>
@@ -347,7 +347,7 @@
 //            return Database.GetCollection<T>(typeof(T).Name).FindOneAndReplace(session, filter, document, options, cancellationToken);
 //        }
 //        /// <summary>
-//        /// 动态表查询替换单条(自动更新UpdateTime字段)
+//        /// 动态表查询替换（单个）(自动更新UpdateTime字段)
 //        /// </summary>
 //        /// <typeparam name="TForeign">文档类型</typeparam>
 //        /// <typeparam name="T">文档类型</typeparam>
@@ -369,7 +369,7 @@
 //            return Database.GetCollection<T>($"{foreignDocument.Id}_{_collectionName}").FindOneAndReplace<T>(r=>r.Id == id, document, options, cancellationToken);
 //        }
 //        /// <summary>
-//        /// 动态表查询替换单条(自动更新UpdateTime字段)
+//        /// 动态表查询替换（单个）(自动更新UpdateTime字段)
 //        /// </summary>
 //        /// <typeparam name="TForeign">文档类型</typeparam>
 //        /// <typeparam name="T">文档类型</typeparam>
@@ -394,7 +394,7 @@
 //            return Database.GetCollection<T>($"{foreignDocument.Id}_{_collectionName}").FindOneAndReplace<T>(session, r=>r.Id == id, document, options, cancellationToken);
 //        }
 //        /// <summary>
-//        /// 动态表查询替换单条(自动更新UpdateTime字段)
+//        /// 动态表查询替换（单个）(自动更新UpdateTime字段)
 //        /// </summary>
 //        /// <typeparam name="TForeign">文档类型</typeparam>
 //        /// <typeparam name="T">文档类型</typeparam>
@@ -414,7 +414,7 @@
 //            return Database.GetCollection<T>($"{foreignDocument.Id}_{_collectionName}").FindOneAndReplace(filter, document, options, cancellationToken);
 //        }
 //        /// <summary>
-//        /// 动态表查询替换单条(自动更新UpdateTime字段)
+//        /// 动态表查询替换（单个）(自动更新UpdateTime字段)
 //        /// </summary>
 //        /// <typeparam name="TForeign">文档类型</typeparam>
 //        /// <typeparam name="T">文档类型</typeparam>
@@ -439,7 +439,7 @@
 //            return Database.GetCollection<T>($"{foreignDocument.Id}_{_collectionName}").FindOneAndReplace(session,filter, document, options, cancellationToken);
 //        }
 //        /// <summary>
-//        /// 动态表查询替换单条(自动更新UpdateTime字段)
+//        /// 动态表查询替换（单个）(自动更新UpdateTime字段)
 //        /// </summary>
 //        /// <typeparam name="TForeign">文档类型</typeparam>
 //        /// <typeparam name="T">文档类型</typeparam>
@@ -462,7 +462,7 @@
 //            return Database.GetCollection<T>($"{foreignDocument.Id}_{_collectionName}").FindOneAndReplace(filter, document, options, cancellationToken);
 //        }
 //        /// <summary>
-//        /// 动态表查询替换单条(自动更新UpdateTime字段)
+//        /// 动态表查询替换（单个）(自动更新UpdateTime字段)
 //        /// </summary>
 //        /// <typeparam name="TForeign">文档类型</typeparam>
 //        /// <typeparam name="T">文档类型</typeparam>

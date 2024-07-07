@@ -12,7 +12,7 @@
 //        #region 更新(异步)
 
 //        /// <summary>
-//        /// 更新单条(自动更新UpdateTime字段)
+//        /// 更新（单个）(自动更新UpdateTime字段)
 //        /// </summary>
 //        /// <typeparam name="T">文档类型</typeparam>
 //        /// <param name="id">文档默认ID</param>
@@ -30,7 +30,7 @@
 //            return Task.Run(() => WhereUpdateOne(id, update, options, cancellationToken));
 //        }
 //        /// <summary>
-//        /// 更新单条(自动更新UpdateTime字段)
+//        /// 更新（单个）(自动更新UpdateTime字段)
 //        /// </summary>
 //        /// <typeparam name="T">文档类型</typeparam>
 //        /// <param name="session">会话句柄(作用于事务)</param>
@@ -50,7 +50,7 @@
 //            return Task.Run(() => WhereUpdateOne(session, id, update, options, cancellationToken));
 //        }
 //        /// <summary>
-//        /// 更新单条(自动更新UpdateTime字段)
+//        /// 更新（单个）(自动更新UpdateTime字段)
 //        /// </summary>
 //        /// <typeparam name="T">文档类型</typeparam>
 //        /// <param name="filter">过滤器</param>
@@ -68,7 +68,7 @@
 //            return Task.Run(() => WhereUpdateOne(filter, update, options, cancellationToken));
 //        }
 //        /// <summary>
-//        /// 更新单条(自动更新UpdateTime字段)
+//        /// 更新（单个）(自动更新UpdateTime字段)
 //        /// </summary>
 //        /// <typeparam name="T">文档类型</typeparam>
 //        /// <param name="session">会话句柄(作用于事务)</param>
@@ -88,7 +88,7 @@
 //            return Task.Run(() => WhereUpdateOne(session, filter, update, options, cancellationToken));
 //        }
 //        /// <summary>
-//        /// 更新单条(自动更新UpdateTime字段)
+//        /// 更新（单个）(自动更新UpdateTime字段)
 //        /// </summary>
 //        /// <typeparam name="T">文档类型</typeparam>
 //        /// <param name="filter">Lambda过滤器</param>
@@ -106,7 +106,7 @@
 //            return Task.Run(() => WhereUpdateOne(filter, update, options, cancellationToken));
 //        }
 //        /// <summary>
-//        /// 更新单条(自动更新UpdateTime字段)
+//        /// 更新（单个）(自动更新UpdateTime字段)
 //        /// </summary>
 //        /// <typeparam name="T">文档类型</typeparam>
 //        /// <param name="session">会话句柄(作用于事务)</param>
@@ -126,7 +126,7 @@
 //            return Task.Run(() => WhereUpdateOne(session, filter, update, options, cancellationToken));
 //        }
 //        /// <summary>
-//        /// 动态表更新单条(自动更新UpdateTime字段)
+//        /// 动态表更新（单个）(自动更新UpdateTime字段)
 //        /// </summary>
 //        /// <typeparam name="TForeign">文档类型</typeparam>
 //        /// <typeparam name="T">文档类型</typeparam>
@@ -148,7 +148,7 @@
 //            return Task.Run(() => DynamicCollectionWhereUpdateOne(foreignDocument, u => u.Id == id, update, options, cancellationToken));
 //        }
 //        /// <summary>
-//        /// 动态表更新单条(自动更新UpdateTime字段)
+//        /// 动态表更新（单个）(自动更新UpdateTime字段)
 //        /// </summary>
 //        /// <typeparam name="TForeign">文档类型</typeparam>
 //        /// <typeparam name="T">文档类型</typeparam>
@@ -171,7 +171,7 @@
 //            return Task.Run(() => DynamicCollectionWhereUpdateOne(seesion, foreignDocument, u => u.Id == id, update, options, cancellationToken));
 //        }
 //        /// <summary>
-//        /// 动态表更新单条(自动更新UpdateTime字段)
+//        /// 动态表更新（单个）(自动更新UpdateTime字段)
 //        /// </summary>
 //        /// <typeparam name="TForeign">文档类型</typeparam>
 //        /// <typeparam name="T">文档类型</typeparam>
@@ -193,7 +193,7 @@
 //            return Task.Run(() => DynamicCollectionWhereUpdateOne(foreignDocument, filter, update, options, cancellationToken));
 //        }
 //        /// <summary>
-//        /// 动态表更新单条(自动更新UpdateTime字段)
+//        /// 动态表更新（单个）(自动更新UpdateTime字段)
 //        /// </summary>
 //        /// <typeparam name="TForeign">文档类型</typeparam>
 //        /// <typeparam name="T">文档类型</typeparam>
@@ -217,7 +217,7 @@
 //            return Task.Run(() => DynamicCollectionWhereUpdateOne(seesion, foreignDocument, filter, update, options, cancellationToken));
 //        }
 //        /// <summary>
-//        /// 动态表更新单条(自动更新UpdateTime字段)
+//        /// 动态表更新（单个）(自动更新UpdateTime字段)
 //        /// </summary>
 //        /// <typeparam name="TForeign">文档类型</typeparam>
 //        /// <typeparam name="T">文档类型</typeparam>
@@ -239,7 +239,7 @@
 //            return Task.Run(() => DynamicCollectionWhereUpdateOne(foreignDocument, filter, update, options, cancellationToken));
 //        }
 //        /// <summary>
-//        /// 动态表更新单条(自动更新UpdateTime字段)
+//        /// 动态表更新（单个）(自动更新UpdateTime字段)
 //        /// </summary>
 //        /// <typeparam name="TForeign">文档类型</typeparam>
 //        /// <typeparam name="T">文档类型</typeparam>
@@ -263,7 +263,7 @@
 //            return Task.Run(() => DynamicCollectionWhereUpdateOne(session, foreignDocument, filter, update, options, cancellationToken));
 //        }
 //        /// <summary>
-//        /// 查询更新单条(自动更新UpdateTime字段)
+//        /// 查询更新（单个）(自动更新UpdateTime字段)
 //        /// </summary>
 //        /// <typeparam name="T">文档类型</typeparam>
 //        /// <param name="id">文档默认ID</param>
@@ -281,7 +281,7 @@
 //            return Task.Run(() => FindOneAndUpdateOne(id, update, options, cancellationToken));
 //        }
 //        /// <summary>
-//        /// 查询更新单条(自动更新UpdateTime字段)
+//        /// 查询更新（单个）(自动更新UpdateTime字段)
 //        /// </summary>
 //        /// <typeparam name="T">文档类型</typeparam>
 //        /// <param name="session">会话句柄(作用于事务)</param>
@@ -301,7 +301,7 @@
 //            return Task.Run(() => FindOneAndUpdateOne(session, id, update, options, cancellationToken));
 //        }
 //        /// <summary>
-//        /// 查询更新单条(自动更新UpdateTime字段)
+//        /// 查询更新（单个）(自动更新UpdateTime字段)
 //        /// </summary>
 //        /// <typeparam name="T">文档类型</typeparam>
 //        /// <param name="filter">过滤器</param>
@@ -319,7 +319,7 @@
 //            return Task.Run(() => FindOneAndUpdateOne(filter, update, options, cancellationToken));
 //        }
 //        /// <summary>
-//        /// 查询更新单条(自动更新UpdateTime字段)
+//        /// 查询更新（单个）(自动更新UpdateTime字段)
 //        /// </summary>
 //        /// <typeparam name="T">文档类型</typeparam>
 //        /// <param name="session">会话句柄(作用于事务)</param>
@@ -339,7 +339,7 @@
 //            return Task.Run(() => FindOneAndUpdateOne(session, filter, update, options, cancellationToken));
 //        }
 //        /// <summary>
-//        /// 查询更新单条(自动更新UpdateTime字段)
+//        /// 查询更新（单个）(自动更新UpdateTime字段)
 //        /// </summary>
 //        /// <typeparam name="T">文档类型</typeparam>
 //        /// <param name="filter">Lambda过滤器</param>
@@ -357,7 +357,7 @@
 //            return Task.Run(() => FindOneAndUpdateOne(filter, update, options, cancellationToken));
 //        }
 //        /// <summary>
-//        /// 查询更新单条(自动更新UpdateTime字段)
+//        /// 查询更新（单个）(自动更新UpdateTime字段)
 //        /// </summary>
 //        /// <typeparam name="T">文档类型</typeparam>
 //        /// <param name="session">会话句柄(作用于事务)</param>
@@ -377,7 +377,7 @@
 //            return Task.Run(() => FindOneAndUpdateOne(session, filter, update, options, cancellationToken));
 //        }
 //        /// <summary>
-//        /// 动态表查询更新单条(自动更新UpdateTime字段)
+//        /// 动态表查询更新（单个）(自动更新UpdateTime字段)
 //        /// </summary>
 //        /// <typeparam name="TForeign">文档类型</typeparam>
 //        /// <typeparam name="T">文档类型</typeparam>
@@ -399,7 +399,7 @@
 //            return Task.Run(() => DynamicCollectionFindOneAndUpdateOne(foreignDocument, filter, update, options, cancellationToken));
 //        }
 //        /// <summary>
-//        /// 动态表查询更新单条(自动更新UpdateTime字段)
+//        /// 动态表查询更新（单个）(自动更新UpdateTime字段)
 //        /// </summary>
 //        /// <typeparam name="TForeign">文档类型</typeparam>
 //        /// <typeparam name="T">文档类型</typeparam>
@@ -423,7 +423,7 @@
 //            return Task.Run(() => DynamicCollectionFindOneAndUpdateOne(session, foreignDocument, filter, update, options, cancellationToken));
 //        }
 //        /// <summary>
-//        /// 动态表查询更新单条(自动更新UpdateTime字段)
+//        /// 动态表查询更新（单个）(自动更新UpdateTime字段)
 //        /// </summary>
 //        /// <typeparam name="TForeign">文档类型</typeparam>
 //        /// <typeparam name="T">文档类型</typeparam>
@@ -445,7 +445,7 @@
 //            return Task.Run(() => DynamicCollectionFindOneAndUpdateOne(foreignDocument, filter, update, options, cancellationToken));
 //        }
 //        /// <summary>
-//        /// 动态表查询更新单条(自动更新UpdateTime字段)
+//        /// 动态表查询更新（单个）(自动更新UpdateTime字段)
 //        /// </summary>
 //        /// <typeparam name="TForeign">文档类型</typeparam>
 //        /// <typeparam name="T">文档类型</typeparam>
@@ -469,7 +469,7 @@
 //            return Task.Run(() => DynamicCollectionFindOneAndUpdateOne(session, foreignDocument, filter, update, options, cancellationToken));
 //        }
 //        /// <summary>
-//        /// 更新多条(自动更新UpdateTime字段)
+//        /// 更新（批量）(自动更新UpdateTime字段)
 //        /// </summary>
 //        /// <typeparam name="T">文档类型</typeparam>
 //        /// <param name="filter">过滤器</param>
@@ -487,7 +487,7 @@
 //            return Task.Run(() => WhereUpdateMany(filter, update, options, cancellationToken));
 //        }
 //        /// <summary>
-//        /// 更新多条(自动更新UpdateTime字段)
+//        /// 更新（批量）(自动更新UpdateTime字段)
 //        /// </summary>
 //        /// <typeparam name="T">文档类型</typeparam>
 //        /// <param name="filter">过滤器</param>
@@ -506,7 +506,7 @@
 //            return Task.Run(() => WhereUpdateMany(session, filter, update, options, cancellationToken));
 //        }
 //        /// <summary>
-//        /// 更新多条(自动更新UpdateTime字段)
+//        /// 更新（批量）(自动更新UpdateTime字段)
 //        /// </summary>
 //        /// <typeparam name="T">文档类型</typeparam>
 //        /// <param name="filter">Lambda过滤器</param>
@@ -524,7 +524,7 @@
 //            return Task.Run(() => WhereUpdateMany(filter, update, options, cancellationToken));
 //        }
 //        /// <summary>
-//        /// 更新多条(自动更新UpdateTime字段)
+//        /// 更新（批量）(自动更新UpdateTime字段)
 //        /// </summary>
 //        /// <typeparam name="T">文档类型</typeparam>
 //        /// <param name="session">会话句柄(作用于事务)</param>
@@ -544,7 +544,7 @@
 //            return Task.Run(() => WhereUpdateMany(session,filter, update, options, cancellationToken));
 //        }
 //        /// <summary>
-//        /// 动态表更新多条(自动更新UpdateTime字段)
+//        /// 动态表更新（批量）(自动更新UpdateTime字段)
 //        /// </summary>
 //        /// <typeparam name="TForeign">文档类型</typeparam>
 //        /// <typeparam name="T">文档类型</typeparam>
@@ -566,7 +566,7 @@
 //            return Task.Run(() => DynamicCollectionWhereUpdateMany(foreignDocument, filter, update, options, cancellationToken));
 //        }
 //        /// <summary>
-//        /// 动态表更新多条(自动更新UpdateTime字段)
+//        /// 动态表更新（批量）(自动更新UpdateTime字段)
 //        /// </summary>
 //        /// <typeparam name="TForeign">文档类型</typeparam>
 //        /// <typeparam name="T">文档类型</typeparam>
@@ -590,7 +590,7 @@
 //            return Task.Run(() => DynamicCollectionWhereUpdateMany(session,foreignDocument, filter, update, options, cancellationToken));
 //        }
 //        /// <summary>
-//        /// 动态表更新多条(自动更新UpdateTime字段)
+//        /// 动态表更新（批量）(自动更新UpdateTime字段)
 //        /// </summary>
 //        /// <typeparam name="TForeign">文档类型</typeparam>
 //        /// <typeparam name="T">文档类型</typeparam>
@@ -612,7 +612,7 @@
 //            return Task.Run(() => DynamicCollectionWhereUpdateMany(foreignDocument, filter, update, options, cancellationToken));
 //        }
 //        /// <summary>
-//        /// 动态表更新多条(自动更新UpdateTime字段)
+//        /// 动态表更新（批量）(自动更新UpdateTime字段)
 //        /// </summary>
 //        /// <typeparam name="TForeign">文档类型</typeparam>
 //        /// <typeparam name="T">文档类型</typeparam>

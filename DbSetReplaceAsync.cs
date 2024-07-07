@@ -11,7 +11,7 @@ namespace Apteryx.MongoDB.Driver.Extend
         #region 替换(异步)
 
         /// <summary>
-        /// 替换单条(自动更新UpdateTime字段)
+        /// 替换（单个）(自动更新UpdateTime字段)
         /// </summary>        
         /// <param name="id">文档默认ID</param>
         /// <param name="document">文档对象</param>
@@ -28,7 +28,7 @@ namespace Apteryx.MongoDB.Driver.Extend
         }
 
         /// <summary>
-        /// 替换单条(自动更新UpdateTime字段)
+        /// 替换（单个）(自动更新UpdateTime字段)
         /// </summary>        
         /// <param name="session">会话句柄(作用于事务)</param>
         /// <param name="filter">文档默认ID</param>
@@ -47,7 +47,7 @@ namespace Apteryx.MongoDB.Driver.Extend
         }
 
         /// <summary>
-        /// 替换单条(自动更新UpdateTime字段)
+        /// 替换（单个）(自动更新UpdateTime字段)
         /// </summary>        
         /// <param name="filter">过滤器</param>
         /// <param name="document">文档对象</param>
@@ -64,7 +64,7 @@ namespace Apteryx.MongoDB.Driver.Extend
         }
 
         /// <summary>
-        /// 替换单条(自动更新UpdateTime字段)
+        /// 替换（单个）(自动更新UpdateTime字段)
         /// </summary>        
         /// <param name="session">会话句柄(作用于事务)</param>
         /// <param name="filter">过滤器</param>
@@ -83,7 +83,7 @@ namespace Apteryx.MongoDB.Driver.Extend
         }
 
         /// <summary>
-        /// 替换单条(自动更新UpdateTime字段)
+        /// 替换（单个）(自动更新UpdateTime字段)
         /// </summary>        
         /// <param name="filter">Lambda过滤器</param>
         /// <param name="document">文档对象</param>
@@ -100,7 +100,7 @@ namespace Apteryx.MongoDB.Driver.Extend
         }
 
         /// <summary>
-        /// 替换单条(自动更新UpdateTime字段)
+        /// 替换（单个）(自动更新UpdateTime字段)
         /// </summary>        
         /// <param name="session">会话句柄(作用于事务)</param>
         /// <param name="filter">Lambda过滤器</param>
@@ -119,7 +119,7 @@ namespace Apteryx.MongoDB.Driver.Extend
         }
 
         /// <summary>
-        /// 动态表替换单条(自动更新UpdateTime字段)
+        /// 动态表替换（单个）(自动更新UpdateTime字段)
         /// </summary>
         /// <typeparam name="TForeign">文档类型</typeparam>        
         /// <param name="foreignDocument">上级文档对象</param>
@@ -140,7 +140,7 @@ namespace Apteryx.MongoDB.Driver.Extend
         }
 
         /// <summary>
-        /// 动态表替换单条(自动更新UpdateTime字段)
+        /// 动态表替换（单个）(自动更新UpdateTime字段)
         /// </summary>
         /// <typeparam name="TForeign">文档类型</typeparam>        
         /// <param name="session">会话句柄(作用于事务)</param>
@@ -163,7 +163,7 @@ namespace Apteryx.MongoDB.Driver.Extend
         }
 
         /// <summary>
-        /// 动态表替换单条(自动更新UpdateTime字段)
+        /// 动态表替换（单个）(自动更新UpdateTime字段)
         /// </summary>
         /// <typeparam name="TForeign">文档类型</typeparam>        
         /// <param name="foreignDocument">上级文档对象</param>
@@ -184,7 +184,7 @@ namespace Apteryx.MongoDB.Driver.Extend
         }
 
         /// <summary>
-        /// 动态表替换单条(自动更新UpdateTime字段)
+        /// 动态表替换（单个）(自动更新UpdateTime字段)
         /// </summary>
         /// <typeparam name="TForeign">文档类型</typeparam>        
         /// <param name="session">会话句柄(作用于事务)</param>
@@ -207,7 +207,7 @@ namespace Apteryx.MongoDB.Driver.Extend
         }
 
         /// <summary>
-        /// 动态表替换单条(自动更新UpdateTime字段)
+        /// 动态表替换（单个）(自动更新UpdateTime字段)
         /// </summary>
         /// <typeparam name="TForeign">文档类型</typeparam>        
         /// <param name="foreignDocument">上级文档对象</param>
@@ -229,7 +229,7 @@ namespace Apteryx.MongoDB.Driver.Extend
         }
 
         /// <summary>
-        /// 动态表替换单条(自动更新UpdateTime字段)
+        /// 动态表替换（单个）(自动更新UpdateTime字段)
         /// </summary>
         /// <typeparam name="TForeign">文档类型</typeparam>        
         /// <param name="session">会话句柄(作用于事务)</param>
@@ -252,7 +252,7 @@ namespace Apteryx.MongoDB.Driver.Extend
         }
 
         /// <summary>
-        /// 查询替换单条(自动更新UpdateTime字段)
+        /// 查询替换（单个）(自动更新UpdateTime字段)
         /// </summary>        
         /// <param name="id">文档默认ID</param>
         /// <param name="document">文档对象</param>
@@ -269,7 +269,7 @@ namespace Apteryx.MongoDB.Driver.Extend
         }
 
         /// <summary>
-        /// 查询替换单条(自动更新UpdateTime字段)
+        /// 查询替换（单个）(自动更新UpdateTime字段)
         /// </summary>        
         /// <param name="session">会话句柄(作用于事务)</param>
         /// <param name="id">文档默认ID</param>
@@ -288,7 +288,7 @@ namespace Apteryx.MongoDB.Driver.Extend
         }
 
         /// <summary>
-        /// 查询替换单条(自动更新UpdateTime字段)
+        /// 查询替换（单个）(自动更新UpdateTime字段)
         /// </summary>        
         /// <param name="filter">过滤器</param>
         /// <param name="document">文档对象</param>
@@ -305,7 +305,7 @@ namespace Apteryx.MongoDB.Driver.Extend
         }
 
         /// <summary>
-        /// 查询替换单条(自动更新UpdateTime字段)
+        /// 查询替换（单个）(自动更新UpdateTime字段)
         /// </summary>        
         /// <param name="session">会话句柄(作用于事务)</param>
         /// <param name="filter">过滤器</param>
@@ -324,7 +324,7 @@ namespace Apteryx.MongoDB.Driver.Extend
         }
 
         /// <summary>
-        /// 查询替换单条(自动更新UpdateTime字段)
+        /// 查询替换（单个）(自动更新UpdateTime字段)
         /// </summary>        
         /// <param name="filter">Lambda过滤器</param>
         /// <param name="document">文档对象</param>
@@ -341,7 +341,7 @@ namespace Apteryx.MongoDB.Driver.Extend
         }
 
         /// <summary>
-        /// 查询替换单条(自动更新UpdateTime字段)
+        /// 查询替换（单个）(自动更新UpdateTime字段)
         /// </summary>        
         /// <param name="filter">Lambda过滤器</param>
         /// <param name="document">文档对象</param>
@@ -359,7 +359,7 @@ namespace Apteryx.MongoDB.Driver.Extend
         }
 
         /// <summary>
-        /// 动态表查询替换单条(自动更新UpdateTime字段)
+        /// 动态表查询替换（单个）(自动更新UpdateTime字段)
         /// </summary>
         /// <typeparam name="TForeign">文档类型</typeparam>        
         /// <param name="foreignDocument">上级文档对象</param>
@@ -380,7 +380,7 @@ namespace Apteryx.MongoDB.Driver.Extend
         }
 
         /// <summary>
-        /// 动态表查询替换单条(自动更新UpdateTime字段)
+        /// 动态表查询替换（单个）(自动更新UpdateTime字段)
         /// </summary>
         /// <typeparam name="TForeign">文档类型</typeparam>        
         /// <param name="session">会话句柄(作用于事务)</param>
@@ -403,7 +403,7 @@ namespace Apteryx.MongoDB.Driver.Extend
         }
 
         /// <summary>
-        /// 动态表查询替换单条(自动更新UpdateTime字段)
+        /// 动态表查询替换（单个）(自动更新UpdateTime字段)
         /// </summary>
         /// <typeparam name="TForeign">文档类型</typeparam>        
         /// <param name="foreignDocument">上级文档对象</param>
@@ -424,7 +424,7 @@ namespace Apteryx.MongoDB.Driver.Extend
         }
 
         /// <summary>
-        /// 动态表查询替换单条(自动更新UpdateTime字段)
+        /// 动态表查询替换（单个）(自动更新UpdateTime字段)
         /// </summary>
         /// <typeparam name="TForeign">文档类型</typeparam>        
         /// <param name="session">会话句柄(作用于事务)</param>
@@ -447,7 +447,7 @@ namespace Apteryx.MongoDB.Driver.Extend
         }
 
         /// <summary>
-        /// 动态表查询替换单条(自动更新UpdateTime字段)
+        /// 动态表查询替换（单个）(自动更新UpdateTime字段)
         /// </summary>
         /// <typeparam name="TForeign">文档类型</typeparam>        
         /// <param name="foreignDocument">上级文档对象</param>
@@ -468,7 +468,7 @@ namespace Apteryx.MongoDB.Driver.Extend
         }
 
         /// <summary>
-        /// 动态表查询替换单条(自动更新UpdateTime字段)
+        /// 动态表查询替换（单个）(自动更新UpdateTime字段)
         /// </summary>
         /// <typeparam name="TForeign">文档类型</typeparam>        
         /// <param name="session">会话句柄(作用于事务)</param>

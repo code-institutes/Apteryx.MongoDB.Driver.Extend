@@ -11,7 +11,7 @@
 //        #region 查询(异步)
 
 //        /// <summary>
-//        /// 查询返回单条
+//        /// 查询返回（单个）
 //        /// </summary>
 //        /// <typeparam name="T">文档类型</typeparam>
 //        /// <param name="id">文档默认ID</param>
@@ -23,7 +23,7 @@
 //            return Task.Run(() => FindOne<T>(id, settings, options));
 //        }
 //        /// <summary>
-//        /// 查询返回单条
+//        /// 查询返回（单个）
 //        /// </summary>
 //        /// <typeparam name="T">文档类型</typeparam>
 //        /// <param name="session">会话句柄(作用于事务)</param>
@@ -36,7 +36,7 @@
 //            return Task.Run(() => FindOne<T>(session, id, settings, options));
 //        }
 //        /// <summary>
-//        /// 查询返回单条
+//        /// 查询返回（单个）
 //        /// </summary>
 //        /// <typeparam name="T">文档类型</typeparam>
 //        /// <param name="collectionName">集合名称</param>
@@ -49,7 +49,7 @@
 //            return Task.Run(() => FindOne<T>(collectionName, id, settings, options));
 //        }
 //        /// <summary>
-//        /// 查询返回单条
+//        /// 查询返回（单个）
 //        /// </summary>
 //        /// <typeparam name="T">文档类型</typeparam>
 //        /// <param name="collectionName">集合名称</param>
@@ -63,7 +63,7 @@
 //            return Task.Run(() => FindOne<T>(collectionName, session, id, settings, options));
 //        }
 //        /// <summary>
-//        /// 查询返回单条
+//        /// 查询返回（单个）
 //        /// </summary>
 //        /// <typeparam name="T">文档类型</typeparam>
 //        /// <param name="filter">过滤器</param>
@@ -75,7 +75,7 @@
 //            return Task.Run(() => FindOne<T>(filter, settings, options));
 //        }
 //        /// <summary>
-//        /// 查询返回单条
+//        /// 查询返回（单个）
 //        /// </summary>
 //        /// <typeparam name="T">文档类型</typeparam>
 //        /// <param name="session">会话句柄(作用于事务)</param>
@@ -88,7 +88,7 @@
 //            return Task.Run(() => FindOne<T>(session, filter, settings, options));
 //        }
 //        /// <summary>
-//        /// 查询返回单条
+//        /// 查询返回（单个）
 //        /// </summary>
 //        /// <typeparam name="T">文档类型</typeparam>
 //        /// <param name="collectionName">集合名称</param>
@@ -101,7 +101,7 @@
 //            return Task.Run(() => FindOne<T>(collectionName, filter, settings, options));
 //        }
 //        /// <summary>
-//        /// 查询返回单条
+//        /// 查询返回（单个）
 //        /// </summary>
 //        /// <typeparam name="T">文档类型</typeparam>
 //        /// <param name="collectionName">集合名称</param>
@@ -115,7 +115,7 @@
 //            return Task.Run(() => FindOne<T>(collectionName, session, filter, settings, options));
 //        }
 //        /// <summary>
-//        /// 查询返回单条
+//        /// 查询返回（单个）
 //        /// </summary>
 //        /// <typeparam name="T">文档类型</typeparam>
 //        /// <param name="filter">Lambda过滤器</param>
@@ -127,7 +127,7 @@
 //            return Task.Run(() => FindOne<T>(filter, settings, options));
 //        }
 //        /// <summary>
-//        /// 查询返回单条
+//        /// 查询返回（单个）
 //        /// </summary>
 //        /// <typeparam name="T">文档类型</typeparam>
 //        /// <param name="session">会话句柄(作用于事务)</param>
@@ -140,7 +140,7 @@
 //            return Task.Run(() => FindOne<T>(session, filter, settings, options));
 //        }
 //        /// <summary>
-//        /// 查询返回单条
+//        /// 查询返回（单个）
 //        /// </summary>
 //        /// <typeparam name="T"></typeparam>
 //        /// <param name="collectionName">集合名称</param>
@@ -153,7 +153,7 @@
 //            return Task.Run(() => FindOne<T>(collectionName, filter, settings, options));
 //        }
 //        /// <summary>
-//        /// 查询返回单条
+//        /// 查询返回（单个）
 //        /// </summary>
 //        /// <typeparam name="T"></typeparam>
 //        /// <param name="collectionName">集合名称</param>
@@ -167,7 +167,7 @@
 //            return Task.Run(() => FindOne<T>(collectionName, filter, settings, options));
 //        }
 //        /// <summary>
-//        /// 查询返回单条
+//        /// 查询返回（单个）
 //        /// </summary>
 //        /// <typeparam name="TForeign">文档类型</typeparam>
 //        /// <typeparam name="T">文档类型</typeparam>
@@ -187,7 +187,7 @@
 //            return Task.Run(() => DynamicCollectionFindOne<TForeign, T>(foreignDocument, filter, settings, options));
 //        }
 //        /// <summary>
-//        /// 查询返回单条
+//        /// 查询返回（单个）
 //        /// </summary>
 //        /// <typeparam name="TForeign">文档类型</typeparam>
 //        /// <typeparam name="T">文档类型</typeparam>
@@ -208,7 +208,7 @@
 //            return Task.Run(() => DynamicCollectionFindOne<TForeign, T>(session, foreignDocument, filter, settings, options));
 //        }
 //        /// <summary>
-//        /// 查询返回单条
+//        /// 查询返回（单个）
 //        /// </summary>
 //        /// <typeparam name="TForeign">文档类型</typeparam>
 //        /// <typeparam name="T">文档类型</typeparam>
@@ -228,7 +228,7 @@
 //            return Task.Run(() => DynamicCollectionFindOne<TForeign, T>(foreignDocument, filter, settings, options));
 //        }
 //        /// <summary>
-//        /// 查询返回单条
+//        /// 查询返回（单个）
 //        /// </summary>
 //        /// <typeparam name="TForeign">文档类型</typeparam>
 //        /// <typeparam name="T">文档类型</typeparam>

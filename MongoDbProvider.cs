@@ -9,10 +9,10 @@ namespace Apteryx.MongoDB.Driver.Extend
     {
         //定义数据库
         public IMongoDatabase Database { get; set; }
-        public MongoClient Client {get; set;}
+        public MongoClient Client { get; set; }
 
         /// <summary>
-        /// 
+        /// 连接字符串
         /// </summary>
         /// <param name="conn"></param>
         public MongoDbProvider(string conn)
@@ -25,12 +25,10 @@ namespace Apteryx.MongoDB.Driver.Extend
         }
 
         /// <summary>
-        /// 
+        /// 连接选项
         /// </summary>
         /// <param name="options"></param>
-        public MongoDbProvider(IOptionsMonitor<MongoDBOptions> options):this(options.CurrentValue.ConnectionString)
-        {
-        }
+        public MongoDbProvider(IOptionsMonitor<MongoDBOptions> options) : this(options.CurrentValue.ConnectionString) { }
 
         private void InitializeDbSets()
         {
