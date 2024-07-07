@@ -15,7 +15,7 @@ namespace Apteryx.MongoDB.Driver.Extend
         /// <param name="id">文档默认ID</param>
         /// <param name="update">更新定义</param>
         /// <param name="options">更新操作设置</param>
-        /// <param name="cancellationToken">取消操作设置</param>
+        /// <param name="cancellationToken">取消令牌</param>
         /// <returns></returns>
         public UpdateResult WhereUpdateOne(
             string id,
@@ -33,7 +33,7 @@ namespace Apteryx.MongoDB.Driver.Extend
         /// <param name="id">文档默认ID</param>
         /// <param name="update">更新定义</param>
         /// <param name="options">更新操作设置</param>
-        /// <param name="cancellationToken">取消操作设置</param>
+        /// <param name="cancellationToken">取消令牌</param>
         /// <returns></returns>
         public UpdateResult WhereUpdateOne(
             IClientSessionHandle session,
@@ -51,7 +51,7 @@ namespace Apteryx.MongoDB.Driver.Extend
         /// <param name="filter">过滤器</param>
         /// <param name="update">更新定义</param>
         /// <param name="options">更新操作设置</param>
-        /// <param name="cancellationToken">取消操作设置</param>
+        /// <param name="cancellationToken">取消令牌</param>
         /// <returns></returns>
         public UpdateResult WhereUpdateOne(
             FilterDefinition<T> filter,
@@ -69,7 +69,7 @@ namespace Apteryx.MongoDB.Driver.Extend
         /// <param name="filter">过滤器</param>
         /// <param name="update">更新定义</param>
         /// <param name="options">更新操作设置</param>
-        /// <param name="cancellationToken">取消操作设置</param>
+        /// <param name="cancellationToken">取消令牌</param>
         /// <returns></returns>
         public UpdateResult WhereUpdateOne(
             IClientSessionHandle session,
@@ -87,7 +87,7 @@ namespace Apteryx.MongoDB.Driver.Extend
         /// <param name="filter">Lambda过滤器</param>
         /// <param name="update">更新定义</param>
         /// <param name="options">更新操作设置</param>
-        /// <param name="cancellationToken">取消操作设置</param>
+        /// <param name="cancellationToken">取消令牌</param>
         /// <returns></returns>
         public UpdateResult WhereUpdateOne(
             Expression<Func<T, bool>> filter,
@@ -105,7 +105,7 @@ namespace Apteryx.MongoDB.Driver.Extend
         /// <param name="filter">Lambda过滤器</param>
         /// <param name="update">更新定义</param>
         /// <param name="options">更新操作设置</param>
-        /// <param name="cancellationToken">取消操作设置</param>
+        /// <param name="cancellationToken">取消令牌</param>
         /// <returns></returns>
         public UpdateResult WhereUpdateOne(
             IClientSessionHandle session,
@@ -126,7 +126,7 @@ namespace Apteryx.MongoDB.Driver.Extend
         /// <param name="id">默认文档ID</param>
         /// <param name="update">更新定义</param>
         /// <param name="options">更新操作设置</param>
-        /// <param name="cancellationToken">取消操作设置</param>
+        /// <param name="cancellationToken">取消令牌</param>
         /// <returns></returns>
         public UpdateResult DynamicCollectionWhereUpdateOne<TForeign>(
             TForeign foreignDocument,
@@ -149,7 +149,7 @@ namespace Apteryx.MongoDB.Driver.Extend
         /// <param name="id">文档默认ID</param>
         /// <param name="update">更新定义</param>
         /// <param name="options">更新操作设置</param>
-        /// <param name="cancellationToken">取消操作设置</param>
+        /// <param name="cancellationToken">取消令牌</param>
         /// <returns></returns>
         public UpdateResult DynamicCollectionWhereUpdateOne<TForeign>(
             IClientSessionHandle session,
@@ -172,7 +172,7 @@ namespace Apteryx.MongoDB.Driver.Extend
         /// <param name="filter">过滤器</param>
         /// <param name="update">更新定义</param>
         /// <param name="options">更新操作设置</param>
-        /// <param name="cancellationToken">取消操作设置</param>
+        /// <param name="cancellationToken">取消令牌</param>
         /// <returns></returns>
         public UpdateResult DynamicCollectionWhereUpdateOne<TForeign>(
             TForeign foreignDocument,
@@ -194,7 +194,7 @@ namespace Apteryx.MongoDB.Driver.Extend
         /// <param name="filter">过滤器</param>
         /// <param name="update">更新定义</param>
         /// <param name="options">更新操作设置</param>
-        /// <param name="cancellationToken">取消操作设置</param>
+        /// <param name="cancellationToken">取消令牌</param>
         /// <returns></returns>
         public UpdateResult DynamicCollectionWhereUpdateOne<TForeign>(
             IClientSessionHandle session,
@@ -217,7 +217,7 @@ namespace Apteryx.MongoDB.Driver.Extend
         /// <param name="filter">Lambda过滤器</param>
         /// <param name="update">更新定义</param>
         /// <param name="options">更新操作设置</param>
-        /// <param name="cancellationToken">取消操作设置</param>
+        /// <param name="cancellationToken">取消令牌</param>
         /// <returns></returns>
         public UpdateResult DynamicCollectionWhereUpdateOne<TForeign>(
             TForeign foreignDocument,
@@ -239,7 +239,7 @@ namespace Apteryx.MongoDB.Driver.Extend
         /// <param name="filter">Lambda过滤器</param>
         /// <param name="update">更新定义</param>
         /// <param name="options">更新操作设置</param>
-        /// <param name="cancellationToken">取消操作设置</param>
+        /// <param name="cancellationToken">取消令牌</param>
         /// <returns></returns>
         public UpdateResult DynamicCollectionWhereUpdateOne<TForeign>(
             IClientSessionHandle session,
@@ -260,7 +260,7 @@ namespace Apteryx.MongoDB.Driver.Extend
         /// <param name="id">文档默认ID</param>
         /// <param name="update">更新定义</param>
         /// <param name="options">更新操作设置</param>
-        /// <param name="cancellationToken">取消操作设置</param>
+        /// <param name="cancellationToken">取消令牌</param>
         /// <returns></returns>
         public T FindOneAndUpdateOne(
             string id,
@@ -279,7 +279,7 @@ namespace Apteryx.MongoDB.Driver.Extend
         /// <param name="id">文档默认ID</param>
         /// <param name="update">更新定义</param>
         /// <param name="options">更新操作设置</param>
-        /// <param name="cancellationToken">取消操作设置</param>
+        /// <param name="cancellationToken">取消令牌</param>
         /// <returns></returns>
         public T FindOneAndUpdateOne(
             IClientSessionHandle session,
@@ -298,7 +298,7 @@ namespace Apteryx.MongoDB.Driver.Extend
         /// <param name="filter">过滤器</param>
         /// <param name="update">更新定义</param>
         /// <param name="options">更新操作设置</param>
-        /// <param name="cancellationToken">取消操作设置</param>
+        /// <param name="cancellationToken">取消令牌</param>
         /// <returns></returns>
         public T FindOneAndUpdateOne(
             FilterDefinition<T> filter,
@@ -317,7 +317,7 @@ namespace Apteryx.MongoDB.Driver.Extend
         /// <param name="filter">过滤器</param>
         /// <param name="update">更新定义</param>
         /// <param name="options">更新操作设置</param>
-        /// <param name="cancellationToken">取消操作设置</param>
+        /// <param name="cancellationToken">取消令牌</param>
         /// <returns></returns>
         public T FindOneAndUpdateOne(
             IClientSessionHandle session,
@@ -336,7 +336,7 @@ namespace Apteryx.MongoDB.Driver.Extend
         /// <param name="filter">Lambda过滤器</param>
         /// <param name="update">更新定义</param>
         /// <param name="options">更新操作设置</param>
-        /// <param name="cancellationToken">取消操作设置</param>
+        /// <param name="cancellationToken">取消令牌</param>
         /// <returns></returns>
         public T FindOneAndUpdateOne(
             Expression<Func<T, bool>> filter,
@@ -355,7 +355,7 @@ namespace Apteryx.MongoDB.Driver.Extend
         /// <param name="filter">Lambda过滤器</param>
         /// <param name="update">更新定义</param>
         /// <param name="options">更新操作设置</param>
-        /// <param name="cancellationToken">取消操作设置</param>
+        /// <param name="cancellationToken">取消令牌</param>
         /// <returns></returns>
         public T FindOneAndUpdateOne(
             IClientSessionHandle session,
@@ -376,7 +376,7 @@ namespace Apteryx.MongoDB.Driver.Extend
         /// <param name="id">文档默认ID</param>
         /// <param name="update">更新定义</param>
         /// <param name="options">更新操作设置</param>
-        /// <param name="cancellationToken">取消操作设置</param>
+        /// <param name="cancellationToken">取消令牌</param>
         /// <returns></returns>
         public T DynamicCollectionFindOneAndUpdateOne<TForeign>(
             TForeign foreignDocument,
@@ -398,7 +398,7 @@ namespace Apteryx.MongoDB.Driver.Extend
         /// <param name="id">文档默认ID</param>
         /// <param name="update">更新定义</param>
         /// <param name="options">更新操作设置</param>
-        /// <param name="cancellationToken">取消操作设置</param>
+        /// <param name="cancellationToken">取消令牌</param>
         /// <returns></returns>
         public T DynamicCollectionFindOneAndUpdateOne<TForeign>(
             IClientSessionHandle session,
@@ -421,7 +421,7 @@ namespace Apteryx.MongoDB.Driver.Extend
         /// <param name="filter">过滤器</param>
         /// <param name="update">更新定义</param>
         /// <param name="options">更新操作设置</param>
-        /// <param name="cancellationToken">取消操作设置</param>
+        /// <param name="cancellationToken">取消令牌</param>
         /// <returns></returns>
         public T DynamicCollectionFindOneAndUpdateOne<TForeign>(
             TForeign foreignDocument,
@@ -444,7 +444,7 @@ namespace Apteryx.MongoDB.Driver.Extend
         /// <param name="filter">过滤器</param>
         /// <param name="update">更新定义</param>
         /// <param name="options">更新操作设置</param>
-        /// <param name="cancellationToken">取消操作设置</param>
+        /// <param name="cancellationToken">取消令牌</param>
         /// <returns></returns>
         public T DynamicCollectionFindOneAndUpdateOne<TForeign>(
             IClientSessionHandle session,
@@ -467,7 +467,7 @@ namespace Apteryx.MongoDB.Driver.Extend
         /// <param name="filter">Lambda过滤器</param>
         /// <param name="update">更新定义</param>
         /// <param name="options">更新操作设置</param>
-        /// <param name="cancellationToken">取消操作设置</param>
+        /// <param name="cancellationToken">取消令牌</param>
         /// <returns></returns>
         public T DynamicCollectionFindOneAndUpdateOne<TForeign>(
             TForeign foreignDocument,
@@ -490,7 +490,7 @@ namespace Apteryx.MongoDB.Driver.Extend
         /// <param name="filter">Lambda过滤器</param>
         /// <param name="update">更新定义</param>
         /// <param name="options">更新操作设置</param>
-        /// <param name="cancellationToken">取消操作设置</param>
+        /// <param name="cancellationToken">取消令牌</param>
         /// <returns></returns>
         public T DynamicCollectionFindOneAndUpdateOne<TForeign>(
             IClientSessionHandle session,
@@ -511,7 +511,7 @@ namespace Apteryx.MongoDB.Driver.Extend
         /// <param name="filter">过滤器</param>
         /// <param name="update">更新定义</param>
         /// <param name="options">更新操作设置</param>
-        /// <param name="cancellationToken">取消操作设置</param>
+        /// <param name="cancellationToken">取消令牌</param>
         /// <returns></returns>
         public UpdateResult WhereUpdateMany(
             FilterDefinition<T> filter,
@@ -530,7 +530,7 @@ namespace Apteryx.MongoDB.Driver.Extend
         /// <param name="filter">过滤器</param>
         /// <param name="update">更新定义</param>
         /// <param name="options">更新操作设置</param>
-        /// <param name="cancellationToken">取消操作设置</param>
+        /// <param name="cancellationToken">取消令牌</param>
         /// <returns></returns>
         public UpdateResult WhereUpdateMany(
             IClientSessionHandle session,
@@ -549,7 +549,7 @@ namespace Apteryx.MongoDB.Driver.Extend
         /// <param name="filter">Lambda过滤器</param>
         /// <param name="update">更新定义</param>
         /// <param name="options">更新操作设置</param>
-        /// <param name="cancellationToken">取消操作设置</param>
+        /// <param name="cancellationToken">取消令牌</param>
         /// <returns></returns>
         public UpdateResult WhereUpdateMany(
             Expression<Func<T, bool>> filter,
@@ -568,7 +568,7 @@ namespace Apteryx.MongoDB.Driver.Extend
         /// <param name="filter">Lambda过滤器</param>
         /// <param name="update">更新定义</param>
         /// <param name="options">更新操作设置</param>
-        /// <param name="cancellationToken">取消操作设置</param>
+        /// <param name="cancellationToken">取消令牌</param>
         /// <returns></returns>
         public UpdateResult WhereUpdateMany(
             IClientSessionHandle session,
@@ -589,7 +589,7 @@ namespace Apteryx.MongoDB.Driver.Extend
         /// <param name="filter">过滤器</param>
         /// <param name="update">更新定义</param>
         /// <param name="options">更新操作设置</param>
-        /// <param name="cancellationToken">取消操作设置</param>
+        /// <param name="cancellationToken">取消令牌</param>
         /// <returns></returns>
         public UpdateResult DynamicCollectionWhereUpdateMany<TForeign>(
             TForeign foreignDocument,
@@ -612,7 +612,7 @@ namespace Apteryx.MongoDB.Driver.Extend
         /// <param name="filter">过滤器</param>
         /// <param name="update">更新定义</param>
         /// <param name="options">更新操作设置</param>
-        /// <param name="cancellationToken">取消操作设置</param>
+        /// <param name="cancellationToken">取消令牌</param>
         /// <returns></returns>
         public UpdateResult DynamicCollectionWhereUpdateMany<TForeign>(
             IClientSessionHandle session,
@@ -635,7 +635,7 @@ namespace Apteryx.MongoDB.Driver.Extend
         /// <param name="filter">Lambda过滤器</param>
         /// <param name="update">更新定义</param>
         /// <param name="options">更新操作设置</param>
-        /// <param name="cancellationToken">取消操作设置</param>
+        /// <param name="cancellationToken">取消令牌</param>
         /// <returns></returns>
         public UpdateResult DynamicCollectionWhereUpdateMany<TForeign>(
             TForeign foreignDocument,
@@ -658,7 +658,7 @@ namespace Apteryx.MongoDB.Driver.Extend
         /// <param name="filter">Lambda过滤器</param>
         /// <param name="update">更新定义</param>
         /// <param name="options">更新操作设置</param>
-        /// <param name="cancellationToken">取消操作设置</param>
+        /// <param name="cancellationToken">取消令牌</param>
         /// <returns></returns>
         public UpdateResult DynamicCollectionWhereUpdateMany<TForeign>(
             IClientSessionHandle session,

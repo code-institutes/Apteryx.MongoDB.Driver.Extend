@@ -16,7 +16,7 @@
 //        /// <param name="id">文档默认ID</param>
 //        /// <param name="document">文档对象</param>
 //        /// <param name="options">替换操作设置</param>
-//        /// <param name="cancellationToken">取消操作设置</param>
+//        /// <param name="cancellationToken">取消令牌</param>
 //        /// <returns></returns>
 //        public ReplaceOneResult WhereReplaceOne<T>(
 //            string id,
@@ -35,7 +35,7 @@
 //        /// <param name="id">文档默认ID</param>
 //        /// <param name="document">文档对象</param>
 //        /// <param name="options">替换操作设置</param>
-//        /// <param name="cancellationToken">取消操作设置</param>
+//        /// <param name="cancellationToken">取消令牌</param>
 //        /// <returns></returns>
 //        public ReplaceOneResult WhereReplaceOne<T>(
 //            IClientSessionHandle session,
@@ -54,7 +54,7 @@
 //        /// <param name="filter">过滤器</param>
 //        /// <param name="document">文档对象</param>
 //        /// <param name="options">替换操作设置</param>
-//        /// <param name="cancellationToken">取消操作设置</param>
+//        /// <param name="cancellationToken">取消令牌</param>
 //        /// <returns></returns>
 //        public ReplaceOneResult WhereReplaceOne<T>(
 //            FilterDefinition<T> filter,
@@ -73,7 +73,7 @@
 //        /// <param name="filter">过滤器</param>
 //        /// <param name="document">文档对象</param>
 //        /// <param name="options">替换操作设置</param>
-//        /// <param name="cancellationToken">取消操作设置</param>
+//        /// <param name="cancellationToken">取消令牌</param>
 //        /// <returns></returns>
 //        public ReplaceOneResult WhereReplaceOne<T>(
 //            IClientSessionHandle session,
@@ -92,7 +92,7 @@
 //        /// <param name="filter">Lambda过滤器</param>
 //        /// <param name="document">文档对象</param>
 //        /// <param name="options">替换操作设置</param>
-//        /// <param name="cancellationToken">取消操作设置</param>
+//        /// <param name="cancellationToken">取消令牌</param>
 //        /// <returns></returns>
 //        public ReplaceOneResult WhereReplaceOne<T>(
 //            Expression<Func<T, bool>> filter,
@@ -113,7 +113,7 @@
 //        /// <param name="filter">Lambda过滤器</param>
 //        /// <param name="document">文档对象</param>
 //        /// <param name="options">替换操作设置</param>
-//        /// <param name="cancellationToken">取消操作设置</param>
+//        /// <param name="cancellationToken">取消令牌</param>
 //        /// <returns></returns>
 //        public ReplaceOneResult WhereReplaceOne<T>(
 //            IClientSessionHandle session,
@@ -135,7 +135,7 @@
 //        /// <param name="filter">过滤器</param>
 //        /// <param name="document">文档对象</param>
 //        /// <param name="options">替换操作设置</param>
-//        /// <param name="cancellationToken">取消操作设置</param>
+//        /// <param name="cancellationToken">取消令牌</param>
 //        /// <returns></returns>
 //        public ReplaceOneResult DynamicCollectionWhereReplaceOne<TForeign, T>(
 //            TForeign foreignDocument,
@@ -160,7 +160,7 @@
 //        /// <param name="filter">过滤器</param>
 //        /// <param name="document">文档对象</param>
 //        /// <param name="options">替换操作设置</param>
-//        /// <param name="cancellationToken">取消操作设置</param>
+//        /// <param name="cancellationToken">取消令牌</param>
 //        /// <returns></returns>
 //        public ReplaceOneResult DynamicCollectionWhereReplaceOne<TForeign, T>(
 //            IClientSessionHandle session,
@@ -185,7 +185,7 @@
 //        /// <param name="filter">Lambda过滤器</param>
 //        /// <param name="document">文档对象</param>
 //        /// <param name="options">替换操作设置</param>
-//        /// <param name="cancellationToken">取消操作设置</param>
+//        /// <param name="cancellationToken">取消令牌</param>
 //        /// <returns></returns>
 //        public ReplaceOneResult DynamicCollectionWhereReplaceOne<TForeign, T>(
 //            TForeign foreignDocument,
@@ -210,7 +210,7 @@
 //        /// <param name="filter">Lambda过滤器</param>
 //        /// <param name="document">文档对象</param>
 //        /// <param name="options">替换操作设置</param>
-//        /// <param name="cancellationToken">取消操作设置</param>
+//        /// <param name="cancellationToken">取消令牌</param>
 //        /// <returns></returns>
 //        public ReplaceOneResult DynamicCollectionWhereReplaceOne<TForeign, T>(
 //            IClientSessionHandle session,
@@ -233,7 +233,7 @@
 //        /// <param name="id">文档默认ID</param>
 //        /// <param name="document">文档对象</param>
 //        /// <param name="options">查询替换操作设置</param>
-//        /// <param name="cancellationToken">取消操作设置</param>
+//        /// <param name="cancellationToken">取消令牌</param>
 //        /// <returns></returns>
 //        public T FindOneAndReplaceOne<T>(
 //            string id,
@@ -253,7 +253,7 @@
 //        /// <param name="filter">过滤器</param>
 //        /// <param name="document">文档对象</param>
 //        /// <param name="options">查询替换操作设置</param>
-//        /// <param name="cancellationToken">取消操作设置</param>
+//        /// <param name="cancellationToken">取消令牌</param>
 //        /// <returns></returns>
 //        public T FindOneAndReplaceOne<T>(
 //            IClientSessionHandle session,
@@ -273,7 +273,7 @@
 //        /// <param name="filter">过滤器</param>
 //        /// <param name="document">文档对象</param>
 //        /// <param name="options">查询替换操作设置</param>
-//        /// <param name="cancellationToken">取消操作设置</param>
+//        /// <param name="cancellationToken">取消令牌</param>
 //        /// <returns></returns>
 //        public T FindOneAndReplaceOne<T>(
 //            FilterDefinition<T> filter,
@@ -293,7 +293,7 @@
 //        /// <param name="filter">过滤器</param>
 //        /// <param name="document">文档对象</param>
 //        /// <param name="options">查询替换操作设置</param>
-//        /// <param name="cancellationToken">取消操作设置</param>
+//        /// <param name="cancellationToken">取消令牌</param>
 //        /// <returns></returns>
 //        public T FindOneAndReplaceOne<T>(
 //            IClientSessionHandle session,
@@ -313,7 +313,7 @@
 //        /// <param name="filter">Lambda过滤器</param>
 //        /// <param name="document">文档对象</param>
 //        /// <param name="options">查询替换操作设置</param>
-//        /// <param name="cancellationToken">取消操作设置</param>
+//        /// <param name="cancellationToken">取消令牌</param>
 //        /// <returns></returns>
 //        public T FindOneAndReplaceOne<T>(
 //            Expression<Func<T, bool>> filter,
@@ -333,7 +333,7 @@
 //        /// <param name="filter">Lambda过滤器</param>
 //        /// <param name="document">文档对象</param>
 //        /// <param name="options">查询替换操作设置</param>
-//        /// <param name="cancellationToken">取消操作设置</param>
+//        /// <param name="cancellationToken">取消令牌</param>
 //        /// <returns></returns>
 //        public T FindOneAndReplaceOne<T>(
 //            IClientSessionHandle session,
@@ -355,7 +355,7 @@
 //        /// <param name="id">文档默认ID</param>
 //        /// <param name="document">文档对象</param>
 //        /// <param name="options">查询替换操作设置</param>
-//        /// <param name="cancellationToken">取消操作设置</param>
+//        /// <param name="cancellationToken">取消令牌</param>
 //        /// <returns></returns>
 //        public T DynamicCollectionFindOneAndReplaceOne<TForeign, T>(
 //            TForeign foreignDocument, 
@@ -378,7 +378,7 @@
 //        /// <param name="id">文档默认ID</param>
 //        /// <param name="document">文档对象</param>
 //        /// <param name="options">查询替换操作设置</param>
-//        /// <param name="cancellationToken">取消操作设置</param>
+//        /// <param name="cancellationToken">取消令牌</param>
 //        /// <returns></returns>
 //        public T DynamicCollectionFindOneAndReplaceOne<TForeign, T>(
 //            IClientSessionHandle session,
@@ -402,7 +402,7 @@
 //        /// <param name="filter">过滤器</param>
 //        /// <param name="document">文档对象</param>
 //        /// <param name="options">查询替换操作设置</param>
-//        /// <param name="cancellationToken">取消操作设置</param>
+//        /// <param name="cancellationToken">取消令牌</param>
 //        /// <returns></returns>
 //        public T DynamicCollectionFindOneAndReplaceOne<TForeign, T>(TForeign foreignDocument, FilterDefinition<T> filter,
 //            T document, FindOneAndReplaceOptions<T> options = null,
@@ -423,7 +423,7 @@
 //        /// <param name="filter">过滤器</param>
 //        /// <param name="document">文档对象</param>
 //        /// <param name="options">查询替换操作设置</param>
-//        /// <param name="cancellationToken">取消操作设置</param>
+//        /// <param name="cancellationToken">取消令牌</param>
 //        /// <returns></returns>
 //        public T DynamicCollectionFindOneAndReplaceOne<TForeign, T>(
 //            IClientSessionHandle session,
@@ -447,7 +447,7 @@
 //        /// <param name="filter">Lambda过滤器</param>
 //        /// <param name="document">文档对象</param>
 //        /// <param name="options">查询替换操作设置</param>
-//        /// <param name="cancellationToken">取消操作设置</param>
+//        /// <param name="cancellationToken">取消令牌</param>
 //        /// <returns></returns>
 //        public T DynamicCollectionFindOneAndReplaceOne<TForeign, T>(
 //            TForeign foreignDocument,
@@ -471,7 +471,7 @@
 //        /// <param name="filter">Lambda过滤器</param>
 //        /// <param name="document">文档对象</param>
 //        /// <param name="options">查询替换操作设置</param>
-//        /// <param name="cancellationToken">取消操作设置</param>
+//        /// <param name="cancellationToken">取消令牌</param>
 //        /// <returns></returns>
 //        public T DynamicCollectionFindOneAndReplaceOne<TForeign, T>(
 //            IClientSessionHandle session,

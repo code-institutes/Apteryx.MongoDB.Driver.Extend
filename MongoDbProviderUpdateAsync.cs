@@ -18,7 +18,7 @@
 //        /// <param name="id">文档默认ID</param>
 //        /// <param name="update">更新定义</param>
 //        /// <param name="options">更新操作设置</param>
-//        /// <param name="cancellationToken">取消操作设置</param>
+//        /// <param name="cancellationToken">取消令牌</param>
 //        /// <returns></returns>
 //        public Task<UpdateResult> WhereUpdateOneAsync<T>(
 //            string id,
@@ -37,7 +37,7 @@
 //        /// <param name="id">文档默认ID</param>
 //        /// <param name="update">更新定义</param>
 //        /// <param name="options">更新操作设置</param>
-//        /// <param name="cancellationToken">取消操作设置</param>
+//        /// <param name="cancellationToken">取消令牌</param>
 //        /// <returns></returns>
 //        public Task<UpdateResult> WhereUpdateOneAsync<T>(
 //            IClientSessionHandle session,
@@ -56,7 +56,7 @@
 //        /// <param name="filter">过滤器</param>
 //        /// <param name="update">更新定义</param>
 //        /// <param name="options">更新操作设置</param>
-//        /// <param name="cancellationToken">取消操作设置</param>
+//        /// <param name="cancellationToken">取消令牌</param>
 //        /// <returns></returns>
 //        public Task<UpdateResult> WhereUpdateOneAsync<T>(
 //            FilterDefinition<T> filter,
@@ -75,7 +75,7 @@
 //        /// <param name="filter">过滤器</param>
 //        /// <param name="update">更新定义</param>
 //        /// <param name="options">更新操作设置</param>
-//        /// <param name="cancellationToken">取消操作设置</param>
+//        /// <param name="cancellationToken">取消令牌</param>
 //        /// <returns></returns>
 //        public Task<UpdateResult> WhereUpdateOneAsync<T>(
 //            IClientSessionHandle session,
@@ -94,7 +94,7 @@
 //        /// <param name="filter">Lambda过滤器</param>
 //        /// <param name="update">更新定义</param>
 //        /// <param name="options">更新操作设置</param>
-//        /// <param name="cancellationToken">取消操作设置</param>
+//        /// <param name="cancellationToken">取消令牌</param>
 //        /// <returns></returns>
 //        public Task<UpdateResult> WhereUpdateOneAsync<T>(
 //            Expression<Func<T, bool>> filter,
@@ -113,7 +113,7 @@
 //        /// <param name="filter">Lambda过滤器</param>
 //        /// <param name="update">更新定义</param>
 //        /// <param name="options">更新操作设置</param>
-//        /// <param name="cancellationToken">取消操作设置</param>
+//        /// <param name="cancellationToken">取消令牌</param>
 //        /// <returns></returns>
 //        public Task<UpdateResult> WhereUpdateOneAsync<T>(
 //            IClientSessionHandle session,
@@ -134,7 +134,7 @@
 //        /// <param name="id">默认文档ID</param>
 //        /// <param name="update">更新定义</param>
 //        /// <param name="options">更新操作设置</param>
-//        /// <param name="cancellationToken">取消操作设置</param>
+//        /// <param name="cancellationToken">取消令牌</param>
 //        /// <returns></returns>
 //        public Task<UpdateResult> DynamicCollectionWhereUpdateOneAsync<TForeign, T>(
 //            TForeign foreignDocument,
@@ -156,7 +156,7 @@
 //        /// <param name="id">文档默认ID</param>
 //        /// <param name="update">更新定义</param>
 //        /// <param name="options">更新操作设置</param>
-//        /// <param name="cancellationToken">取消操作设置</param>
+//        /// <param name="cancellationToken">取消令牌</param>
 //        /// <returns></returns>
 //        public Task<UpdateResult> DynamicCollectionWhereUpdateOneAsync<TForeign, T>(
 //            IClientSessionHandle seesion,
@@ -179,7 +179,7 @@
 //        /// <param name="filter">过滤器</param>
 //        /// <param name="update">更新定义</param>
 //        /// <param name="options">更新操作设置</param>
-//        /// <param name="cancellationToken">取消操作设置</param>
+//        /// <param name="cancellationToken">取消令牌</param>
 //        /// <returns></returns>
 //        public Task<UpdateResult> DynamicCollectionWhereUpdateOneAsync<TForeign, T>(
 //            TForeign foreignDocument,
@@ -202,7 +202,7 @@
 //        /// <param name="filter">过滤器</param>
 //        /// <param name="update">更新定义</param>
 //        /// <param name="options">更新操作设置</param>
-//        /// <param name="cancellationToken">取消操作设置</param>
+//        /// <param name="cancellationToken">取消令牌</param>
 //        /// <returns></returns>
 //        public Task<UpdateResult> DynamicCollectionWhereUpdateOneAsync<TForeign, T>(
 //            IClientSessionHandle seesion,
@@ -225,7 +225,7 @@
 //        /// <param name="filter">Lmabda过滤器</param>
 //        /// <param name="update">更新定义</param>
 //        /// <param name="options">更新操作设置</param>
-//        /// <param name="cancellationToken">取消操作设置</param>
+//        /// <param name="cancellationToken">取消令牌</param>
 //        /// <returns></returns>
 //        public Task<UpdateResult> DynamicCollectionWhereUpdateOneAsync<TForeign, T>(
 //            TForeign foreignDocument,
@@ -248,7 +248,7 @@
 //        /// <param name="filter">Lmabda过滤器</param>
 //        /// <param name="update">更新定义</param>
 //        /// <param name="options">更新操作设置</param>
-//        /// <param name="cancellationToken">取消操作设置</param>
+//        /// <param name="cancellationToken">取消令牌</param>
 //        /// <returns></returns>
 //        public Task<UpdateResult> DynamicCollectionWhereUpdateOneAsync<TForeign, T>(
 //            IClientSessionHandle session,
@@ -269,7 +269,7 @@
 //        /// <param name="id">文档默认ID</param>
 //        /// <param name="update">更新定义</param>
 //        /// <param name="options">更新操作设置</param>
-//        /// <param name="cancellationToken">取消操作设置</param>
+//        /// <param name="cancellationToken">取消令牌</param>
 //        /// <returns></returns>
 //        public Task<T> FindOneAndUpdateOneAsync<T>(
 //            string id,
@@ -288,7 +288,7 @@
 //        /// <param name="id">文档默认ID</param>
 //        /// <param name="update">更新定义</param>
 //        /// <param name="options">更新操作设置</param>
-//        /// <param name="cancellationToken">取消操作设置</param>
+//        /// <param name="cancellationToken">取消令牌</param>
 //        /// <returns></returns>
 //        public Task<T> FindOneAndUpdateOneAsync<T>(
 //            IClientSessionHandle session,
@@ -307,7 +307,7 @@
 //        /// <param name="filter">过滤器</param>
 //        /// <param name="update">更新定义</param>
 //        /// <param name="options">更新操作设置</param>
-//        /// <param name="cancellationToken">取消操作设置</param>
+//        /// <param name="cancellationToken">取消令牌</param>
 //        /// <returns></returns>
 //        public Task<T> FindOneAndUpdateOneAsync<T>(
 //            FilterDefinition<T> filter,
@@ -326,7 +326,7 @@
 //        /// <param name="filter">过滤器</param>
 //        /// <param name="update">更新定义</param>
 //        /// <param name="options">更新操作设置</param>
-//        /// <param name="cancellationToken">取消操作设置</param>
+//        /// <param name="cancellationToken">取消令牌</param>
 //        /// <returns></returns>
 //        public Task<T> FindOneAndUpdateOneAsync<T>(
 //            IClientSessionHandle session,
@@ -345,7 +345,7 @@
 //        /// <param name="filter">Lambda过滤器</param>
 //        /// <param name="update">更新定义</param>
 //        /// <param name="options">更新操作设置</param>
-//        /// <param name="cancellationToken">取消操作设置</param>
+//        /// <param name="cancellationToken">取消令牌</param>
 //        /// <returns></returns>
 //        public Task<T> FindOneAndUpdateOneAsync<T>(
 //            Expression<Func<T, bool>> filter,
@@ -364,7 +364,7 @@
 //        /// <param name="filter">Lambda过滤器</param>
 //        /// <param name="update">更新定义</param>
 //        /// <param name="options">更新操作设置</param>
-//        /// <param name="cancellationToken">取消操作设置</param>
+//        /// <param name="cancellationToken">取消令牌</param>
 //        /// <returns></returns>
 //        public Task<T> FindOneAndUpdateOneAsync<T>(
 //            IClientSessionHandle session,
@@ -385,7 +385,7 @@
 //        /// <param name="filter">过滤器</param>
 //        /// <param name="update">更新定义</param>
 //        /// <param name="options">更新操作设置</param>
-//        /// <param name="cancellationToken">取消操作设置</param>
+//        /// <param name="cancellationToken">取消令牌</param>
 //        /// <returns></returns>
 //        public Task<T> DynamicCollectionFindOneAndUpdateOneAsync<TForeign, T>(
 //            TForeign foreignDocument,
@@ -408,7 +408,7 @@
 //        /// <param name="filter">过滤器</param>
 //        /// <param name="update">更新定义</param>
 //        /// <param name="options">更新操作设置</param>
-//        /// <param name="cancellationToken">取消操作设置</param>
+//        /// <param name="cancellationToken">取消令牌</param>
 //        /// <returns></returns>
 //        public Task<T> DynamicCollectionFindOneAndUpdateOneAsync<TForeign, T>(
 //            IClientSessionHandle session,
@@ -431,7 +431,7 @@
 //        /// <param name="filter">Lambda过滤器</param>
 //        /// <param name="update">更新定义</param>
 //        /// <param name="options">更新操作设置</param>
-//        /// <param name="cancellationToken">取消操作设置</param>
+//        /// <param name="cancellationToken">取消令牌</param>
 //        /// <returns></returns>
 //        public Task<T> DynamicCollectionFindOneAndUpdateOneAsync<TForeign, T>(
 //            TForeign foreignDocument,
@@ -454,7 +454,7 @@
 //        /// <param name="filter">Lambda过滤器</param>
 //        /// <param name="update">更新定义</param>
 //        /// <param name="options">更新操作设置</param>
-//        /// <param name="cancellationToken">取消操作设置</param>
+//        /// <param name="cancellationToken">取消令牌</param>
 //        /// <returns></returns>
 //        public Task<T> DynamicCollectionFindOneAndUpdateOneAsync<TForeign, T>(
 //            IClientSessionHandle session,
@@ -475,7 +475,7 @@
 //        /// <param name="filter">过滤器</param>
 //        /// <param name="update">更新定义</param>
 //        /// <param name="options">更新操作设置</param>
-//        /// <param name="cancellationToken">取消操作设置</param>
+//        /// <param name="cancellationToken">取消令牌</param>
 //        /// <returns></returns>
 //        public Task<UpdateResult> WhereUpdateManyAsync<T>(
 //            FilterDefinition<T> filter,
@@ -493,7 +493,7 @@
 //        /// <param name="filter">过滤器</param>
 //        /// <param name="update">更新定义</param>
 //        /// <param name="options">更新操作设置</param>
-//        /// <param name="cancellationToken">取消操作设置</param>
+//        /// <param name="cancellationToken">取消令牌</param>
 //        /// <returns></returns>
 //        public Task<UpdateResult> WhereUpdateManyAsync<T>(
 //            IClientSessionHandle session,
@@ -512,7 +512,7 @@
 //        /// <param name="filter">Lambda过滤器</param>
 //        /// <param name="update">更新定义</param>
 //        /// <param name="options">更新操作设置</param>
-//        /// <param name="cancellationToken">取消操作设置</param>
+//        /// <param name="cancellationToken">取消令牌</param>
 //        /// <returns></returns>
 //        public Task<UpdateResult> WhereUpdateManyAsync<T>(
 //            Expression<Func<T, bool>> filter,
@@ -531,7 +531,7 @@
 //        /// <param name="filter">Lambda过滤器</param>
 //        /// <param name="update">更新定义</param>
 //        /// <param name="options">更新操作设置</param>
-//        /// <param name="cancellationToken">取消操作设置</param>
+//        /// <param name="cancellationToken">取消令牌</param>
 //        /// <returns></returns>
 //        public Task<UpdateResult> WhereUpdateManyAsync<T>(
 //            IClientSessionHandle session,
@@ -552,7 +552,7 @@
 //        /// <param name="filter">过滤器</param>
 //        /// <param name="update">更新定义</param>
 //        /// <param name="options">更新操作设置</param>
-//        /// <param name="cancellationToken">取消操作设置</param>
+//        /// <param name="cancellationToken">取消令牌</param>
 //        /// <returns></returns>
 //        public Task<UpdateResult> DynamicCollectionWhereUpdateManyAsync<TForeign, T>(
 //            TForeign foreignDocument, 
@@ -575,7 +575,7 @@
 //        /// <param name="filter">过滤器</param>
 //        /// <param name="update">更新定义</param>
 //        /// <param name="options">更新操作设置</param>
-//        /// <param name="cancellationToken">取消操作设置</param>
+//        /// <param name="cancellationToken">取消令牌</param>
 //        /// <returns></returns>
 //        public Task<UpdateResult> DynamicCollectionWhereUpdateManyAsync<TForeign, T>(
 //            IClientSessionHandle session,
@@ -598,7 +598,7 @@
 //        /// <param name="filter">Lambda过滤器</param>
 //        /// <param name="update">更新定义</param>
 //        /// <param name="options">更新操作设置</param>
-//        /// <param name="cancellationToken">取消操作设置</param>
+//        /// <param name="cancellationToken">取消令牌</param>
 //        /// <returns></returns>
 //        public Task<UpdateResult> DynamicCollectionWhereUpdateManyAsync<TForeign, T>(
 //            TForeign foreignDocument, 
@@ -621,7 +621,7 @@
 //        /// <param name="filter">Lambda过滤器</param>
 //        /// <param name="update">更新定义</param>
 //        /// <param name="options">更新操作设置</param>
-//        /// <param name="cancellationToken">取消操作设置</param>
+//        /// <param name="cancellationToken">取消令牌</param>
 //        /// <returns></returns>
 //        public Task<UpdateResult> DynamicCollectionWhereUpdateManyAsync<TForeign, T>(
 //            IClientSessionHandle session,

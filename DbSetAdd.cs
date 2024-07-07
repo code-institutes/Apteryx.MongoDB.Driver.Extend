@@ -13,7 +13,7 @@ namespace Apteryx.MongoDB.Driver.Extend
         /// </summary>
         /// <param name="document">文档对象</param>
         /// <param name="options">插入操作设置</param>
-        /// <param name="cancellationToken">取消操作设置</param>
+        /// <param name="cancellationToken">取消令牌</param>
         public void Add(T document, InsertOneOptions options = null, CancellationToken cancellationToken = default)
         {
             _collection.InsertOne(document, options, cancellationToken);
@@ -25,7 +25,7 @@ namespace Apteryx.MongoDB.Driver.Extend
         /// <param name="session">会话句柄(作用于事务)</param>
         /// <param name="document">文档对象</param>
         /// <param name="options">插入操作设置</param>
-        /// <param name="cancellationToken">取消操作设置</param>
+        /// <param name="cancellationToken">取消令牌</param>
         public void Add(IClientSessionHandle session, T document, InsertOneOptions options = null, CancellationToken cancellationToken = default)
         {
             _collection.InsertOne(session, document, options, cancellationToken);
@@ -36,7 +36,7 @@ namespace Apteryx.MongoDB.Driver.Extend
         /// </summary>
         /// <param name="documents">文档对象</param>
         /// <param name="options">插入操作设置</param>
-        /// <param name="cancellationToken">取消操作设置</param>
+        /// <param name="cancellationToken">取消令牌</param>
         public void AddMany(IEnumerable<T> documents, InsertManyOptions options = null, CancellationToken cancellationToken = default)
         {
             _collection.InsertMany(documents, options, cancellationToken);
@@ -48,7 +48,7 @@ namespace Apteryx.MongoDB.Driver.Extend
         /// <param name="session">会话句柄(作用于事务)</param>
         /// <param name="documents">文档对象</param>
         /// <param name="options">插入操作设置</param>
-        /// <param name="cancellationToken">取消操作设置</param>
+        /// <param name="cancellationToken">取消令牌</param>
         public void AddMany(IClientSessionHandle session, IEnumerable<T> documents, InsertManyOptions options = null, CancellationToken cancellationToken = default)
         {
             _collection.InsertMany(session, documents, options, cancellationToken);
@@ -61,7 +61,7 @@ namespace Apteryx.MongoDB.Driver.Extend
         /// <param name="foreignDocument">上级文档</param>
         /// <param name="document">文档对象</param>
         /// <param name="options">插入操作设置</param>
-        /// <param name="cancellationToken">取消操作设置</param>
+        /// <param name="cancellationToken">取消令牌</param>
         public void DynamicCollectionAdd<TForeign>(TForeign foreignDocument, T document, InsertOneOptions options = null, CancellationToken cancellationToken = default)
             where TForeign : BaseMongoEntity
         {
@@ -76,7 +76,7 @@ namespace Apteryx.MongoDB.Driver.Extend
         /// <param name="foreignDocument">上级文档</param>
         /// <param name="document">文档对象</param>
         /// <param name="options">插入操作设置</param>
-        /// <param name="cancellationToken">取消操作设置</param>
+        /// <param name="cancellationToken">取消令牌</param>
         public void DynamicCollectionAdd<TForeign>(IClientSessionHandle session, TForeign foreignDocument, T document, InsertOneOptions options = null, CancellationToken cancellationToken = default)
             where TForeign : BaseMongoEntity
         {
@@ -90,7 +90,7 @@ namespace Apteryx.MongoDB.Driver.Extend
         /// <param name="foreignDocument">上级文档</param>
         /// <param name="documents">文档对象</param>
         /// <param name="options">插入操作设置</param>
-        /// <param name="cancellationToken">取消操作设置</param>
+        /// <param name="cancellationToken">取消令牌</param>
         public void DynamicCollectionAddMany<TForeign>(TForeign foreignDocument, IEnumerable<T> documents, InsertManyOptions options = null, CancellationToken cancellationToken = default)
             where TForeign : BaseMongoEntity
         {
@@ -105,7 +105,7 @@ namespace Apteryx.MongoDB.Driver.Extend
         /// <param name="foreignDocument">上级文档</param>
         /// <param name="documents">文档对象</param>
         /// <param name="options">插入操作设置</param>
-        /// <param name="cancellationToken">取消操作设置</param>
+        /// <param name="cancellationToken">取消令牌</param>
         public void DynamicCollectionAddMany<TForeign>(IClientSessionHandle session, TForeign foreignDocument, IEnumerable<T> documents, InsertManyOptions options = null, CancellationToken cancellationToken = default)
             where TForeign : BaseMongoEntity
         {

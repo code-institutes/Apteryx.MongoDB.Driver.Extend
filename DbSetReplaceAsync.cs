@@ -16,7 +16,7 @@ namespace Apteryx.MongoDB.Driver.Extend
         /// <param name="id">文档默认ID</param>
         /// <param name="document">文档对象</param>
         /// <param name="options">替换操作设置</param>
-        /// <param name="cancellationToken">取消操作设置</param>
+        /// <param name="cancellationToken">取消令牌</param>
         /// <returns></returns>
         public Task<ReplaceOneResult> WhereReplaceOneAsnyc(
             string id,
@@ -34,7 +34,7 @@ namespace Apteryx.MongoDB.Driver.Extend
         /// <param name="filter">文档默认ID</param>
         /// <param name="document">文档对象</param>
         /// <param name="options">替换操作设置</param>
-        /// <param name="cancellationToken">取消操作设置</param>
+        /// <param name="cancellationToken">取消令牌</param>
         /// <returns></returns>
         public Task<ReplaceOneResult> WhereReplaceOneAsnyc(
             IClientSessionHandle session,
@@ -52,7 +52,7 @@ namespace Apteryx.MongoDB.Driver.Extend
         /// <param name="filter">过滤器</param>
         /// <param name="document">文档对象</param>
         /// <param name="options">替换操作设置</param>
-        /// <param name="cancellationToken">取消操作设置</param>
+        /// <param name="cancellationToken">取消令牌</param>
         /// <returns></returns>
         public Task<ReplaceOneResult> WhereReplaceOneAsnyc(
             FilterDefinition<T> filter,
@@ -70,7 +70,7 @@ namespace Apteryx.MongoDB.Driver.Extend
         /// <param name="filter">过滤器</param>
         /// <param name="document">文档对象</param>
         /// <param name="options">替换操作设置</param>
-        /// <param name="cancellationToken">取消操作设置</param>
+        /// <param name="cancellationToken">取消令牌</param>
         /// <returns></returns>
         public Task<ReplaceOneResult> WhereReplaceOneAsnyc(
             IClientSessionHandle session,
@@ -88,7 +88,7 @@ namespace Apteryx.MongoDB.Driver.Extend
         /// <param name="filter">Lambda过滤器</param>
         /// <param name="document">文档对象</param>
         /// <param name="options">替换操作设置</param>
-        /// <param name="cancellationToken">取消操作设置</param>
+        /// <param name="cancellationToken">取消令牌</param>
         /// <returns></returns>
         public Task<ReplaceOneResult> WhereReplaceOneAsnyc(
             Expression<Func<T, bool>> filter,
@@ -106,7 +106,7 @@ namespace Apteryx.MongoDB.Driver.Extend
         /// <param name="filter">Lambda过滤器</param>
         /// <param name="document">文档对象</param>
         /// <param name="options">替换操作设置</param>
-        /// <param name="cancellationToken">取消操作设置</param>
+        /// <param name="cancellationToken">取消令牌</param>
         /// <returns></returns>
         public Task<ReplaceOneResult> WhereReplaceOneAsnyc(
             IClientSessionHandle session,
@@ -126,7 +126,7 @@ namespace Apteryx.MongoDB.Driver.Extend
         /// <param name="id">文档默认ID</param>
         /// <param name="document">文档对象</param>
         /// <param name="options">替换操作设置</param>
-        /// <param name="cancellationToken">取消操作设置</param>
+        /// <param name="cancellationToken">取消令牌</param>
         /// <returns></returns>
         public Task<ReplaceOneResult> DynamicCollectionWhereReplaceOneAsnyc<TForeign>(
             TForeign foreignDocument,
@@ -148,7 +148,7 @@ namespace Apteryx.MongoDB.Driver.Extend
         /// <param name="id">文档默认ID</param>
         /// <param name="document">文档对象</param>
         /// <param name="options">替换操作设置</param>
-        /// <param name="cancellationToken">取消操作设置</param>
+        /// <param name="cancellationToken">取消令牌</param>
         /// <returns></returns>
         public Task<ReplaceOneResult> DynamicCollectionWhereReplaceOneAsnyc<TForeign>(
             IClientSessionHandle session,
@@ -170,7 +170,7 @@ namespace Apteryx.MongoDB.Driver.Extend
         /// <param name="filter">过滤器</param>
         /// <param name="document">文档对象</param>
         /// <param name="options">替换操作设置</param>
-        /// <param name="cancellationToken">取消操作设置</param>
+        /// <param name="cancellationToken">取消令牌</param>
         /// <returns></returns>
         public Task<ReplaceOneResult> DynamicCollectionWhereReplaceOneAsnyc<TForeign>(
             TForeign foreignDocument,
@@ -192,7 +192,7 @@ namespace Apteryx.MongoDB.Driver.Extend
         /// <param name="filter">过滤器</param>
         /// <param name="document">文档对象</param>
         /// <param name="options">替换操作设置</param>
-        /// <param name="cancellationToken">取消操作设置</param>
+        /// <param name="cancellationToken">取消令牌</param>
         /// <returns></returns>
         public Task<ReplaceOneResult> DynamicCollectionWhereReplaceOneAsnyc<TForeign>(
             IClientSessionHandle session,
@@ -214,7 +214,7 @@ namespace Apteryx.MongoDB.Driver.Extend
         /// <param name="filter">Lambda过滤器</param>
         /// <param name="document">文档对象</param>
         /// <param name="options">替换操作设置</param>
-        /// <param name="cancellationToken">取消操作设置</param>
+        /// <param name="cancellationToken">取消令牌</param>
         /// <returns></returns>
         public Task<ReplaceOneResult> DynamicCollectionWhereReplaceOneAsnyc<TForeign>(
             TForeign foreignDocument,
@@ -237,7 +237,7 @@ namespace Apteryx.MongoDB.Driver.Extend
         /// <param name="filter">Lambda过滤器</param>
         /// <param name="document">文档对象</param>
         /// <param name="options">替换操作设置</param>
-        /// <param name="cancellationToken">取消操作设置</param>
+        /// <param name="cancellationToken">取消令牌</param>
         /// <returns></returns>
         public Task<ReplaceOneResult> DynamicCollectionWhereReplaceOneAsnyc<TForeign>(
             IClientSessionHandle session,
@@ -257,7 +257,7 @@ namespace Apteryx.MongoDB.Driver.Extend
         /// <param name="id">文档默认ID</param>
         /// <param name="document">文档对象</param>
         /// <param name="options">查询替换操作设置</param>
-        /// <param name="cancellationToken">取消操作设置</param>
+        /// <param name="cancellationToken">取消令牌</param>
         /// <returns></returns>
         public Task<T> FindOneAndReplaceOneAsync(
             string id,
@@ -275,7 +275,7 @@ namespace Apteryx.MongoDB.Driver.Extend
         /// <param name="id">文档默认ID</param>
         /// <param name="document">文档对象</param>
         /// <param name="options">查询替换操作设置</param>
-        /// <param name="cancellationToken">取消操作设置</param>
+        /// <param name="cancellationToken">取消令牌</param>
         /// <returns></returns>
         public Task<T> FindOneAndReplaceOneAsync(
             IClientSessionHandle session,
@@ -293,7 +293,7 @@ namespace Apteryx.MongoDB.Driver.Extend
         /// <param name="filter">过滤器</param>
         /// <param name="document">文档对象</param>
         /// <param name="options">查询替换操作设置</param>
-        /// <param name="cancellationToken">取消操作设置</param>
+        /// <param name="cancellationToken">取消令牌</param>
         /// <returns></returns>
         public Task<T> FindOneAndReplaceOneAsync(
             FilterDefinition<T> filter,
@@ -311,7 +311,7 @@ namespace Apteryx.MongoDB.Driver.Extend
         /// <param name="filter">过滤器</param>
         /// <param name="document">文档对象</param>
         /// <param name="options">查询替换操作设置</param>
-        /// <param name="cancellationToken">取消操作设置</param>
+        /// <param name="cancellationToken">取消令牌</param>
         /// <returns></returns>
         public Task<T> FindOneAndReplaceOneAsync(
             IClientSessionHandle session,
@@ -329,7 +329,7 @@ namespace Apteryx.MongoDB.Driver.Extend
         /// <param name="filter">Lambda过滤器</param>
         /// <param name="document">文档对象</param>
         /// <param name="options">查询替换操作设置</param>
-        /// <param name="cancellationToken">取消操作设置</param>
+        /// <param name="cancellationToken">取消令牌</param>
         /// <returns></returns>
         public Task<T> FindOneAndReplaceOneAsync(
             Expression<Func<T, bool>> filter,
@@ -346,7 +346,7 @@ namespace Apteryx.MongoDB.Driver.Extend
         /// <param name="filter">Lambda过滤器</param>
         /// <param name="document">文档对象</param>
         /// <param name="options">查询替换操作设置</param>
-        /// <param name="cancellationToken">取消操作设置</param>
+        /// <param name="cancellationToken">取消令牌</param>
         /// <returns></returns>
         public Task<T> FindOneAndReplaceOneAsync(
             IClientSessionHandle session,
@@ -366,7 +366,7 @@ namespace Apteryx.MongoDB.Driver.Extend
         /// <param name="id">文档默认ID</param>
         /// <param name="document">文档对象</param>
         /// <param name="options">查询替换操作设置</param>
-        /// <param name="cancellationToken">取消操作设置</param>
+        /// <param name="cancellationToken">取消令牌</param>
         /// <returns></returns>
         public Task<T> DynamicCollectionFindOneAndReplaceOneAsync<TForeign>(
             TForeign foreignDocument,
@@ -388,7 +388,7 @@ namespace Apteryx.MongoDB.Driver.Extend
         /// <param name="id">文档默认ID</param>
         /// <param name="document">文档对象</param>
         /// <param name="options">查询替换操作设置</param>
-        /// <param name="cancellationToken">取消操作设置</param>
+        /// <param name="cancellationToken">取消令牌</param>
         /// <returns></returns>
         public Task<T> DynamicCollectionFindOneAndReplaceOneAsync<TForeign>(
             IClientSessionHandle session,
@@ -410,7 +410,7 @@ namespace Apteryx.MongoDB.Driver.Extend
         /// <param name="filter">过滤器</param>
         /// <param name="document">文档对象</param>
         /// <param name="options">查询替换操作设置</param>
-        /// <param name="cancellationToken">取消操作设置</param>
+        /// <param name="cancellationToken">取消令牌</param>
         /// <returns></returns>
         public Task<T> DynamicCollectionFindOneAndReplaceOneAsync<TForeign>(
             TForeign foreignDocument,
@@ -432,7 +432,7 @@ namespace Apteryx.MongoDB.Driver.Extend
         /// <param name="filter">过滤器</param>
         /// <param name="document">文档对象</param>
         /// <param name="options">查询替换操作设置</param>
-        /// <param name="cancellationToken">取消操作设置</param>
+        /// <param name="cancellationToken">取消令牌</param>
         /// <returns></returns>
         public Task<T> DynamicCollectionFindOneAndReplaceOneAsync<TForeign>(
             IClientSessionHandle session,
@@ -454,7 +454,7 @@ namespace Apteryx.MongoDB.Driver.Extend
         /// <param name="filter">Lambda过滤器</param>
         /// <param name="document">文档对象</param>
         /// <param name="options">查询替换操作设置</param>
-        /// <param name="cancellationToken">取消操作设置</param>
+        /// <param name="cancellationToken">取消令牌</param>
         /// <returns></returns>
         public Task<T> DynamicCollectionFindOneAndReplaceOneAsync<TForeign>(
             TForeign foreignDocument,
@@ -476,7 +476,7 @@ namespace Apteryx.MongoDB.Driver.Extend
         /// <param name="filter">Lambda过滤器</param>
         /// <param name="document">文档对象</param>
         /// <param name="options">查询替换操作设置</param>
-        /// <param name="cancellationToken">取消操作设置</param>
+        /// <param name="cancellationToken">取消令牌</param>
         /// <returns></returns>
         public Task<T> DynamicCollectionFindOneAndReplaceOneAsync<TForeign>(
             IClientSessionHandle session,

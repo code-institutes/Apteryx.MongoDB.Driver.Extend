@@ -14,7 +14,7 @@
 //        /// <typeparam name="T">文档类型</typeparam>
 //        /// <param name="document">文档对象</param>
 //        /// <param name="options">插入操作设置</param>
-//        /// <param name="cancellationToken">取消操作设置</param>
+//        /// <param name="cancellationToken">取消令牌</param>
 //        public void Add<T>(T document, InsertOneOptions options = null, CancellationToken cancellationToken = default) where T : BaseMongoEntity
 //        {
 //            Database.GetCollection<T>(typeof(T).Name).InsertOne(document, options, cancellationToken);
@@ -27,7 +27,7 @@
 //        /// <param name="session">会话句柄(作用于事务)</param>
 //        /// <param name="document">文档对象</param>
 //        /// <param name="options">插入操作设置</param>
-//        /// <param name="cancellationToken">取消操作设置</param>
+//        /// <param name="cancellationToken">取消令牌</param>
 //        public void Add<T>(IClientSessionHandle session, T document, InsertOneOptions options = null, CancellationToken cancellationToken = default) where T : BaseMongoEntity
 //        {
 //            Database.GetCollection<T>(typeof(T).Name).InsertOne(session, document, options, cancellationToken);
@@ -39,7 +39,7 @@
 //        /// <typeparam name="T">文档类型</typeparam>
 //        /// <param name="documents">文档对象</param>
 //        /// <param name="options">插入操作设置</param>
-//        /// <param name="cancellationToken">取消操作设置</param>
+//        /// <param name="cancellationToken">取消令牌</param>
 //        public void AddMany<T>(IEnumerable<T> documents, InsertManyOptions options = null, CancellationToken cancellationToken = default) where T : BaseMongoEntity
 //        {
 //            Database.GetCollection<T>(typeof(T).Name).InsertMany(documents, options, cancellationToken);
@@ -52,7 +52,7 @@
 //        /// <param name="session">会话句柄(作用于事务)</param>
 //        /// <param name="documents">文档对象</param>
 //        /// <param name="options">插入操作设置</param>
-//        /// <param name="cancellationToken">取消操作设置</param>
+//        /// <param name="cancellationToken">取消令牌</param>
 //        public void AddMany<T>(IClientSessionHandle session, IEnumerable<T> documents, InsertManyOptions options = null, CancellationToken cancellationToken = default) where T : BaseMongoEntity
 //        {
 //            Database.GetCollection<T>(typeof(T).Name).InsertMany(session, documents, options, cancellationToken);

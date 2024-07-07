@@ -21,7 +21,7 @@ namespace Apteryx.MongoDB.Driver.Extend
         /// <param name="id">文档默认ID</param>
         /// <param name="update">更新定义</param>
         /// <param name="options">更新操作设置</param>
-        /// <param name="cancellationToken">取消操作设置</param>
+        /// <param name="cancellationToken">取消令牌</param>
         /// <returns></returns>
         public static Task<UpdateResult> WhereUpdateOneAsync<T>(
             this IMongoCollection<T> collection,
@@ -43,7 +43,7 @@ namespace Apteryx.MongoDB.Driver.Extend
         /// <param name="id">文档默认ID</param>
         /// <param name="update">更新定义</param>
         /// <param name="options">更新操作设置</param>
-        /// <param name="cancellationToken">取消操作设置</param>
+        /// <param name="cancellationToken">取消令牌</param>
         /// <returns></returns>
         public static Task<UpdateResult> WhereUpdateOneAsync<T>(
             this IMongoCollection<T> collection,
@@ -65,7 +65,7 @@ namespace Apteryx.MongoDB.Driver.Extend
         /// <param name="filter">过滤器</param>
         /// <param name="update">更新定义</param>
         /// <param name="options">更新操作设置</param>
-        /// <param name="cancellationToken">取消操作设置</param>
+        /// <param name="cancellationToken">取消令牌</param>
         /// <returns></returns>
         public static Task<UpdateResult> WhereUpdateOneAsync<T>(
             this IMongoCollection<T> collection,
@@ -87,7 +87,7 @@ namespace Apteryx.MongoDB.Driver.Extend
         /// <param name="filter">过滤器</param>
         /// <param name="update">更新定义</param>
         /// <param name="options">更新操作设置</param>
-        /// <param name="cancellationToken">取消操作设置</param>
+        /// <param name="cancellationToken">取消令牌</param>
         /// <returns></returns>
         public static Task<UpdateResult> WhereUpdateOneAsync<T>(
             this IMongoCollection<T> collection,
@@ -109,7 +109,7 @@ namespace Apteryx.MongoDB.Driver.Extend
         /// <param name="filter">Lambda过滤器</param>
         /// <param name="update">更新定义</param>
         /// <param name="options">更新操作设置</param>
-        /// <param name="cancellationToken">取消操作设置</param>
+        /// <param name="cancellationToken">取消令牌</param>
         /// <returns></returns>
         public static Task<UpdateResult> WhereUpdateOneAsync<T>(
             this IMongoCollection<T> collection,
@@ -131,7 +131,7 @@ namespace Apteryx.MongoDB.Driver.Extend
         /// <param name="filter">Lambda过滤器</param>
         /// <param name="update">更新定义</param>
         /// <param name="options">更新操作设置</param>
-        /// <param name="cancellationToken">取消操作设置</param>
+        /// <param name="cancellationToken">取消令牌</param>
         /// <returns></returns>
         public static Task<UpdateResult> WhereUpdateOneAsync<T>(
             this IMongoCollection<T> collection,
@@ -153,7 +153,7 @@ namespace Apteryx.MongoDB.Driver.Extend
         /// <param name="id">文档默认ID</param>
         /// <param name="update">更新定义</param>
         /// <param name="options">更新操作设置</param>
-        /// <param name="cancellationToken">取消操作设置</param>
+        /// <param name="cancellationToken">取消令牌</param>
         /// <returns></returns>
         public static Task<T> FindOneAndUpdateOneAsync<T>(
             this IMongoCollection<T> collection,
@@ -175,7 +175,7 @@ namespace Apteryx.MongoDB.Driver.Extend
         /// <param name="id">文档默认ID</param>
         /// <param name="update">更新定义</param>
         /// <param name="options">更新操作设置</param>
-        /// <param name="cancellationToken">取消操作设置</param>
+        /// <param name="cancellationToken">取消令牌</param>
         /// <returns></returns>
         public static Task<T> FindOneAndUpdateOneAsync<T>(
             this IMongoCollection<T> collection,
@@ -197,7 +197,7 @@ namespace Apteryx.MongoDB.Driver.Extend
         /// <param name="filter">过滤器</param>
         /// <param name="update">更新定义</param>
         /// <param name="options">更新操作设置</param>
-        /// <param name="cancellationToken">取消操作设置</param>
+        /// <param name="cancellationToken">取消令牌</param>
         /// <returns></returns>
         public static Task<T> FindOneAndUpdateOneAsync<T>(
             this IMongoCollection<T> collection,
@@ -219,7 +219,7 @@ namespace Apteryx.MongoDB.Driver.Extend
         /// <param name="filter">过滤器</param>
         /// <param name="update">更新定义</param>
         /// <param name="options">更新操作设置</param>
-        /// <param name="cancellationToken">取消操作设置</param>
+        /// <param name="cancellationToken">取消令牌</param>
         /// <returns></returns>
         public static Task<T> FindOneAndUpdateOneAsync<T>(
             this IMongoCollection<T> collection,
@@ -241,7 +241,7 @@ namespace Apteryx.MongoDB.Driver.Extend
         /// <param name="filter">Lambda过滤器</param>
         /// <param name="update">更新定义</param>
         /// <param name="options">更新操作设置</param>
-        /// <param name="cancellationToken">取消操作设置</param>
+        /// <param name="cancellationToken">取消令牌</param>
         /// <returns></returns>
         public static Task<T> FindOneAndUpdateOneAsync<T>(
             this IMongoCollection<T> collection,
@@ -263,7 +263,7 @@ namespace Apteryx.MongoDB.Driver.Extend
         /// <param name="filter">Lambda过滤器</param>
         /// <param name="update">更新定义</param>
         /// <param name="options">更新操作设置</param>
-        /// <param name="cancellationToken">取消操作设置</param>
+        /// <param name="cancellationToken">取消令牌</param>
         /// <returns></returns>
         public static Task<T> FindOneAndUpdateOneAsync<T>(
             this IMongoCollection<T> collection,
@@ -285,7 +285,7 @@ namespace Apteryx.MongoDB.Driver.Extend
         /// <param name="filter">过滤器</param>
         /// <param name="update">更新定义</param>
         /// <param name="options">更新操作设置</param>
-        /// <param name="cancellationToken">取消操作设置</param>
+        /// <param name="cancellationToken">取消令牌</param>
         /// <returns></returns>
         public static Task<UpdateResult> WhereUpdateManyAsync<T>(
             this IMongoCollection<T> collection,
@@ -307,7 +307,7 @@ namespace Apteryx.MongoDB.Driver.Extend
         /// <param name="filter">过滤器</param>
         /// <param name="update">更新定义</param>
         /// <param name="options">更新操作设置</param>
-        /// <param name="cancellationToken">取消操作设置</param>
+        /// <param name="cancellationToken">取消令牌</param>
         /// <returns></returns>
         public static Task<UpdateResult> WhereUpdateManyAsync<T>(
             this IMongoCollection<T> collection,
@@ -329,7 +329,7 @@ namespace Apteryx.MongoDB.Driver.Extend
         /// <param name="filter">Lambda过滤器</param>
         /// <param name="update">更新定义</param>
         /// <param name="options">更新操作设置</param>
-        /// <param name="cancellationToken">取消操作设置</param>
+        /// <param name="cancellationToken">取消令牌</param>
         /// <returns></returns>
         public static Task<UpdateResult> WhereUpdateManyAsync<T>(
             this IMongoCollection<T> collection,
@@ -351,7 +351,7 @@ namespace Apteryx.MongoDB.Driver.Extend
         /// <param name="filter">Lambda过滤器</param>
         /// <param name="update">更新定义</param>
         /// <param name="options">更新操作设置</param>
-        /// <param name="cancellationToken">取消操作设置</param>
+        /// <param name="cancellationToken">取消令牌</param>
         /// <returns></returns>
         public static Task<UpdateResult> WhereUpdateManyAsync<T>(
             this IMongoCollection<T> collection,

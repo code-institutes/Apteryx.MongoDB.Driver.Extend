@@ -15,7 +15,7 @@
 //        /// <typeparam name="T">文档类型</typeparam>
 //        /// <param name="document">文档对象</param>
 //        /// <param name="options">插入操作设置</param>
-//        /// <param name="cancellationToken">取消操作设置</param>
+//        /// <param name="cancellationToken">取消令牌</param>
 //        public Task AddAsync<T>(T document, InsertOneOptions options = null, CancellationToken cancellationToken = default) where T : BaseMongoEntity
 //        {
 //            return Task.Run(() => Add(document,options,cancellationToken));
@@ -28,7 +28,7 @@
 //        /// <param name="session">会话句柄(作用于事务)</param>
 //        /// <param name="document">文档对象</param>
 //        /// <param name="options">插入操作设置</param>
-//        /// <param name="cancellationToken">取消操作设置</param>
+//        /// <param name="cancellationToken">取消令牌</param>
 //        public Task AddAsync<T>(IClientSessionHandle session,T document, InsertOneOptions options = null, CancellationToken cancellationToken = default) where T : BaseMongoEntity
 //        {
 //            return Task.Run(() => Add(session,document, options, cancellationToken));
@@ -40,7 +40,7 @@
 //        /// <typeparam name="T">文档类型</typeparam>
 //        /// <param name="documents">文档对象</param>
 //        /// <param name="options">插入操作设置</param>
-//        /// <param name="cancellationToken">取消操作设置</param>
+//        /// <param name="cancellationToken">取消令牌</param>
 //        public Task AddManyAsync<T>(IEnumerable<T> documents, InsertManyOptions options, CancellationToken cancellationToken = default) where T : BaseMongoEntity
 //        {
 //            return Task.Run(() => AddMany(documents,options,cancellationToken));
@@ -53,7 +53,7 @@
 //        /// <param name="session">会话句柄(作用于事务)</param>
 //        /// <param name="documents">文档对象</param>
 //        /// <param name="options">插入操作设置</param>
-//        /// <param name="cancellationToken">取消操作设置</param>
+//        /// <param name="cancellationToken">取消令牌</param>
 //        public Task AddManyAsync<T>(IClientSessionHandle session,IEnumerable<T> documents, InsertManyOptions options, CancellationToken cancellationToken = default) where T : BaseMongoEntity
 //        {
 //            return Task.Run(() => AddMany(session,documents, options, cancellationToken));

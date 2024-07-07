@@ -17,7 +17,7 @@
 //        /// <param name="id">文档默认ID</param>
 //        /// <param name="document">文档对象</param>
 //        /// <param name="options">替换操作设置</param>
-//        /// <param name="cancellationToken">取消操作设置</param>
+//        /// <param name="cancellationToken">取消令牌</param>
 //        /// <returns></returns>
 //        public Task<ReplaceOneResult> WhereReplaceOneAsnyc<T>(
 //            string id,
@@ -36,7 +36,7 @@
 //        /// <param name="filter">文档默认ID</param>
 //        /// <param name="document">文档对象</param>
 //        /// <param name="options">替换操作设置</param>
-//        /// <param name="cancellationToken">取消操作设置</param>
+//        /// <param name="cancellationToken">取消令牌</param>
 //        /// <returns></returns>
 //        public Task<ReplaceOneResult> WhereReplaceOneAsnyc<T>(
 //            IClientSessionHandle session,
@@ -55,7 +55,7 @@
 //        /// <param name="filter">过滤器</param>
 //        /// <param name="document">文档对象</param>
 //        /// <param name="options">替换操作设置</param>
-//        /// <param name="cancellationToken">取消操作设置</param>
+//        /// <param name="cancellationToken">取消令牌</param>
 //        /// <returns></returns>
 //        public Task<ReplaceOneResult> WhereReplaceOneAsnyc<T>(
 //            FilterDefinition<T> filter,
@@ -74,7 +74,7 @@
 //        /// <param name="filter">过滤器</param>
 //        /// <param name="document">文档对象</param>
 //        /// <param name="options">替换操作设置</param>
-//        /// <param name="cancellationToken">取消操作设置</param>
+//        /// <param name="cancellationToken">取消令牌</param>
 //        /// <returns></returns>
 //        public Task<ReplaceOneResult> WhereReplaceOneAsnyc<T>(
 //            IClientSessionHandle session,
@@ -93,7 +93,7 @@
 //        /// <param name="filter">Lambda过滤器</param>
 //        /// <param name="document">文档对象</param>
 //        /// <param name="options">替换操作设置</param>
-//        /// <param name="cancellationToken">取消操作设置</param>
+//        /// <param name="cancellationToken">取消令牌</param>
 //        /// <returns></returns>
 //        public Task<ReplaceOneResult> WhereReplaceOneAsnyc<T>(
 //            Expression<Func<T, bool>> filter,
@@ -112,7 +112,7 @@
 //        /// <param name="filter">Lambda过滤器</param>
 //        /// <param name="document">文档对象</param>
 //        /// <param name="options">替换操作设置</param>
-//        /// <param name="cancellationToken">取消操作设置</param>
+//        /// <param name="cancellationToken">取消令牌</param>
 //        /// <returns></returns>
 //        public Task<ReplaceOneResult> WhereReplaceOneAsnyc<T>(
 //            IClientSessionHandle session,
@@ -133,7 +133,7 @@
 //        /// <param name="id">文档默认ID</param>
 //        /// <param name="document">文档对象</param>
 //        /// <param name="options">替换操作设置</param>
-//        /// <param name="cancellationToken">取消操作设置</param>
+//        /// <param name="cancellationToken">取消令牌</param>
 //        /// <returns></returns>
 //        public Task<ReplaceOneResult> DynamicCollectionWhereReplaceOneAsnyc<TForeign, T>(
 //            TForeign foreignDocument,
@@ -156,7 +156,7 @@
 //        /// <param name="id">文档默认ID</param>
 //        /// <param name="document">文档对象</param>
 //        /// <param name="options">替换操作设置</param>
-//        /// <param name="cancellationToken">取消操作设置</param>
+//        /// <param name="cancellationToken">取消令牌</param>
 //        /// <returns></returns>
 //        public Task<ReplaceOneResult> DynamicCollectionWhereReplaceOneAsnyc<TForeign, T>(
 //            IClientSessionHandle session,
@@ -179,7 +179,7 @@
 //        /// <param name="filter">过滤器</param>
 //        /// <param name="document">文档对象</param>
 //        /// <param name="options">替换操作设置</param>
-//        /// <param name="cancellationToken">取消操作设置</param>
+//        /// <param name="cancellationToken">取消令牌</param>
 //        /// <returns></returns>
 //        public Task<ReplaceOneResult> DynamicCollectionWhereReplaceOneAsnyc<TForeign, T>(
 //            TForeign foreignDocument,
@@ -202,7 +202,7 @@
 //        /// <param name="filter">过滤器</param>
 //        /// <param name="document">文档对象</param>
 //        /// <param name="options">替换操作设置</param>
-//        /// <param name="cancellationToken">取消操作设置</param>
+//        /// <param name="cancellationToken">取消令牌</param>
 //        /// <returns></returns>
 //        public Task<ReplaceOneResult> DynamicCollectionWhereReplaceOneAsnyc<TForeign, T>(
 //            IClientSessionHandle session,
@@ -225,7 +225,7 @@
 //        /// <param name="filter">Lambda过滤器</param>
 //        /// <param name="document">文档对象</param>
 //        /// <param name="options">替换操作设置</param>
-//        /// <param name="cancellationToken">取消操作设置</param>
+//        /// <param name="cancellationToken">取消令牌</param>
 //        /// <returns></returns>
 //        public Task<ReplaceOneResult> DynamicCollectionWhereReplaceOneAsnyc<TForeign, T>(
 //            TForeign foreignDocument,
@@ -249,7 +249,7 @@
 //        /// <param name="filter">Lambda过滤器</param>
 //        /// <param name="document">文档对象</param>
 //        /// <param name="options">替换操作设置</param>
-//        /// <param name="cancellationToken">取消操作设置</param>
+//        /// <param name="cancellationToken">取消令牌</param>
 //        /// <returns></returns>
 //        public Task<ReplaceOneResult> DynamicCollectionWhereReplaceOneAsnyc<TForeign, T>(
 //            IClientSessionHandle session,
@@ -270,7 +270,7 @@
 //        /// <param name="id">文档默认ID</param>
 //        /// <param name="document">文档对象</param>
 //        /// <param name="options">查询替换操作设置</param>
-//        /// <param name="cancellationToken">取消操作设置</param>
+//        /// <param name="cancellationToken">取消令牌</param>
 //        /// <returns></returns>
 //        public Task<T> FindOneAndReplaceOneAsync<T>(
 //            string id,
@@ -289,7 +289,7 @@
 //        /// <param name="id">文档默认ID</param>
 //        /// <param name="document">文档对象</param>
 //        /// <param name="options">查询替换操作设置</param>
-//        /// <param name="cancellationToken">取消操作设置</param>
+//        /// <param name="cancellationToken">取消令牌</param>
 //        /// <returns></returns>
 //        public Task<T> FindOneAndReplaceOneAsync<T>(
 //            IClientSessionHandle session,
@@ -308,7 +308,7 @@
 //        /// <param name="filter">过滤器</param>
 //        /// <param name="document">文档对象</param>
 //        /// <param name="options">查询替换操作设置</param>
-//        /// <param name="cancellationToken">取消操作设置</param>
+//        /// <param name="cancellationToken">取消令牌</param>
 //        /// <returns></returns>
 //        public Task<T> FindOneAndReplaceOneAsync<T>(
 //            FilterDefinition<T> filter,
@@ -327,7 +327,7 @@
 //        /// <param name="filter">过滤器</param>
 //        /// <param name="document">文档对象</param>
 //        /// <param name="options">查询替换操作设置</param>
-//        /// <param name="cancellationToken">取消操作设置</param>
+//        /// <param name="cancellationToken">取消令牌</param>
 //        /// <returns></returns>
 //        public Task<T> FindOneAndReplaceOneAsync<T>(
 //            IClientSessionHandle session,
@@ -346,7 +346,7 @@
 //        /// <param name="filter">Lambda过滤器</param>
 //        /// <param name="document">文档对象</param>
 //        /// <param name="options">查询替换操作设置</param>
-//        /// <param name="cancellationToken">取消操作设置</param>
+//        /// <param name="cancellationToken">取消令牌</param>
 //        /// <returns></returns>
 //        public Task<T> FindOneAndReplaceOneAsync<T>(
 //            Expression<Func<T, bool>> filter,
@@ -364,7 +364,7 @@
 //        /// <param name="filter">Lambda过滤器</param>
 //        /// <param name="document">文档对象</param>
 //        /// <param name="options">查询替换操作设置</param>
-//        /// <param name="cancellationToken">取消操作设置</param>
+//        /// <param name="cancellationToken">取消令牌</param>
 //        /// <returns></returns>
 //        public Task<T> FindOneAndReplaceOneAsync<T>(
 //            IClientSessionHandle session,
@@ -385,7 +385,7 @@
 //        /// <param name="id">文档默认ID</param>
 //        /// <param name="document">文档对象</param>
 //        /// <param name="options">查询替换操作设置</param>
-//        /// <param name="cancellationToken">取消操作设置</param>
+//        /// <param name="cancellationToken">取消令牌</param>
 //        /// <returns></returns>
 //        public Task<T> DynamicCollectionFindOneAndReplaceOneAsync<TForeign, T>(
 //            TForeign foreignDocument,
@@ -408,7 +408,7 @@
 //        /// <param name="id">文档默认ID</param>
 //        /// <param name="document">文档对象</param>
 //        /// <param name="options">查询替换操作设置</param>
-//        /// <param name="cancellationToken">取消操作设置</param>
+//        /// <param name="cancellationToken">取消令牌</param>
 //        /// <returns></returns>
 //        public Task<T> DynamicCollectionFindOneAndReplaceOneAsync<TForeign, T>(
 //            IClientSessionHandle session,
@@ -431,7 +431,7 @@
 //        /// <param name="filter">过滤器</param>
 //        /// <param name="document">文档对象</param>
 //        /// <param name="options">查询替换操作设置</param>
-//        /// <param name="cancellationToken">取消操作设置</param>
+//        /// <param name="cancellationToken">取消令牌</param>
 //        /// <returns></returns>
 //        public Task<T> DynamicCollectionFindOneAndReplaceOneAsync<TForeign, T>(
 //            TForeign foreignDocument,
@@ -454,7 +454,7 @@
 //        /// <param name="filter">过滤器</param>
 //        /// <param name="document">文档对象</param>
 //        /// <param name="options">查询替换操作设置</param>
-//        /// <param name="cancellationToken">取消操作设置</param>
+//        /// <param name="cancellationToken">取消令牌</param>
 //        /// <returns></returns>
 //        public Task<T> DynamicCollectionFindOneAndReplaceOneAsync<TForeign, T>(
 //            IClientSessionHandle session,
@@ -477,7 +477,7 @@
 //        /// <param name="filter">Lambda过滤器</param>
 //        /// <param name="document">文档对象</param>
 //        /// <param name="options">查询替换操作设置</param>
-//        /// <param name="cancellationToken">取消操作设置</param>
+//        /// <param name="cancellationToken">取消令牌</param>
 //        /// <returns></returns>
 //        public Task<T> DynamicCollectionFindOneAndReplaceOneAsync<TForeign, T>(
 //            TForeign foreignDocument,
@@ -500,7 +500,7 @@
 //        /// <param name="filter">Lambda过滤器</param>
 //        /// <param name="document">文档对象</param>
 //        /// <param name="options">查询替换操作设置</param>
-//        /// <param name="cancellationToken">取消操作设置</param>
+//        /// <param name="cancellationToken">取消令牌</param>
 //        /// <returns></returns>
 //        public Task<T> DynamicCollectionFindOneAndReplaceOneAsync<TForeign, T>(
 //            IClientSessionHandle session,
