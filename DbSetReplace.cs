@@ -145,8 +145,7 @@ namespace Apteryx.MongoDB.Driver.Extend
            
         {
             document.UpdateTime = DateTime.Now;
-            return _database.GetCollection<T>($"{_collectionName}_{foreignDocument.Id}")
-                .ReplaceOne(filter, document, options, cancellationToken);
+            return _database.GetCollection<T>($"{foreignDocument.Id}_{_collectionName}").ReplaceOne(filter, document, options, cancellationToken);
         }
 
         /// <summary>
@@ -171,8 +170,7 @@ namespace Apteryx.MongoDB.Driver.Extend
            
         {
             document.UpdateTime = DateTime.Now;
-            return _database.GetCollection<T>($"{_collectionName}_{foreignDocument.Id}")
-                .ReplaceOne(session, filter, document, options, cancellationToken);
+            return _database.GetCollection<T>($"{foreignDocument.Id}_{_collectionName}").ReplaceOne(session, filter, document, options, cancellationToken);
         }
 
         /// <summary>
@@ -195,8 +193,7 @@ namespace Apteryx.MongoDB.Driver.Extend
            
         {
             document.UpdateTime = DateTime.Now;
-            return _database.GetCollection<T>($"{_collectionName}_{foreignDocument.Id}")
-                .ReplaceOne(filter, document, options, cancellationToken);
+            return _database.GetCollection<T>($"{foreignDocument.Id}_{_collectionName}").ReplaceOne(filter, document, options, cancellationToken);
         }
 
         /// <summary>
@@ -221,8 +218,7 @@ namespace Apteryx.MongoDB.Driver.Extend
            
         {
             document.UpdateTime = DateTime.Now;
-            return _database.GetCollection<T>($"{_collectionName}_{foreignDocument.Id}")
-                .ReplaceOne(session, filter, document, options, cancellationToken);
+            return _database.GetCollection<T>($"{foreignDocument.Id}_{_collectionName}").ReplaceOne(session, filter, document, options, cancellationToken);
         }
 
         /// <summary>
@@ -364,7 +360,7 @@ namespace Apteryx.MongoDB.Driver.Extend
            
         {
             document.UpdateTime = DateTime.Now;
-            return _database.GetCollection<T>($"{_collectionName}_{foreignDocument.Id}").FindOneAndReplace<T>(r=>r.Id == id, document, options, cancellationToken);
+            return _database.GetCollection<T>($"{foreignDocument.Id}_{_collectionName}").FindOneAndReplace<T>(r=>r.Id == id, document, options, cancellationToken);
         }
 
         /// <summary>
@@ -389,7 +385,7 @@ namespace Apteryx.MongoDB.Driver.Extend
            
         {
             document.UpdateTime = DateTime.Now;
-            return _database.GetCollection<T>($"{_collectionName}_{foreignDocument.Id}").FindOneAndReplace<T>(session, r=>r.Id == id, document, options, cancellationToken);
+            return _database.GetCollection<T>($"{foreignDocument.Id}_{_collectionName}").FindOneAndReplace<T>(session, r=>r.Id == id, document, options, cancellationToken);
         }
 
         /// <summary>
@@ -409,7 +405,7 @@ namespace Apteryx.MongoDB.Driver.Extend
            
         {
             document.UpdateTime = DateTime.Now;
-            return _database.GetCollection<T>($"{_collectionName}_{foreignDocument.Id}").FindOneAndReplace(filter, document, options, cancellationToken);
+            return _database.GetCollection<T>($"{foreignDocument.Id}_{_collectionName}").FindOneAndReplace(filter, document, options, cancellationToken);
         }
 
         /// <summary>
@@ -434,7 +430,7 @@ namespace Apteryx.MongoDB.Driver.Extend
            
         {
             document.UpdateTime = DateTime.Now;
-            return _database.GetCollection<T>($"{_collectionName}_{foreignDocument.Id}").FindOneAndReplace(session,filter, document, options, cancellationToken);
+            return _database.GetCollection<T>($"{foreignDocument.Id}_{_collectionName}").FindOneAndReplace(session,filter, document, options, cancellationToken);
         }
 
         /// <summary>
@@ -457,7 +453,7 @@ namespace Apteryx.MongoDB.Driver.Extend
            
         {
             document.UpdateTime = DateTime.Now;
-            return _database.GetCollection<T>($"{_collectionName}_{foreignDocument.Id}").FindOneAndReplace(filter, document, options, cancellationToken);
+            return _database.GetCollection<T>($"{foreignDocument.Id}_{_collectionName}").FindOneAndReplace(filter, document, options, cancellationToken);
         }
 
         /// <summary>
@@ -482,7 +478,7 @@ namespace Apteryx.MongoDB.Driver.Extend
            
         {
             document.UpdateTime = DateTime.Now;
-            return _database.GetCollection<T>($"{_collectionName}_{foreignDocument.Id}").FindOneAndReplace(session,filter, document, options, cancellationToken);
+            return _database.GetCollection<T>($"{foreignDocument.Id}_{_collectionName}").FindOneAndReplace(session,filter, document, options, cancellationToken);
         }
 
         #endregion

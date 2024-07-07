@@ -99,7 +99,7 @@ namespace Apteryx.MongoDB.Driver.Extend
             CancellationToken cancellationToken = default)
             where TForeign : BaseMongoEntity
         {
-            return _database.GetCollection<T>($"{typeof(T).Name}_{foreignDocument.Id}").CountDocuments(filter, options, cancellationToken);
+            return _database.GetCollection<T>($"{foreignDocument.Id}_{_collectionName}").CountDocuments(filter, options, cancellationToken);
         }
 
         /// <summary>
@@ -120,7 +120,7 @@ namespace Apteryx.MongoDB.Driver.Extend
             CancellationToken cancellationToken = default)
             where TForeign : BaseMongoEntity
         {
-            return _database.GetCollection<T>($"{typeof(T).Name}_{foreignDocument.Id}").CountDocuments(session, filter, options, cancellationToken);
+            return _database.GetCollection<T>($"{foreignDocument.Id}_{_collectionName}").CountDocuments(session, filter, options, cancellationToken);
         }
 
         /// <summary>
@@ -139,7 +139,7 @@ namespace Apteryx.MongoDB.Driver.Extend
             CancellationToken cancellationToken = default)
             where TForeign : BaseMongoEntity
         {
-            return _database.GetCollection<T>($"{typeof(T).Name}_{foreignDocument.Id}").CountDocuments(filter, options, cancellationToken);
+            return _database.GetCollection<T>($"{foreignDocument.Id}_{_collectionName}").CountDocuments(filter, options, cancellationToken);
         }
 
         /// <summary>
@@ -160,7 +160,7 @@ namespace Apteryx.MongoDB.Driver.Extend
             CancellationToken cancellationToken = default)
             where TForeign : BaseMongoEntity
         {
-            return _database.GetCollection<T>($"{typeof(T).Name}_{foreignDocument.Id}").CountDocuments(session, filter, options, cancellationToken);
+            return _database.GetCollection<T>($"{foreignDocument.Id}_{_collectionName}").CountDocuments(session, filter, options, cancellationToken);
         }
 
         #endregion

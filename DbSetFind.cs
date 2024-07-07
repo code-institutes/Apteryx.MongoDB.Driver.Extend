@@ -168,7 +168,7 @@ namespace Apteryx.MongoDB.Driver.Extend
             where TForeign : BaseMongoEntity
 
         {
-            return _database.GetCollection<T>($"{typeof(T).Name}_{foreignDocument.Id}", settings).Find(filter, options).FirstOrDefault();
+            return _database.GetCollection<T>($"{foreignDocument.Id}_{_collectionName}", settings).Find(filter, options).FirstOrDefault();
         }
         /// <summary>
         /// 查询返回单条
@@ -189,7 +189,7 @@ namespace Apteryx.MongoDB.Driver.Extend
             where TForeign : BaseMongoEntity
 
         {
-            return _database.GetCollection<T>($"{typeof(T).Name}_{foreignDocument.Id}", settings).Find(session, filter, options).FirstOrDefault();
+            return _database.GetCollection<T>($"{foreignDocument.Id}_{_collectionName}", settings).Find(session, filter, options).FirstOrDefault();
         }
         /// <summary>
         /// 查询返回单条
@@ -208,7 +208,7 @@ namespace Apteryx.MongoDB.Driver.Extend
             where TForeign : BaseMongoEntity
 
         {
-            return _database.GetCollection<T>($"{typeof(T).Name}_{foreignDocument.Id}", settings).Find(filter, options).FirstOrDefault();
+            return _database.GetCollection<T>($"{foreignDocument.Id}_{_collectionName}", settings).Find(filter, options).FirstOrDefault();
         }
         /// <summary>
         /// 查询返回单条
@@ -228,7 +228,7 @@ namespace Apteryx.MongoDB.Driver.Extend
             where TForeign : BaseMongoEntity
 
         {
-            return _database.GetCollection<T>($"{typeof(T).Name}_{foreignDocument.Id}", settings).Find(session, filter, options).FirstOrDefault();
+            return _database.GetCollection<T>($"{foreignDocument.Id}_{_collectionName}", settings).Find(session, filter, options).FirstOrDefault();
         }
         /// <summary>
         /// 查询全部
@@ -286,7 +286,7 @@ namespace Apteryx.MongoDB.Driver.Extend
             where TForeign : BaseMongoEntity
 
         {
-            return _database.GetCollection<T>($"{typeof(T).Name}_{foreignDocument.Id}", settings).Find(_ => true, options).ToEnumerable();
+            return _database.GetCollection<T>($"{foreignDocument.Id}_{_collectionName}", settings).Find(_ => true, options).ToEnumerable();
         }
         /// <summary>
         /// 查询全部
@@ -301,7 +301,7 @@ namespace Apteryx.MongoDB.Driver.Extend
             where TForeign : BaseMongoEntity
 
         {
-            return _database.GetCollection<T>($"{typeof(T).Name}_{foreignDocument.Id}", settings).Find(session, _ => true, options).ToEnumerable();
+            return _database.GetCollection<T>($"{foreignDocument.Id}_{_collectionName}", settings).Find(session, _ => true, options).ToEnumerable();
         }
         /// <summary>
         /// 查询返回集合
@@ -416,7 +416,7 @@ namespace Apteryx.MongoDB.Driver.Extend
             where TForeign : BaseMongoEntity
 
         {
-            return _database.GetCollection<T>($"{typeof(T).Name}_{foreignDocument.Id}", settings).Find(filter, options).ToEnumerable();
+            return _database.GetCollection<T>($"{foreignDocument.Id}_{_collectionName}", settings).Find(filter, options).ToEnumerable();
         }
         /// <summary>
         /// 查询返回集合
@@ -437,7 +437,7 @@ namespace Apteryx.MongoDB.Driver.Extend
             where TForeign : BaseMongoEntity
 
         {
-            return _database.GetCollection<T>($"{typeof(T).Name}_{foreignDocument.Id}", settings).Find(session, filter, options).ToEnumerable();
+            return _database.GetCollection<T>($"{foreignDocument.Id}_{_collectionName}", settings).Find(session, filter, options).ToEnumerable();
         }
         /// <summary>
         /// 查询返回集合
@@ -456,7 +456,7 @@ namespace Apteryx.MongoDB.Driver.Extend
             where TForeign : BaseMongoEntity
 
         {
-            return _database.GetCollection<T>($"{typeof(T).Name}_{foreignDocument.Id}", settings).Find(filter, options).ToEnumerable();
+            return _database.GetCollection<T>($"{foreignDocument.Id}_{_collectionName}", settings).Find(filter, options).ToEnumerable();
         }
         /// <summary>
         /// 查询返回集合
@@ -477,7 +477,7 @@ namespace Apteryx.MongoDB.Driver.Extend
             where TForeign : BaseMongoEntity
 
         {
-            return _database.GetCollection<T>($"{typeof(T).Name}_{foreignDocument.Id}", settings).Find(session, filter, options).ToEnumerable();
+            return _database.GetCollection<T>($"{foreignDocument.Id}_{_collectionName}", settings).Find(session, filter, options).ToEnumerable();
         }
 
         #endregion

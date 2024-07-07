@@ -183,7 +183,7 @@ namespace Apteryx.MongoDB.Driver.Extend
             FindOptions options = null)
             where TForeign : BaseMongoEntity
         {
-            return Task.Run(() => DynamicCollectionFindOne<TForeign>(foreignDocument, filter, settings, options));
+            return Task.Run(() => DynamicCollectionFindOne(foreignDocument, filter, settings, options));
         }
 
         /// <summary>
@@ -203,7 +203,7 @@ namespace Apteryx.MongoDB.Driver.Extend
             FindOptions options = null)
             where TForeign : BaseMongoEntity
         {
-            return Task.Run(() => DynamicCollectionFindOne<TForeign>(session, foreignDocument, filter, settings, options));
+            return Task.Run(() => DynamicCollectionFindOne(session, foreignDocument, filter, settings, options));
         }
 
         /// <summary>
@@ -222,7 +222,7 @@ namespace Apteryx.MongoDB.Driver.Extend
             FindOptions options = null)
             where TForeign : BaseMongoEntity
         {
-            return Task.Run(() => DynamicCollectionFindOne<TForeign>(foreignDocument, filter, settings, options));
+            return Task.Run(() => DynamicCollectionFindOne(foreignDocument, filter, settings, options));
         }
 
         /// <summary>
@@ -242,7 +242,7 @@ namespace Apteryx.MongoDB.Driver.Extend
             FindOptions options = null)
             where TForeign : BaseMongoEntity
         {
-            return Task.Run(() => DynamicCollectionFindOne<TForeign>(session, foreignDocument, filter, settings, options));
+            return Task.Run(() => DynamicCollectionFindOne(session, foreignDocument, filter, settings, options));
         }
 
         /// <summary>
@@ -305,7 +305,7 @@ namespace Apteryx.MongoDB.Driver.Extend
             where TForeign : BaseMongoEntity
 
         {
-            return Task.Run(() => DynamicCollectionFindAll<TForeign>(foreignDocument, settings, options));
+            return Task.Run(() => DynamicCollectionFindAll(foreignDocument, settings, options));
         }
 
         /// <summary>
@@ -321,7 +321,7 @@ namespace Apteryx.MongoDB.Driver.Extend
             where TForeign : BaseMongoEntity
 
         {
-            return Task.Run(() => DynamicCollectionFindAll<TForeign>(session, foreignDocument, settings, options));
+            return Task.Run(() => DynamicCollectionFindAll(session, foreignDocument, settings, options));
         }
 
         /// <summary>
@@ -444,7 +444,7 @@ namespace Apteryx.MongoDB.Driver.Extend
             FindOptions options = null)
             where TForeign : BaseMongoEntity
         {
-            return Task.Run(() => DynamicCollectionWhere<TForeign>(foreignDocument, filter, settings, options));
+            return Task.Run(() => DynamicCollectionWhere(foreignDocument, filter, settings, options));
         }
 
         /// <summary>
@@ -465,7 +465,7 @@ namespace Apteryx.MongoDB.Driver.Extend
             FindOptions options = null)
             where TForeign : BaseMongoEntity
         {
-            return Task.Run(() => DynamicCollectionWhere<TForeign>(session, foreignDocument, filter, settings, options));
+            return Task.Run(() => DynamicCollectionWhere(session, foreignDocument, filter, settings, options));
         }
 
         /// <summary>
@@ -484,7 +484,7 @@ namespace Apteryx.MongoDB.Driver.Extend
             FindOptions options = null)
             where TForeign : BaseMongoEntity
         {
-            return Task.Run(() => DynamicCollectionWhere<TForeign>(foreignDocument, filter, settings, options));
+            return Task.Run(() => DynamicCollectionWhere(foreignDocument, filter, settings, options));
         }
 
         /// <summary>
@@ -505,7 +505,7 @@ namespace Apteryx.MongoDB.Driver.Extend
             FindOptions options = null)
             where TForeign : BaseMongoEntity
         {
-            return Task.Run(() => DynamicCollectionWhere<TForeign>(session, foreignDocument, filter, settings, options));
+            return Task.Run(() => DynamicCollectionWhere(session, foreignDocument, filter, settings, options));
         }
 
         #endregion

@@ -55,7 +55,7 @@ namespace Apteryx.MongoDB.Driver.Extend
         }
 
         /// <summary>
-        /// 根据主文档的默认id动态的创建附文档的集合,集合名称规则:"{附文档名}_{主文档默认id}"
+        /// 根据主文档的默认id动态的创建附文档的集合,集合名称规则:"{主文档默认id}_{附文档名}"
         /// </summary>
         /// <typeparam name="TForeign">文档类型</typeparam>
         /// <param name="foreignDocument">上级文档</param>
@@ -65,11 +65,11 @@ namespace Apteryx.MongoDB.Driver.Extend
         public void DynamicCollectionAdd<TForeign>(TForeign foreignDocument, T document, InsertOneOptions options = null, CancellationToken cancellationToken = default)
             where TForeign : BaseMongoEntity
         {
-            _database.GetCollection<T>($"{_collectionName}_{foreignDocument.Id}").InsertOne(document, options, cancellationToken);
+            _database.GetCollection<T>($"{foreignDocument.Id}_{_collectionName}").InsertOne(document, options, cancellationToken);
         }
 
         /// <summary>
-        /// 根据主文档的默认id动态的创建附文档的集合,集合名称规则:"{附文档名}_{主文档默认id}"
+        /// 根据主文档的默认id动态的创建附文档的集合,集合名称规则:"{主文档默认id}_{附文档名}"
         /// </summary>
         /// <typeparam name="TForeign">文档类型</typeparam>
         /// <param name="session">会话句柄(作用于事务)</param>
@@ -80,11 +80,11 @@ namespace Apteryx.MongoDB.Driver.Extend
         public void DynamicCollectionAdd<TForeign>(IClientSessionHandle session, TForeign foreignDocument, T document, InsertOneOptions options = null, CancellationToken cancellationToken = default)
             where TForeign : BaseMongoEntity
         {
-            _database.GetCollection<T>($"{_collectionName}_{foreignDocument.Id}").InsertOne(session, document, options, cancellationToken);
+            _database.GetCollection<T>($"{foreignDocument.Id}_{_collectionName}").InsertOne(session, document, options, cancellationToken);
         }
 
         /// <summary>
-        /// 根据主文档的默认id动态的创建附文档的集合,集合名称规则:"{附文档名}_{主文档默认id}"
+        /// 根据主文档的默认id动态的创建附文档的集合,集合名称规则:"{主文档默认id}_{附文档名}"
         /// </summary>
         /// <typeparam name="TForeign">文档类型</typeparam>
         /// <param name="foreignDocument">上级文档</param>
@@ -94,11 +94,11 @@ namespace Apteryx.MongoDB.Driver.Extend
         public void DynamicCollectionAddMany<TForeign>(TForeign foreignDocument, IEnumerable<T> documents, InsertManyOptions options = null, CancellationToken cancellationToken = default)
             where TForeign : BaseMongoEntity
         {
-            _database.GetCollection<T>($"{_collectionName}_{foreignDocument.Id}").InsertMany(documents, options, cancellationToken);
+            _database.GetCollection<T>($"{foreignDocument.Id}_{_collectionName}").InsertMany(documents, options, cancellationToken);
         }
 
         /// <summary>
-        /// 根据主文档的默认id动态的创建附文档的集合,集合名称规则:"{附文档名}_{主文档默认id}"
+        /// 根据主文档的默认id动态的创建附文档的集合,集合名称规则:"{主文档默认id}_{附文档名}"
         /// </summary>
         /// <typeparam name="TForeign">文档类型</typeparam>
         /// <param name="session">会话句柄(作用于事务)</param>
@@ -109,7 +109,7 @@ namespace Apteryx.MongoDB.Driver.Extend
         public void DynamicCollectionAddMany<TForeign>(IClientSessionHandle session, TForeign foreignDocument, IEnumerable<T> documents, InsertManyOptions options = null, CancellationToken cancellationToken = default)
             where TForeign : BaseMongoEntity
         {
-            _database.GetCollection<T>($"{_collectionName}_{foreignDocument.Id}").InsertMany(session, documents, options, cancellationToken);
+            _database.GetCollection<T>($"{foreignDocument.Id}_{_collectionName}").InsertMany(session, documents, options, cancellationToken);
         }
 
         #endregion

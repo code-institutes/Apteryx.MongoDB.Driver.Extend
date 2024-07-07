@@ -14,5 +14,13 @@ namespace Apteryx.MongoDB.Driver.Extend
             _collectionName = collectionName;
             _collection = database.GetCollection<T>(collectionName);
         }
+
+        public IMongoCollection<T> AsCollection
+        {
+            get
+            {
+                return _collection;
+            }
+        }
     }
 }
