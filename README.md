@@ -11,7 +11,7 @@
     public class MyDbService:MongoDbProvider
     {
         public MyDbService(IOptionsMonitor<MongoDBOptions> options) : base(options){}
-        public IMongoCollection<Account> Account => _database.GetCollection<Account>("Account");
+        public DbSet<Account> Account { get; set; }
     }
 
     public class Startup
@@ -64,7 +64,7 @@
     {        
         public MyDbService(string conn):base(conn){}
         //public MyDbService(IOptionsMonitor<MongoDBOptions> options) : base(options){}
-        public IMongoCollection<Account> Account => _database.GetCollection<Account>("Account");
+        public DbSet<Account> Account { get; set; }
     }
     
     [Route("api/[controller]")]
