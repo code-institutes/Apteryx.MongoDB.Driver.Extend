@@ -8,14 +8,6 @@ Nuget/
 *.pdb
 *.tmp
 *.log
-*.ttf
-*.png
-*.xml
-*.jpg
-*.zip
-*.xlsx
-*.pdf
-*.svg
 
 #/Tools/*
 *.DotSettings
