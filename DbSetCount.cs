@@ -10,157 +10,141 @@ namespace Apteryx.MongoDB.Driver.Extend
         #region 计数（同步）
 
         /// <summary>
-        /// 
+        /// 计数
         /// </summary>
         /// <param name="filter">过滤器</param>
-        /// <param name="options">设置</param>
-        /// <param name="cancellationToken">标记</param>
+        /// <param name="options">选项</param>
+        /// <param name="cancellationToken">取消令牌</param>
         /// <returns></returns>
         public long CountDocuments(FilterDefinition<T> filter, CountOptions options = null, CancellationToken cancellationToken = default)
         {
             return _collection.CountDocuments(filter, options, cancellationToken);
         }
+
         /// <summary>
-        /// 
+        /// 计数
         /// </summary>
         /// <param name="session">会话句柄(作用于事务)</param>
         /// <param name="filter">过滤器</param>
-        /// <param name="options">设置</param>
-        /// <param name="cancellationToken">标记</param>
+        /// <param name="options">选项</param>
+        /// <param name="cancellationToken">取消令牌</param>
         /// <returns></returns>
         public long CountDocuments(IClientSessionHandle session, FilterDefinition<T> filter, CountOptions options = null, CancellationToken cancellationToken = default)
         {
             return _collection.CountDocuments(session, filter, options, cancellationToken);
         }
+
         /// <summary>
-        /// 
+        /// 计数
         /// </summary>
-        /// <param name="collectionName">集合名称</param>
-        /// <param name="filter">过滤器</param>
-        /// <param name="options">设置</param>
-        /// <param name="cancellationToken">标记</param>
+        /// <param name="expression">Lambda过滤器</param>
+        /// <param name="options">选项</param>
+        /// <param name="cancellationToken">取消令牌</param>
         /// <returns></returns>
-        public long CountDocuments(string collectionName, FilterDefinition<T> filter, CountOptions options = null, CancellationToken cancellationToken = default)
+        public long CountDocuments(Expression<Func<T, bool>> expression, CountOptions options = null, CancellationToken cancellationToken = default)
         {
-            return _collection.CountDocuments(filter, options, cancellationToken);
-        }
-        /// <summary>
-        /// 
-        /// </summary>
-        /// <param name="collectionName">集合名称</param>
-        /// <param name="session">会话句柄(作用于事务)</param>
-        /// <param name="filter">过滤器</param>
-        /// <param name="options">设置</param>
-        /// <param name="cancellationToken">标记</param>
-        /// <returns></returns>
-        public long CountDocuments(string collectionName, IClientSessionHandle session, FilterDefinition<T> filter, CountOptions options = null, CancellationToken cancellationToken = default)
-        {
-            return _collection.CountDocuments(session, filter, options, cancellationToken);
-        }
-        /// <summary>
-        /// 
-        /// </summary>
-        /// <param name="collectionName">集合名称</param>
-        /// <param name="filter">过滤器</param>
-        /// <param name="options">设置</param>
-        /// <param name="cancellationToken">标记</param>
-        /// <returns></returns>
-        public long CountDocuments(string collectionName, Expression<Func<T, bool>> filter, CountOptions options = null, CancellationToken cancellationToken = default)
-        {
-            return _collection.CountDocuments(filter, options, cancellationToken);
-        }
-        /// <summary>
-        /// 
-        /// </summary>
-        /// <param name="collectionName">集合名称</param>
-        /// <param name="session">会话句柄(作用于事务)</param>
-        /// <param name="filter">过滤器</param>
-        /// <param name="options">设置</param>
-        /// <param name="cancellationToken">标记</param>
-        /// <returns></returns>
-        public long CountDocuments(string collectionName, IClientSessionHandle session, Expression<Func<T, bool>> filter, CountOptions options = null, CancellationToken cancellationToken = default)
-        {
-            return _collection.CountDocuments(session, filter, options, cancellationToken);
+            return _collection.CountDocuments(expression, options, cancellationToken);
         }
 
         /// <summary>
-        /// 
+        /// 计数
+        /// </summary>
+        /// <param name="session">会话句柄(作用于事务)</param>
+        /// <param name="expression">Lambda过滤器</param>
+        /// <param name="options">选项</param>
+        /// <param name="cancellationToken">取消令牌</param>
+        /// <returns></returns>
+        public long CountDocuments(IClientSessionHandle session, Expression<Func<T, bool>> expression, CountOptions options = null, CancellationToken cancellationToken = default)
+        {
+            return _collection.CountDocuments(session, expression, options, cancellationToken);
+        }
+
+        /// <summary>
+        /// 计数
         /// </summary>
         /// <typeparam name="TForeign">文档类型</typeparam>
         /// <param name="foreignDocument">文档对象</param>
         /// <param name="filter">过滤器</param>
-        /// <param name="options">设置</param>
-        /// <param name="cancellationToken">标记</param>
+        /// <param name="settings">设置</param>
+        /// <param name="options">选项</param>
+        /// <param name="cancellationToken">取消令牌</param>
         /// <returns></returns>
         public long DynamicCollectionCountDocuments<TForeign>(
             TForeign foreignDocument,
             FilterDefinition<T> filter,
+            MongoCollectionSettings settings = null,
             CountOptions options = null,
             CancellationToken cancellationToken = default)
             where TForeign : BaseMongoEntity
         {
-            return _database.GetCollection<T>($"{foreignDocument.Id}_{_collectionName}").CountDocuments(filter, options, cancellationToken);
+            return _database.GetCollection<T>($"{foreignDocument.Id}_{_collectionName}",settings).CountDocuments(filter, options, cancellationToken);
         }
 
         /// <summary>
-        /// 
+        /// 计数
         /// </summary>
         /// <typeparam name="TForeign">文档类型</typeparam>
         /// <param name="session">会话句柄(作用于事务)</param>
         /// <param name="foreignDocument">文档对象</param>
         /// <param name="filter">过滤器</param>
-        /// <param name="options">设置</param>
-        /// <param name="cancellationToken">标记</param>
+        /// <param name="settings">设置</param>
+        /// <param name="options">选项</param>
+        /// <param name="cancellationToken">取消令牌</param>
         /// <returns></returns>
         public long DynamicCollectionCountDocuments<TForeign>(
             IClientSessionHandle session,
             TForeign foreignDocument,
             FilterDefinition<T> filter,
+            MongoCollectionSettings settings = null,
             CountOptions options = null,
             CancellationToken cancellationToken = default)
             where TForeign : BaseMongoEntity
         {
-            return _database.GetCollection<T>($"{foreignDocument.Id}_{_collectionName}").CountDocuments(session, filter, options, cancellationToken);
+            return _database.GetCollection<T>($"{foreignDocument.Id}_{_collectionName}", settings).CountDocuments(session, filter, options, cancellationToken);
         }
 
         /// <summary>
-        /// 
+        /// 计数
         /// </summary>
         /// <typeparam name="TForeign">文档类型</typeparam>
         /// <param name="foreignDocument">文档对象</param>
-        /// <param name="filter">过滤器</param>
-        /// <param name="options">设置</param>
-        /// <param name="cancellationToken">标记</param>
+        /// <param name="expression">Lambda过滤器</param>
+        /// <param name="settings">设置</param>
+        /// <param name="options">选项</param>
+        /// <param name="cancellationToken">取消令牌</param>
         /// <returns></returns>
         public long DynamicCollectionCountDocuments<TForeign>(
             TForeign foreignDocument,
-            Expression<Func<T, bool>> filter,
+            Expression<Func<T, bool>> expression,
+            MongoCollectionSettings settings = null,
             CountOptions options = null,
             CancellationToken cancellationToken = default)
             where TForeign : BaseMongoEntity
         {
-            return _database.GetCollection<T>($"{foreignDocument.Id}_{_collectionName}").CountDocuments(filter, options, cancellationToken);
+            return _database.GetCollection<T>($"{foreignDocument.Id}_{_collectionName}", settings).CountDocuments(expression, options, cancellationToken);
         }
 
         /// <summary>
-        /// 
+        /// 计数
         /// </summary>
         /// <typeparam name="TForeign">文档类型</typeparam>
-        /// <param name="session">客户端会话句柄</param>
+        /// <param name="session">会话句柄(作用于事务)</param>
         /// <param name="foreignDocument">文档对象</param>
-        /// <param name="filter">过滤器</param>
-        /// <param name="options">设置</param>
-        /// <param name="cancellationToken">标记</param>
+        /// <param name="expression">Lambda过滤器</param>
+        /// <param name="settings">设置</param>
+        /// <param name="options">选项</param>
+        /// <param name="cancellationToken">取消令牌</param>
         /// <returns></returns>
         public long DynamicCollectionCountDocuments<TForeign>(
             IClientSessionHandle session,
             TForeign foreignDocument,
-            Expression<Func<T, bool>> filter,
+            Expression<Func<T, bool>> expression,
+            MongoCollectionSettings settings = null,
             CountOptions options = null,
             CancellationToken cancellationToken = default)
             where TForeign : BaseMongoEntity
         {
-            return _database.GetCollection<T>($"{foreignDocument.Id}_{_collectionName}").CountDocuments(session, filter, options, cancellationToken);
+            return _database.GetCollection<T>($"{foreignDocument.Id}_{_collectionName}", settings).CountDocuments(session, expression, options, cancellationToken);
         }
 
         #endregion

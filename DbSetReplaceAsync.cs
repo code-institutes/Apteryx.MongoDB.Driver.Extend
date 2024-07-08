@@ -3,6 +3,7 @@ using System.Linq.Expressions;
 using System.Threading;
 using System.Threading.Tasks;
 using MongoDB.Driver;
+using static System.Collections.Specialized.BitVector32;
 
 namespace Apteryx.MongoDB.Driver.Extend
 {
@@ -22,9 +23,9 @@ namespace Apteryx.MongoDB.Driver.Extend
             string id,
             T document,
             ReplaceOptions options = null,
-            CancellationToken cancellationToken = default)            
+            CancellationToken cancellationToken = default)
         {
-            return Task.Run(() => WhereReplaceOne(id, document, options, cancellationToken));
+            return _collection.ReplaceOneAsync(d => d.Id == id, document, options, cancellationToken);
         }
 
         /// <summary>
@@ -41,9 +42,9 @@ namespace Apteryx.MongoDB.Driver.Extend
             string id,
             T document,
             ReplaceOptions options = null,
-            CancellationToken cancellationToken = default)            
+            CancellationToken cancellationToken = default)
         {
-            return Task.Run(() => WhereReplaceOne(session, id, document, options, cancellationToken));
+            return _collection.ReplaceOneAsync(session, d => d.Id == id, document, options, cancellationToken);
         }
 
         /// <summary>
@@ -58,9 +59,9 @@ namespace Apteryx.MongoDB.Driver.Extend
             FilterDefinition<T> filter,
             T document,
             ReplaceOptions options = null,
-            CancellationToken cancellationToken = default)            
+            CancellationToken cancellationToken = default)
         {
-            return Task.Run(() => WhereReplaceOne(filter, document, options, cancellationToken));
+            return _collection.ReplaceOneAsync(filter, document, options, cancellationToken);
         }
 
         /// <summary>
@@ -77,45 +78,45 @@ namespace Apteryx.MongoDB.Driver.Extend
             FilterDefinition<T> filter,
             T document,
             ReplaceOptions options = null,
-            CancellationToken cancellationToken = default)            
+            CancellationToken cancellationToken = default)
         {
-            return Task.Run(() => WhereReplaceOne(session, filter, document, options, cancellationToken));
+            return _collection.ReplaceOneAsync(session, filter, document, options, cancellationToken);
         }
 
         /// <summary>
         /// 替换（单个）(自动更新UpdateTime字段)
         /// </summary>        
-        /// <param name="filter">Lambda过滤器</param>
+        /// <param name="expression">Lambda过滤器</param>
         /// <param name="document">文档对象</param>
         /// <param name="options">替换操作设置</param>
         /// <param name="cancellationToken">取消令牌</param>
         /// <returns></returns>
         public Task<ReplaceOneResult> WhereReplaceOneAsnyc(
-            Expression<Func<T, bool>> filter,
+            Expression<Func<T, bool>> expression,
             T document,
             ReplaceOptions options = null,
-            CancellationToken cancellationToken = default)            
+            CancellationToken cancellationToken = default)
         {
-            return Task.Run(() => WhereReplaceOne(filter, document, options, cancellationToken));
+            return _collection.ReplaceOneAsync(expression, document, options, cancellationToken);
         }
 
         /// <summary>
         /// 替换（单个）(自动更新UpdateTime字段)
         /// </summary>        
         /// <param name="session">会话句柄(作用于事务)</param>
-        /// <param name="filter">Lambda过滤器</param>
+        /// <param name="expression">Lambda过滤器</param>
         /// <param name="document">文档对象</param>
         /// <param name="options">替换操作设置</param>
         /// <param name="cancellationToken">取消令牌</param>
         /// <returns></returns>
         public Task<ReplaceOneResult> WhereReplaceOneAsnyc(
             IClientSessionHandle session,
-            Expression<Func<T, bool>> filter,
+            Expression<Func<T, bool>> expression,
             T document,
             ReplaceOptions options = null,
-            CancellationToken cancellationToken = default)            
+            CancellationToken cancellationToken = default)
         {
-            return Task.Run(() => WhereReplaceOne(session, filter, document, options, cancellationToken));
+            return _collection.ReplaceOneAsync(session, expression, document, options, cancellationToken);
         }
 
         /// <summary>
@@ -125,6 +126,7 @@ namespace Apteryx.MongoDB.Driver.Extend
         /// <param name="foreignDocument">上级文档对象</param>
         /// <param name="id">文档默认ID</param>
         /// <param name="document">文档对象</param>
+        /// <param name="settings">集合设置</param>
         /// <param name="options">替换操作设置</param>
         /// <param name="cancellationToken">取消令牌</param>
         /// <returns></returns>
@@ -132,11 +134,12 @@ namespace Apteryx.MongoDB.Driver.Extend
             TForeign foreignDocument,
             string id,
             T document,
+            MongoCollectionSettings settings = null,
             ReplaceOptions options = null,
             CancellationToken cancellationToken = default)
-            where TForeign : BaseMongoEntity            
+            where TForeign : BaseMongoEntity
         {
-            return Task.Run(() => DynamicCollectionWhereReplaceOne(foreignDocument, id, document, options, cancellationToken));
+            return _database.GetCollection<T>($"{foreignDocument.Id}_{_collectionName}", settings).ReplaceOneAsync(r => r.Id == id, document, options, cancellationToken);
         }
 
         /// <summary>
@@ -147,6 +150,7 @@ namespace Apteryx.MongoDB.Driver.Extend
         /// <param name="foreignDocument">上级文档对象</param>
         /// <param name="id">文档默认ID</param>
         /// <param name="document">文档对象</param>
+        /// <param name="settings">集合设置</param>
         /// <param name="options">替换操作设置</param>
         /// <param name="cancellationToken">取消令牌</param>
         /// <returns></returns>
@@ -155,11 +159,12 @@ namespace Apteryx.MongoDB.Driver.Extend
             TForeign foreignDocument,
             string id,
             T document,
+            MongoCollectionSettings settings = null,
             ReplaceOptions options = null,
             CancellationToken cancellationToken = default)
-            where TForeign : BaseMongoEntity            
+            where TForeign : BaseMongoEntity
         {
-            return Task.Run(() => DynamicCollectionWhereReplaceOne(session, foreignDocument, id, document, options, cancellationToken));
+            return _database.GetCollection<T>($"{foreignDocument.Id}_{_collectionName}", settings).ReplaceOneAsync(session, r => r.Id == id, document, options, cancellationToken);
         }
 
         /// <summary>
@@ -169,6 +174,7 @@ namespace Apteryx.MongoDB.Driver.Extend
         /// <param name="foreignDocument">上级文档对象</param>
         /// <param name="filter">过滤器</param>
         /// <param name="document">文档对象</param>
+        /// <param name="settings">集合设置</param>
         /// <param name="options">替换操作设置</param>
         /// <param name="cancellationToken">取消令牌</param>
         /// <returns></returns>
@@ -176,11 +182,12 @@ namespace Apteryx.MongoDB.Driver.Extend
             TForeign foreignDocument,
             FilterDefinition<T> filter,
             T document,
+            MongoCollectionSettings settings = null,
             ReplaceOptions options = null,
             CancellationToken cancellationToken = default)
-            where TForeign : BaseMongoEntity            
+            where TForeign : BaseMongoEntity
         {
-            return Task.Run(() => DynamicCollectionWhereReplaceOne(foreignDocument, filter, document, options, cancellationToken));
+            return _database.GetCollection<T>($"{foreignDocument.Id}_{_collectionName}", settings).ReplaceOneAsync(filter, document, options, cancellationToken);
         }
 
         /// <summary>
@@ -191,6 +198,7 @@ namespace Apteryx.MongoDB.Driver.Extend
         /// <param name="foreignDocument">上级文档对象</param>
         /// <param name="filter">过滤器</param>
         /// <param name="document">文档对象</param>
+        /// <param name="settings">集合设置</param>
         /// <param name="options">替换操作设置</param>
         /// <param name="cancellationToken">取消令牌</param>
         /// <returns></returns>
@@ -199,11 +207,12 @@ namespace Apteryx.MongoDB.Driver.Extend
             TForeign foreignDocument,
             FilterDefinition<T> filter,
             T document,
+            MongoCollectionSettings settings = null,
             ReplaceOptions options = null,
             CancellationToken cancellationToken = default)
-            where TForeign : BaseMongoEntity            
+            where TForeign : BaseMongoEntity
         {
-            return Task.Run(() => DynamicCollectionWhereReplaceOne(session, foreignDocument, filter, document, options, cancellationToken));
+            return _database.GetCollection<T>($"{foreignDocument.Id}_{_collectionName}", settings).ReplaceOneAsync(session, filter, document, options, cancellationToken);
         }
 
         /// <summary>
@@ -211,20 +220,22 @@ namespace Apteryx.MongoDB.Driver.Extend
         /// </summary>
         /// <typeparam name="TForeign">文档类型</typeparam>        
         /// <param name="foreignDocument">上级文档对象</param>
-        /// <param name="filter">Lambda过滤器</param>
+        /// <param name="expression">Lambda过滤器</param>
         /// <param name="document">文档对象</param>
+        /// <param name="settings">集合设置</param>
         /// <param name="options">替换操作设置</param>
         /// <param name="cancellationToken">取消令牌</param>
         /// <returns></returns>
         public Task<ReplaceOneResult> DynamicCollectionWhereReplaceOneAsnyc<TForeign>(
             TForeign foreignDocument,
-            Expression<Func<T, bool>> filter,
+            Expression<Func<T, bool>> expression,
             T document,
+            MongoCollectionSettings settings = null,
             ReplaceOptions options = null,
             CancellationToken cancellationToken = default)
-            where TForeign : BaseMongoEntity            
+            where TForeign : BaseMongoEntity
         {
-            return Task.Run(() => DynamicCollectionWhereReplaceOne(foreignDocument, filter, document, options, cancellationToken));
+            return _database.GetCollection<T>($"{foreignDocument.Id}_{_collectionName}", settings).ReplaceOneAsync(expression, document, options, cancellationToken);
 
         }
 
@@ -234,21 +245,23 @@ namespace Apteryx.MongoDB.Driver.Extend
         /// <typeparam name="TForeign">文档类型</typeparam>        
         /// <param name="session">会话句柄(作用于事务)</param>
         /// <param name="foreignDocument">上级文档对象</param>
-        /// <param name="filter">Lambda过滤器</param>
+        /// <param name="expression">Lambda过滤器</param>
         /// <param name="document">文档对象</param>
+        /// <param name="settings">集合设置</param>
         /// <param name="options">替换操作设置</param>
         /// <param name="cancellationToken">取消令牌</param>
         /// <returns></returns>
         public Task<ReplaceOneResult> DynamicCollectionWhereReplaceOneAsnyc<TForeign>(
             IClientSessionHandle session,
             TForeign foreignDocument,
-            Expression<Func<T, bool>> filter,
+            Expression<Func<T, bool>> expression,
             T document,
+            MongoCollectionSettings settings = null,
             ReplaceOptions options = null,
             CancellationToken cancellationToken = default)
-            where TForeign : BaseMongoEntity            
+            where TForeign : BaseMongoEntity
         {
-            return Task.Run(() => DynamicCollectionWhereReplaceOne(session, foreignDocument, filter, document, options, cancellationToken));
+            return _database.GetCollection<T>($"{foreignDocument.Id}_{_collectionName}", settings).ReplaceOneAsync(session, expression, document, options, cancellationToken);
         }
 
         /// <summary>
@@ -263,9 +276,9 @@ namespace Apteryx.MongoDB.Driver.Extend
             string id,
             T document,
             FindOneAndReplaceOptions<T> options = null,
-            CancellationToken cancellationToken = default)            
+            CancellationToken cancellationToken = default)
         {
-            return Task.Run(() => FindOneAndReplaceOne(id, document, options, cancellationToken));
+            return _collection.FindOneAndReplaceAsync(id, document, options, cancellationToken);
         }
 
         /// <summary>
@@ -282,9 +295,9 @@ namespace Apteryx.MongoDB.Driver.Extend
             string id,
             T document,
             FindOneAndReplaceOptions<T> options = null,
-            CancellationToken cancellationToken = default)            
+            CancellationToken cancellationToken = default)
         {
-            return Task.Run(() => FindOneAndReplaceOne(session, id, document, options, cancellationToken));
+            return _collection.FindOneAndReplaceAsync(session, id, document, options, cancellationToken);
         }
 
         /// <summary>
@@ -299,9 +312,9 @@ namespace Apteryx.MongoDB.Driver.Extend
             FilterDefinition<T> filter,
             T document,
             FindOneAndReplaceOptions<T> options = null,
-            CancellationToken cancellationToken = default)            
+            CancellationToken cancellationToken = default)
         {
-            return Task.Run(() => FindOneAndReplaceOne(filter, document, options, cancellationToken));
+            return _collection.FindOneAndReplaceAsync(filter, document, options, cancellationToken);
         }
 
         /// <summary>
@@ -318,44 +331,44 @@ namespace Apteryx.MongoDB.Driver.Extend
             FilterDefinition<T> filter,
             T document,
             FindOneAndReplaceOptions<T> options = null,
-            CancellationToken cancellationToken = default)            
+            CancellationToken cancellationToken = default)
         {
-            return Task.Run(() => FindOneAndReplaceOne(session, filter, document, options, cancellationToken));
+            return _collection.FindOneAndReplaceAsync(session, filter, document, options, cancellationToken);
         }
 
         /// <summary>
         /// 查询替换（单个）(自动更新UpdateTime字段)
         /// </summary>        
-        /// <param name="filter">Lambda过滤器</param>
+        /// <param name="expression">Lambda过滤器</param>
         /// <param name="document">文档对象</param>
         /// <param name="options">查询替换操作设置</param>
         /// <param name="cancellationToken">取消令牌</param>
         /// <returns></returns>
         public Task<T> FindOneAndReplaceOneAsync(
-            Expression<Func<T, bool>> filter,
+            Expression<Func<T, bool>> expression,
             T document,
             FindOneAndReplaceOptions<T> options = null,
-            CancellationToken cancellationToken = default)            
+            CancellationToken cancellationToken = default)
         {
-            return Task.Run(() => FindOneAndReplaceOne(filter, document, options, cancellationToken));
+            return _collection.FindOneAndReplaceAsync(expression, document, options, cancellationToken);
         }
 
         /// <summary>
         /// 查询替换（单个）(自动更新UpdateTime字段)
         /// </summary>        
-        /// <param name="filter">Lambda过滤器</param>
+        /// <param name="expression">Lambda过滤器</param>
         /// <param name="document">文档对象</param>
         /// <param name="options">查询替换操作设置</param>
         /// <param name="cancellationToken">取消令牌</param>
         /// <returns></returns>
         public Task<T> FindOneAndReplaceOneAsync(
             IClientSessionHandle session,
-            Expression<Func<T, bool>> filter,
+            Expression<Func<T, bool>> expression,
             T document,
             FindOneAndReplaceOptions<T> options = null,
-            CancellationToken cancellationToken = default)            
+            CancellationToken cancellationToken = default)
         {
-            return Task.Run(() => FindOneAndReplaceOne(session, filter, document, options, cancellationToken));
+            return _collection.FindOneAndReplaceAsync(expression, session, document, options, cancellationToken);
         }
 
         /// <summary>
@@ -365,6 +378,7 @@ namespace Apteryx.MongoDB.Driver.Extend
         /// <param name="foreignDocument">上级文档对象</param>
         /// <param name="id">文档默认ID</param>
         /// <param name="document">文档对象</param>
+        /// <param name="settings">集合设置</param>
         /// <param name="options">查询替换操作设置</param>
         /// <param name="cancellationToken">取消令牌</param>
         /// <returns></returns>
@@ -372,11 +386,12 @@ namespace Apteryx.MongoDB.Driver.Extend
             TForeign foreignDocument,
             string id,
             T document,
+            MongoCollectionSettings settings = null,
             FindOneAndReplaceOptions<T> options = null,
             CancellationToken cancellationToken = default)
-            where TForeign : BaseMongoEntity            
+            where TForeign : BaseMongoEntity
         {
-            return Task.Run(() => DynamicCollectionFindOneAndReplaceOne(foreignDocument, id, document, options, cancellationToken));
+            return _database.GetCollection<T>($"{foreignDocument.Id}_{_collectionName}", settings).FindOneAndReplaceAsync<T>(r => r.Id == id, document, options, cancellationToken);
         }
 
         /// <summary>
@@ -387,6 +402,7 @@ namespace Apteryx.MongoDB.Driver.Extend
         /// <param name="foreignDocument">上级文档对象</param>
         /// <param name="id">文档默认ID</param>
         /// <param name="document">文档对象</param>
+        /// <param name="settings">集合设置</param>
         /// <param name="options">查询替换操作设置</param>
         /// <param name="cancellationToken">取消令牌</param>
         /// <returns></returns>
@@ -395,11 +411,12 @@ namespace Apteryx.MongoDB.Driver.Extend
             TForeign foreignDocument,
             string id,
             T document,
+            MongoCollectionSettings settings = null,
             FindOneAndReplaceOptions<T> options = null,
             CancellationToken cancellationToken = default)
-            where TForeign : BaseMongoEntity            
+            where TForeign : BaseMongoEntity
         {
-            return Task.Run(() => DynamicCollectionFindOneAndReplaceOne(session, foreignDocument, id, document, options, cancellationToken));
+            return _database.GetCollection<T>($"{foreignDocument.Id}_{_collectionName}", settings).FindOneAndReplaceAsync<T>(r => r.Id == id, session, document, options, cancellationToken);
         }
 
         /// <summary>
@@ -409,6 +426,7 @@ namespace Apteryx.MongoDB.Driver.Extend
         /// <param name="foreignDocument">上级文档对象</param>
         /// <param name="filter">过滤器</param>
         /// <param name="document">文档对象</param>
+        /// <param name="settings">集合设置</param>
         /// <param name="options">查询替换操作设置</param>
         /// <param name="cancellationToken">取消令牌</param>
         /// <returns></returns>
@@ -416,11 +434,12 @@ namespace Apteryx.MongoDB.Driver.Extend
             TForeign foreignDocument,
             FilterDefinition<T> filter,
             T document,
+            MongoCollectionSettings settings = null,
             FindOneAndReplaceOptions<T> options = null,
             CancellationToken cancellationToken = default)
-            where TForeign : BaseMongoEntity            
+            where TForeign : BaseMongoEntity
         {
-            return Task.Run(() => DynamicCollectionFindOneAndReplaceOne(foreignDocument, filter, document, options, cancellationToken));
+            return _database.GetCollection<T>($"{foreignDocument.Id}_{_collectionName}", settings).FindOneAndReplaceAsync<T>(filter, document, options, cancellationToken);
         }
 
         /// <summary>
@@ -431,6 +450,7 @@ namespace Apteryx.MongoDB.Driver.Extend
         /// <param name="foreignDocument">上级文档对象</param>
         /// <param name="filter">过滤器</param>
         /// <param name="document">文档对象</param>
+        /// <param name="settings">集合设置</param>
         /// <param name="options">查询替换操作设置</param>
         /// <param name="cancellationToken">取消令牌</param>
         /// <returns></returns>
@@ -439,11 +459,12 @@ namespace Apteryx.MongoDB.Driver.Extend
             TForeign foreignDocument,
             FilterDefinition<T> filter,
             T document,
+            MongoCollectionSettings settings = null,
             FindOneAndReplaceOptions<T> options = null,
             CancellationToken cancellationToken = default)
-            where TForeign : BaseMongoEntity            
+            where TForeign : BaseMongoEntity
         {
-            return Task.Run(() => DynamicCollectionFindOneAndReplaceOne(session, foreignDocument, filter, document, options, cancellationToken));
+            return _database.GetCollection<T>($"{foreignDocument.Id}_{_collectionName}", settings).FindOneAndReplaceAsync<T>(session, filter, document, options, cancellationToken);
         }
 
         /// <summary>
@@ -451,20 +472,22 @@ namespace Apteryx.MongoDB.Driver.Extend
         /// </summary>
         /// <typeparam name="TForeign">文档类型</typeparam>        
         /// <param name="foreignDocument">上级文档对象</param>
-        /// <param name="filter">Lambda过滤器</param>
+        /// <param name="expression">Lambda过滤器</param>
         /// <param name="document">文档对象</param>
+        /// <param name="settings">集合设置</param>
         /// <param name="options">查询替换操作设置</param>
         /// <param name="cancellationToken">取消令牌</param>
         /// <returns></returns>
         public Task<T> DynamicCollectionFindOneAndReplaceOneAsync<TForeign>(
             TForeign foreignDocument,
-            Expression<Func<T, bool>> filter,
+            Expression<Func<T, bool>> expression,
             T document,
+            MongoCollectionSettings settings = null,
             FindOneAndReplaceOptions<T> options = null,
             CancellationToken cancellationToken = default)
-            where TForeign : BaseMongoEntity            
+            where TForeign : BaseMongoEntity
         {
-            return Task.Run(() => DynamicCollectionFindOneAndReplaceOne(foreignDocument, filter, document, options, cancellationToken));
+            return _database.GetCollection<T>($"{foreignDocument.Id}_{_collectionName}", settings).FindOneAndReplaceAsync<T>(expression, document, options, cancellationToken);
         }
 
         /// <summary>
@@ -473,21 +496,23 @@ namespace Apteryx.MongoDB.Driver.Extend
         /// <typeparam name="TForeign">文档类型</typeparam>        
         /// <param name="session">会话句柄(作用于事务)</param>
         /// <param name="foreignDocument">上级文档对象</param>
-        /// <param name="filter">Lambda过滤器</param>
+        /// <param name="expression">Lambda过滤器</param>
         /// <param name="document">文档对象</param>
+        /// <param name="settings">集合设置</param>
         /// <param name="options">查询替换操作设置</param>
         /// <param name="cancellationToken">取消令牌</param>
         /// <returns></returns>
         public Task<T> DynamicCollectionFindOneAndReplaceOneAsync<TForeign>(
             IClientSessionHandle session,
             TForeign foreignDocument,
-            Expression<Func<T, bool>> filter,
+            Expression<Func<T, bool>> expression,
             T document,
+            MongoCollectionSettings settings = null,
             FindOneAndReplaceOptions<T> options = null,
             CancellationToken cancellationToken = default)
-            where TForeign : BaseMongoEntity            
+            where TForeign : BaseMongoEntity
         {
-            return Task.Run(() => DynamicCollectionFindOneAndReplaceOne(session,foreignDocument, filter, document, options, cancellationToken));
+            return _database.GetCollection<T>($"{foreignDocument.Id}_{_collectionName}", settings).FindOneAndReplaceAsync<T>(expression, session, document, options, cancellationToken);
         }
 
         #endregion

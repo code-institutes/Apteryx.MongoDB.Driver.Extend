@@ -62,10 +62,10 @@ namespace Apteryx.MongoDB.Driver.Extend
         /// <param name="document">文档对象</param>
         /// <param name="options">插入操作设置</param>
         /// <param name="cancellationToken">取消令牌</param>
-        public void DynamicCollectionAdd<TForeign>(TForeign foreignDocument, T document, InsertOneOptions options = null, CancellationToken cancellationToken = default)
+        public void DynamicCollectionAdd<TForeign>(TForeign foreignDocument, T document, MongoCollectionSettings settings = null, InsertOneOptions options = null, CancellationToken cancellationToken = default)
             where TForeign : BaseMongoEntity
         {
-            _database.GetCollection<T>($"{foreignDocument.Id}_{_collectionName}").InsertOne(document, options, cancellationToken);
+            _database.GetCollection<T>($"{foreignDocument.Id}_{_collectionName}", settings).InsertOne(document, options, cancellationToken);
         }
 
         /// <summary>
@@ -77,10 +77,10 @@ namespace Apteryx.MongoDB.Driver.Extend
         /// <param name="document">文档对象</param>
         /// <param name="options">插入操作设置</param>
         /// <param name="cancellationToken">取消令牌</param>
-        public void DynamicCollectionAdd<TForeign>(IClientSessionHandle session, TForeign foreignDocument, T document, InsertOneOptions options = null, CancellationToken cancellationToken = default)
+        public void DynamicCollectionAdd<TForeign>(IClientSessionHandle session, TForeign foreignDocument, T document, MongoCollectionSettings settings = null, InsertOneOptions options = null, CancellationToken cancellationToken = default)
             where TForeign : BaseMongoEntity
         {
-            _database.GetCollection<T>($"{foreignDocument.Id}_{_collectionName}").InsertOne(session, document, options, cancellationToken);
+            _database.GetCollection<T>($"{foreignDocument.Id}_{_collectionName}", settings).InsertOne(session, document, options, cancellationToken);
         }
 
         /// <summary>
@@ -91,10 +91,10 @@ namespace Apteryx.MongoDB.Driver.Extend
         /// <param name="documents">文档对象</param>
         /// <param name="options">插入操作设置</param>
         /// <param name="cancellationToken">取消令牌</param>
-        public void DynamicCollectionAddMany<TForeign>(TForeign foreignDocument, IEnumerable<T> documents, InsertManyOptions options = null, CancellationToken cancellationToken = default)
+        public void DynamicCollectionAddMany<TForeign>(TForeign foreignDocument, IEnumerable<T> documents, MongoCollectionSettings settings = null, InsertManyOptions options = null, CancellationToken cancellationToken = default)
             where TForeign : BaseMongoEntity
         {
-            _database.GetCollection<T>($"{foreignDocument.Id}_{_collectionName}").InsertMany(documents, options, cancellationToken);
+            _database.GetCollection<T>($"{foreignDocument.Id}_{_collectionName}", settings).InsertMany(documents, options, cancellationToken);
         }
 
         /// <summary>
@@ -106,10 +106,10 @@ namespace Apteryx.MongoDB.Driver.Extend
         /// <param name="documents">文档对象</param>
         /// <param name="options">插入操作设置</param>
         /// <param name="cancellationToken">取消令牌</param>
-        public void DynamicCollectionAddMany<TForeign>(IClientSessionHandle session, TForeign foreignDocument, IEnumerable<T> documents, InsertManyOptions options = null, CancellationToken cancellationToken = default)
+        public void DynamicCollectionAddMany<TForeign>(IClientSessionHandle session, TForeign foreignDocument, IEnumerable<T> documents, MongoCollectionSettings settings = null, InsertManyOptions options = null, CancellationToken cancellationToken = default)
             where TForeign : BaseMongoEntity
         {
-            _database.GetCollection<T>($"{foreignDocument.Id}_{_collectionName}").InsertMany(session, documents, options, cancellationToken);
+            _database.GetCollection<T>($"{foreignDocument.Id}_{_collectionName}", settings).InsertMany(session, documents, options, cancellationToken);
         }
 
         #endregion

@@ -5,7 +5,7 @@ using System.Linq;
 
 namespace Apteryx.MongoDB.Driver.Extend
 {
-    public abstract partial class MongoDbProvider /*: IMongoDbProvider*/
+    public abstract partial class MongoDbProvider
     {
         //定义数据库
         public IMongoDatabase Database { get; set; }

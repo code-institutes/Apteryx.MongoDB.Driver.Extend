@@ -18,7 +18,7 @@ namespace Apteryx.MongoDB.Driver.Extend
         /// <param name="cancellationToken">取消令牌</param>
         public Task AddAsync(T document, InsertOneOptions options = null, CancellationToken cancellationToken = default)
         {
-            return Task.Run(() => Add(document, options, cancellationToken));
+            return _collection.InsertOneAsync(document, options, cancellationToken);
         }
 
         /// <summary>
@@ -31,7 +31,7 @@ namespace Apteryx.MongoDB.Driver.Extend
         /// <param name="cancellationToken">取消令牌</param>
         public Task AddAsync(IClientSessionHandle session, T document, InsertOneOptions options = null, CancellationToken cancellationToken = default)
         {
-            return Task.Run(() => Add(session, document, options, cancellationToken));
+            return _collection.InsertOneAsync(session, document, options, cancellationToken);
         }
 
         /// <summary>
@@ -43,7 +43,7 @@ namespace Apteryx.MongoDB.Driver.Extend
         /// <param name="cancellationToken">取消令牌</param>
         public Task AddManyAsync(IEnumerable<T> documents, InsertManyOptions options, CancellationToken cancellationToken = default)
         {
-            return Task.Run(() => AddMany(documents, options, cancellationToken));
+            return _collection.InsertManyAsync(documents, options, cancellationToken);
         }
 
         /// <summary>
@@ -56,7 +56,7 @@ namespace Apteryx.MongoDB.Driver.Extend
         /// <param name="cancellationToken">取消令牌</param>
         public Task AddManyAsync(IClientSessionHandle session, IEnumerable<T> documents, InsertManyOptions options, CancellationToken cancellationToken = default)
         {
-            return Task.Run(() => AddMany(session, documents, options, cancellationToken));
+            return _collection.InsertManyAsync(session, documents, options, cancellationToken);
         }
 
         /// <summary>
@@ -67,10 +67,10 @@ namespace Apteryx.MongoDB.Driver.Extend
         /// <param name="document">文档对象</param>
         /// <param name="options">插入操作设置</param>
         /// <param name="cancellationToken">取消令牌</param>
-        public Task DynamicCollectionAddAsync<TForeign>(T foreignDocument, T document, InsertOneOptions options = null, CancellationToken cancellationToken = default)
+        public Task DynamicCollectionAddAsync<TForeign>(T foreignDocument, T document, MongoCollectionSettings settings = null, InsertOneOptions options = null, CancellationToken cancellationToken = default)
             where TForeign : BaseMongoEntity
         {
-            return Task.Run(() => DynamicCollectionAdd(foreignDocument, document, options, cancellationToken));
+            return _database.GetCollection<T>($"{foreignDocument.Id}_{_collectionName}", settings).InsertOneAsync(document, options, cancellationToken);
         }
 
         /// <summary>
@@ -82,10 +82,10 @@ namespace Apteryx.MongoDB.Driver.Extend
         /// <param name="document">文档对象</param>
         /// <param name="options">插入操作设置</param>
         /// <param name="cancellationToken">取消令牌</param>
-        public Task DynamicCollectionAddAsync<TForeign>(IClientSessionHandle session, T foreignDocument, T document, InsertOneOptions options = null, CancellationToken cancellationToken = default)
+        public Task DynamicCollectionAddAsync<TForeign>(IClientSessionHandle session, T foreignDocument, T document, MongoCollectionSettings settings = null, InsertOneOptions options = null, CancellationToken cancellationToken = default)
             where TForeign : BaseMongoEntity
         {
-            return Task.Run(() => DynamicCollectionAdd(session, foreignDocument, document, options, cancellationToken));
+            return _database.GetCollection<T>($"{foreignDocument.Id}_{_collectionName}", settings).InsertOneAsync(session, document, options, cancellationToken);
         }
 
         /// <summary>
@@ -96,10 +96,10 @@ namespace Apteryx.MongoDB.Driver.Extend
         /// <param name="documents">文档对象</param>
         /// <param name="options">插入操作设置</param>
         /// <param name="cancellationToken">取消令牌</param>
-        public Task DynamicCollectionAddManyAsync<TForeign>(T foreignDocument, IEnumerable<T> documents, InsertManyOptions options = null, CancellationToken cancellationToken = default)
+        public Task DynamicCollectionAddManyAsync<TForeign>(T foreignDocument, IEnumerable<T> documents, MongoCollectionSettings settings = null, InsertManyOptions options = null, CancellationToken cancellationToken = default)
             where TForeign : BaseMongoEntity
         {
-            return Task.Run(() => DynamicCollectionAddMany(foreignDocument, documents, options, cancellationToken));
+            return _database.GetCollection<T>($"{foreignDocument.Id}_{_collectionName}", settings).InsertManyAsync(documents, options, cancellationToken);
         }
 
         /// <summary>
@@ -111,11 +111,12 @@ namespace Apteryx.MongoDB.Driver.Extend
         /// <param name="documents">文档对象</param>
         /// <param name="options">插入操作设置</param>
         /// <param name="cancellationToken">取消令牌</param>
-        public Task DynamicCollectionAddManyAsync<TForeign>(IClientSessionHandle session, T foreignDocument, IEnumerable<T> documents, InsertManyOptions options = null, CancellationToken cancellationToken = default)
+        public Task DynamicCollectionAddManyAsync<TForeign>(IClientSessionHandle session, T foreignDocument, IEnumerable<T> documents, MongoCollectionSettings settings = null, InsertManyOptions options = null, CancellationToken cancellationToken = default)
             where TForeign : BaseMongoEntity
         {
-            return Task.Run(() => DynamicCollectionAddMany(session, foreignDocument, documents, options, cancellationToken));
+            return _database.GetCollection<T>($"{foreignDocument.Id}_{_collectionName}", settings).InsertManyAsync(session, documents, options, cancellationToken);
         }
+
         #endregion
     }
 }
