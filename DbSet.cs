@@ -14,7 +14,7 @@ namespace Apteryx.MongoDB.Driver.Extend
             _collection = database.GetCollection<T>(collectionName);
         }
 
-        public IMongoCollection<T> AsCollection
+        public IMongoCollection<T> AsMongoCollection
         {
             get
             {

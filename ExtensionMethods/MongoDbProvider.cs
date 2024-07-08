@@ -2,6 +2,7 @@
 using MongoDB.Driver;
 using System;
 using System.Linq;
+using System.Reflection;
 
 namespace Apteryx.MongoDB.Driver.Extend
 {
@@ -22,6 +23,7 @@ namespace Apteryx.MongoDB.Driver.Extend
             Database = Client.GetDatabase(connsetting.DatabaseName);
 
             InitializeDbSets();
+            InitializeCollections();
         }
 
         /// <summary>
@@ -42,6 +44,23 @@ namespace Apteryx.MongoDB.Driver.Extend
                 var dbSetType = typeof(DbSet<>).MakeGenericType(entityType);
                 var dbSetInstance = Activator.CreateInstance(dbSetType, Database, collectionName);
                 property.SetValue(this, dbSetInstance);
+            }
+        }
+
+        private void InitializeCollections()
+        {
+            var properties = this.GetType().GetProperties(BindingFlags.Public | BindingFlags.Instance);
+            foreach (var property in properties)
+            {
+                if (property.PropertyType.IsGenericType && property.PropertyType.GetGenericTypeDefinition() == typeof(IMongoCollection<>))
+                {
+                    var collectionName = property.Name;
+                    var collectionType = property.PropertyType.GetGenericArguments()[0];
+                    var method = typeof(IMongoDatabase).GetMethod("GetCollection", new[] { typeof(string), typeof(MongoCollectionSettings) });
+                    var genericMethod = method.MakeGenericMethod(collectionType);
+                    var collection = genericMethod.Invoke(Database, new object[] { collectionName, null });
+                    property.SetValue(this, collection);
+                }
             }
         }
     }
