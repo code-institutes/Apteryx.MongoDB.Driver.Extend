@@ -18,7 +18,7 @@ namespace Apteryx.MongoDB.Driver.Extend
         /// <param name="settings">数据库设置</param>
         /// <param name="options">查找操作设置</param>
         /// <returns></returns>
-        public async Task<T> FindOneAsync(string id, FindOptions<T, T> options = null)
+        public async Task<T> FindOneAsync(string id, FindOptions<T> options = null)
         {
             return (await _collection.FindAsync(f => f.Id == id, options)).Current.FirstOrDefault();
         }
@@ -31,7 +31,7 @@ namespace Apteryx.MongoDB.Driver.Extend
         /// <param name="settings">数据库设置</param>
         /// <param name="options">查找操作设置</param>
         /// <returns></returns>
-        public async Task<T> FindOneAsync(IClientSessionHandle session, string id, FindOptions<T, T> options = null)
+        public async Task<T> FindOneAsync(IClientSessionHandle session, string id, FindOptions<T> options = null)
         {
             return (await _collection.FindAsync(session, f => f.Id == id, options)).Current.FirstOrDefault();
         }
@@ -43,7 +43,7 @@ namespace Apteryx.MongoDB.Driver.Extend
         /// <param name="settings">数据库设置</param>
         /// <param name="options">查找操作设置</param>
         /// <returns></returns>
-        public async Task<T> FindOneAsync(FilterDefinition<T> filter, FindOptions<T, T> options = null)
+        public async Task<T> FindOneAsync(FilterDefinition<T> filter, FindOptions<T> options = null)
         {
             return (await _collection.FindAsync(filter, options)).Current.FirstOrDefault();
         }
@@ -56,7 +56,7 @@ namespace Apteryx.MongoDB.Driver.Extend
         /// <param name="settings">数据库设置</param>
         /// <param name="options">查找操作设置</param>
         /// <returns></returns>
-        public async Task<T> FindOneAsync(IClientSessionHandle session, FilterDefinition<T> filter, FindOptions<T, T> options = null)
+        public async Task<T> FindOneAsync(IClientSessionHandle session, FilterDefinition<T> filter, FindOptions<T> options = null)
         {
             return (await _collection.FindAsync(session, filter, options)).Current.FirstOrDefault();
         }
@@ -68,7 +68,7 @@ namespace Apteryx.MongoDB.Driver.Extend
         /// <param name="settings">数据库设置</param>
         /// <param name="options">查找操作设置</param>
         /// <returns></returns>
-        public async Task<T> FindOneAsync(Expression<Func<T, bool>> expression, FindOptions<T, T> options = null)
+        public async Task<T> FindOneAsync(Expression<Func<T, bool>> expression, FindOptions<T> options = null)
         {
             return (await _collection.FindAsync(expression, options)).Current.FirstOrDefault();
         }
@@ -81,7 +81,7 @@ namespace Apteryx.MongoDB.Driver.Extend
         /// <param name="settings">数据库设置</param>
         /// <param name="options">查找操作设置</param>
         /// <returns></returns>
-        public async Task<T> FindOneAsync(IClientSessionHandle session, Expression<Func<T, bool>> expression, FindOptions<T, T> options = null)
+        public async Task<T> FindOneAsync(IClientSessionHandle session, Expression<Func<T, bool>> expression, FindOptions<T> options = null)
         {
             return (await _collection.FindAsync(session, expression, options)).Current.FirstOrDefault();
         }
@@ -99,7 +99,7 @@ namespace Apteryx.MongoDB.Driver.Extend
             TForeign foreignDocument,
             FilterDefinition<T> filter,
             MongoCollectionSettings settings = null,
-            FindOptions<T, T> options = null)
+            FindOptions<T> options = null)
             where TForeign : BaseMongoEntity
         {
             return (await _database.GetCollection<T>($"{foreignDocument.Id}_{_collectionName}", settings).FindAsync(filter, options)).Current.FirstOrDefault();
@@ -119,7 +119,7 @@ namespace Apteryx.MongoDB.Driver.Extend
             TForeign foreignDocument,
             FilterDefinition<T> filter,
             MongoCollectionSettings settings = null,
-            FindOptions<T, T> options = null)
+            FindOptions<T> options = null)
             where TForeign : BaseMongoEntity
         {
             return (await _database.GetCollection<T>($"{foreignDocument.Id}_{_collectionName}", settings).FindAsync(session, filter, options)).Current.FirstOrDefault();
@@ -138,7 +138,7 @@ namespace Apteryx.MongoDB.Driver.Extend
             TForeign foreignDocument,
             Expression<Func<T, bool>> expression,
             MongoCollectionSettings settings = null,
-            FindOptions<T, T> options = null)
+            FindOptions<T> options = null)
             where TForeign : BaseMongoEntity
         {
             return (await _database.GetCollection<T>($"{foreignDocument.Id}_{_collectionName}", settings).FindAsync(expression, options)).Current.FirstOrDefault();
@@ -158,7 +158,7 @@ namespace Apteryx.MongoDB.Driver.Extend
             TForeign foreignDocument,
             Expression<Func<T, bool>> expression,
             MongoCollectionSettings settings = null,
-            FindOptions<T, T> options = null)
+            FindOptions<T> options = null)
             where TForeign : BaseMongoEntity
         {
             return (await _database.GetCollection<T>($"{foreignDocument.Id}_{_collectionName}", settings).FindAsync(session, expression, options)).Current.FirstOrDefault();
@@ -170,7 +170,7 @@ namespace Apteryx.MongoDB.Driver.Extend
         /// <param name="settings">数据库设置</param>
         /// <param name="options">查找操作设置</param>
         /// <returns></returns>
-        public async Task<IEnumerable<T>> FindAllAsync(FindOptions<T, T> options = null)
+        public async Task<IEnumerable<T>> FindAllAsync(FindOptions<T> options = null)
         {
             return (await _collection.FindAsync(_ => true, options)).Current;
         }
@@ -182,7 +182,7 @@ namespace Apteryx.MongoDB.Driver.Extend
         /// <param name="settings">数据库设置</param>
         /// <param name="options">查找操作设置</param>
         /// <returns></returns>
-        public async Task<IEnumerable<T>> FindAllAsync(IClientSessionHandle session,  FindOptions<T, T> options = null)
+        public async Task<IEnumerable<T>> FindAllAsync(IClientSessionHandle session,  FindOptions<T> options = null)
         {
             return (await _collection.FindAsync(session, _ => true, options)).Current;
         }
@@ -195,7 +195,7 @@ namespace Apteryx.MongoDB.Driver.Extend
         /// <param name="settings">数据库设置</param>
         /// <param name="options">查找操作设置</param>
         /// <returns></returns>
-        public async Task<IEnumerable<T>> DynamicCollectionFindAllAsync<TForeign>(TForeign foreignDocument, MongoCollectionSettings settings = null, FindOptions<T, T> options = null)
+        public async Task<IEnumerable<T>> DynamicCollectionFindAllAsync<TForeign>(TForeign foreignDocument, MongoCollectionSettings settings = null, FindOptions<T> options = null)
             where TForeign : BaseMongoEntity
 
         {
@@ -211,7 +211,7 @@ namespace Apteryx.MongoDB.Driver.Extend
         /// <param name="settings">数据库设置</param>
         /// <param name="options">查找操作设置</param>
         /// <returns></returns>
-        public async Task<IEnumerable<T>> DynamicCollectionFindAllAsync<TForeign>(IClientSessionHandle session, TForeign foreignDocument, MongoCollectionSettings settings = null, FindOptions<T, T> options = null)
+        public async Task<IEnumerable<T>> DynamicCollectionFindAllAsync<TForeign>(IClientSessionHandle session, TForeign foreignDocument, MongoCollectionSettings settings = null, FindOptions<T> options = null)
             where TForeign : BaseMongoEntity
 
         {
@@ -225,7 +225,7 @@ namespace Apteryx.MongoDB.Driver.Extend
         /// <param name="settings">数据库设置</param>
         /// <param name="options">查找操作设置</param>
         /// <returns></returns>
-        public async Task<IEnumerable<T>> WhereAsync(FilterDefinition<T> filter, FindOptions<T, T> options = null)
+        public async Task<IEnumerable<T>> WhereAsync(FilterDefinition<T> filter, FindOptions<T> options = null)
         {
             return (await _collection.FindAsync(filter, options)).Current;
         }
@@ -238,7 +238,7 @@ namespace Apteryx.MongoDB.Driver.Extend
         /// <param name="settings">数据库设置</param>
         /// <param name="options">查找操作设置</param>
         /// <returns></returns>
-        public async Task<IEnumerable<T>> WhereAsync(IClientSessionHandle session, FilterDefinition<T> filter, FindOptions<T, T> options = null)
+        public async Task<IEnumerable<T>> WhereAsync(IClientSessionHandle session, FilterDefinition<T> filter, FindOptions<T> options = null)
         {
             return (await _collection.FindAsync(session, filter, options)).Current;
         }
@@ -250,7 +250,7 @@ namespace Apteryx.MongoDB.Driver.Extend
         /// <param name="settings">数据库设置</param>
         /// <param name="options">查找操作设置</param>
         /// <returns></returns>
-        public async Task<IEnumerable<T>> WhereAsync(Expression<Func<T, bool>> expression, FindOptions<T, T> options = null)
+        public async Task<IEnumerable<T>> WhereAsync(Expression<Func<T, bool>> expression, FindOptions<T> options = null)
         {
             return (await _collection.FindAsync(expression, options)).Current;
         }
@@ -263,7 +263,7 @@ namespace Apteryx.MongoDB.Driver.Extend
         /// <param name="settings">数据库设置</param>
         /// <param name="options">查找操作设置</param>
         /// <returns></returns>
-        public async Task<IEnumerable<T>> WhereAsync(IClientSessionHandle session, Expression<Func<T, bool>> expression, FindOptions<T, T> options = null)
+        public async Task<IEnumerable<T>> WhereAsync(IClientSessionHandle session, Expression<Func<T, bool>> expression, FindOptions<T> options = null)
         {
             return (await _collection.FindAsync(session, expression, options)).Current;
         }
@@ -281,7 +281,7 @@ namespace Apteryx.MongoDB.Driver.Extend
             TForeign foreignDocument,
             FilterDefinition<T> filter,
             MongoCollectionSettings settings = null,
-            FindOptions<T, T> options = null)
+            FindOptions<T> options = null)
             where TForeign : BaseMongoEntity
         {
             return (await _database.GetCollection<T>($"{foreignDocument.Id}_{_collectionName}", settings).FindAsync(filter, options)).Current;
@@ -302,7 +302,7 @@ namespace Apteryx.MongoDB.Driver.Extend
             TForeign foreignDocument,
             FilterDefinition<T> filter,
             MongoCollectionSettings settings = null,
-            FindOptions<T, T> options = null)
+            FindOptions<T> options = null)
             where TForeign : BaseMongoEntity
         {
             return (await _database.GetCollection<T>($"{foreignDocument.Id}_{_collectionName}", settings).FindAsync(session, filter, options)).Current;
@@ -321,7 +321,7 @@ namespace Apteryx.MongoDB.Driver.Extend
             TForeign foreignDocument,
             Expression<Func<T, bool>> expression,
             MongoCollectionSettings settings = null,
-            FindOptions<T, T> options = null)
+            FindOptions<T> options = null)
             where TForeign : BaseMongoEntity
         {
             return (await _database.GetCollection<T>($"{foreignDocument.Id}_{_collectionName}", settings).FindAsync(expression, options)).Current;
@@ -342,7 +342,7 @@ namespace Apteryx.MongoDB.Driver.Extend
             TForeign foreignDocument,
             Expression<Func<T, bool>> expression,
             MongoCollectionSettings settings = null,
-            FindOptions<T, T> options = null)
+            FindOptions<T> options = null)
             where TForeign : BaseMongoEntity
         {
             return (await _database.GetCollection<T>($"{foreignDocument.Id}_{_collectionName}", settings).FindAsync(session, expression, options)).Current;
