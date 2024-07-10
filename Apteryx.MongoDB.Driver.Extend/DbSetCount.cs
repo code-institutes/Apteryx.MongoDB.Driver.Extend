@@ -13,7 +13,7 @@ namespace Apteryx.MongoDB.Driver.Extend
         /// 计数
         /// </summary>
         /// <param name="filter">过滤器</param>
-        /// <param name="options">选项</param>
+        /// <param name="options">计数选项</param>
         /// <param name="cancellationToken">取消令牌</param>
         /// <returns></returns>
         public long CountDocuments(FilterDefinition<T> filter, CountOptions options = null, CancellationToken cancellationToken = default)
@@ -26,7 +26,7 @@ namespace Apteryx.MongoDB.Driver.Extend
         /// </summary>
         /// <param name="session">会话句柄(作用于事务)</param>
         /// <param name="filter">过滤器</param>
-        /// <param name="options">选项</param>
+        /// <param name="options">计数选项</param>
         /// <param name="cancellationToken">取消令牌</param>
         /// <returns></returns>
         public long CountDocuments(IClientSessionHandle session, FilterDefinition<T> filter, CountOptions options = null, CancellationToken cancellationToken = default)
@@ -38,7 +38,7 @@ namespace Apteryx.MongoDB.Driver.Extend
         /// 计数
         /// </summary>
         /// <param name="expression">Lambda过滤器</param>
-        /// <param name="options">选项</param>
+        /// <param name="options">计数选项</param>
         /// <param name="cancellationToken">取消令牌</param>
         /// <returns></returns>
         public long CountDocuments(Expression<Func<T, bool>> expression, CountOptions options = null, CancellationToken cancellationToken = default)
@@ -51,7 +51,7 @@ namespace Apteryx.MongoDB.Driver.Extend
         /// </summary>
         /// <param name="session">会话句柄(作用于事务)</param>
         /// <param name="expression">Lambda过滤器</param>
-        /// <param name="options">选项</param>
+        /// <param name="options">计数选项</param>
         /// <param name="cancellationToken">取消令牌</param>
         /// <returns></returns>
         public long CountDocuments(IClientSessionHandle session, Expression<Func<T, bool>> expression, CountOptions options = null, CancellationToken cancellationToken = default)
@@ -65,8 +65,8 @@ namespace Apteryx.MongoDB.Driver.Extend
         /// <typeparam name="TForeign">文档类型</typeparam>
         /// <param name="foreignDocument">文档对象</param>
         /// <param name="filter">过滤器</param>
-        /// <param name="settings">设置</param>
-        /// <param name="options">选项</param>
+        /// <param name="settings">集合设置</param>
+        /// <param name="options">计数选项</param>
         /// <param name="cancellationToken">取消令牌</param>
         /// <returns></returns>
         public long DynamicCollectionCountDocuments<TForeign>(
@@ -87,8 +87,8 @@ namespace Apteryx.MongoDB.Driver.Extend
         /// <param name="session">会话句柄(作用于事务)</param>
         /// <param name="foreignDocument">文档对象</param>
         /// <param name="filter">过滤器</param>
-        /// <param name="settings">设置</param>
-        /// <param name="options">选项</param>
+        /// <param name="settings">集合设置</param>
+        /// <param name="options">计数选项</param>
         /// <param name="cancellationToken">取消令牌</param>
         /// <returns></returns>
         public long DynamicCollectionCountDocuments<TForeign>(
@@ -109,8 +109,8 @@ namespace Apteryx.MongoDB.Driver.Extend
         /// <typeparam name="TForeign">文档类型</typeparam>
         /// <param name="foreignDocument">文档对象</param>
         /// <param name="expression">Lambda过滤器</param>
-        /// <param name="settings">设置</param>
-        /// <param name="options">选项</param>
+        /// <param name="settings">集合设置</param>
+        /// <param name="options">计数选项</param>
         /// <param name="cancellationToken">取消令牌</param>
         /// <returns></returns>
         public long DynamicCollectionCountDocuments<TForeign>(
@@ -131,8 +131,8 @@ namespace Apteryx.MongoDB.Driver.Extend
         /// <param name="session">会话句柄(作用于事务)</param>
         /// <param name="foreignDocument">文档对象</param>
         /// <param name="expression">Lambda过滤器</param>
-        /// <param name="settings">设置</param>
-        /// <param name="options">选项</param>
+        /// <param name="settings">集合设置</param>
+        /// <param name="options">计数选项</param>
         /// <param name="cancellationToken">取消令牌</param>
         /// <returns></returns>
         public long DynamicCollectionCountDocuments<TForeign>(

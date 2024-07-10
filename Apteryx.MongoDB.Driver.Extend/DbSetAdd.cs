@@ -60,9 +60,15 @@ namespace Apteryx.MongoDB.Driver.Extend
         /// <typeparam name="TForeign">文档类型</typeparam>
         /// <param name="foreignDocument">上级文档</param>
         /// <param name="document">文档对象</param>
+        /// <param name="settings">集合设置</param>
         /// <param name="options">插入操作设置</param>
         /// <param name="cancellationToken">取消令牌</param>
-        public void DynamicCollectionAdd<TForeign>(TForeign foreignDocument, T document, MongoCollectionSettings settings = null, InsertOneOptions options = null, CancellationToken cancellationToken = default)
+        public void DynamicCollectionAdd<TForeign>(
+            TForeign foreignDocument,
+            T document, 
+            MongoCollectionSettings settings = null, 
+            InsertOneOptions options = null, 
+            CancellationToken cancellationToken = default)
             where TForeign : BaseMongoEntity
         {
             _database.GetCollection<T>($"{foreignDocument.Id}_{_collectionName}", settings).InsertOne(document, options, cancellationToken);
@@ -75,9 +81,16 @@ namespace Apteryx.MongoDB.Driver.Extend
         /// <param name="session">会话句柄(作用于事务)</param>
         /// <param name="foreignDocument">上级文档</param>
         /// <param name="document">文档对象</param>
+        /// <param name="settings">集合设置</param>
         /// <param name="options">插入操作设置</param>
         /// <param name="cancellationToken">取消令牌</param>
-        public void DynamicCollectionAdd<TForeign>(IClientSessionHandle session, TForeign foreignDocument, T document, MongoCollectionSettings settings = null, InsertOneOptions options = null, CancellationToken cancellationToken = default)
+        public void DynamicCollectionAdd<TForeign>(
+            IClientSessionHandle session, 
+            TForeign foreignDocument, 
+            T document, 
+            MongoCollectionSettings settings = null, 
+            InsertOneOptions options = null, 
+            CancellationToken cancellationToken = default)
             where TForeign : BaseMongoEntity
         {
             _database.GetCollection<T>($"{foreignDocument.Id}_{_collectionName}", settings).InsertOne(session, document, options, cancellationToken);
@@ -89,9 +102,15 @@ namespace Apteryx.MongoDB.Driver.Extend
         /// <typeparam name="TForeign">文档类型</typeparam>
         /// <param name="foreignDocument">上级文档</param>
         /// <param name="documents">文档对象</param>
+        /// <param name="settings">集合设置</param>
         /// <param name="options">插入操作设置</param>
         /// <param name="cancellationToken">取消令牌</param>
-        public void DynamicCollectionAddMany<TForeign>(TForeign foreignDocument, IEnumerable<T> documents, MongoCollectionSettings settings = null, InsertManyOptions options = null, CancellationToken cancellationToken = default)
+        public void DynamicCollectionAddMany<TForeign>(
+            TForeign foreignDocument, 
+            IEnumerable<T> documents,
+            MongoCollectionSettings settings = null, 
+            InsertManyOptions options = null, 
+            CancellationToken cancellationToken = default)
             where TForeign : BaseMongoEntity
         {
             _database.GetCollection<T>($"{foreignDocument.Id}_{_collectionName}", settings).InsertMany(documents, options, cancellationToken);
@@ -104,9 +123,16 @@ namespace Apteryx.MongoDB.Driver.Extend
         /// <param name="session">会话句柄(作用于事务)</param>
         /// <param name="foreignDocument">上级文档</param>
         /// <param name="documents">文档对象</param>
+        /// <param name="settings">集合设置</param>
         /// <param name="options">插入操作设置</param>
         /// <param name="cancellationToken">取消令牌</param>
-        public void DynamicCollectionAddMany<TForeign>(IClientSessionHandle session, TForeign foreignDocument, IEnumerable<T> documents, MongoCollectionSettings settings = null, InsertManyOptions options = null, CancellationToken cancellationToken = default)
+        public void DynamicCollectionAddMany<TForeign>(
+            IClientSessionHandle session, 
+            TForeign foreignDocument, 
+            IEnumerable<T> documents,
+            MongoCollectionSettings settings = null, 
+            InsertManyOptions options = null, 
+            CancellationToken cancellationToken = default)
             where TForeign : BaseMongoEntity
         {
             _database.GetCollection<T>($"{foreignDocument.Id}_{_collectionName}", settings).InsertMany(session, documents, options, cancellationToken);

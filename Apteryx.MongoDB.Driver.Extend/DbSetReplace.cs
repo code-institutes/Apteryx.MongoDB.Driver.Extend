@@ -383,7 +383,6 @@ namespace Apteryx.MongoDB.Driver.Extend
             FindOneAndReplaceOptions<T> options = null,
             CancellationToken cancellationToken = default)
             where TForeign : BaseMongoEntity
-
         {
             document.UpdateTime = DateTime.Now;
             return _database.GetCollection<T>($"{foreignDocument.Id}_{_collectionName}", settings).FindOneAndReplace<T>(session, r => r.Id == id, document, options, cancellationToken);
@@ -434,7 +433,6 @@ namespace Apteryx.MongoDB.Driver.Extend
             FindOneAndReplaceOptions<T> options = null,
             CancellationToken cancellationToken = default)
             where TForeign : BaseMongoEntity
-
         {
             document.UpdateTime = DateTime.Now;
             return _database.GetCollection<T>($"{foreignDocument.Id}_{_collectionName}", settings).FindOneAndReplace(session, filter, document, options, cancellationToken);
@@ -459,7 +457,6 @@ namespace Apteryx.MongoDB.Driver.Extend
             FindOneAndReplaceOptions<T> options = null,
             CancellationToken cancellationToken = default)
             where TForeign : BaseMongoEntity
-
         {
             document.UpdateTime = DateTime.Now;
             return _database.GetCollection<T>($"{foreignDocument.Id}_{_collectionName}", settings).FindOneAndReplace(expression, document, options, cancellationToken);
@@ -486,7 +483,6 @@ namespace Apteryx.MongoDB.Driver.Extend
             FindOneAndReplaceOptions<T> options = null,
             CancellationToken cancellationToken = default)
             where TForeign : BaseMongoEntity
-
         {
             document.UpdateTime = DateTime.Now;
             return _database.GetCollection<T>($"{foreignDocument.Id}_{_collectionName}", settings).FindOneAndReplace(session, expression, document, options, cancellationToken);

@@ -12,7 +12,7 @@ namespace Apteryx.MongoDB.Driver.Extend
         /// 查询返回（单个）
         /// </summary>        
         /// <param name="id">文档默认ID</param>
-        /// <param name="options">选项</param>
+        /// <param name="options">计数选项</param>
         /// <returns></returns>
         public T FindOne(string id, FindOptions options = null)
         {
@@ -24,7 +24,7 @@ namespace Apteryx.MongoDB.Driver.Extend
         /// </summary>        
         /// <param name="session">会话句柄(作用于事务)</param>
         /// <param name="id">文档默认ID</param>
-        /// <param name="options">选项</param>
+        /// <param name="options">计数选项</param>
         /// <returns></returns>
         public T FindOne(IClientSessionHandle session, string id,  FindOptions options = null)
         {
@@ -35,7 +35,7 @@ namespace Apteryx.MongoDB.Driver.Extend
         /// 查询返回（单个）
         /// </summary>
         /// <param name="filter">过滤器</param>
-        /// <param name="options">选项</param>
+        /// <param name="options">计数选项</param>
         /// <returns></returns>
         public T FindOne(FilterDefinition<T> filter,  FindOptions options = null)
         {
@@ -46,7 +46,7 @@ namespace Apteryx.MongoDB.Driver.Extend
         /// 查询返回（单个）
         /// </summary>
         /// <param name="filter">过滤器</param>
-        /// <param name="options">选项</param>
+        /// <param name="options">计数选项</param>
         /// <returns></returns>
         public T FindOne(IClientSessionHandle session, FilterDefinition<T> filter,  FindOptions options = null)
         {
@@ -57,7 +57,7 @@ namespace Apteryx.MongoDB.Driver.Extend
         /// 查询返回（单个）
         /// </summary>
         /// <param name="expression">Lambda过滤器</param>
-        /// <param name="options">选项</param>
+        /// <param name="options">计数选项</param>
         /// <returns></returns>
         public T FindOne(Expression<Func<T, bool>> expression,  FindOptions options = null)
         {
@@ -69,7 +69,7 @@ namespace Apteryx.MongoDB.Driver.Extend
         /// </summary>
         /// <param name="session">会话句柄(作用于事务)</param>
         /// <param name="expression">Lambda过滤器</param>
-        /// <param name="options">选项</param>
+        /// <param name="options">计数选项</param>
         /// <returns></returns>
         public T FindOne(IClientSessionHandle session, Expression<Func<T, bool>> expression,  FindOptions options = null)
         {
@@ -82,7 +82,7 @@ namespace Apteryx.MongoDB.Driver.Extend
         /// <typeparam name="TForeign">文档类型</typeparam>
         /// <param name="foreignDocument">文档对象</param>
         /// <param name="filter">过滤器</param>
-        /// <param name="options">选项</param>
+        /// <param name="options">计数选项</param>
         /// <returns></returns>
         public T DynamicCollectionFindOne<TForeign>(
             TForeign foreignDocument,
@@ -101,7 +101,7 @@ namespace Apteryx.MongoDB.Driver.Extend
         /// <param name="session">会话句柄(作用于事务)</param>
         /// <param name="foreignDocument">文档对象</param>
         /// <param name="filter">过滤器</param>
-        /// <param name="options">选项</param>
+        /// <param name="options">计数选项</param>
         /// <returns></returns>
         public T DynamicCollectionFindOne<TForeign>(
             IClientSessionHandle session,
@@ -120,8 +120,8 @@ namespace Apteryx.MongoDB.Driver.Extend
         /// <typeparam name="TForeign">文档类型</typeparam>
         /// <param name="foreignDocument">文档对象</param>
         /// <param name="expression">Lambda过滤器</param>
-        /// <param name="settings">设置</param>
-        /// <param name="options">选项</param>
+        /// <param name="settings">集合设置</param>
+        /// <param name="options">计数选项</param>
         /// <returns></returns>
         public T DynamicCollectionFindOne<TForeign>(
             TForeign foreignDocument,
@@ -138,8 +138,8 @@ namespace Apteryx.MongoDB.Driver.Extend
         /// <typeparam name="TForeign">文档类型</typeparam>
         /// <param name="foreignDocument">文档对象</param>
         /// <param name="expression">Lambda过滤器</param>
-        /// <param name="settings">设置</param>
-        /// <param name="options">选项</param>
+        /// <param name="settings">集合设置</param>
+        /// <param name="options">计数选项</param>
         /// <returns></returns>
         public T DynamicCollectionFindOne<TForeign>(
             IClientSessionHandle session,
@@ -154,7 +154,7 @@ namespace Apteryx.MongoDB.Driver.Extend
         /// <summary>
         /// 查询全部
         /// </summary>        
-        /// <param name="options">选项</param>
+        /// <param name="options">计数选项</param>
         /// <returns></returns>
         public IEnumerable<T> FindAll( FindOptions options = null)
         {
@@ -164,7 +164,7 @@ namespace Apteryx.MongoDB.Driver.Extend
         /// 查询全部
         /// </summary>
         /// <param name="session">会话句柄(作用于事务)</param>        
-        /// <param name="options">选项</param>
+        /// <param name="options">计数选项</param>
         /// <returns></returns>
         public IEnumerable<T> FindAll(IClientSessionHandle session,  FindOptions options = null)
         {
@@ -176,8 +176,8 @@ namespace Apteryx.MongoDB.Driver.Extend
         /// </summary>
         /// <typeparam name="TForeign">文档类型</typeparam>
         /// <param name="foreignDocument">文档对象</param>
-        /// <param name="settings">设置</param>
-        /// <param name="options">选项</param>
+        /// <param name="settings">集合设置</param>
+        /// <param name="options">计数选项</param>
         /// <returns></returns>
         public IEnumerable<T> DynamicCollectionFindAll<TForeign>(TForeign foreignDocument, MongoCollectionSettings settings = null, FindOptions options = null)
             where TForeign : BaseMongoEntity
@@ -192,8 +192,8 @@ namespace Apteryx.MongoDB.Driver.Extend
         /// <typeparam name="TForeign">文档类型</typeparam>
         /// <param name="session">会话句柄(作用于事务)</param>
         /// <param name="foreignDocument">文档对象</param>
-        /// <param name="settings">设置</param>
-        /// <param name="options">选项</param>
+        /// <param name="settings">集合设置</param>
+        /// <param name="options">计数选项</param>
         /// <returns></returns>
         public IEnumerable<T> DynamicCollectionFindAll<TForeign>(IClientSessionHandle session, TForeign foreignDocument, MongoCollectionSettings settings = null, FindOptions options = null)
             where TForeign : BaseMongoEntity
@@ -206,7 +206,7 @@ namespace Apteryx.MongoDB.Driver.Extend
         /// 查询返回集合
         /// </summary>
         /// <param name="filter">过滤器</param>        
-        /// <param name="options">选项</param>
+        /// <param name="options">计数选项</param>
         /// <returns></returns>
         public IFindFluent<T,T> Where(FilterDefinition<T> filter,  FindOptions options = null)
         {
@@ -218,7 +218,7 @@ namespace Apteryx.MongoDB.Driver.Extend
         /// </summary>
         /// <param name="session">会话句柄(作用于事务)</param>
         /// <param name="filter">过滤器</param>        
-        /// <param name="options">选项</param>
+        /// <param name="options">计数选项</param>
         /// <returns></returns>
         public IFindFluent<T, T> Where(IClientSessionHandle session, FilterDefinition<T> filter,  FindOptions options = null)
         {
@@ -229,7 +229,7 @@ namespace Apteryx.MongoDB.Driver.Extend
         /// 查询返回集合
         /// </summary>
         /// <param name="expression">Lambda过滤器</param>        
-        /// <param name="options">选项</param>
+        /// <param name="options">计数选项</param>
         /// <returns></returns>
         public IFindFluent<T, T> Where(Expression<Func<T, bool>> expression,  FindOptions options = null)
         {
@@ -241,7 +241,7 @@ namespace Apteryx.MongoDB.Driver.Extend
         /// </summary>
         /// <param name="session">会话句柄(作用于事务)</param>
         /// <param name="expression">Lambda过滤器</param>        
-        /// <param name="options">选项</param>
+        /// <param name="options">计数选项</param>
         /// <returns></returns>
         public IFindFluent<T, T> Where(IClientSessionHandle session, Expression<Func<T, bool>> expression,  FindOptions options = null)
         {
@@ -254,8 +254,8 @@ namespace Apteryx.MongoDB.Driver.Extend
         /// <typeparam name="TForeign">文档类型</typeparam>
         /// <param name="foreignDocument">文档对象</param>
         /// <param name="filter">过滤器</param>
-        /// <param name="settings">设置</param>
-        /// <param name="options">选项</param>
+        /// <param name="settings">集合设置</param>
+        /// <param name="options">计数选项</param>
         /// <returns></returns>
         public IFindFluent<T, T> DynamicCollectionWhere<TForeign>(
             TForeign foreignDocument,
@@ -274,7 +274,7 @@ namespace Apteryx.MongoDB.Driver.Extend
         /// <param name="session">会话句柄(作用于事务)</param>
         /// <param name="foreignDocument">文档对象</param>
         /// <param name="filter">过滤器</param>        
-        /// <param name="options">选项</param>
+        /// <param name="options">计数选项</param>
         /// <returns></returns>
         public IFindFluent<T, T> DynamicCollectionWhere<TForeign>(
             IClientSessionHandle session,
@@ -293,8 +293,8 @@ namespace Apteryx.MongoDB.Driver.Extend
         /// <typeparam name="TForeign">文档类型</typeparam>
         /// <param name="foreignDocument">文档对象</param>
         /// <param name="expression">Lambda过滤器</param>
-        /// <param name="settings">设置</param>
-        /// <param name="options">选项</param>
+        /// <param name="settings">集合设置</param>
+        /// <param name="options">计数选项</param>
         /// <returns></returns>
         public IFindFluent<T, T> DynamicCollectionWhere<TForeign>(
             TForeign foreignDocument,
@@ -313,8 +313,8 @@ namespace Apteryx.MongoDB.Driver.Extend
         /// <param name="session">会话句柄(作用于事务)</param>
         /// <param name="foreignDocument">文档对象</param>
         /// <param name="expression">Lambda过滤器</param>
-        /// <param name="settings">设置</param>
-        /// <param name="options">选项</param>
+        /// <param name="settings">集合设置</param>
+        /// <param name="options">计数选项</param>
         /// <returns></returns>
         public IFindFluent<T, T> DynamicCollectionWhere<TForeign>(
             IClientSessionHandle session,

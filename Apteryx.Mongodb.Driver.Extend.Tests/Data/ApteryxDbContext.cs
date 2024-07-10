@@ -1,8 +1,7 @@
 ﻿using Apteryx.MongoDB.Driver.Extend;
 using Microsoft.Extensions.Options;
-using MongoDB.Driver;
 
-namespace Apteryx.WebApi.Data
+namespace Apteryx.Mongodb.Driver.Extend.Tests.Data
 {
     public class ApteryxDbContext : MongoDbProvider
     {
@@ -15,8 +14,6 @@ namespace Apteryx.WebApi.Data
 
         public DbSet<User> Users { get; set; }
 
-        public DbSet<User> UserMany { get; set; }
-
-        public IMongoCollection<User> UsersCollection { get; set; }
+        public DbSet<UserGroup> UserGroups { get; set; }
     }
 }
