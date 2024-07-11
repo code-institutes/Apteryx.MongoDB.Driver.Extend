@@ -103,6 +103,49 @@ namespace Apteryx.MongoDB.Driver.Extend
         /// </summary>
         /// <typeparam name="TForeign">文档类型</typeparam>
         /// <param name="foreignDocument">文档对象</param>
+        /// <param name="id">文档默认ID</param>
+        /// <param name="settings">集合设置</param>
+        /// <param name="options">查找操作设置</param>
+        /// <returns></returns>
+        public async Task<T> DynamicCollectionFindOneAsync<TForeign>(
+            TForeign foreignDocument,
+            string id,
+            MongoCollectionSettings settings = null,
+            FindOptions<T> options = null)
+            where TForeign : BaseMongoEntity
+        {
+            var cursor = await _database.GetCollection<T>($"{foreignDocument.Id}_{_collectionName}", settings).FindAsync(f => f.Id == id, options);
+            await cursor.MoveNextAsync();
+            return cursor.Current.FirstOrDefault();
+        }
+
+        /// <summary>
+        /// 查询返回（单个）
+        /// </summary>
+        /// <typeparam name="TForeign">文档类型</typeparam>
+        /// <param name="foreignDocument">文档对象</param>
+        /// <param name="id">文档默认ID</param>
+        /// <param name="settings">集合设置</param>
+        /// <param name="options">查找操作设置</param>
+        /// <returns></returns>
+        public async Task<T> DynamicCollectionFindOneAsync<TForeign>(
+            IClientSessionHandle session,
+            TForeign foreignDocument,
+            string id,
+            MongoCollectionSettings settings = null,
+            FindOptions<T> options = null)
+            where TForeign : BaseMongoEntity
+        {
+            var cursor = await _database.GetCollection<T>($"{foreignDocument.Id}_{_collectionName}", settings).FindAsync(session, f => f.Id == id, options);
+            await cursor.MoveNextAsync();
+            return cursor.Current.FirstOrDefault();
+        }
+
+        /// <summary>
+        /// 查询返回（单个）
+        /// </summary>
+        /// <typeparam name="TForeign">文档类型</typeparam>
+        /// <param name="foreignDocument">文档对象</param>
         /// <param name="filter">过滤器</param>
         /// <param name="settings">集合设置</param>
         /// <param name="options">查找操作设置</param>

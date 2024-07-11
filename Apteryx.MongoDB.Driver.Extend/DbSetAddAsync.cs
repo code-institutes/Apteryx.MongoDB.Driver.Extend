@@ -69,7 +69,7 @@ namespace Apteryx.MongoDB.Driver.Extend
         /// <param name="options">插入操作设置</param>
         /// <param name="cancellationToken">取消令牌</param>
         public Task DynamicCollectionAddAsync<TForeign>(
-            T foreignDocument,
+            TForeign foreignDocument,
             T document,
             MongoCollectionSettings settings = null,
             InsertOneOptions options = null,
@@ -91,7 +91,7 @@ namespace Apteryx.MongoDB.Driver.Extend
         /// <param name="cancellationToken">取消令牌</param>
         public Task DynamicCollectionAddAsync<TForeign>(
             IClientSessionHandle session,
-            T foreignDocument,
+            TForeign foreignDocument,
             T document,
             MongoCollectionSettings settings = null,
             InsertOneOptions options = null,
@@ -111,7 +111,7 @@ namespace Apteryx.MongoDB.Driver.Extend
         /// <param name="options">插入操作设置</param>
         /// <param name="cancellationToken">取消令牌</param>
         public Task DynamicCollectionAddManyAsync<TForeign>(
-            T foreignDocument,
+            TForeign foreignDocument,
             IEnumerable<T> documents,
             MongoCollectionSettings settings = null,
             InsertManyOptions options = null,
@@ -133,7 +133,7 @@ namespace Apteryx.MongoDB.Driver.Extend
         /// <param name="cancellationToken">取消令牌</param>
         public Task DynamicCollectionAddManyAsync<TForeign>(
             IClientSessionHandle session,
-            T foreignDocument,
+            TForeign foreignDocument,
             IEnumerable<T> documents,
             MongoCollectionSettings settings = null,
             InsertManyOptions options = null,

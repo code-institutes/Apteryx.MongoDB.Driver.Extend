@@ -16,7 +16,7 @@ namespace Apteryx.MongoDB.Driver.Extend
         /// <returns></returns>
         public T FindOne(string id, FindOptions options = null)
         {
-            return _collection.Find(f=>f.Id == id, options).FirstOrDefault();
+            return _collection.Find(f => f.Id == id, options).FirstOrDefault();
         }
 
         /// <summary>
@@ -26,7 +26,7 @@ namespace Apteryx.MongoDB.Driver.Extend
         /// <param name="id">文档默认ID</param>
         /// <param name="options">计数选项</param>
         /// <returns></returns>
-        public T FindOne(IClientSessionHandle session, string id,  FindOptions options = null)
+        public T FindOne(IClientSessionHandle session, string id, FindOptions options = null)
         {
             return _collection.Find(session, f => f.Id == id, options).FirstOrDefault();
         }
@@ -37,7 +37,7 @@ namespace Apteryx.MongoDB.Driver.Extend
         /// <param name="filter">过滤器</param>
         /// <param name="options">计数选项</param>
         /// <returns></returns>
-        public T FindOne(FilterDefinition<T> filter,  FindOptions options = null)
+        public T FindOne(FilterDefinition<T> filter, FindOptions options = null)
         {
             return _collection.Find(filter, options).FirstOrDefault();
         }
@@ -48,18 +48,18 @@ namespace Apteryx.MongoDB.Driver.Extend
         /// <param name="filter">过滤器</param>
         /// <param name="options">计数选项</param>
         /// <returns></returns>
-        public T FindOne(IClientSessionHandle session, FilterDefinition<T> filter,  FindOptions options = null)
+        public T FindOne(IClientSessionHandle session, FilterDefinition<T> filter, FindOptions options = null)
         {
             return _collection.Find(session, filter, options).FirstOrDefault();
         }
-                
+
         /// <summary>
         /// 查询返回（单个）
         /// </summary>
         /// <param name="expression">Lambda过滤器</param>
         /// <param name="options">计数选项</param>
         /// <returns></returns>
-        public T FindOne(Expression<Func<T, bool>> expression,  FindOptions options = null)
+        public T FindOne(Expression<Func<T, bool>> expression, FindOptions options = null)
         {
             return _collection.Find(expression, options).FirstOrDefault();
         }
@@ -71,9 +71,47 @@ namespace Apteryx.MongoDB.Driver.Extend
         /// <param name="expression">Lambda过滤器</param>
         /// <param name="options">计数选项</param>
         /// <returns></returns>
-        public T FindOne(IClientSessionHandle session, Expression<Func<T, bool>> expression,  FindOptions options = null)
+        public T FindOne(IClientSessionHandle session, Expression<Func<T, bool>> expression, FindOptions options = null)
         {
             return _collection.Find(session, expression, options).FirstOrDefault();
+        }
+
+        /// <summary>
+        /// 查询返回（单个）
+        /// </summary>
+        /// <typeparam name="TForeign">文档类型</typeparam>
+        /// <param name="foreignDocument">文档对象</param>
+        /// <param name="id">文档默认ID</param>
+        /// <param name="options">计数选项</param>
+        /// <returns></returns>
+        public T DynamicCollectionFindOne<TForeign>(
+            TForeign foreignDocument,
+            string id,
+            MongoCollectionSettings settings = null,
+            FindOptions options = null)
+            where TForeign : BaseMongoEntity
+        {
+            return _database.GetCollection<T>($"{foreignDocument.Id}_{_collectionName}", settings).Find(f => f.Id == id, options).FirstOrDefault();
+        }
+
+        /// <summary>
+        /// 查询返回（单个）
+        /// </summary>
+        /// <typeparam name="TForeign">文档类型</typeparam>
+        /// <param name="session">会话句柄(作用于事务)</param>
+        /// <param name="foreignDocument">文档对象</param>
+        /// <param name="id">文档默认ID</param>
+        /// <param name="options">计数选项</param>
+        /// <returns></returns>
+        public T DynamicCollectionFindOne<TForeign>(
+            IClientSessionHandle session,
+            TForeign foreignDocument,
+            string id,
+            MongoCollectionSettings settings = null,
+            FindOptions options = null)
+            where TForeign : BaseMongoEntity
+        {
+            return _database.GetCollection<T>($"{foreignDocument.Id}_{_collectionName}", settings).Find(session, f => f.Id == id, options).FirstOrDefault();
         }
 
         /// <summary>
@@ -156,7 +194,7 @@ namespace Apteryx.MongoDB.Driver.Extend
         /// </summary>        
         /// <param name="options">计数选项</param>
         /// <returns></returns>
-        public IEnumerable<T> FindAll( FindOptions options = null)
+        public IEnumerable<T> FindAll(FindOptions options = null)
         {
             return _collection.Find(_ => true, options).ToEnumerable();
         }
@@ -166,7 +204,7 @@ namespace Apteryx.MongoDB.Driver.Extend
         /// <param name="session">会话句柄(作用于事务)</param>        
         /// <param name="options">计数选项</param>
         /// <returns></returns>
-        public IEnumerable<T> FindAll(IClientSessionHandle session,  FindOptions options = null)
+        public IEnumerable<T> FindAll(IClientSessionHandle session, FindOptions options = null)
         {
             return _collection.Find(session, _ => true, options).ToEnumerable();
         }
@@ -208,7 +246,7 @@ namespace Apteryx.MongoDB.Driver.Extend
         /// <param name="filter">过滤器</param>        
         /// <param name="options">计数选项</param>
         /// <returns></returns>
-        public IFindFluent<T,T> Where(FilterDefinition<T> filter,  FindOptions options = null)
+        public IFindFluent<T, T> Where(FilterDefinition<T> filter, FindOptions options = null)
         {
             return _collection.Find(filter, options);
         }
@@ -220,7 +258,7 @@ namespace Apteryx.MongoDB.Driver.Extend
         /// <param name="filter">过滤器</param>        
         /// <param name="options">计数选项</param>
         /// <returns></returns>
-        public IFindFluent<T, T> Where(IClientSessionHandle session, FilterDefinition<T> filter,  FindOptions options = null)
+        public IFindFluent<T, T> Where(IClientSessionHandle session, FilterDefinition<T> filter, FindOptions options = null)
         {
             return _collection.Find(session, filter, options);
         }
@@ -231,7 +269,7 @@ namespace Apteryx.MongoDB.Driver.Extend
         /// <param name="expression">Lambda过滤器</param>        
         /// <param name="options">计数选项</param>
         /// <returns></returns>
-        public IFindFluent<T, T> Where(Expression<Func<T, bool>> expression,  FindOptions options = null)
+        public IFindFluent<T, T> Where(Expression<Func<T, bool>> expression, FindOptions options = null)
         {
             return _collection.Find(expression, options);
         }
@@ -243,7 +281,7 @@ namespace Apteryx.MongoDB.Driver.Extend
         /// <param name="expression">Lambda过滤器</param>        
         /// <param name="options">计数选项</param>
         /// <returns></returns>
-        public IFindFluent<T, T> Where(IClientSessionHandle session, Expression<Func<T, bool>> expression,  FindOptions options = null)
+        public IFindFluent<T, T> Where(IClientSessionHandle session, Expression<Func<T, bool>> expression, FindOptions options = null)
         {
             return _collection.Find(session, expression, options);
         }
