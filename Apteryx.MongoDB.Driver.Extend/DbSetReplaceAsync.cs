@@ -19,7 +19,7 @@ namespace Apteryx.MongoDB.Driver.Extend
         /// <param name="options">替换操作设置</param>
         /// <param name="cancellationToken">取消令牌</param>
         /// <returns></returns>
-        public Task<ReplaceOneResult> WhereReplaceOneAsnyc(
+        public Task<ReplaceOneResult> ReplaceOneAsync(
             string id,
             T document,
             ReplaceOptions options = null,
@@ -37,7 +37,7 @@ namespace Apteryx.MongoDB.Driver.Extend
         /// <param name="options">替换操作设置</param>
         /// <param name="cancellationToken">取消令牌</param>
         /// <returns></returns>
-        public Task<ReplaceOneResult> WhereReplaceOneAsnyc(
+        public Task<ReplaceOneResult> ReplaceOneAsync(
             IClientSessionHandle session,
             string id,
             T document,
@@ -55,7 +55,7 @@ namespace Apteryx.MongoDB.Driver.Extend
         /// <param name="options">替换操作设置</param>
         /// <param name="cancellationToken">取消令牌</param>
         /// <returns></returns>
-        public Task<ReplaceOneResult> WhereReplaceOneAsnyc(
+        public Task<ReplaceOneResult> ReplaceOneAsync(
             FilterDefinition<T> filter,
             T document,
             ReplaceOptions options = null,
@@ -73,7 +73,7 @@ namespace Apteryx.MongoDB.Driver.Extend
         /// <param name="options">替换操作设置</param>
         /// <param name="cancellationToken">取消令牌</param>
         /// <returns></returns>
-        public Task<ReplaceOneResult> WhereReplaceOneAsnyc(
+        public Task<ReplaceOneResult> ReplaceOneAsync(
             IClientSessionHandle session,
             FilterDefinition<T> filter,
             T document,
@@ -91,7 +91,7 @@ namespace Apteryx.MongoDB.Driver.Extend
         /// <param name="options">替换操作设置</param>
         /// <param name="cancellationToken">取消令牌</param>
         /// <returns></returns>
-        public Task<ReplaceOneResult> WhereReplaceOneAsnyc(
+        public Task<ReplaceOneResult> ReplaceOneAsync(
             Expression<Func<T, bool>> expression,
             T document,
             ReplaceOptions options = null,
@@ -109,7 +109,7 @@ namespace Apteryx.MongoDB.Driver.Extend
         /// <param name="options">替换操作设置</param>
         /// <param name="cancellationToken">取消令牌</param>
         /// <returns></returns>
-        public Task<ReplaceOneResult> WhereReplaceOneAsnyc(
+        public Task<ReplaceOneResult> ReplaceOneAsync(
             IClientSessionHandle session,
             Expression<Func<T, bool>> expression,
             T document,
@@ -130,7 +130,7 @@ namespace Apteryx.MongoDB.Driver.Extend
         /// <param name="options">替换操作设置</param>
         /// <param name="cancellationToken">取消令牌</param>
         /// <returns></returns>
-        public Task<ReplaceOneResult> DynamicCollectionWhereReplaceOneAsnyc<TForeign>(
+        public Task<ReplaceOneResult> DynamicCollectionReplaceOneAsync<TForeign>(
             TForeign foreignDocument,
             string id,
             T document,
@@ -154,7 +154,7 @@ namespace Apteryx.MongoDB.Driver.Extend
         /// <param name="options">替换操作设置</param>
         /// <param name="cancellationToken">取消令牌</param>
         /// <returns></returns>
-        public Task<ReplaceOneResult> DynamicCollectionWhereReplaceOneAsnyc<TForeign>(
+        public Task<ReplaceOneResult> DynamicCollectionReplaceOneAsync<TForeign>(
             IClientSessionHandle session,
             TForeign foreignDocument,
             string id,
@@ -178,7 +178,7 @@ namespace Apteryx.MongoDB.Driver.Extend
         /// <param name="options">替换操作设置</param>
         /// <param name="cancellationToken">取消令牌</param>
         /// <returns></returns>
-        public Task<ReplaceOneResult> DynamicCollectionWhereReplaceOneAsnyc<TForeign>(
+        public Task<ReplaceOneResult> DynamicCollectionReplaceOneAsync<TForeign>(
             TForeign foreignDocument,
             FilterDefinition<T> filter,
             T document,
@@ -202,7 +202,7 @@ namespace Apteryx.MongoDB.Driver.Extend
         /// <param name="options">替换操作设置</param>
         /// <param name="cancellationToken">取消令牌</param>
         /// <returns></returns>
-        public Task<ReplaceOneResult> DynamicCollectionWhereReplaceOneAsnyc<TForeign>(
+        public Task<ReplaceOneResult> DynamicCollectionReplaceOneAsync<TForeign>(
             IClientSessionHandle session,
             TForeign foreignDocument,
             FilterDefinition<T> filter,
@@ -226,7 +226,7 @@ namespace Apteryx.MongoDB.Driver.Extend
         /// <param name="options">替换操作设置</param>
         /// <param name="cancellationToken">取消令牌</param>
         /// <returns></returns>
-        public Task<ReplaceOneResult> DynamicCollectionWhereReplaceOneAsnyc<TForeign>(
+        public Task<ReplaceOneResult> DynamicCollectionReplaceOneAsync<TForeign>(
             TForeign foreignDocument,
             Expression<Func<T, bool>> expression,
             T document,
@@ -251,7 +251,7 @@ namespace Apteryx.MongoDB.Driver.Extend
         /// <param name="options">替换操作设置</param>
         /// <param name="cancellationToken">取消令牌</param>
         /// <returns></returns>
-        public Task<ReplaceOneResult> DynamicCollectionWhereReplaceOneAsnyc<TForeign>(
+        public Task<ReplaceOneResult> DynamicCollectionReplaceOneAsync<TForeign>(
             IClientSessionHandle session,
             TForeign foreignDocument,
             Expression<Func<T, bool>> expression,
@@ -278,7 +278,7 @@ namespace Apteryx.MongoDB.Driver.Extend
             FindOneAndReplaceOptions<T> options = null,
             CancellationToken cancellationToken = default)
         {
-            return _collection.FindOneAndReplaceAsync(id, document, options, cancellationToken);
+            return _collection.FindOneAndReplaceAsync<T>(r => r.Id == id, document, options, cancellationToken);
         }
 
         /// <summary>
@@ -297,7 +297,7 @@ namespace Apteryx.MongoDB.Driver.Extend
             FindOneAndReplaceOptions<T> options = null,
             CancellationToken cancellationToken = default)
         {
-            return _collection.FindOneAndReplaceAsync(session, id, document, options, cancellationToken);
+            return _collection.FindOneAndReplaceAsync(session, r => r.Id == id, document, options, cancellationToken);
         }
 
         /// <summary>

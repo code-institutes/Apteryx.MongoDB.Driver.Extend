@@ -17,7 +17,7 @@ namespace Apteryx.MongoDB.Driver.Extend
         /// <param name="options">替换操作设置</param>
         /// <param name="cancellationToken">取消令牌</param>
         /// <returns></returns>
-        public ReplaceOneResult WhereReplaceOne(
+        public ReplaceOneResult ReplaceOne(
             string id,
             T document,
             ReplaceOptions options = null,
@@ -36,7 +36,7 @@ namespace Apteryx.MongoDB.Driver.Extend
         /// <param name="options">替换操作设置</param>
         /// <param name="cancellationToken">取消令牌</param>
         /// <returns></returns>
-        public ReplaceOneResult WhereReplaceOne(
+        public ReplaceOneResult ReplaceOne(
             IClientSessionHandle session,
             string id,
             T document,
@@ -55,7 +55,7 @@ namespace Apteryx.MongoDB.Driver.Extend
         /// <param name="options">替换操作设置</param>
         /// <param name="cancellationToken">取消令牌</param>
         /// <returns></returns>
-        public ReplaceOneResult WhereReplaceOne(
+        public ReplaceOneResult ReplaceOne(
             FilterDefinition<T> filter,
             T document,
             ReplaceOptions options = null,
@@ -74,7 +74,7 @@ namespace Apteryx.MongoDB.Driver.Extend
         /// <param name="options">替换操作设置</param>
         /// <param name="cancellationToken">取消令牌</param>
         /// <returns></returns>
-        public ReplaceOneResult WhereReplaceOne(
+        public ReplaceOneResult ReplaceOne(
             IClientSessionHandle session,
             FilterDefinition<T> filter,
             T document,
@@ -93,12 +93,11 @@ namespace Apteryx.MongoDB.Driver.Extend
         /// <param name="options">替换操作设置</param>
         /// <param name="cancellationToken">取消令牌</param>
         /// <returns></returns>
-        public ReplaceOneResult WhereReplaceOne(
+        public ReplaceOneResult ReplaceOne(
             Expression<Func<T, bool>> expression,
             T document,
             ReplaceOptions options = null,
             CancellationToken cancellationToken = default)
-
         {
             document.UpdateTime = DateTime.Now;
             return _collection.ReplaceOne(expression, document, options, cancellationToken);
@@ -113,16 +112,64 @@ namespace Apteryx.MongoDB.Driver.Extend
         /// <param name="options">替换操作设置</param>
         /// <param name="cancellationToken">取消令牌</param>
         /// <returns></returns>
-        public ReplaceOneResult WhereReplaceOne(
+        public ReplaceOneResult ReplaceOne(
             IClientSessionHandle session,
             Expression<Func<T, bool>> expression,
             T document,
             ReplaceOptions options = null,
             CancellationToken cancellationToken = default)
-
         {
             document.UpdateTime = DateTime.Now;
             return _collection.ReplaceOne(session, expression, document, options, cancellationToken);
+        }
+
+        /// <summary>
+        /// 动态表替换（单个）(自动更新UpdateTime字段)
+        /// </summary>
+        /// <typeparam name="TForeign">文档类型</typeparam>        
+        /// <param name="foreignDocument">上级文档对象</param>
+        /// <param name="id">文档默认ID</param>
+        /// <param name="document">文档对象</param>
+        /// <param name="settings">集合设置</param>
+        /// <param name="options">替换操作设置</param>
+        /// <param name="cancellationToken">取消令牌</param>
+        /// <returns></returns>
+        public ReplaceOneResult DynamicCollectionReplaceOne<TForeign>(
+            TForeign foreignDocument,
+            string id,
+            T document,
+            MongoCollectionSettings settings = null,
+            ReplaceOptions options = null,
+            CancellationToken cancellationToken = default)
+            where TForeign : BaseMongoEntity
+        {
+            document.UpdateTime = DateTime.Now;
+            return _database.GetCollection<T>($"{foreignDocument.Id}_{_collectionName}", settings).ReplaceOne(r => r.Id == id, document, options, cancellationToken);
+        }
+
+        /// <summary>
+        /// 动态表替换（单个）(自动更新UpdateTime字段)
+        /// </summary>
+        /// <typeparam name="TForeign">文档类型</typeparam>        
+        /// <param name="session">会话句柄(作用于事务)</param>
+        /// <param name="foreignDocument">上级文档对象</param>
+        /// <param name="id">文档默认ID</param>
+        /// <param name="document">文档对象</param>
+        /// <param name="options">替换操作设置</param>
+        /// <param name="cancellationToken">取消令牌</param>
+        /// <returns></returns>
+        public ReplaceOneResult DynamicCollectionReplaceOne<TForeign>(
+            IClientSessionHandle session,
+            TForeign foreignDocument,
+            string id,
+            T document,
+            MongoCollectionSettings settings = null,
+            ReplaceOptions options = null,
+            CancellationToken cancellationToken = default)
+            where TForeign : BaseMongoEntity
+        {
+            document.UpdateTime = DateTime.Now;
+            return _database.GetCollection<T>($"{foreignDocument.Id}_{_collectionName}", settings).ReplaceOne(session, r => r.Id == id, document, options, cancellationToken);
         }
 
         /// <summary>
@@ -136,7 +183,7 @@ namespace Apteryx.MongoDB.Driver.Extend
         /// <param name="options">替换操作设置</param>
         /// <param name="cancellationToken">取消令牌</param>
         /// <returns></returns>
-        public ReplaceOneResult DynamicCollectionWhereReplaceOne<TForeign>(
+        public ReplaceOneResult DynamicCollectionReplaceOne<TForeign>(
             TForeign foreignDocument,
             FilterDefinition<T> filter,
             T document,
@@ -146,7 +193,7 @@ namespace Apteryx.MongoDB.Driver.Extend
             where TForeign : BaseMongoEntity
         {
             document.UpdateTime = DateTime.Now;
-            return _database.GetCollection<T>($"{foreignDocument.Id}_{_collectionName}",settings).ReplaceOne(filter, document, options, cancellationToken);
+            return _database.GetCollection<T>($"{foreignDocument.Id}_{_collectionName}", settings).ReplaceOne(filter, document, options, cancellationToken);
         }
 
         /// <summary>
@@ -160,7 +207,7 @@ namespace Apteryx.MongoDB.Driver.Extend
         /// <param name="options">替换操作设置</param>
         /// <param name="cancellationToken">取消令牌</param>
         /// <returns></returns>
-        public ReplaceOneResult DynamicCollectionWhereReplaceOne<TForeign>(
+        public ReplaceOneResult DynamicCollectionReplaceOne<TForeign>(
             IClientSessionHandle session,
             TForeign foreignDocument,
             FilterDefinition<T> filter,
@@ -169,7 +216,6 @@ namespace Apteryx.MongoDB.Driver.Extend
             ReplaceOptions options = null,
             CancellationToken cancellationToken = default)
             where TForeign : BaseMongoEntity
-
         {
             document.UpdateTime = DateTime.Now;
             return _database.GetCollection<T>($"{foreignDocument.Id}_{_collectionName}", settings).ReplaceOne(session, filter, document, options, cancellationToken);
@@ -185,7 +231,7 @@ namespace Apteryx.MongoDB.Driver.Extend
         /// <param name="options">替换操作设置</param>
         /// <param name="cancellationToken">取消令牌</param>
         /// <returns></returns>
-        public ReplaceOneResult DynamicCollectionWhereReplaceOne<TForeign>(
+        public ReplaceOneResult DynamicCollectionReplaceOne<TForeign>(
             TForeign foreignDocument,
             Expression<Func<T, bool>> expression,
             T document,
@@ -195,7 +241,7 @@ namespace Apteryx.MongoDB.Driver.Extend
             where TForeign : BaseMongoEntity
         {
             document.UpdateTime = DateTime.Now;
-            return _database.GetCollection<T>($"{foreignDocument.Id}_{_collectionName}",settings).ReplaceOne(expression, document, options, cancellationToken);
+            return _database.GetCollection<T>($"{foreignDocument.Id}_{_collectionName}", settings).ReplaceOne(expression, document, options, cancellationToken);
         }
 
         /// <summary>
@@ -209,7 +255,7 @@ namespace Apteryx.MongoDB.Driver.Extend
         /// <param name="options">替换操作设置</param>
         /// <param name="cancellationToken">取消令牌</param>
         /// <returns></returns>
-        public ReplaceOneResult DynamicCollectionWhereReplaceOne<TForeign>(
+        public ReplaceOneResult DynamicCollectionReplaceOne<TForeign>(
             IClientSessionHandle session,
             TForeign foreignDocument,
             Expression<Func<T, bool>> expression,
@@ -256,7 +302,6 @@ namespace Apteryx.MongoDB.Driver.Extend
             T document,
             FindOneAndReplaceOptions<T> options = null,
             CancellationToken cancellationToken = default)
-
         {
             document.UpdateTime = DateTime.Now;
             return _collection.FindOneAndReplace<T>(session, r => r.Id == id, document, options, cancellationToken);
@@ -400,7 +445,7 @@ namespace Apteryx.MongoDB.Driver.Extend
         /// <param name="cancellationToken">取消令牌</param>
         /// <returns></returns>
         public T DynamicCollectionFindOneAndReplaceOne<TForeign>(
-            TForeign foreignDocument, 
+            TForeign foreignDocument,
             FilterDefinition<T> filter,
             T document,
             MongoCollectionSettings settings = null,

@@ -177,46 +177,67 @@ namespace Apteryx.MongoDB.Driver.Extend
 
 
         #region 替换(同步)
-        ReplaceOneResult WhereReplaceOne(
+        ReplaceOneResult ReplaceOne(
             string id,
             T document,
             ReplaceOptions options = null,
             CancellationToken cancellationToken = default);
 
-        ReplaceOneResult WhereReplaceOne(
+        ReplaceOneResult ReplaceOne(
             IClientSessionHandle session,
             string id,
             T document,
             ReplaceOptions options = null,
             CancellationToken cancellationToken = default);
 
-        ReplaceOneResult WhereReplaceOne(
+        ReplaceOneResult ReplaceOne(
             FilterDefinition<T> filter,
             T document,
             ReplaceOptions options = null,
             CancellationToken cancellationToken = default);
 
-        ReplaceOneResult WhereReplaceOne(
+        ReplaceOneResult ReplaceOne(
             IClientSessionHandle session,
             FilterDefinition<T> filter,
             T document,
             ReplaceOptions options = null,
             CancellationToken cancellationToken = default);
 
-        ReplaceOneResult WhereReplaceOne(
+        ReplaceOneResult ReplaceOne(
             Expression<Func<T, bool>> expression,
             T document,
             ReplaceOptions options = null,
             CancellationToken cancellationToken = default);
 
-        ReplaceOneResult WhereReplaceOne(
+        ReplaceOneResult ReplaceOne(
             IClientSessionHandle session,
             Expression<Func<T, bool>> expression,
             T document,
             ReplaceOptions options = null,
             CancellationToken cancellationToken = default);
 
-        ReplaceOneResult DynamicCollectionWhereReplaceOne<TForeign>(
+        ReplaceOneResult DynamicCollectionReplaceOne<TForeign>(
+            TForeign foreignDocument,
+            string id,
+            T document,
+            MongoCollectionSettings settings = null,
+            ReplaceOptions options = null,
+            CancellationToken cancellationToken = default)
+            where TForeign : BaseMongoEntity
+           ;
+
+        ReplaceOneResult DynamicCollectionReplaceOne<TForeign>(
+            IClientSessionHandle session,
+            TForeign foreignDocument,
+            string id,
+            T document,
+            MongoCollectionSettings settings = null,
+            ReplaceOptions options = null,
+            CancellationToken cancellationToken = default)
+            where TForeign : BaseMongoEntity
+           ;
+
+        ReplaceOneResult DynamicCollectionReplaceOne<TForeign>(
             TForeign foreignDocument,
             FilterDefinition<T> filter,
             T document,
@@ -226,7 +247,7 @@ namespace Apteryx.MongoDB.Driver.Extend
             where TForeign : BaseMongoEntity
            ;
 
-        ReplaceOneResult DynamicCollectionWhereReplaceOne<TForeign>(
+        ReplaceOneResult DynamicCollectionReplaceOne<TForeign>(
             IClientSessionHandle session,
             TForeign foreignDocument,
             FilterDefinition<T> filter,
@@ -237,7 +258,7 @@ namespace Apteryx.MongoDB.Driver.Extend
             where TForeign : BaseMongoEntity
            ;
 
-        ReplaceOneResult DynamicCollectionWhereReplaceOne<TForeign>(
+        ReplaceOneResult DynamicCollectionReplaceOne<TForeign>(
             TForeign foreignDocument,
             Expression<Func<T, bool>> expression,
             T document,
@@ -247,7 +268,7 @@ namespace Apteryx.MongoDB.Driver.Extend
             where TForeign : BaseMongoEntity
            ;
 
-        ReplaceOneResult DynamicCollectionWhereReplaceOne<TForeign>(
+        ReplaceOneResult DynamicCollectionReplaceOne<TForeign>(
             IClientSessionHandle session,
             TForeign foreignDocument,
             Expression<Func<T, bool>> expression,
@@ -366,46 +387,46 @@ namespace Apteryx.MongoDB.Driver.Extend
 
         #region 替换(异步)
 
-        Task<ReplaceOneResult> WhereReplaceOneAsnyc(
+        Task<ReplaceOneResult> ReplaceOneAsync(
             string id,
             T document,
             ReplaceOptions options = null,
             CancellationToken cancellationToken = default);
 
-        Task<ReplaceOneResult> WhereReplaceOneAsnyc(
+        Task<ReplaceOneResult> ReplaceOneAsync(
             IClientSessionHandle session,
             string id,
             T document,
             ReplaceOptions options = null,
             CancellationToken cancellationToken = default);
 
-        Task<ReplaceOneResult> WhereReplaceOneAsnyc(
+        Task<ReplaceOneResult> ReplaceOneAsync(
             FilterDefinition<T> filter,
             T document,
             ReplaceOptions options = null,
             CancellationToken cancellationToken = default);
 
-        Task<ReplaceOneResult> WhereReplaceOneAsnyc(
+        Task<ReplaceOneResult> ReplaceOneAsync(
             IClientSessionHandle session,
             FilterDefinition<T> filter,
             T document,
             ReplaceOptions options = null,
             CancellationToken cancellationToken = default);
 
-        Task<ReplaceOneResult> WhereReplaceOneAsnyc(
+        Task<ReplaceOneResult> ReplaceOneAsync(
             Expression<Func<T, bool>> expression,
             T document,
             ReplaceOptions options = null,
             CancellationToken cancellationToken = default);
 
-        Task<ReplaceOneResult> WhereReplaceOneAsnyc(
+        Task<ReplaceOneResult> ReplaceOneAsync(
             IClientSessionHandle session,
             Expression<Func<T, bool>> expression,
             T document,
             ReplaceOptions options = null,
             CancellationToken cancellationToken = default);
 
-        Task<ReplaceOneResult> DynamicCollectionWhereReplaceOneAsnyc<TForeign>(
+        Task<ReplaceOneResult> DynamicCollectionReplaceOneAsync<TForeign>(
             TForeign foreignDocument,
             string id,
             T document,
@@ -413,7 +434,7 @@ namespace Apteryx.MongoDB.Driver.Extend
             ReplaceOptions options = null,
             CancellationToken cancellationToken = default) where TForeign : BaseMongoEntity;
 
-        Task<ReplaceOneResult> DynamicCollectionWhereReplaceOneAsnyc<TForeign>(
+        Task<ReplaceOneResult> DynamicCollectionReplaceOneAsync<TForeign>(
             IClientSessionHandle session,
             TForeign foreignDocument,
             string id,
@@ -422,7 +443,7 @@ namespace Apteryx.MongoDB.Driver.Extend
             ReplaceOptions options = null,
             CancellationToken cancellationToken = default) where TForeign : BaseMongoEntity;
 
-        Task<ReplaceOneResult> DynamicCollectionWhereReplaceOneAsnyc<TForeign>(
+        Task<ReplaceOneResult> DynamicCollectionReplaceOneAsync<TForeign>(
             TForeign foreignDocument,
             FilterDefinition<T> filter,
             T document,
@@ -430,7 +451,7 @@ namespace Apteryx.MongoDB.Driver.Extend
             ReplaceOptions options = null,
             CancellationToken cancellationToken = default) where TForeign : BaseMongoEntity;
 
-        Task<ReplaceOneResult> DynamicCollectionWhereReplaceOneAsnyc<TForeign>(
+        Task<ReplaceOneResult> DynamicCollectionReplaceOneAsync<TForeign>(
             IClientSessionHandle session,
             TForeign foreignDocument,
             FilterDefinition<T> filter,
@@ -439,7 +460,7 @@ namespace Apteryx.MongoDB.Driver.Extend
             ReplaceOptions options = null,
             CancellationToken cancellationToken = default) where TForeign : BaseMongoEntity;
 
-        Task<ReplaceOneResult> DynamicCollectionWhereReplaceOneAsnyc<TForeign>(
+        Task<ReplaceOneResult> DynamicCollectionReplaceOneAsync<TForeign>(
             TForeign foreignDocument,
             Expression<Func<T, bool>> expression,
             T document,
@@ -447,7 +468,7 @@ namespace Apteryx.MongoDB.Driver.Extend
             ReplaceOptions options = null,
             CancellationToken cancellationToken = default) where TForeign : BaseMongoEntity;
 
-        Task<ReplaceOneResult> DynamicCollectionWhereReplaceOneAsnyc<TForeign>(
+        Task<ReplaceOneResult> DynamicCollectionReplaceOneAsync<TForeign>(
             IClientSessionHandle session,
             TForeign foreignDocument,
             Expression<Func<T, bool>> expression,
