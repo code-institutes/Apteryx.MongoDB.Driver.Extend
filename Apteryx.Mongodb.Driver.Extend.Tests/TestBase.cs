@@ -2,10 +2,11 @@
 using Microsoft.Extensions.DependencyInjection;
 using Apteryx.MongoDB.Driver.Extend;
 using Microsoft.Extensions.Configuration;
+using MongoDB.Driver;
 
 namespace Apteryx.Mongodb.Driver.Extend.Tests
 {
-    public class TestBase
+    public class TestBase : IDisposable
     {
         protected ServiceProvider ServiceProvider { get; private set; }
         protected IConfiguration Configuration { get; private set; }
@@ -34,6 +35,19 @@ namespace Apteryx.Mongodb.Driver.Extend.Tests
             });
 
             // 其他服务注册
+        }
+
+        public void Dispose()
+        {
+            var dbContext = ServiceProvider.GetService<ApteryxDbContext>();
+            // 获取所有集合名称
+            var collections = dbContext.Database.ListCollectionNames().ToList();
+
+            // 遍历并删除每个集合
+            foreach (var collectionName in collections)
+            {
+                dbContext.Database.DropCollection(collectionName);
+            }
         }
     }
 }

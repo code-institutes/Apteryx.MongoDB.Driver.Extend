@@ -60,7 +60,7 @@ namespace Apteryx.Mongodb.Driver.Extend.Tests
             Assert.AreEqual(replaceedUser3.Name, name3, "未成功替换用户。");
 
             // 删除用户
-            dbContext.Users.DeleteOne(user);
+             var result = dbContext.Users.DeleteOne(user);
 
             // 验证删除是否成功
             var deletedUser = dbContext.Users.FindOne(user.Id);
@@ -105,7 +105,7 @@ namespace Apteryx.Mongodb.Driver.Extend.Tests
             Assert.AreEqual(replaceedUser3.Name, name3, "未成功替换用户。");
 
             // 删除用户
-            await dbContext.Users.DeleteOneAsync(user);
+            var result = await dbContext.Users.DeleteOneAsync(user);
 
             // 验证删除是否成功
             var deletedUser = await dbContext.Users.FindOneAsync(user.Id);
@@ -156,7 +156,7 @@ namespace Apteryx.Mongodb.Driver.Extend.Tests
                 Assert.AreEqual(replaceedUser3.Name, name3, "未成功替换用户。");
 
                 // 删除用户
-                dbContext.Users.DeleteOne(session, user);
+                 var result = dbContext.Users.DeleteOne(session, user);
 
                 // 验证删除是否成功
                 var deletedUser = dbContext.Users.FindOne(session, user.Id);
@@ -210,7 +210,7 @@ namespace Apteryx.Mongodb.Driver.Extend.Tests
                 Assert.AreEqual(replaceedUser3.Name, name3, "未成功替换用户。");
 
                 // 删除用户
-                await dbContext.Users.DeleteOneAsync(session, user);
+                var result = await dbContext.Users.DeleteOneAsync(session, user);
 
                 // 验证删除是否成功
                 var deletedUser = await dbContext.Users.FindOneAsync(session, user.Id);
@@ -260,7 +260,7 @@ namespace Apteryx.Mongodb.Driver.Extend.Tests
             Assert.AreEqual(replaceedUser3.Name, name3, "未成功替换用户。");
 
             // 删除用户
-            dbContext.Users.DynamicCollectionDeleteOne(userGroup, user);
+            var result = dbContext.Users.DynamicCollectionDeleteOne(userGroup, user);
 
             // 验证删除是否成功
             var deletedUser = dbContext.Users.DynamicCollectionFindOne(userGroup, user.Id);
@@ -307,7 +307,7 @@ namespace Apteryx.Mongodb.Driver.Extend.Tests
             Assert.AreEqual(replaceedUser3.Name, name3, "未成功替换用户。");
 
             // 删除用户
-            await dbContext.Users.DynamicCollectionDeleteOneAsync(userGroup, user);
+            var result = await dbContext.Users.DynamicCollectionDeleteOneAsync(userGroup, user);
 
             // 验证删除是否成功
             var deletedUser = await dbContext.Users.DynamicCollectionFindOneAsync(userGroup, user.Id);
@@ -359,7 +359,7 @@ namespace Apteryx.Mongodb.Driver.Extend.Tests
                 Assert.AreEqual(replaceedUser3.Name, name3, "未成功替换用户。");
 
                 // 删除用户
-                dbContext.Users.DynamicCollectionDeleteOne(session, userGroup, user);
+                var result = dbContext.Users.DynamicCollectionDeleteOne(session, userGroup, user);
 
                 // 验证删除是否成功
                 var deletedUser = dbContext.Users.DynamicCollectionFindOne(session, userGroup, user.Id);
@@ -411,7 +411,7 @@ namespace Apteryx.Mongodb.Driver.Extend.Tests
                 await dbContext.Users.DynamicCollectionReplaceOneAsync(session, userGroup, Builders<User>.Filter.Eq(f => f.Id, user.Id), user);
 
                 // 删除用户
-                await dbContext.Users.DynamicCollectionDeleteOneAsync(session, userGroup, user);
+                var result = await dbContext.Users.DynamicCollectionDeleteOneAsync(session, userGroup, user);
 
                 // 验证删除是否成功
                 var deletedUser = await dbContext.Users.DynamicCollectionFindOneAsync(session, userGroup, user.Id);
@@ -460,7 +460,7 @@ namespace Apteryx.Mongodb.Driver.Extend.Tests
             Assert.AreNotEqual(replaceedUser3.Name, result3.Name, "未成功替换用户。");
 
             // 删除用户
-            dbContext.Users.DeleteOne(user);
+             var result = dbContext.Users.DeleteOne(user);
 
             // 验证删除是否成功
             var deletedUser = dbContext.Users.FindOne(user.Id);
@@ -506,7 +506,7 @@ namespace Apteryx.Mongodb.Driver.Extend.Tests
 
 
             // 删除用户
-            await dbContext.Users.DeleteOneAsync(user);
+            var result = await dbContext.Users.DeleteOneAsync(user);
 
             // 验证删除是否成功
             var deletedUser = await dbContext.Users.FindOneAsync(user.Id);
@@ -557,7 +557,7 @@ namespace Apteryx.Mongodb.Driver.Extend.Tests
                 Assert.AreNotEqual(replaceedUser3.Name, result3.Name, "未成功替换用户。");
 
                 // 删除用户
-                dbContext.Users.DeleteOne(session, user);
+                 var result = dbContext.Users.DeleteOne(session, user);
 
                 // 验证删除是否成功
                 var deletedUser = dbContext.Users.FindOne(session, user.Id);
@@ -611,7 +611,7 @@ namespace Apteryx.Mongodb.Driver.Extend.Tests
                 Assert.AreNotEqual(replaceedUser3.Name, result3.Name, "未成功替换用户。");
 
                 // 删除用户
-                await dbContext.Users.DeleteOneAsync(session, user);
+                var result = await dbContext.Users.DeleteOneAsync(session, user);
 
                 // 验证删除是否成功
                 var deletedUser = await dbContext.Users.FindOneAsync(session, user.Id);
@@ -661,7 +661,7 @@ namespace Apteryx.Mongodb.Driver.Extend.Tests
             Assert.AreNotEqual(replaceedUser3.Name, result3.Name, "未成功替换用户。");
 
             // 删除用户
-            dbContext.Users.DynamicCollectionDeleteOne(userGroup, user);
+            var result = dbContext.Users.DynamicCollectionDeleteOne(userGroup, user);
 
             // 验证删除是否成功
             var deletedUser = dbContext.Users.DynamicCollectionFindOne(userGroup, user.Id);
@@ -708,7 +708,7 @@ namespace Apteryx.Mongodb.Driver.Extend.Tests
             Assert.AreNotEqual(replaceedUser3.Name, result3.Name, "未成功替换用户。");
 
             // 删除用户
-            await dbContext.Users.DynamicCollectionDeleteOneAsync(userGroup, user);
+            var result = await dbContext.Users.DynamicCollectionDeleteOneAsync(userGroup, user);
 
             // 验证删除是否成功
             var deletedUser = await dbContext.Users.DynamicCollectionFindOneAsync(userGroup, user.Id);
@@ -760,7 +760,7 @@ namespace Apteryx.Mongodb.Driver.Extend.Tests
                 Assert.AreNotEqual(replaceedUser3.Name, result3.Name, "未成功替换用户。");
 
                 // 删除用户
-                dbContext.Users.DynamicCollectionDeleteOne(session, userGroup, user);
+                var result = dbContext.Users.DynamicCollectionDeleteOne(session, userGroup, user);
 
                 // 验证删除是否成功
                 var deletedUser = dbContext.Users.DynamicCollectionFindOne(session, userGroup, user.Id);
@@ -815,7 +815,7 @@ namespace Apteryx.Mongodb.Driver.Extend.Tests
                 Assert.AreNotEqual(replaceedUser3.Name, result3.Name, "未成功替换用户。");
 
                 // 删除用户
-                await dbContext.Users.DynamicCollectionDeleteOneAsync(session, userGroup, user);
+                var result = await dbContext.Users.DynamicCollectionDeleteOneAsync(session, userGroup, user);
 
                 // 验证删除是否成功
                 var deletedUser = await dbContext.Users.DynamicCollectionFindOneAsync(session, userGroup, user.Id);

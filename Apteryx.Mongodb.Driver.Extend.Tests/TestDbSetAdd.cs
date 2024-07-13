@@ -39,7 +39,7 @@ namespace Apteryx.Mongodb.Driver.Extend.Tests
 
 
             // 删除用户
-            dbContext.Users.DeleteOne(addedUser);
+            var result = dbContext.Users.DeleteOne(addedUser);
 
             // 验证删除是否成功
             var deletedUser = dbContext.Users.FindOne(user.Id);
@@ -90,7 +90,7 @@ namespace Apteryx.Mongodb.Driver.Extend.Tests
 
 
                 // 删除用户
-                dbContext.Users.DeleteOne(session, addedUser);
+                 var result = dbContext.Users.DeleteOne(session, addedUser);
 
                 // 验证删除是否成功
                 var deletedUser = dbContext.Users.FindOne(session, newUser.Id);
@@ -145,7 +145,7 @@ namespace Apteryx.Mongodb.Driver.Extend.Tests
             Assert.IsNotNull(addedUser, "未成功添加用户。");
 
             // 删除用户
-            await dbContext.Users.DeleteOneAsync(addedUser);
+            var result = await dbContext.Users.DeleteOneAsync(addedUser);
 
             // 验证删除是否成功
             var deletedUser = await dbContext.Users.FindOneAsync(newUser.Id);
@@ -197,7 +197,7 @@ namespace Apteryx.Mongodb.Driver.Extend.Tests
                 Assert.IsNotNull(addedUser, "未成功添加用户。");
 
                 // 删除用户
-                await dbContext.Users.DeleteOneAsync(session, addedUser);
+                var result = await dbContext.Users.DeleteOneAsync(session, addedUser);
 
                 // 验证删除是否成功
                 var deletedUser = await dbContext.Users.FindOneAsync(session, newUser.Id);
@@ -227,7 +227,7 @@ namespace Apteryx.Mongodb.Driver.Extend.Tests
 
 
                 // 删除用户
-                await dbContext.Users.DynamicCollectionDeleteOneAsync(session, userGroup, addedUser);
+                var result = await dbContext.Users.DynamicCollectionDeleteOneAsync(session, userGroup, addedUser);
 
                 // 验证删除是否成功
                 var deletedUser = await dbContext.Users.DynamicCollectionFindOneAsync(session, userGroup, user.Id);
@@ -249,7 +249,7 @@ namespace Apteryx.Mongodb.Driver.Extend.Tests
 
 
             // 删除用户
-            dbContext.Users.DeleteMany(users);
+            var result = dbContext.Users.DeleteMany(users);
 
             // 验证删除是否成功
             var deletedUserCount = dbContext.Users.Where(w => true).CountDocuments();
@@ -289,8 +289,6 @@ namespace Apteryx.Mongodb.Driver.Extend.Tests
             {
                 session.StartTransaction();
 
-                dbContext.Users.DeleteMany(session, d => d.Password == "123456");
-
                 dbContext.Users.AddMany(session, users);
 
                 // 验证添加是否成功
@@ -302,7 +300,7 @@ namespace Apteryx.Mongodb.Driver.Extend.Tests
 
 
                 // 删除用户
-                dbContext.Users.DeleteMany(session, users);
+                var result = dbContext.Users.DeleteMany(session, users);
 
                 // 验证删除是否成功
                 var deletedUserCount = dbContext.Users.Where(session, w => true).CountDocuments();
@@ -360,7 +358,7 @@ namespace Apteryx.Mongodb.Driver.Extend.Tests
 
 
             // 删除用户
-            await dbContext.Users.DeleteManyAsync(users);
+            var result = await dbContext.Users.DeleteManyAsync(users);
 
             // 验证删除是否成功
             addedUser.Clear();
@@ -392,7 +390,7 @@ namespace Apteryx.Mongodb.Driver.Extend.Tests
 
 
             // 删除用户
-            await dbContext.Users.DynamicCollectionDeleteManyAsync(userGroup, users);
+            var result = await dbContext.Users.DynamicCollectionDeleteManyAsync(userGroup, users);
 
             // 验证删除是否成功
             addedUser.Clear();
@@ -426,7 +424,7 @@ namespace Apteryx.Mongodb.Driver.Extend.Tests
 
 
                 // 删除用户
-                await dbContext.Users.DeleteManyAsync(session, users);
+                var result = await dbContext.Users.DeleteManyAsync(session, users);
 
                 // 验证删除是否成功
                 addedUser.Clear();
@@ -464,7 +462,7 @@ namespace Apteryx.Mongodb.Driver.Extend.Tests
                 Assert.AreEqual(3, addedUser.Count, "未成功添加，数量不正确");
 
                 // 删除用户
-                await dbContext.Users.DynamicCollectionDeleteManyAsync(session, userGroup, users);
+                var result = await dbContext.Users.DynamicCollectionDeleteManyAsync(session, userGroup, users);
 
                 // 验证删除是否成功
                 addedUser.Clear();
