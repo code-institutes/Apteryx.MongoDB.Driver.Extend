@@ -22,7 +22,7 @@ namespace Apteryx.Mongodb.Driver.Extend.Tests
         }
 
         [TestMethod]
-        public void DeleteOne()
+        public void TestDeleteOne()
         {
             var users = DataHelper.GetNewUsers();
 
@@ -50,7 +50,7 @@ namespace Apteryx.Mongodb.Driver.Extend.Tests
         }
 
         [TestMethod]
-        public async Task DeleteOneAsync()
+        public async Task TestDeleteOneAsync()
         {
             var users = DataHelper.GetNewUsers();
 
@@ -78,7 +78,7 @@ namespace Apteryx.Mongodb.Driver.Extend.Tests
         }
 
         [TestMethod]
-        public void DeleteOneSession()
+        public void TestDeleteOneSession()
         {
             var users = DataHelper.GetNewUsers();
 
@@ -113,7 +113,7 @@ namespace Apteryx.Mongodb.Driver.Extend.Tests
         }
 
         [TestMethod]
-        public async Task DeleteOneSessionAsync()
+        public async Task TestDeleteOneSessionAsync()
         {
             var users = DataHelper.GetNewUsers();
 
@@ -148,7 +148,7 @@ namespace Apteryx.Mongodb.Driver.Extend.Tests
         }
 
         [TestMethod]
-        public void DeleteOneDynamic()
+        public void TestDeleteOneDynamic()
         {
             var userGroup = DataHelper.GetNewUserGroup();
             var users = DataHelper.GetNewUsers();
@@ -177,7 +177,7 @@ namespace Apteryx.Mongodb.Driver.Extend.Tests
         }
 
         [TestMethod]
-        public async Task DeleteOneDynamicAsync()
+        public async Task TestDeleteOneDynamicAsync()
         {
             var userGroup = DataHelper.GetNewUserGroup();
             var users = DataHelper.GetNewUsers();
@@ -206,7 +206,7 @@ namespace Apteryx.Mongodb.Driver.Extend.Tests
         }
 
         [TestMethod]
-        public void DeleteOneDynamicSession()
+        public void TestDeleteOneDynamicSession()
         {
             var userGroup = DataHelper.GetNewUserGroup();
             var users = DataHelper.GetNewUsers();
@@ -242,7 +242,7 @@ namespace Apteryx.Mongodb.Driver.Extend.Tests
         }
 
         [TestMethod]
-        public async Task DeleteOneDynamicSessionAsync()
+        public async Task TestDeleteOneDynamicSessionAsync()
         {
             var userGroup = DataHelper.GetNewUserGroup();
             var users = DataHelper.GetNewUsers();
@@ -278,7 +278,215 @@ namespace Apteryx.Mongodb.Driver.Extend.Tests
         }
 
         [TestMethod]
-        public void DeleteMany()
+        public void TestFindOneAndDeleteOne()
+        {
+            var users = DataHelper.GetNewUsers();
+
+            dbContext.Users.AddMany(users);
+
+            // 删除用户
+            var result1 = dbContext.Users.FindOneAndDelete(users[0].Id);
+            Assert.IsNotNull(result1, "用户1，未成功删除。");
+
+            // 删除用户
+            var result2 = dbContext.Users.FindOneAndDelete(d => d.Id == users[1].Id);
+            Assert.IsNotNull(result2, "用户2，未成功删除。");
+
+            // 删除用户
+            var result3 = dbContext.Users.FindOneAndDelete(Builders<User>.Filter.Eq(f => f.Id, users[2].Id));
+            Assert.IsNotNull(result3, "用户3，未成功删除。");
+
+            var deletedUser = dbContext.Users.DeleteMany(users);
+        }
+
+        [TestMethod]
+        public async Task TestFindOneAndDeleteOneAsync()
+        {
+            var users = DataHelper.GetNewUsers();
+
+            await dbContext.Users.AddManyAsync(users);
+
+            // 删除用户
+            var result1 = await dbContext.Users.FindOneAndDeleteAsync(users[0].Id);
+            Assert.IsNotNull(result1, "用户1，未成功删除。");
+
+            // 删除用户
+            var result2 = await dbContext.Users.FindOneAndDeleteAsync(d => d.Id == users[1].Id);
+            Assert.IsNotNull(result2, "用户2，未成功删除。");
+
+            // 删除用户
+            var result3 = await dbContext.Users.FindOneAndDeleteAsync(Builders<User>.Filter.Eq(f => f.Id, users[2].Id));
+            Assert.IsNotNull(result3, "用户3，未成功删除。");
+
+            var deletedUser = dbContext.Users.DeleteMany(users);
+        }
+
+        [TestMethod]
+        public void TestFindOneAndDeleteOneSession()
+        {
+            var users = DataHelper.GetNewUsers();
+
+            using (var session = dbContext.Client.StartSession())
+            {
+                session.StartTransaction();
+
+                dbContext.Users.AddMany(session, users);
+
+                // 删除用户
+                var result1 = dbContext.Users.FindOneAndDelete(session, users[0].Id);
+                Assert.IsNotNull(result1, "用户1，未成功删除。");
+
+                // 删除用户
+                var result2 = dbContext.Users.FindOneAndDelete(session, d => d.Id == users[1].Id);
+                Assert.IsNotNull(result2, "用户2，未成功删除。");
+
+                // 删除用户
+                var result3 = dbContext.Users.FindOneAndDelete(session, Builders<User>.Filter.Eq(f => f.Id, users[2].Id));
+                Assert.IsNotNull(result3, "用户3，未成功删除。");
+
+                var deletedUser = dbContext.Users.DeleteMany(session, users);
+
+                session.CommitTransaction();
+            }
+        }
+
+        [TestMethod]
+        public async Task TestFindOneAndDeleteOneSessionAsync()
+        {
+            var users = DataHelper.GetNewUsers();
+
+            using (var session = await dbContext.Client.StartSessionAsync())
+            {
+                session.StartTransaction();
+
+                await dbContext.Users.AddManyAsync(session, users);
+
+                // 删除用户
+                var result1 = await dbContext.Users.FindOneAndDeleteAsync(session, users[0].Id);
+                Assert.IsNotNull(result1, "用户1，未成功删除。");
+
+                // 删除用户
+                var result2 = await dbContext.Users.FindOneAndDeleteAsync(session, d => d.Id == users[1].Id);
+                Assert.IsNotNull(result2, "用户2，未成功删除。");
+
+                // 删除用户
+                var result3 = await dbContext.Users.FindOneAndDeleteAsync(session, Builders<User>.Filter.Eq(f => f.Id, users[2].Id));
+                Assert.IsNotNull(result3, "用户3，未成功删除。");
+
+                var deletedUser = dbContext.Users.DeleteMany(session, users);
+
+                session.CommitTransaction();
+            }
+        }
+
+        [TestMethod]
+        public void TestFindOneAndDeleteOneDynamic()
+        {
+            var userGroup = DataHelper.GetNewUserGroup();
+            var users = DataHelper.GetNewUsers();
+
+            dbContext.Users.DynamicCollectionAddMany(userGroup, users);
+
+            // 删除用户
+            var result1 = dbContext.Users.DynamicCollectionFindOneAndDelete(userGroup, users[0].Id);
+            Assert.IsNotNull(result1, "用户1，未成功删除。");
+
+            // 删除用户
+            var result2 = dbContext.Users.DynamicCollectionFindOneAndDelete(userGroup, d => d.Id == users[1].Id);
+            Assert.IsNotNull(result2, "用户2，未成功删除。");
+
+            // 删除用户
+            var result3 = dbContext.Users.DynamicCollectionFindOneAndDelete(userGroup, Builders<User>.Filter.Eq(f => f.Id, users[2].Id));
+            Assert.IsNotNull(result3, "用户3，未成功删除。");
+
+            var deletedUser = dbContext.Users.DynamicCollectionDeleteMany(userGroup, users);
+        }
+
+        [TestMethod]
+        public async Task TestFindOneAndDeleteOneDynamicAsync()
+        {
+            var userGroup = DataHelper.GetNewUserGroup();
+            var users = DataHelper.GetNewUsers();
+
+            await dbContext.Users.DynamicCollectionAddManyAsync(userGroup, users);
+
+            // 删除用户
+            var result1 = await dbContext.Users.DynamicCollectionFindOneAndDeleteAsync(userGroup, users[0].Id);
+            Assert.IsNotNull(result1, "用户1，未成功删除。");
+
+            // 删除用户
+            var result2 = await dbContext.Users.DynamicCollectionFindOneAndDeleteAsync(userGroup, d => d.Id == users[1].Id);
+            Assert.IsNotNull(result2, "用户2，未成功删除。");
+
+            // 删除用户
+            var result3 = await dbContext.Users.DynamicCollectionFindOneAndDeleteAsync(userGroup, Builders<User>.Filter.Eq(f => f.Id, users[2].Id));
+            Assert.IsNotNull(result3, "用户3，未成功删除。");
+
+            var deletedUser = await dbContext.Users.DynamicCollectionDeleteManyAsync(userGroup, users);
+        }
+
+        [TestMethod]
+        public void TestFindOneAndDeleteOneDynamicSession()
+        {
+            var userGroup = DataHelper.GetNewUserGroup();
+            var users = DataHelper.GetNewUsers();
+
+            using (var session = dbContext.Client.StartSession())
+            {
+                session.StartTransaction();
+
+                dbContext.Users.DynamicCollectionAddMany(session, userGroup, users);
+
+                // 删除用户
+                var result1 = dbContext.Users.DynamicCollectionFindOneAndDelete(session, userGroup, users[0].Id);
+                Assert.IsNotNull(result1, "用户1，未成功删除。");
+
+                // 删除用户
+                var result2 = dbContext.Users.DynamicCollectionFindOneAndDelete(session, userGroup, d => d.Id == users[1].Id);
+                Assert.IsNotNull(result2, "用户2，未成功删除。");
+
+                // 删除用户
+                var result3 = dbContext.Users.DynamicCollectionFindOneAndDelete(session, userGroup, Builders<User>.Filter.Eq(f => f.Id, users[2].Id));
+                Assert.IsNotNull(result3, "用户3，未成功删除。");
+
+                var deletedUser = dbContext.Users.DynamicCollectionDeleteMany(session, userGroup, users);
+
+                session.CommitTransaction();
+            }
+        }
+
+        [TestMethod]
+        public async Task TestFindOneAndDeleteOneDynamicSessionAsync()
+        {
+            var userGroup = DataHelper.GetNewUserGroup();
+            var users = DataHelper.GetNewUsers();
+
+            using (var session = await dbContext.Client.StartSessionAsync())
+            {
+                session.StartTransaction();
+
+                await dbContext.Users.DynamicCollectionAddManyAsync(session, userGroup, users);
+
+                // 删除用户
+                var result1 = await dbContext.Users.DynamicCollectionFindOneAndDeleteAsync(session, userGroup, users[0].Id);
+                Assert.IsNotNull(result1, "用户1，未成功删除。");
+
+                // 删除用户
+                var result2 = await dbContext.Users.DynamicCollectionFindOneAndDeleteAsync(session, userGroup, d => d.Id == users[1].Id);
+                Assert.IsNotNull(result2, "用户2，未成功删除。");
+
+                // 删除用户
+                var result3 = await dbContext.Users.DynamicCollectionFindOneAndDeleteAsync(session, userGroup, Builders<User>.Filter.Eq(f => f.Id, users[2].Id));
+                Assert.IsNotNull(result3, "用户3，未成功删除。");
+
+                var deletedUser = await dbContext.Users.DynamicCollectionDeleteManyAsync(session, userGroup, users);
+
+                session.CommitTransaction();
+            }
+        }
+
+        [TestMethod]
+        public void TestDeleteMany()
         {
             var users1 = DataHelper.GetNewUsers();
             var users2 = DataHelper.GetNewUsers();
@@ -304,7 +512,7 @@ namespace Apteryx.Mongodb.Driver.Extend.Tests
         }
 
         [TestMethod]
-        public async Task DeleteManyAsync()
+        public async Task TestDeleteManyAsync()
         {
             var users1 = DataHelper.GetNewUsers();
             var users2 = DataHelper.GetNewUsers();
@@ -330,7 +538,7 @@ namespace Apteryx.Mongodb.Driver.Extend.Tests
         }
 
         [TestMethod]
-        public void DeleteManySession()
+        public void TestDeleteManySession()
         {
             var pwd1 = Guid.NewGuid().ToString();
             var pwd2 = Guid.NewGuid().ToString();
@@ -367,7 +575,7 @@ namespace Apteryx.Mongodb.Driver.Extend.Tests
         }
 
         [TestMethod]
-        public async Task DeleteManySessionAsync()
+        public async Task TestDeleteManySessionAsync()
         {
             var pwd1 = Guid.NewGuid().ToString();
             var pwd2 = Guid.NewGuid().ToString();
@@ -404,7 +612,7 @@ namespace Apteryx.Mongodb.Driver.Extend.Tests
         }
 
         [TestMethod]
-        public void DeleteManyDynamic()
+        public void TestDeleteManyDynamic()
         {
             var userGroup = DataHelper.GetNewUserGroup();
             var users1 = DataHelper.GetNewUsers();
@@ -431,7 +639,7 @@ namespace Apteryx.Mongodb.Driver.Extend.Tests
         }
 
         [TestMethod]
-        public async Task DeleteManyDynamicAsync()
+        public async Task TestDeleteManyDynamicAsync()
         {
             var userGroup = DataHelper.GetNewUserGroup();
             var users1 = DataHelper.GetNewUsers();
@@ -458,7 +666,7 @@ namespace Apteryx.Mongodb.Driver.Extend.Tests
         }
 
         [TestMethod]
-        public void DeleteManyDynamicSession()
+        public void TestDeleteManyDynamicSession()
         {
             var userGroup = DataHelper.GetNewUserGroup();
 
@@ -497,7 +705,7 @@ namespace Apteryx.Mongodb.Driver.Extend.Tests
         }
 
         [TestMethod]
-        public async Task DeleteManyDynamicSessionAsync()
+        public async Task TestDeleteManyDynamicSessionAsync()
         {
             var userGroup = DataHelper.GetNewUserGroup();
 

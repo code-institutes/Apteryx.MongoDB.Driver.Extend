@@ -1142,6 +1142,64 @@ namespace Apteryx.MongoDB.Driver.Extend
         public DeleteResult DeleteOne(IClientSessionHandle session, T document, DeleteOptions options = null, CancellationToken cancellationToken = default);
         public DeleteResult DeleteOne(Expression<Func<T, bool>> expression, DeleteOptions options = null, CancellationToken cancellationToken = default);
         public DeleteResult DeleteOne(IClientSessionHandle session, Expression<Func<T, bool>> expression, DeleteOptions options = null, CancellationToken cancellationToken = default);
+        public T FindOneAndDelete(string id, FindOneAndDeleteOptions<T> options = null, CancellationToken cancellationToken = default);
+        public T FindOneAndDelete(IClientSessionHandle session, string id, FindOneAndDeleteOptions<T> options = null, CancellationToken cancellationToken = default);
+        public T FindOneAndDelete(FilterDefinition<T> filter, FindOneAndDeleteOptions<T> options = null, CancellationToken cancellationToken = default);
+        public T FindOneAndDelete(IClientSessionHandle session, FilterDefinition<T> filter, FindOneAndDeleteOptions<T> options = null, CancellationToken cancellationToken = default);
+        public T FindOneAndDelete(Expression<Func<T, bool>> expression, FindOneAndDeleteOptions<T> options = null, CancellationToken cancellationToken = default);
+        public T FindOneAndDelete(IClientSessionHandle session, Expression<Func<T, bool>> expression, FindOneAndDeleteOptions<T> options = null, CancellationToken cancellationToken = default);
+
+        public T DynamicCollectionFindOneAndDelete<TForeign>(
+            TForeign foreignDocument,
+            string id,
+            MongoCollectionSettings settings = null,
+            FindOneAndDeleteOptions<T> options = null,
+            CancellationToken cancellationToken = default)
+            where TForeign : BaseMongoEntity
+            ;
+        public T DynamicCollectionFindOneAndDelete<TForeign>(
+            IClientSessionHandle session,
+            TForeign foreignDocument,
+            string id,
+            MongoCollectionSettings settings = null,
+            FindOneAndDeleteOptions<T> options = null,
+            CancellationToken cancellationToken = default)
+            where TForeign : BaseMongoEntity
+            ;
+        public T DynamicCollectionFindOneAndDelete<TForeign>(
+            TForeign foreignDocument,
+            FilterDefinition<T> filter,
+            MongoCollectionSettings settings = null,
+            FindOneAndDeleteOptions<T> options = null,
+            CancellationToken cancellationToken = default)
+            where TForeign : BaseMongoEntity
+            ;
+        public T DynamicCollectionFindOneAndDelete<TForeign>(
+            IClientSessionHandle session,
+            TForeign foreignDocument,
+            FilterDefinition<T> filter,
+            MongoCollectionSettings settings = null,
+            FindOneAndDeleteOptions<T> options = null,
+            CancellationToken cancellationToken = default)
+            where TForeign : BaseMongoEntity
+            ;
+        public T DynamicCollectionFindOneAndDelete<TForeign>(
+            TForeign foreignDocument,
+            Expression<Func<T, bool>> expression,
+            MongoCollectionSettings settings = null,
+            FindOneAndDeleteOptions<T> options = null,
+            CancellationToken cancellationToken = default)
+            where TForeign : BaseMongoEntity
+            ;
+        public T DynamicCollectionFindOneAndDelete<TForeign>(
+            IClientSessionHandle session,
+            TForeign foreignDocument,
+            Expression<Func<T, bool>> expression,
+            MongoCollectionSettings settings = null,
+            FindOneAndDeleteOptions<T> options = null,
+            CancellationToken cancellationToken = default)
+            where TForeign : BaseMongoEntity
+            ;
         public List<DeleteResult> DeleteMany(IEnumerable<T> documents, DeleteOptions options = null, CancellationToken cancellationToken = default);
         public List<DeleteResult> DeleteMany(IClientSessionHandle session, IEnumerable<T> documents, DeleteOptions options = null, CancellationToken cancellationToken = default);
         public DeleteResult DeleteMany(FilterDefinition<T> filter, DeleteOptions options = null, CancellationToken cancellationToken = default);
@@ -1280,9 +1338,66 @@ namespace Apteryx.MongoDB.Driver.Extend
         public Task<DeleteResult> DeleteOneAsync(IClientSessionHandle session, FilterDefinition<T> filter, DeleteOptions options = null, CancellationToken cancellationToken = default);
         public Task<DeleteResult> DeleteOneAsync(Expression<Func<T, bool>> expression, DeleteOptions options = null, CancellationToken cancellationToken = default);
         public Task<DeleteResult> DeleteOneAsync(IClientSessionHandle session, Expression<Func<T, bool>> expression, DeleteOptions options = null, CancellationToken cancellationToken = default);
+        public Task<T> FindOneAndDeleteAsync(string id, FindOneAndDeleteOptions<T> options = null, CancellationToken cancellationToken = default);
+        public Task<T> FindOneAndDeleteAsync(IClientSessionHandle session, string id, FindOneAndDeleteOptions<T> options = null, CancellationToken cancellationToken = default);
+        public Task<T> FindOneAndDeleteAsync(FilterDefinition<T> filter, FindOneAndDeleteOptions<T> options = null, CancellationToken cancellationToken = default);
+        public Task<T> FindOneAndDeleteAsync(IClientSessionHandle session, FilterDefinition<T> filter, FindOneAndDeleteOptions<T> options = null, CancellationToken cancellationToken = default);
+        public Task<T> FindOneAndDeleteAsync(Expression<Func<T, bool>> expression, FindOneAndDeleteOptions<T> options = null, CancellationToken cancellationToken = default);
+        public Task<T> FindOneAndDeleteAsync(IClientSessionHandle session, Expression<Func<T, bool>> expression, FindOneAndDeleteOptions<T> options = null, CancellationToken cancellationToken = default);
+
+        public Task<T> DynamicCollectionFindOneAndDeleteAsync<TForeign>(
+            TForeign foreignDocument,
+            string id,
+            MongoCollectionSettings settings = null,
+            FindOneAndDeleteOptions<T> options = null,
+            CancellationToken cancellationToken = default)
+            where TForeign : BaseMongoEntity
+            ;
+        public Task<T> DynamicCollectionFindOneAndDeleteAsync<TForeign>(
+            IClientSessionHandle session,
+            TForeign foreignDocument,
+            string id,
+            MongoCollectionSettings settings = null,
+            FindOneAndDeleteOptions<T> options = null,
+            CancellationToken cancellationToken = default)
+            where TForeign : BaseMongoEntity
+            ;
+        public Task<T> DynamicCollectionFindOneAndDeleteAsync<TForeign>(
+            TForeign foreignDocument,
+            FilterDefinition<T> filter,
+            MongoCollectionSettings settings = null,
+            FindOneAndDeleteOptions<T> options = null,
+            CancellationToken cancellationToken = default)
+            where TForeign : BaseMongoEntity
+            ;
+        public Task<T> DynamicCollectionFindOneAndDeleteAsync<TForeign>(
+            IClientSessionHandle session,
+            TForeign foreignDocument,
+            FilterDefinition<T> filter,
+            MongoCollectionSettings settings = null,
+            FindOneAndDeleteOptions<T> options = null,
+            CancellationToken cancellationToken = default)
+            where TForeign : BaseMongoEntity
+            ;
+        public Task<T> DynamicCollectionFindOneAndDeleteAsync<TForeign>(
+            TForeign foreignDocument,
+            Expression<Func<T, bool>> expression,
+            MongoCollectionSettings settings = null,
+            FindOneAndDeleteOptions<T> options = null,
+            CancellationToken cancellationToken = default)
+            where TForeign : BaseMongoEntity
+            ;
+        public Task<T> DynamicCollectionFindOneAndDeleteAsync<TForeign>(
+            IClientSessionHandle session,
+            TForeign foreignDocument,
+            Expression<Func<T, bool>> expression,
+            MongoCollectionSettings settings = null,
+            FindOneAndDeleteOptions<T> options = null,
+            CancellationToken cancellationToken = default)
+            where TForeign : BaseMongoEntity
+            ;
         public Task<List<DeleteResult>> DeleteManyAsync(IEnumerable<T> documents, DeleteOptions options = null, CancellationToken cancellationToken = default);
         public Task<List<DeleteResult>> DeleteManyAsync(IClientSessionHandle session, IEnumerable<T> documents, DeleteOptions options = null, CancellationToken cancellationToken = default);
-
         public Task<DeleteResult> DeleteManyAsync(FilterDefinition<T> filter, DeleteOptions options = null, CancellationToken cancellationToken = default);
         public Task<DeleteResult> DeleteManyAsync(IClientSessionHandle session, FilterDefinition<T> filter, DeleteOptions options = null, CancellationToken cancellationToken = default);
         public Task<DeleteResult> DeleteManyAsync(Expression<Func<T, bool>> expression, DeleteOptions options = null, CancellationToken cancellationToken = default);

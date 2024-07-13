@@ -104,6 +104,213 @@ namespace Apteryx.MongoDB.Driver.Extend
         }
 
         /// <summary>
+        /// 查询并删除（单个）
+        /// </summary>
+        /// <param name="id">文档对象ID</param>
+        /// <param name="options">删除操作选项</param>
+        /// <param name="cancellationToken">取消令牌</param>
+        /// <returns></returns>
+        public Task<T> FindOneAndDeleteAsync(string id, FindOneAndDeleteOptions<T> options = null, CancellationToken cancellationToken = default)
+        {
+            return _collection.FindOneAndDeleteAsync<T>(f => f.Id == id, options, cancellationToken);
+        }
+
+        /// <summary>
+        /// 查询并删除（单个）
+        /// </summary>
+        /// <param name="session">会话句柄(作用于事务)</param>
+        /// <param name="id">文档对象ID</param>
+        /// <param name="options">删除操作选项</param>
+        /// <param name="cancellationToken">取消令牌</param>
+        /// <returns></returns>
+        public Task<T> FindOneAndDeleteAsync(IClientSessionHandle session, string id, FindOneAndDeleteOptions<T> options = null, CancellationToken cancellationToken = default)
+        {
+            return _collection.FindOneAndDeleteAsync<T>(session, f => f.Id == id, options, cancellationToken);
+        }
+
+        /// <summary>
+        /// 查询并删除（单个）
+        /// </summary>
+        /// <param name="filter">过滤器</param>
+        /// <param name="options">删除操作选项</param>
+        /// <param name="cancellationToken">取消令牌</param>
+        /// <returns></returns>
+        public Task<T> FindOneAndDeleteAsync(FilterDefinition<T> filter, FindOneAndDeleteOptions<T> options = null, CancellationToken cancellationToken = default)
+        {
+            return _collection.FindOneAndDeleteAsync(filter, options, cancellationToken);
+        }
+
+        /// <summary>
+        /// 查询并删除（单个）
+        /// </summary>
+        /// <param name="session">会话句柄(作用于事务)</param>
+        /// <param name="filter">过滤器</param>
+        /// <param name="options">删除操作选项</param>
+        /// <param name="cancellationToken">取消令牌</param>
+        /// <returns></returns>
+        public Task<T> FindOneAndDeleteAsync(IClientSessionHandle session, FilterDefinition<T> filter, FindOneAndDeleteOptions<T> options = null, CancellationToken cancellationToken = default)
+        {
+            return _collection.FindOneAndDeleteAsync(session, filter, options, cancellationToken);
+        }
+
+        /// <summary>
+        /// 查询并删除（单个）
+        /// </summary>
+        /// <param name="expression">Lambda过滤器</param>
+        /// <param name="options">删除操作选项</param>
+        /// <param name="cancellationToken">取消令牌</param>
+        /// <returns></returns>
+        public Task<T> FindOneAndDeleteAsync(Expression<Func<T, bool>> expression, FindOneAndDeleteOptions<T> options = null, CancellationToken cancellationToken = default)
+        {
+            return _collection.FindOneAndDeleteAsync(expression, options, cancellationToken);
+        }
+
+        /// <summary>
+        /// 查询并删除（单个）
+        /// </summary>
+        /// <param name="session">会话句柄(作用于事务)</param>
+        /// <param name="expression">Lambda过滤器</param>
+        /// <param name="options">删除操作选项</param>
+        /// <param name="cancellationToken">取消令牌</param>
+        /// <returns></returns>
+        public Task<T> FindOneAndDeleteAsync(IClientSessionHandle session, Expression<Func<T, bool>> expression, FindOneAndDeleteOptions<T> options = null, CancellationToken cancellationToken = default)
+        {
+            return _collection.FindOneAndDeleteAsync(session, expression, options, cancellationToken);
+        }
+
+        /// <summary>
+        /// 动态查询并删除（单个）
+        /// </summary>
+        /// <typeparam name="TForeign">文档类型</typeparam>
+        /// <param name="foreignDocument">上级文档</param>
+        /// <param name="id">文档对象ID</param>
+        /// <param name="settings">集合设置</param>
+        /// <param name="options">删除操作选项</param>
+        /// <param name="cancellationToken">取消令牌</param>
+        /// <returns></returns>
+        public Task<T> DynamicCollectionFindOneAndDeleteAsync<TForeign>(
+            TForeign foreignDocument,
+            string id,
+            MongoCollectionSettings settings = null,
+            FindOneAndDeleteOptions<T> options = null,
+            CancellationToken cancellationToken = default)
+            where TForeign : BaseMongoEntity
+        {
+            return _database.GetCollection<T>($"{foreignDocument.Id}_{_collectionName}", settings).FindOneAndDeleteAsync<T>(d => d.Id == id, options, cancellationToken);
+        }
+
+        /// <summary>
+        /// 动态查询并删除（单个）
+        /// </summary>
+        /// <typeparam name="TForeign">文档类型</typeparam>
+        /// <param name="session">会话句柄(作用于事务)</param>
+        /// <param name="foreignDocument">上级文档</param>
+        /// <param name="id">文档对象ID</param>
+        /// <param name="settings">集合设置</param>
+        /// <param name="options">删除操作选项</param>
+        /// <param name="cancellationToken">取消令牌</param>
+        /// <returns></returns>
+        public Task<T> DynamicCollectionFindOneAndDeleteAsync<TForeign>(
+            IClientSessionHandle session,
+            TForeign foreignDocument,
+            string id,
+            MongoCollectionSettings settings = null,
+            FindOneAndDeleteOptions<T> options = null,
+            CancellationToken cancellationToken = default)
+            where TForeign : BaseMongoEntity
+        {
+            return _database.GetCollection<T>($"{foreignDocument.Id}_{_collectionName}", settings).FindOneAndDeleteAsync<T>(session, d => d.Id == id, options, cancellationToken);
+        }
+
+        /// <summary>
+        /// 动态查询并删除（单个）
+        /// </summary>
+        /// <typeparam name="TForeign">文档类型</typeparam>
+        /// <param name="foreignDocument">上级文档</param>
+        /// <param name="filter">过滤器</param>
+        /// <param name="settings">集合设置</param>
+        /// <param name="options">删除操作选项</param>
+        /// <param name="cancellationToken">取消令牌</param>
+        /// <returns></returns>
+        public Task<T> DynamicCollectionFindOneAndDeleteAsync<TForeign>(
+            TForeign foreignDocument,
+            FilterDefinition<T> filter,
+            MongoCollectionSettings settings = null,
+            FindOneAndDeleteOptions<T> options = null,
+            CancellationToken cancellationToken = default)
+            where TForeign : BaseMongoEntity
+        {
+            return _database.GetCollection<T>($"{foreignDocument.Id}_{_collectionName}", settings).FindOneAndDeleteAsync<T>(filter, options, cancellationToken);
+        }
+
+        /// <summary>
+        /// 动态查询并删除（单个）
+        /// </summary>
+        /// <typeparam name="TForeign">文档类型</typeparam>
+        /// <param name="session">会话句柄(作用于事务)</param>
+        /// <param name="foreignDocument">上级文档</param>
+        /// <param name="filter">过滤器</param>
+        /// <param name="settings">集合设置</param>
+        /// <param name="options">删除操作选项</param>
+        /// <param name="cancellationToken">取消令牌</param>
+        /// <returns></returns>
+        public Task<T> DynamicCollectionFindOneAndDeleteAsync<TForeign>(
+            IClientSessionHandle session,
+            TForeign foreignDocument,
+            FilterDefinition<T> filter,
+            MongoCollectionSettings settings = null,
+            FindOneAndDeleteOptions<T> options = null,
+            CancellationToken cancellationToken = default)
+            where TForeign : BaseMongoEntity
+        {
+            return _database.GetCollection<T>($"{foreignDocument.Id}_{_collectionName}", settings).FindOneAndDeleteAsync<T>(session, filter, options, cancellationToken);
+        }
+
+        /// <summary>
+        /// 动态查询并删除（单个）
+        /// </summary>
+        /// <typeparam name="TForeign">文档类型</typeparam>
+        /// <param name="foreignDocument">上级文档</param>
+        /// <param name="expression">Lambda表达式</param>
+        /// <param name="settings">集合设置</param>
+        /// <param name="options">删除操作选项</param>
+        /// <param name="cancellationToken">取消令牌</param>
+        /// <returns></returns>
+        public Task<T> DynamicCollectionFindOneAndDeleteAsync<TForeign>(
+            TForeign foreignDocument,
+            Expression<Func<T, bool>> expression,
+            MongoCollectionSettings settings = null,
+            FindOneAndDeleteOptions<T> options = null,
+            CancellationToken cancellationToken = default)
+            where TForeign : BaseMongoEntity
+        {
+            return _database.GetCollection<T>($"{foreignDocument.Id}_{_collectionName}", settings).FindOneAndDeleteAsync<T>(expression, options, cancellationToken);
+        }
+
+        /// <summary>
+        /// 动态查询并删除（单个）
+        /// </summary>
+        /// <typeparam name="TForeign">文档类型</typeparam>
+        /// <param name="session">会话句柄(作用于事务)</param>
+        /// <param name="foreignDocument">上级文档</param>
+        /// <param name="expression">Lambda表达式</param>
+        /// <param name="settings">集合设置</param>
+        /// <param name="options">删除操作选项</param>
+        /// <param name="cancellationToken">取消令牌</param>
+        /// <returns></returns>
+        public Task<T> DynamicCollectionFindOneAndDeleteAsync<TForeign>(
+            IClientSessionHandle session,
+            TForeign foreignDocument,
+            Expression<Func<T, bool>> expression,
+            MongoCollectionSettings settings = null,
+            FindOneAndDeleteOptions<T> options = null,
+            CancellationToken cancellationToken = default)
+            where TForeign : BaseMongoEntity
+        {
+            return _database.GetCollection<T>($"{foreignDocument.Id}_{_collectionName}", settings).FindOneAndDeleteAsync<T>(session, expression, options, cancellationToken);
+        }
+
+        /// <summary>
         /// 删除（批量）
         /// </summary>
         /// <param name="documents">文档对象</param>
