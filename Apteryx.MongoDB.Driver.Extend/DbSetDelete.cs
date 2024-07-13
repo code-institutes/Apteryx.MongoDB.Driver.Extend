@@ -60,6 +60,29 @@ namespace Apteryx.MongoDB.Driver.Extend
         /// <summary>
         /// 删除（单个）
         /// </summary>
+        /// <param name="filter">过滤器</param>
+        /// <param name="options">删除操作选项</param>
+        /// <param name="cancellationToken">取消令牌</param>
+        public DeleteResult DeleteOne(FilterDefinition<T> filter, DeleteOptions options = null, CancellationToken cancellationToken = default)
+        {
+            return _collection.DeleteOne(filter, options, cancellationToken);
+        }
+
+        /// <summary>
+        /// 删除（单个）
+        /// </summary>
+        /// <param name="session">会话句柄(作用于事务)</param>
+        /// <param name="filter">过滤器</param>
+        /// <param name="options">删除操作选项</param>
+        /// <param name="cancellationToken">取消令牌</param>
+        public DeleteResult DeleteOne(IClientSessionHandle session, FilterDefinition<T> filter, DeleteOptions options = null, CancellationToken cancellationToken = default)
+        {
+            return _collection.DeleteOne(session, filter, options, cancellationToken);
+        }
+
+        /// <summary>
+        /// 删除（单个）
+        /// </summary>
         /// <param name="expression">Lambda过滤器</param>
         /// <param name="options">删除操作选项</param>
         /// <param name="cancellationToken">取消令牌</param>
@@ -118,7 +141,30 @@ namespace Apteryx.MongoDB.Driver.Extend
         /// <summary>
         /// 删除（批量）
         /// </summary>
-        /// <param name="expression">文档对象</param>
+        /// <param name="filter">过滤器</param>
+        /// <param name="options">删除操作选项</param>
+        /// <param name="cancellationToken">取消令牌</param>
+        public DeleteResult DeleteMany(FilterDefinition<T> filter, DeleteOptions options = null, CancellationToken cancellationToken = default)
+        {
+            return _collection.DeleteMany(filter, options, cancellationToken);
+        }
+
+        /// <summary>
+        /// 删除（批量）
+        /// </summary>
+        /// <param name="session">会话句柄(作用于事务)</param>
+        /// <param name="filter">过滤器</param>
+        /// <param name="options">删除操作选项</param>
+        /// <param name="cancellationToken">取消令牌</param>
+        public DeleteResult DeleteMany(IClientSessionHandle session, FilterDefinition<T> filter, DeleteOptions options = null, CancellationToken cancellationToken = default)
+        {
+            return _collection.DeleteMany(session, filter, options, cancellationToken);
+        }
+
+        /// <summary>
+        /// 删除（批量）
+        /// </summary>
+        /// <param name="expression">Lambda过滤器</param>
         /// <param name="options">删除操作选项</param>
         /// <param name="cancellationToken">取消令牌</param>
         public DeleteResult DeleteMany(Expression<Func<T, bool>> expression, DeleteOptions options = null, CancellationToken cancellationToken = default)
@@ -130,7 +176,7 @@ namespace Apteryx.MongoDB.Driver.Extend
         /// 删除（批量）
         /// </summary>
         /// <param name="session">会话句柄(作用于事务)</param>
-        /// <param name="expression">文档对象</param>
+        /// <param name="expression">Lambda过滤器</param>
         /// <param name="options">删除操作选项</param>
         /// <param name="cancellationToken">取消令牌</param>
         public DeleteResult DeleteMany(IClientSessionHandle session, Expression<Func<T, bool>> expression, DeleteOptions options = null, CancellationToken cancellationToken = default)
@@ -177,7 +223,7 @@ namespace Apteryx.MongoDB.Driver.Extend
             CancellationToken cancellationToken = default)
             where TForeign : BaseMongoEntity
         {
-            return _database.GetCollection<T>($"{foreignDocument.Id}_{_collectionName}", settings).DeleteOne<T>(session, d => d.Id == id, options, cancellationToken);
+            return _database.GetCollection<T>($"{foreignDocument.Id}_{_collectionName}", settings).DeleteOne(session, d => d.Id == id, options, cancellationToken);
         }
 
         /// <summary>
@@ -197,7 +243,7 @@ namespace Apteryx.MongoDB.Driver.Extend
             CancellationToken cancellationToken = default)
             where TForeign : BaseMongoEntity
         {
-            return _database.GetCollection<T>($"{foreignDocument.Id}_{_collectionName}", settings).DeleteOne<T>(d => d.Id == document.Id, options, cancellationToken);
+            return _database.GetCollection<T>($"{foreignDocument.Id}_{_collectionName}", settings).DeleteOne(d => d.Id == document.Id, options, cancellationToken);
         }
 
         /// <summary>
@@ -219,7 +265,49 @@ namespace Apteryx.MongoDB.Driver.Extend
             CancellationToken cancellationToken = default)
             where TForeign : BaseMongoEntity
         {
-            return _database.GetCollection<T>($"{foreignDocument.Id}_{_collectionName}", settings).DeleteOne<T>(session, d => d.Id == document.Id, options, cancellationToken);
+            return _database.GetCollection<T>($"{foreignDocument.Id}_{_collectionName}", settings).DeleteOne(session, d => d.Id == document.Id, options, cancellationToken);
+        }
+
+        /// <summary>
+        /// 根据主文档的默认id动态的删除附文档的集合,集合名称规则:"{主文档默认id}_{附文档名}"
+        /// </summary>
+        /// <typeparam name="TForeign">文档类型</typeparam>
+        /// <param name="foreignDocument">上级文档</param>
+        /// <param name="filter">过滤器</param>
+        /// <param name="settings">集合设置</param>
+        /// <param name="options">删除操作选项</param>
+        /// <param name="cancellationToken">取消令牌</param>
+        public DeleteResult DynamicCollectionDeleteOne<TForeign>(
+            TForeign foreignDocument,
+            FilterDefinition<T> filter,
+            MongoCollectionSettings settings = null,
+            DeleteOptions options = null,
+            CancellationToken cancellationToken = default)
+            where TForeign : BaseMongoEntity
+        {
+            return _database.GetCollection<T>($"{foreignDocument.Id}_{_collectionName}", settings).DeleteOne(filter, options, cancellationToken);
+        }
+
+        /// <summary>
+        /// 根据主文档的默认id动态的删除附文档的集合,集合名称规则:"{主文档默认id}_{附文档名}"
+        /// </summary>
+        /// <typeparam name="TForeign">文档类型</typeparam>
+        /// <param name="session">会话句柄(作用于事务)</param>
+        /// <param name="foreignDocument">上级文档</param>
+        /// <param name="filter">过滤器</param>
+        /// <param name="settings">集合设置</param>
+        /// <param name="options">删除操作选项</param>
+        /// <param name="cancellationToken">取消令牌</param>
+        public DeleteResult DynamicCollectionDeleteOne<TForeign>(
+            IClientSessionHandle session,
+            TForeign foreignDocument,
+            FilterDefinition<T> filter,
+            MongoCollectionSettings settings = null,
+            DeleteOptions options = null,
+            CancellationToken cancellationToken = default)
+            where TForeign : BaseMongoEntity
+        {
+            return _database.GetCollection<T>($"{foreignDocument.Id}_{_collectionName}", settings).DeleteOne(session, filter, options, cancellationToken);
         }
 
         /// <summary>
@@ -261,7 +349,7 @@ namespace Apteryx.MongoDB.Driver.Extend
             CancellationToken cancellationToken = default)
             where TForeign : BaseMongoEntity
         {
-            return _database.GetCollection<T>($"{foreignDocument.Id}_{_collectionName}", settings).DeleteOne<T>(session, expression, options, cancellationToken);
+            return _database.GetCollection<T>($"{foreignDocument.Id}_{_collectionName}", settings).DeleteOne(session, expression, options, cancellationToken);
         }
 
         /// <summary>
@@ -284,7 +372,7 @@ namespace Apteryx.MongoDB.Driver.Extend
             var results = new List<DeleteResult>();
             foreach (var document in documents)
             {
-                var result = _database.GetCollection<T>($"{foreignDocument.Id}_{_collectionName}", settings).DeleteOne<T>(d => d.Id == document.Id, options, cancellationToken);
+                var result = _database.GetCollection<T>($"{foreignDocument.Id}_{_collectionName}", settings).DeleteOne(d => d.Id == document.Id, options, cancellationToken);
                 results.Add(result);
             }
 
@@ -313,10 +401,53 @@ namespace Apteryx.MongoDB.Driver.Extend
             var results = new List<DeleteResult>();
             foreach (var document in documents)
             {
-                var result = _database.GetCollection<T>($"{foreignDocument.Id}_{_collectionName}", settings).DeleteOne<T>(session, d => d.Id == document.Id, options, cancellationToken);
+                var result = _database.GetCollection<T>($"{foreignDocument.Id}_{_collectionName}", settings).DeleteOne(session, d => d.Id == document.Id, options, cancellationToken);
                 results.Add(result);
             }
             return results;
+        }
+
+        /// <summary>
+        /// 根据主文档的默认id动态的删除附文档的集合,集合名称规则:"{主文档默认id}_{附文档名}"
+        /// </summary>
+        /// <typeparam name="TForeign">文档类型</typeparam>
+        /// <param name="foreignDocument">上级文档</param>
+        /// <param name="filter">过滤器</param>
+        /// <param name="settings">集合设置</param>
+        /// <param name="options">删除操作选项</param>
+        /// <param name="cancellationToken">取消令牌</param>
+        public DeleteResult DynamicCollectionDeleteMany<TForeign>(
+            TForeign foreignDocument,
+            FilterDefinition<T> filter,
+            MongoCollectionSettings settings = null,
+            DeleteOptions options = null,
+            CancellationToken cancellationToken = default)
+            where TForeign : BaseMongoEntity
+        {
+            return _database.GetCollection<T>($"{foreignDocument.Id}_{_collectionName}", settings).DeleteMany(filter, options, cancellationToken);
+
+        }
+
+        /// <summary>
+        /// 根据主文档的默认id动态的删除附文档的集合,集合名称规则:"{主文档默认id}_{附文档名}"
+        /// </summary>
+        /// <typeparam name="TForeign">文档类型</typeparam>
+        /// <param name="session">会话句柄(作用于事务)</param>
+        /// <param name="foreignDocument">上级文档</param>
+        /// <param name="filter">过滤器</param>
+        /// <param name="settings"></param>
+        /// <param name="options">删除操作选项</param>
+        /// <param name="cancellationToken">取消令牌</param>
+        public DeleteResult DynamicCollectionDeleteMany<TForeign>(
+            IClientSessionHandle session,
+            TForeign foreignDocument,
+            FilterDefinition<T> filter,
+            MongoCollectionSettings settings = null,
+            DeleteOptions options = null,
+            CancellationToken cancellationToken = default)
+            where TForeign : BaseMongoEntity
+        {
+            return _database.GetCollection<T>($"{foreignDocument.Id}_{_collectionName}", settings).DeleteMany(session, filter, options, cancellationToken);
         }
 
         /// <summary>

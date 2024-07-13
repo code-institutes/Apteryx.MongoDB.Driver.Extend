@@ -54,7 +54,7 @@ namespace Apteryx.Mongodb.Driver.Extend.Tests
             // 替换用户3
             var name3 = $"段誉{Guid.NewGuid().ToString()}";
             user.Name = name3;
-            dbContext.Users.ReplaceOne(new FilterDefinitionBuilder<User>().Eq(f => f.Id, user.Id), user);
+            dbContext.Users.ReplaceOne(Builders<User>.Filter.Eq(f => f.Id, user.Id), user);
 
             var replaceedUser3 = dbContext.Users.FindOne(user.Id);
             Assert.AreEqual(replaceedUser3.Name, name3, "未成功替换用户。");
@@ -99,7 +99,7 @@ namespace Apteryx.Mongodb.Driver.Extend.Tests
             // 替换用户3
             var name3 = $"段誉{Guid.NewGuid().ToString()}";
             user.Name = name3;
-            await dbContext.Users.ReplaceOneAsync(new FilterDefinitionBuilder<User>().Eq(f => f.Id, user.Id), user);
+            await dbContext.Users.ReplaceOneAsync(Builders<User>.Filter.Eq(f => f.Id, user.Id), user);
 
             var replaceedUser3 = await dbContext.Users.FindOneAsync(user.Id);
             Assert.AreEqual(replaceedUser3.Name, name3, "未成功替换用户。");
@@ -150,7 +150,7 @@ namespace Apteryx.Mongodb.Driver.Extend.Tests
                 // 替换用户3
                 var name3 = $"段誉{Guid.NewGuid().ToString()}";
                 user.Name = name3;
-                dbContext.Users.ReplaceOne(session, new FilterDefinitionBuilder<User>().Eq(f => f.Id, user.Id), user);
+                dbContext.Users.ReplaceOne(session, Builders<User>.Filter.Eq(f => f.Id, user.Id), user);
 
                 var replaceedUser3 = dbContext.Users.FindOne(session, user.Id);
                 Assert.AreEqual(replaceedUser3.Name, name3, "未成功替换用户。");
@@ -204,7 +204,7 @@ namespace Apteryx.Mongodb.Driver.Extend.Tests
                 // 替换用户3
                 var name3 = $"段誉{Guid.NewGuid().ToString()}";
                 user.Name = name3;
-                await dbContext.Users.ReplaceOneAsync(session, new FilterDefinitionBuilder<User>().Eq(f => f.Id, user.Id), user);
+                await dbContext.Users.ReplaceOneAsync(session, Builders<User>.Filter.Eq(f => f.Id, user.Id), user);
 
                 var replaceedUser3 = await dbContext.Users.FindOneAsync(session, user.Id);
                 Assert.AreEqual(replaceedUser3.Name, name3, "未成功替换用户。");
@@ -254,7 +254,7 @@ namespace Apteryx.Mongodb.Driver.Extend.Tests
             // 替换用户3
             var name3 = $"段誉{Guid.NewGuid().ToString()}";
             user.Name = name3;
-            dbContext.Users.DynamicCollectionReplaceOne(userGroup, new FilterDefinitionBuilder<User>().Eq(f => f.Id, user.Id), user);
+            dbContext.Users.DynamicCollectionReplaceOne(userGroup, Builders<User>.Filter.Eq(f => f.Id, user.Id), user);
 
             var replaceedUser3 = dbContext.Users.DynamicCollectionFindOne(userGroup, user.Id);
             Assert.AreEqual(replaceedUser3.Name, name3, "未成功替换用户。");
@@ -301,7 +301,7 @@ namespace Apteryx.Mongodb.Driver.Extend.Tests
             // 替换用户3
             var name3 = $"段誉{Guid.NewGuid().ToString()}";
             user.Name = name3;
-            await dbContext.Users.DynamicCollectionReplaceOneAsync(userGroup, new FilterDefinitionBuilder<User>().Eq(f => f.Id, user.Id), user);
+            await dbContext.Users.DynamicCollectionReplaceOneAsync(userGroup, Builders<User>.Filter.Eq(f => f.Id, user.Id), user);
 
             var replaceedUser3 = await dbContext.Users.DynamicCollectionFindOneAsync(userGroup, user.Id);
             Assert.AreEqual(replaceedUser3.Name, name3, "未成功替换用户。");
@@ -353,7 +353,7 @@ namespace Apteryx.Mongodb.Driver.Extend.Tests
                 // 替换用户3
                 var name3 = $"段誉{Guid.NewGuid().ToString()}";
                 user.Name = name3;
-                dbContext.Users.DynamicCollectionReplaceOne(session, userGroup, new FilterDefinitionBuilder<User>().Eq(f => f.Id, user.Id), user);
+                dbContext.Users.DynamicCollectionReplaceOne(session, userGroup, Builders<User>.Filter.Eq(f => f.Id, user.Id), user);
 
                 var replaceedUser3 = dbContext.Users.DynamicCollectionFindOne(session, userGroup, user.Id);
                 Assert.AreEqual(replaceedUser3.Name, name3, "未成功替换用户。");
@@ -408,7 +408,7 @@ namespace Apteryx.Mongodb.Driver.Extend.Tests
                 // 替换用户3
                 var name3 = $"段誉{Guid.NewGuid().ToString()}";
                 user.Name = name3;
-                await dbContext.Users.DynamicCollectionReplaceOneAsync(session, userGroup, new FilterDefinitionBuilder<User>().Eq(f => f.Id, user.Id), user);
+                await dbContext.Users.DynamicCollectionReplaceOneAsync(session, userGroup, Builders<User>.Filter.Eq(f => f.Id, user.Id), user);
 
                 // 删除用户
                 await dbContext.Users.DynamicCollectionDeleteOneAsync(session, userGroup, user);
@@ -454,7 +454,7 @@ namespace Apteryx.Mongodb.Driver.Extend.Tests
             // 替换用户3
             var name3 = $"段誉{Guid.NewGuid().ToString()}";
             user.Name = name3;
-            var result3 = dbContext.Users.FindOneAndReplaceOne(new FilterDefinitionBuilder<User>().Eq(f => f.Id, user.Id), user);
+            var result3 = dbContext.Users.FindOneAndReplaceOne(Builders<User>.Filter.Eq(f => f.Id, user.Id), user);
 
             var replaceedUser3 = dbContext.Users.FindOne(user.Id);
             Assert.AreNotEqual(replaceedUser3.Name, result3.Name, "未成功替换用户。");
@@ -499,7 +499,7 @@ namespace Apteryx.Mongodb.Driver.Extend.Tests
             // 替换用户3
             var name3 = $"段誉{Guid.NewGuid().ToString()}";
             user.Name = name3;
-            var result3 = await dbContext.Users.FindOneAndReplaceOneAsync(new FilterDefinitionBuilder<User>().Eq(f => f.Id, user.Id), user);
+            var result3 = await dbContext.Users.FindOneAndReplaceOneAsync(Builders<User>.Filter.Eq(f => f.Id, user.Id), user);
 
             var replaceedUser3 = await dbContext.Users.FindOneAsync(user.Id);
             Assert.AreNotEqual(replaceedUser3.Name, result3.Name, "未成功替换用户。");
@@ -551,7 +551,7 @@ namespace Apteryx.Mongodb.Driver.Extend.Tests
                 // 替换用户3
                 var name3 = $"段誉{Guid.NewGuid().ToString()}";
                 user.Name = name3;
-                var result3 = dbContext.Users.FindOneAndReplaceOne(session, new FilterDefinitionBuilder<User>().Eq(f => f.Id, user.Id), user);
+                var result3 = dbContext.Users.FindOneAndReplaceOne(session, Builders<User>.Filter.Eq(f => f.Id, user.Id), user);
 
                 var replaceedUser3 = dbContext.Users.FindOne(session, user.Id);
                 Assert.AreNotEqual(replaceedUser3.Name, result3.Name, "未成功替换用户。");
@@ -605,7 +605,7 @@ namespace Apteryx.Mongodb.Driver.Extend.Tests
                 // 替换用户3
                 var name3 = $"段誉{Guid.NewGuid().ToString()}";
                 user.Name = name3;
-                var result3 = await dbContext.Users.FindOneAndReplaceOneAsync(session, new FilterDefinitionBuilder<User>().Eq(f => f.Id, user.Id), user);
+                var result3 = await dbContext.Users.FindOneAndReplaceOneAsync(session, Builders<User>.Filter.Eq(f => f.Id, user.Id), user);
 
                 var replaceedUser3 = await dbContext.Users.FindOneAsync(session, user.Id);
                 Assert.AreNotEqual(replaceedUser3.Name, result3.Name, "未成功替换用户。");
@@ -655,7 +655,7 @@ namespace Apteryx.Mongodb.Driver.Extend.Tests
             // 替换用户3
             var name3 = $"段誉{Guid.NewGuid().ToString()}";
             user.Name = name3;
-            var result3 = dbContext.Users.DynamicCollectionFindOneAndReplaceOne(userGroup, new FilterDefinitionBuilder<User>().Eq(f => f.Id, user.Id), user);
+            var result3 = dbContext.Users.DynamicCollectionFindOneAndReplaceOne(userGroup, Builders<User>.Filter.Eq(f => f.Id, user.Id), user);
 
             var replaceedUser3 = dbContext.Users.DynamicCollectionFindOne(userGroup, user.Id);
             Assert.AreNotEqual(replaceedUser3.Name, result3.Name, "未成功替换用户。");
@@ -702,7 +702,7 @@ namespace Apteryx.Mongodb.Driver.Extend.Tests
             // 替换用户3
             var name3 = $"段誉{Guid.NewGuid().ToString()}";
             user.Name = name3;
-            var result3 = await dbContext.Users.DynamicCollectionFindOneAndReplaceOneAsync(userGroup, new FilterDefinitionBuilder<User>().Eq(f => f.Id, user.Id), user);
+            var result3 = await dbContext.Users.DynamicCollectionFindOneAndReplaceOneAsync(userGroup, Builders<User>.Filter.Eq(f => f.Id, user.Id), user);
 
             var replaceedUser3 = await dbContext.Users.DynamicCollectionFindOneAsync(userGroup, user.Id);
             Assert.AreNotEqual(replaceedUser3.Name, result3.Name, "未成功替换用户。");
@@ -754,7 +754,7 @@ namespace Apteryx.Mongodb.Driver.Extend.Tests
                 // 替换用户3
                 var name3 = $"段誉{Guid.NewGuid().ToString()}";
                 user.Name = name3;
-                var result3 = dbContext.Users.DynamicCollectionFindOneAndReplaceOne(session, userGroup, new FilterDefinitionBuilder<User>().Eq(f => f.Id, user.Id), user);
+                var result3 = dbContext.Users.DynamicCollectionFindOneAndReplaceOne(session, userGroup, Builders<User>.Filter.Eq(f => f.Id, user.Id), user);
 
                 var replaceedUser3 = dbContext.Users.DynamicCollectionFindOne(session, userGroup, user.Id);
                 Assert.AreNotEqual(replaceedUser3.Name, result3.Name, "未成功替换用户。");
@@ -809,7 +809,7 @@ namespace Apteryx.Mongodb.Driver.Extend.Tests
                 // 替换用户3
                 var name3 = $"段誉{Guid.NewGuid().ToString()}";
                 user.Name = name3;
-                var result3 = await dbContext.Users.DynamicCollectionFindOneAndReplaceOneAsync(session, userGroup, new FilterDefinitionBuilder<User>().Eq(f => f.Id, user.Id), user);
+                var result3 = await dbContext.Users.DynamicCollectionFindOneAndReplaceOneAsync(session, userGroup, Builders<User>.Filter.Eq(f => f.Id, user.Id), user);
 
                 var replaceedUser3 = await dbContext.Users.DynamicCollectionFindOneAsync(session, userGroup, user.Id);
                 Assert.AreNotEqual(replaceedUser3.Name, result3.Name, "未成功替换用户。");

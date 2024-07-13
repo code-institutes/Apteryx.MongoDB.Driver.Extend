@@ -20,7 +20,7 @@ namespace Apteryx.MongoDB.Driver.Extend
         /// <param name="options">更新操作设置</param>
         /// <param name="cancellationToken">取消令牌</param>
         /// <returns></returns>
-        public Task<UpdateResult> WhereUpdateOneAsync(
+        public Task<UpdateResult> UpdateOneAsync(
             string id,
             UpdateDefinition<T> update,
             UpdateOptions options = null,
@@ -38,7 +38,7 @@ namespace Apteryx.MongoDB.Driver.Extend
         /// <param name="options">更新操作设置</param>
         /// <param name="cancellationToken">取消令牌</param>
         /// <returns></returns>
-        public Task<UpdateResult> WhereUpdateOneAsync(
+        public Task<UpdateResult> UpdateOneAsync(
             IClientSessionHandle session,
             string id,
             UpdateDefinition<T> update,
@@ -56,7 +56,7 @@ namespace Apteryx.MongoDB.Driver.Extend
         /// <param name="options">更新操作设置</param>
         /// <param name="cancellationToken">取消令牌</param>
         /// <returns></returns>
-        public Task<UpdateResult> WhereUpdateOneAsync(
+        public Task<UpdateResult> UpdateOneAsync(
             FilterDefinition<T> filter,
             UpdateDefinition<T> update,
             UpdateOptions options = null,
@@ -74,7 +74,7 @@ namespace Apteryx.MongoDB.Driver.Extend
         /// <param name="options">更新操作设置</param>
         /// <param name="cancellationToken">取消令牌</param>
         /// <returns></returns>
-        public Task<UpdateResult> WhereUpdateOneAsync(
+        public Task<UpdateResult> UpdateOneAsync(
             IClientSessionHandle session,
             FilterDefinition<T> filter,
             UpdateDefinition<T> update,
@@ -92,7 +92,7 @@ namespace Apteryx.MongoDB.Driver.Extend
         /// <param name="options">更新操作设置</param>
         /// <param name="cancellationToken">取消令牌</param>
         /// <returns></returns>
-        public Task<UpdateResult> WhereUpdateOneAsync(
+        public Task<UpdateResult> UpdateOneAsync(
             Expression<Func<T, bool>> expression,
             UpdateDefinition<T> update,
             UpdateOptions options = null,
@@ -110,7 +110,7 @@ namespace Apteryx.MongoDB.Driver.Extend
         /// <param name="options">更新操作设置</param>
         /// <param name="cancellationToken">取消令牌</param>
         /// <returns></returns>
-        public Task<UpdateResult> WhereUpdateOneAsync(
+        public Task<UpdateResult> UpdateOneAsync(
             IClientSessionHandle session,
             Expression<Func<T, bool>> expression,
             UpdateDefinition<T> update,
@@ -131,7 +131,7 @@ namespace Apteryx.MongoDB.Driver.Extend
         /// <param name="options">更新操作设置</param>
         /// <param name="cancellationToken">取消令牌</param>
         /// <returns></returns>
-        public Task<UpdateResult> DynamicCollectionWhereUpdateOneAsync<TForeign>(
+        public Task<UpdateResult> DynamicCollectionUpdateOneAsync<TForeign>(
             TForeign foreignDocument,
             string id,
             UpdateDefinition<T> update,
@@ -154,7 +154,7 @@ namespace Apteryx.MongoDB.Driver.Extend
         /// <param name="options">更新操作设置</param>
         /// <param name="cancellationToken">取消令牌</param>
         /// <returns></returns>
-        public Task<UpdateResult> DynamicCollectionWhereUpdateOneAsync<TForeign>(
+        public Task<UpdateResult> DynamicCollectionUpdateOneAsync<TForeign>(
             IClientSessionHandle seesion,
             TForeign foreignDocument,
             string id,
@@ -178,7 +178,7 @@ namespace Apteryx.MongoDB.Driver.Extend
         /// <param name="options">更新操作设置</param>
         /// <param name="cancellationToken">取消令牌</param>
         /// <returns></returns>
-        public Task<UpdateResult> DynamicCollectionWhereUpdateOneAsync<TForeign>(
+        public Task<UpdateResult> DynamicCollectionUpdateOneAsync<TForeign>(
             TForeign foreignDocument,
             FilterDefinition<T> filter,
             UpdateDefinition<T> update,
@@ -202,7 +202,7 @@ namespace Apteryx.MongoDB.Driver.Extend
         /// <param name="options">更新操作设置</param>
         /// <param name="cancellationToken">取消令牌</param>
         /// <returns></returns>
-        public Task<UpdateResult> DynamicCollectionWhereUpdateOneAsync<TForeign>(
+        public Task<UpdateResult> DynamicCollectionUpdateOneAsync<TForeign>(
             IClientSessionHandle seesion,
             TForeign foreignDocument,
             FilterDefinition<T> filter,
@@ -226,7 +226,7 @@ namespace Apteryx.MongoDB.Driver.Extend
         /// <param name="options">更新操作设置</param>
         /// <param name="cancellationToken">取消令牌</param>
         /// <returns></returns>
-        public Task<UpdateResult> DynamicCollectionWhereUpdateOneAsync<TForeign>(
+        public Task<UpdateResult> DynamicCollectionUpdateOneAsync<TForeign>(
             TForeign foreignDocument,
             Expression<Func<T, bool>> expression,
             UpdateDefinition<T> update,
@@ -250,7 +250,7 @@ namespace Apteryx.MongoDB.Driver.Extend
         /// <param name="options">更新操作设置</param>
         /// <param name="cancellationToken">取消令牌</param>
         /// <returns></returns>
-        public Task<UpdateResult> DynamicCollectionWhereUpdateOneAsync<TForeign>(
+        public Task<UpdateResult> DynamicCollectionUpdateOneAsync<TForeign>(
             IClientSessionHandle session,
             TForeign foreignDocument,
             Expression<Func<T, bool>> expression,
@@ -384,6 +384,54 @@ namespace Apteryx.MongoDB.Driver.Extend
         /// <returns></returns>
         public Task<T> DynamicCollectionFindOneAndUpdateOneAsync<TForeign>(
             TForeign foreignDocument,
+            string id,
+            UpdateDefinition<T> update,
+            MongoCollectionSettings settings = null,
+            FindOneAndUpdateOptions<T> options = null,
+            CancellationToken cancellationToken = default)
+            where TForeign : BaseMongoEntity
+        {
+            return _database.GetCollection<T>($"{foreignDocument.Id}_{_collectionName}", settings).FindOneAndUpdateAsync<T>(u => u.Id == id, update, options, cancellationToken);
+        }
+
+        /// <summary>
+        /// 动态表查询更新（单个）(自动更新UpdateTime字段)
+        /// </summary>
+        /// <typeparam name="TForeign">文档类型</typeparam>        
+        /// <param name="session">会话句柄(作用于事务)</param>
+        /// <param name="foreignDocument">上级文档</param>
+        /// <param name="filter">过滤器</param>
+        /// <param name="update">更新定义</param>
+        /// <param name="settings">集合设置</param>
+        /// <param name="options">更新操作设置</param>
+        /// <param name="cancellationToken">取消令牌</param>
+        /// <returns></returns>
+        public Task<T> DynamicCollectionFindOneAndUpdateOneAsync<TForeign>(
+            IClientSessionHandle session,
+            TForeign foreignDocument,
+            string id,
+            UpdateDefinition<T> update,
+            MongoCollectionSettings settings = null,
+            FindOneAndUpdateOptions<T> options = null,
+            CancellationToken cancellationToken = default)
+            where TForeign : BaseMongoEntity
+        {
+            return _database.GetCollection<T>($"{foreignDocument.Id}_{_collectionName}", settings).FindOneAndUpdateAsync<T>(session, u => u.Id == id, update, options, cancellationToken);
+        }
+
+        /// <summary>
+        /// 动态表查询更新（单个）(自动更新UpdateTime字段)
+        /// </summary>
+        /// <typeparam name="TForeign">文档类型</typeparam>        
+        /// <param name="foreignDocument">上级文档</param>
+        /// <param name="filter">过滤器</param>
+        /// <param name="update">更新定义</param>
+        /// <param name="settings">集合设置</param>
+        /// <param name="options">更新操作设置</param>
+        /// <param name="cancellationToken">取消令牌</param>
+        /// <returns></returns>
+        public Task<T> DynamicCollectionFindOneAndUpdateOneAsync<TForeign>(
+            TForeign foreignDocument,
             FilterDefinition<T> filter,
             UpdateDefinition<T> update,
             MongoCollectionSettings settings = null,
@@ -475,7 +523,7 @@ namespace Apteryx.MongoDB.Driver.Extend
         /// <param name="options">更新操作设置</param>
         /// <param name="cancellationToken">取消令牌</param>
         /// <returns></returns>
-        public Task<UpdateResult> WhereUpdateManyAsync(
+        public Task<UpdateResult> UpdateManyAsync(
             FilterDefinition<T> filter,
             UpdateDefinition<T> update,
             UpdateOptions options = null,
@@ -492,7 +540,7 @@ namespace Apteryx.MongoDB.Driver.Extend
         /// <param name="options">更新操作设置</param>
         /// <param name="cancellationToken">取消令牌</param>
         /// <returns></returns>
-        public Task<UpdateResult> WhereUpdateManyAsync(
+        public Task<UpdateResult> UpdateManyAsync(
             IClientSessionHandle session,
             FilterDefinition<T> filter,
             UpdateDefinition<T> update,
@@ -510,7 +558,7 @@ namespace Apteryx.MongoDB.Driver.Extend
         /// <param name="options">更新操作设置</param>
         /// <param name="cancellationToken">取消令牌</param>
         /// <returns></returns>
-        public Task<UpdateResult> WhereUpdateManyAsync(
+        public Task<UpdateResult> UpdateManyAsync(
             Expression<Func<T, bool>> expression,
             UpdateDefinition<T> update,
             UpdateOptions options = null,
@@ -528,7 +576,7 @@ namespace Apteryx.MongoDB.Driver.Extend
         /// <param name="options">更新操作设置</param>
         /// <param name="cancellationToken">取消令牌</param>
         /// <returns></returns>
-        public Task<UpdateResult> WhereUpdateManyAsync(
+        public Task<UpdateResult> UpdateManyAsync(
             IClientSessionHandle session,
             Expression<Func<T, bool>> expression,
             UpdateDefinition<T> update,
@@ -549,7 +597,7 @@ namespace Apteryx.MongoDB.Driver.Extend
         /// <param name="options">更新操作设置</param>
         /// <param name="cancellationToken">取消令牌</param>
         /// <returns></returns>
-        public Task<UpdateResult> DynamicCollectionWhereUpdateManyAsync<TForeign>(
+        public Task<UpdateResult> DynamicCollectionUpdateManyAsync<TForeign>(
             TForeign foreignDocument,
             FilterDefinition<T> filter,
             UpdateDefinition<T> update,
@@ -573,7 +621,7 @@ namespace Apteryx.MongoDB.Driver.Extend
         /// <param name="options">更新操作设置</param>
         /// <param name="cancellationToken">取消令牌</param>
         /// <returns></returns>
-        public Task<UpdateResult> DynamicCollectionWhereUpdateManyAsync<TForeign>(
+        public Task<UpdateResult> DynamicCollectionUpdateManyAsync<TForeign>(
             IClientSessionHandle session,
             TForeign foreignDocument,
             FilterDefinition<T> filter,
@@ -597,7 +645,7 @@ namespace Apteryx.MongoDB.Driver.Extend
         /// <param name="options">更新操作设置</param>
         /// <param name="cancellationToken">取消令牌</param>
         /// <returns></returns>
-        public Task<UpdateResult> DynamicCollectionWhereUpdateManyAsync<TForeign>(
+        public Task<UpdateResult> DynamicCollectionUpdateManyAsync<TForeign>(
             TForeign foreignDocument,
             Expression<Func<T, bool>> expression,
             UpdateDefinition<T> update,
@@ -621,7 +669,7 @@ namespace Apteryx.MongoDB.Driver.Extend
         /// <param name="options">更新操作设置</param>
         /// <param name="cancellationToken">取消令牌</param>
         /// <returns></returns>
-        public Task<UpdateResult> DynamicCollectionWhereUpdateManyAsync<TForeign>(
+        public Task<UpdateResult> DynamicCollectionUpdateManyAsync<TForeign>(
             IClientSessionHandle session,
             TForeign foreignDocument,
             Expression<Func<T, bool>> expression,

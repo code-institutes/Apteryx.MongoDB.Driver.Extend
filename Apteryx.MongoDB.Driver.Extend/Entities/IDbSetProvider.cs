@@ -581,46 +581,46 @@ namespace Apteryx.MongoDB.Driver.Extend
 
         #region 更新(同步)
 
-        UpdateResult WhereUpdateOne(
+        UpdateResult UpdateOne(
             string id,
             UpdateDefinition<T> update,
             UpdateOptions options = null,
             CancellationToken cancellationToken = default);
 
-        UpdateResult WhereUpdateOne(
+        UpdateResult UpdateOne(
             IClientSessionHandle session,
             string id,
             UpdateDefinition<T> update,
             UpdateOptions options = null,
             CancellationToken cancellationToken = default);
 
-        UpdateResult WhereUpdateOne(
+        UpdateResult UpdateOne(
             FilterDefinition<T> filter,
             UpdateDefinition<T> update,
             UpdateOptions options = null,
             CancellationToken cancellationToken = default);
 
-        UpdateResult WhereUpdateOne(
+        UpdateResult UpdateOne(
             IClientSessionHandle session,
             FilterDefinition<T> filter,
             UpdateDefinition<T> update,
             UpdateOptions options = null,
             CancellationToken cancellationToken = default);
 
-        UpdateResult WhereUpdateOne(
+        UpdateResult UpdateOne(
             Expression<Func<T, bool>> expression,
             UpdateDefinition<T> update,
             UpdateOptions options = null,
             CancellationToken cancellationToken = default);
 
-        UpdateResult WhereUpdateOne(
+        UpdateResult UpdateOne(
             IClientSessionHandle session,
             Expression<Func<T, bool>> expression,
             UpdateDefinition<T> update,
             UpdateOptions options = null,
             CancellationToken cancellationToken = default);
 
-        UpdateResult DynamicCollectionWhereUpdateOne<TForeign>(
+        UpdateResult DynamicCollectionUpdateOne<TForeign>(
             TForeign foreignDocument,
             string id,
             UpdateDefinition<T> update,
@@ -630,7 +630,7 @@ namespace Apteryx.MongoDB.Driver.Extend
             where TForeign : BaseMongoEntity
            ;
 
-        UpdateResult DynamicCollectionWhereUpdateOne<TForeign>(
+        UpdateResult DynamicCollectionUpdateOne<TForeign>(
             IClientSessionHandle session,
             TForeign foreignDocument,
             string id,
@@ -641,7 +641,7 @@ namespace Apteryx.MongoDB.Driver.Extend
             where TForeign : BaseMongoEntity
            ;
 
-        UpdateResult DynamicCollectionWhereUpdateOne<TForeign>(
+        UpdateResult DynamicCollectionUpdateOne<TForeign>(
             TForeign foreignDocument,
             FilterDefinition<T> filter,
             UpdateDefinition<T> update,
@@ -651,7 +651,7 @@ namespace Apteryx.MongoDB.Driver.Extend
             where TForeign : BaseMongoEntity
            ;
 
-        UpdateResult DynamicCollectionWhereUpdateOne<TForeign>(
+        UpdateResult DynamicCollectionUpdateOne<TForeign>(
             IClientSessionHandle session,
             TForeign foreignDocument,
             FilterDefinition<T> filter,
@@ -662,7 +662,7 @@ namespace Apteryx.MongoDB.Driver.Extend
             where TForeign : BaseMongoEntity
            ;
 
-        UpdateResult DynamicCollectionWhereUpdateOne<TForeign>(
+        UpdateResult DynamicCollectionUpdateOne<TForeign>(
             TForeign foreignDocument,
             Expression<Func<T, bool>> expression,
             UpdateDefinition<T> update,
@@ -672,7 +672,7 @@ namespace Apteryx.MongoDB.Driver.Extend
             where TForeign : BaseMongoEntity
            ;
 
-        UpdateResult DynamicCollectionWhereUpdateOne<TForeign>(
+        UpdateResult DynamicCollectionUpdateOne<TForeign>(
             IClientSessionHandle session,
             TForeign foreignDocument,
             Expression<Func<T, bool>> expression,
@@ -721,30 +721,51 @@ namespace Apteryx.MongoDB.Driver.Extend
             UpdateDefinition<T> update,
             FindOneAndUpdateOptions<T> options = null,
             CancellationToken cancellationToken = default);
+
+        public T DynamicCollectionFindOneAndUpdateOne<TForeign>(
+            TForeign foreignDocument,
+            string id,
+            UpdateDefinition<T> update,
+            MongoCollectionSettings settings = null,
+            FindOneAndUpdateOptions<T> options = null,
+            CancellationToken cancellationToken = default)
+            where TForeign : BaseMongoEntity
+            ;
+
+        public T DynamicCollectionFindOneAndUpdateOne<TForeign>(
+            IClientSessionHandle session,
+            TForeign foreignDocument,
+            string id,
+            UpdateDefinition<T> update,
+            MongoCollectionSettings settings = null,
+            FindOneAndUpdateOptions<T> options = null,
+            CancellationToken cancellationToken = default)
+            where TForeign : BaseMongoEntity
+            ;
+
+        T DynamicCollectionFindOneAndUpdateOne<TForeign>(
+             TForeign foreignDocument,
+             FilterDefinition<T> filter,
+             UpdateDefinition<T> update,
+             MongoCollectionSettings settings = null,
+             FindOneAndUpdateOptions<T> options = null,
+             CancellationToken cancellationToken = default)
+             where TForeign : BaseMongoEntity
+            ;
+
+        T DynamicCollectionFindOneAndUpdateOne<TForeign>(
+            IClientSessionHandle session,
+            TForeign foreignDocument,
+            FilterDefinition<T> filter,
+            UpdateDefinition<T> update,
+            MongoCollectionSettings settings = null,
+            FindOneAndUpdateOptions<T> options = null,
+            CancellationToken cancellationToken = default)
+            where TForeign : BaseMongoEntity
+           ;
 
         T DynamicCollectionFindOneAndUpdateOne<TForeign>(
             TForeign foreignDocument,
-            FilterDefinition<T> filter,
-            UpdateDefinition<T> update,
-            MongoCollectionSettings settings = null,
-            FindOneAndUpdateOptions<T> options = null,
-            CancellationToken cancellationToken = default)
-            where TForeign : BaseMongoEntity
-           ;
-
-        T DynamicCollectionFindOneAndUpdateOne<TForeign>(
-            IClientSessionHandle session,
-            TForeign foreignDocument,
-            FilterDefinition<T> filter,
-            UpdateDefinition<T> update,
-            MongoCollectionSettings settings = null,
-            FindOneAndUpdateOptions<T> options = null,
-            CancellationToken cancellationToken = default)
-            where TForeign : BaseMongoEntity
-           ;
-
-        T DynamicCollectionFindOneAndUpdateOne<TForeign>(
-            TForeign foreignDocument,
             Expression<Func<T, bool>> expression,
             UpdateDefinition<T> update,
             MongoCollectionSettings settings = null,
@@ -764,33 +785,33 @@ namespace Apteryx.MongoDB.Driver.Extend
             where TForeign : BaseMongoEntity
            ;
 
-        UpdateResult WhereUpdateMany(
+        UpdateResult UpdateMany(
             FilterDefinition<T> filter,
             UpdateDefinition<T> update,
             UpdateOptions options = null,
             CancellationToken cancellationToken = default);
 
-        UpdateResult WhereUpdateMany(
+        UpdateResult UpdateMany(
             IClientSessionHandle session,
             FilterDefinition<T> filter,
             UpdateDefinition<T> update,
             UpdateOptions options = null,
             CancellationToken cancellationToken = default);
 
-        UpdateResult WhereUpdateMany(
+        UpdateResult UpdateMany(
             Expression<Func<T, bool>> expression,
             UpdateDefinition<T> update,
             UpdateOptions options = null,
             CancellationToken cancellationToken = default);
 
-        UpdateResult WhereUpdateMany(
+        UpdateResult UpdateMany(
             IClientSessionHandle session,
             Expression<Func<T, bool>> expression,
             UpdateDefinition<T> update,
             UpdateOptions options = null,
             CancellationToken cancellationToken = default);
 
-        UpdateResult DynamicCollectionWhereUpdateMany<TForeign>(
+        UpdateResult DynamicCollectionUpdateMany<TForeign>(
             TForeign foreignDocument,
             FilterDefinition<T> filter,
             UpdateDefinition<T> update,
@@ -800,7 +821,7 @@ namespace Apteryx.MongoDB.Driver.Extend
             where TForeign : BaseMongoEntity
            ;
 
-        UpdateResult DynamicCollectionWhereUpdateMany<TForeign>(
+        UpdateResult DynamicCollectionUpdateMany<TForeign>(
             IClientSessionHandle session,
             TForeign foreignDocument,
             FilterDefinition<T> filter,
@@ -811,7 +832,7 @@ namespace Apteryx.MongoDB.Driver.Extend
             where TForeign : BaseMongoEntity
            ;
 
-        UpdateResult DynamicCollectionWhereUpdateMany<TForeign>(
+        UpdateResult DynamicCollectionUpdateMany<TForeign>(
             TForeign foreignDocument,
             Expression<Func<T, bool>> expression,
             UpdateDefinition<T> update,
@@ -821,7 +842,7 @@ namespace Apteryx.MongoDB.Driver.Extend
             where TForeign : BaseMongoEntity
            ;
 
-        UpdateResult DynamicCollectionWhereUpdateMany<TForeign>(
+        UpdateResult DynamicCollectionUpdateMany<TForeign>(
             IClientSessionHandle session,
             TForeign foreignDocument,
             Expression<Func<T, bool>> expression,
@@ -838,46 +859,46 @@ namespace Apteryx.MongoDB.Driver.Extend
 
         #region 更新(异步)
 
-        Task<UpdateResult> WhereUpdateOneAsync(
+        Task<UpdateResult> UpdateOneAsync(
             string id,
             UpdateDefinition<T> update,
             UpdateOptions options = null,
             CancellationToken cancellationToken = default);
 
-        Task<UpdateResult> WhereUpdateOneAsync(
+        Task<UpdateResult> UpdateOneAsync(
             IClientSessionHandle session,
             string id,
             UpdateDefinition<T> update,
             UpdateOptions options = null,
             CancellationToken cancellationToken = default);
 
-        Task<UpdateResult> WhereUpdateOneAsync(
+        Task<UpdateResult> UpdateOneAsync(
             FilterDefinition<T> filter,
             UpdateDefinition<T> update,
             UpdateOptions options = null,
             CancellationToken cancellationToken = default);
 
-        Task<UpdateResult> WhereUpdateOneAsync(
+        Task<UpdateResult> UpdateOneAsync(
             IClientSessionHandle session,
             FilterDefinition<T> filter,
             UpdateDefinition<T> update,
             UpdateOptions options = null,
             CancellationToken cancellationToken = default);
 
-        Task<UpdateResult> WhereUpdateOneAsync(
+        Task<UpdateResult> UpdateOneAsync(
             Expression<Func<T, bool>> expression,
             UpdateDefinition<T> update,
             UpdateOptions options = null,
             CancellationToken cancellationToken = default);
 
-        Task<UpdateResult> WhereUpdateOneAsync(
+        Task<UpdateResult> UpdateOneAsync(
             IClientSessionHandle session,
             Expression<Func<T, bool>> expression,
             UpdateDefinition<T> update,
             UpdateOptions options = null,
             CancellationToken cancellationToken = default);
 
-        Task<UpdateResult> DynamicCollectionWhereUpdateOneAsync<TForeign>(
+        Task<UpdateResult> DynamicCollectionUpdateOneAsync<TForeign>(
             TForeign foreignDocument,
             string id,
             UpdateDefinition<T> update,
@@ -887,7 +908,7 @@ namespace Apteryx.MongoDB.Driver.Extend
             where TForeign : BaseMongoEntity
            ;
 
-        Task<UpdateResult> DynamicCollectionWhereUpdateOneAsync<TForeign>(
+        Task<UpdateResult> DynamicCollectionUpdateOneAsync<TForeign>(
             IClientSessionHandle session,
             TForeign foreignDocument,
             string id,
@@ -898,7 +919,7 @@ namespace Apteryx.MongoDB.Driver.Extend
             where TForeign : BaseMongoEntity
            ;
 
-        Task<UpdateResult> DynamicCollectionWhereUpdateOneAsync<TForeign>(
+        Task<UpdateResult> DynamicCollectionUpdateOneAsync<TForeign>(
             TForeign foreignDocument,
             FilterDefinition<T> filter,
             UpdateDefinition<T> update,
@@ -908,7 +929,7 @@ namespace Apteryx.MongoDB.Driver.Extend
             where TForeign : BaseMongoEntity
            ;
 
-        Task<UpdateResult> DynamicCollectionWhereUpdateOneAsync<TForeign>(
+        Task<UpdateResult> DynamicCollectionUpdateOneAsync<TForeign>(
             IClientSessionHandle session,
             TForeign foreignDocument,
             FilterDefinition<T> filter,
@@ -919,7 +940,7 @@ namespace Apteryx.MongoDB.Driver.Extend
             where TForeign : BaseMongoEntity
            ;
 
-        Task<UpdateResult> DynamicCollectionWhereUpdateOneAsync<TForeign>(
+        Task<UpdateResult> DynamicCollectionUpdateOneAsync<TForeign>(
             TForeign foreignDocument,
             Expression<Func<T, bool>> expression,
             UpdateDefinition<T> update,
@@ -929,7 +950,7 @@ namespace Apteryx.MongoDB.Driver.Extend
             where TForeign : BaseMongoEntity
            ;
 
-        Task<UpdateResult> DynamicCollectionWhereUpdateOneAsync<TForeign>(
+        Task<UpdateResult> DynamicCollectionUpdateOneAsync<TForeign>(
             IClientSessionHandle session,
             TForeign foreignDocument,
             Expression<Func<T, bool>> expression,
@@ -981,6 +1002,27 @@ namespace Apteryx.MongoDB.Driver.Extend
 
         Task<T> DynamicCollectionFindOneAndUpdateOneAsync<TForeign>(
             TForeign foreignDocument,
+            string id,
+            UpdateDefinition<T> update,
+            MongoCollectionSettings settings = null,
+            FindOneAndUpdateOptions<T> options = null,
+            CancellationToken cancellationToken = default)
+            where TForeign : BaseMongoEntity
+           ;
+
+        Task<T> DynamicCollectionFindOneAndUpdateOneAsync<TForeign>(
+            IClientSessionHandle session,
+            TForeign foreignDocument,
+            string id,
+            UpdateDefinition<T> update,
+            MongoCollectionSettings settings = null,
+            FindOneAndUpdateOptions<T> options = null,
+            CancellationToken cancellationToken = default)
+            where TForeign : BaseMongoEntity
+           ;
+
+        Task<T> DynamicCollectionFindOneAndUpdateOneAsync<TForeign>(
+            TForeign foreignDocument,
             FilterDefinition<T> filter,
             UpdateDefinition<T> update,
             MongoCollectionSettings settings = null,
@@ -1021,33 +1063,33 @@ namespace Apteryx.MongoDB.Driver.Extend
             where TForeign : BaseMongoEntity
            ;
 
-        Task<UpdateResult> WhereUpdateManyAsync(
+        Task<UpdateResult> UpdateManyAsync(
             FilterDefinition<T> filter,
             UpdateDefinition<T> update,
             UpdateOptions options = null,
             CancellationToken cancellationToken = default);
 
-        Task<UpdateResult> WhereUpdateManyAsync(
+        Task<UpdateResult> UpdateManyAsync(
             IClientSessionHandle session,
             FilterDefinition<T> filter,
             UpdateDefinition<T> update,
             UpdateOptions options = null,
             CancellationToken cancellationToken = default);
 
-        Task<UpdateResult> WhereUpdateManyAsync(
+        Task<UpdateResult> UpdateManyAsync(
             Expression<Func<T, bool>> expression,
             UpdateDefinition<T> update,
             UpdateOptions options = null,
             CancellationToken cancellationToken = default);
 
-        Task<UpdateResult> WhereUpdateManyAsync(
+        Task<UpdateResult> UpdateManyAsync(
             IClientSessionHandle session,
             Expression<Func<T, bool>> expression,
             UpdateDefinition<T> update,
             UpdateOptions options = null,
             CancellationToken cancellationToken = default);
 
-        Task<UpdateResult> DynamicCollectionWhereUpdateManyAsync<TForeign>(
+        Task<UpdateResult> DynamicCollectionUpdateManyAsync<TForeign>(
             TForeign foreignDocument,
             FilterDefinition<T> filter,
             UpdateDefinition<T> update,
@@ -1057,7 +1099,7 @@ namespace Apteryx.MongoDB.Driver.Extend
             where TForeign : BaseMongoEntity
            ;
 
-        Task<UpdateResult> DynamicCollectionWhereUpdateManyAsync<TForeign>(
+        Task<UpdateResult> DynamicCollectionUpdateManyAsync<TForeign>(
             IClientSessionHandle session,
             TForeign foreignDocument,
             FilterDefinition<T> filter,
@@ -1068,7 +1110,7 @@ namespace Apteryx.MongoDB.Driver.Extend
             where TForeign : BaseMongoEntity
            ;
 
-        Task<UpdateResult> DynamicCollectionWhereUpdateManyAsync<TForeign>(
+        Task<UpdateResult> DynamicCollectionUpdateManyAsync<TForeign>(
             TForeign foreignDocument,
             Expression<Func<T, bool>> expression,
             UpdateDefinition<T> update,
@@ -1078,7 +1120,7 @@ namespace Apteryx.MongoDB.Driver.Extend
             where TForeign : BaseMongoEntity
            ;
 
-        Task<UpdateResult> DynamicCollectionWhereUpdateManyAsync<TForeign>(
+        Task<UpdateResult> DynamicCollectionUpdateManyAsync<TForeign>(
             IClientSessionHandle session,
             TForeign foreignDocument,
             Expression<Func<T, bool>> expression,
@@ -1102,6 +1144,8 @@ namespace Apteryx.MongoDB.Driver.Extend
         public DeleteResult DeleteOne(IClientSessionHandle session, Expression<Func<T, bool>> expression, DeleteOptions options = null, CancellationToken cancellationToken = default);
         public List<DeleteResult> DeleteMany(IEnumerable<T> documents, DeleteOptions options = null, CancellationToken cancellationToken = default);
         public List<DeleteResult> DeleteMany(IClientSessionHandle session, IEnumerable<T> documents, DeleteOptions options = null, CancellationToken cancellationToken = default);
+        public DeleteResult DeleteMany(FilterDefinition<T> filter, DeleteOptions options = null, CancellationToken cancellationToken = default);
+        public DeleteResult DeleteMany(IClientSessionHandle session, FilterDefinition<T> filter, DeleteOptions options = null, CancellationToken cancellationToken = default);
         public DeleteResult DeleteMany(Expression<Func<T, bool>> expression, DeleteOptions options = null, CancellationToken cancellationToken = default);
         public DeleteResult DeleteMany(IClientSessionHandle session, Expression<Func<T, bool>> expression, DeleteOptions options = null, CancellationToken cancellationToken = default);
         public DeleteResult DynamicCollectionDeleteOne<TForeign>(
@@ -1140,6 +1184,23 @@ namespace Apteryx.MongoDB.Driver.Extend
             ;
         public DeleteResult DynamicCollectionDeleteOne<TForeign>(
             TForeign foreignDocument,
+            FilterDefinition<T> filter,
+            MongoCollectionSettings settings = null,
+            DeleteOptions options = null,
+            CancellationToken cancellationToken = default)
+            where TForeign : BaseMongoEntity
+            ;
+        public DeleteResult DynamicCollectionDeleteOne<TForeign>(
+            IClientSessionHandle session,
+            TForeign foreignDocument,
+            FilterDefinition<T> filter,
+            MongoCollectionSettings settings = null,
+            DeleteOptions options = null,
+            CancellationToken cancellationToken = default)
+            where TForeign : BaseMongoEntity
+            ;
+        public DeleteResult DynamicCollectionDeleteOne<TForeign>(
+            TForeign foreignDocument,
             Expression<Func<T, bool>> expression,
             MongoCollectionSettings settings = null,
             DeleteOptions options = null,
@@ -1174,6 +1235,23 @@ namespace Apteryx.MongoDB.Driver.Extend
             ;
         public DeleteResult DynamicCollectionDeleteMany<TForeign>(
             TForeign foreignDocument,
+            FilterDefinition<T> filter,
+            MongoCollectionSettings settings = null,
+            DeleteOptions options = null,
+            CancellationToken cancellationToken = default)
+            where TForeign : BaseMongoEntity
+            ;
+        public DeleteResult DynamicCollectionDeleteMany<TForeign>(
+            IClientSessionHandle session,
+            TForeign foreignDocument,
+            FilterDefinition<T> filter,
+            MongoCollectionSettings settings = null,
+            DeleteOptions options = null,
+            CancellationToken cancellationToken = default)
+            where TForeign : BaseMongoEntity
+            ;
+        public DeleteResult DynamicCollectionDeleteMany<TForeign>(
+            TForeign foreignDocument,
             Expression<Func<T, bool>> expression,
             MongoCollectionSettings settings = null,
             DeleteOptions options = null,
@@ -1198,10 +1276,15 @@ namespace Apteryx.MongoDB.Driver.Extend
         public Task<DeleteResult> DeleteOneAsync(IClientSessionHandle session, string id, DeleteOptions options = null, CancellationToken cancellationToken = default);
         public Task<DeleteResult> DeleteOneAsync(T document, DeleteOptions options = null, CancellationToken cancellationToken = default);
         public Task<DeleteResult> DeleteOneAsync(IClientSessionHandle session, T document, DeleteOptions options = null, CancellationToken cancellationToken = default);
+        public Task<DeleteResult> DeleteOneAsync(FilterDefinition<T> filter, DeleteOptions options = null, CancellationToken cancellationToken = default);
+        public Task<DeleteResult> DeleteOneAsync(IClientSessionHandle session, FilterDefinition<T> filter, DeleteOptions options = null, CancellationToken cancellationToken = default);
         public Task<DeleteResult> DeleteOneAsync(Expression<Func<T, bool>> expression, DeleteOptions options = null, CancellationToken cancellationToken = default);
         public Task<DeleteResult> DeleteOneAsync(IClientSessionHandle session, Expression<Func<T, bool>> expression, DeleteOptions options = null, CancellationToken cancellationToken = default);
         public Task<List<DeleteResult>> DeleteManyAsync(IEnumerable<T> documents, DeleteOptions options = null, CancellationToken cancellationToken = default);
         public Task<List<DeleteResult>> DeleteManyAsync(IClientSessionHandle session, IEnumerable<T> documents, DeleteOptions options = null, CancellationToken cancellationToken = default);
+
+        public Task<DeleteResult> DeleteManyAsync(FilterDefinition<T> filter, DeleteOptions options = null, CancellationToken cancellationToken = default);
+        public Task<DeleteResult> DeleteManyAsync(IClientSessionHandle session, FilterDefinition<T> filter, DeleteOptions options = null, CancellationToken cancellationToken = default);
         public Task<DeleteResult> DeleteManyAsync(Expression<Func<T, bool>> expression, DeleteOptions options = null, CancellationToken cancellationToken = default);
         public Task<DeleteResult> DeleteManyAsync(IClientSessionHandle session, Expression<Func<T, bool>> expression, DeleteOptions options = null, CancellationToken cancellationToken = default);
         public Task<DeleteResult> DynamicCollectionDeleteOneAsync<TForeign>(
@@ -1240,6 +1323,23 @@ namespace Apteryx.MongoDB.Driver.Extend
             ;
         public Task<DeleteResult> DynamicCollectionDeleteOneAsync<TForeign>(
             TForeign foreignDocument,
+            FilterDefinition<T> filter,
+            MongoCollectionSettings settings = null,
+            DeleteOptions options = null,
+            CancellationToken cancellationToken = default)
+            where TForeign : BaseMongoEntity
+            ;
+        public Task<DeleteResult> DynamicCollectionDeleteOneAsync<TForeign>(
+            IClientSessionHandle session,
+            TForeign foreignDocument,
+            FilterDefinition<T> filter,
+            MongoCollectionSettings settings = null,
+            DeleteOptions options = null,
+            CancellationToken cancellationToken = default)
+            where TForeign : BaseMongoEntity
+            ;
+        public Task<DeleteResult> DynamicCollectionDeleteOneAsync<TForeign>(
+            TForeign foreignDocument,
             Expression<Func<T, bool>> expression,
             MongoCollectionSettings settings = null,
             DeleteOptions options = null,
@@ -1267,6 +1367,23 @@ namespace Apteryx.MongoDB.Driver.Extend
             IClientSessionHandle session,
             TForeign foreignDocument,
             IEnumerable<T> documents,
+            MongoCollectionSettings settings = null,
+            DeleteOptions options = null,
+            CancellationToken cancellationToken = default)
+            where TForeign : BaseMongoEntity
+            ;
+        public Task<DeleteResult> DynamicCollectionDeleteManyAsync<TForeign>(
+            TForeign foreignDocument,
+            FilterDefinition<T> filter,
+            MongoCollectionSettings settings = null,
+            DeleteOptions options = null,
+            CancellationToken cancellationToken = default)
+            where TForeign : BaseMongoEntity
+            ;
+        public Task<DeleteResult> DynamicCollectionDeleteManyAsync<TForeign>(
+            IClientSessionHandle session,
+            TForeign foreignDocument,
+            FilterDefinition<T> filter,
             MongoCollectionSettings settings = null,
             DeleteOptions options = null,
             CancellationToken cancellationToken = default)

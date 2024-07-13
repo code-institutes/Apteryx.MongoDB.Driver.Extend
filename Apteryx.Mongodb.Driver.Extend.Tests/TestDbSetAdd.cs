@@ -9,7 +9,7 @@ namespace Apteryx.Mongodb.Driver.Extend.Tests
     {
         private readonly ApteryxDbContext? dbContext;
 
-        private List<User> newUsers = DataHelper.GetNewUsers();
+        private List<User> users = DataHelper.GetNewUsers();
 
         private User user = DataHelper.GetNewUser();
 
@@ -241,24 +241,19 @@ namespace Apteryx.Mongodb.Driver.Extend.Tests
         [TestMethod]
         public void TestAddMany()
         {
-            dbContext.Users.DeleteMany(d => d.Email == "zhangfei@qq.com");
-
-            dbContext.Users.AddMany(newUsers);
+            dbContext.Users.AddMany(users);
 
             // 验证添加是否成功
-            var addedUser = dbContext.Users.Where(w => w.Email == "zhangfei@qq.com").CountDocuments();
-
-            Assert.IsNotNull(addedUser, "未成功添加用户。");
-
-            Assert.AreEqual(addedUser, 3, "未成功添加，数量不正确");
+            var addedUserCount = dbContext.Users.Where(w => w.Email == "zhangfei@qq.com").CountDocuments();
+            Assert.AreEqual(3, addedUserCount, "未成功添加，数量不正确");
 
 
             // 删除用户
-            dbContext.Users.DeleteMany(newUsers);
+            dbContext.Users.DeleteMany(users);
 
             // 验证删除是否成功
-            var deletedUser = dbContext.Users.Where(w => w.Email == "zhangfei@qq.com").CountDocuments();
-            Assert.AreEqual(deletedUser, 0, "用户未成功删除。");
+            var deletedUserCount = dbContext.Users.Where(w => true).CountDocuments();
+            Assert.AreEqual(0, deletedUserCount, "用户未成功删除。");
         }
 
         /// <summary>
@@ -269,24 +264,19 @@ namespace Apteryx.Mongodb.Driver.Extend.Tests
         {
             var userGroup = DataHelper.GetNewUserGroup();
 
-            dbContext.Users.DynamicCollectionDeleteMany(userGroup, d => d.Email == "zhangfei@qq.com");
-
-            dbContext.Users.DynamicCollectionAddMany(userGroup, newUsers);
+            dbContext.Users.DynamicCollectionAddMany(userGroup, users);
 
             // 验证添加是否成功
-            var addedUser = dbContext.Users.DynamicCollectionWhere(userGroup, w => w.Email == "zhangfei@qq.com").CountDocuments();
-
-            Assert.IsNotNull(addedUser, "未成功添加用户。");
-
-            Assert.AreEqual(addedUser, 3, "未成功添加，数量不正确");
+            var addedUserCount = dbContext.Users.DynamicCollectionWhere(userGroup, w => w.Email == "zhangfei@qq.com").CountDocuments();
+            Assert.AreEqual(3, addedUserCount, "未成功添加，数量不正确");
 
 
             // 删除用户
-            dbContext.Users.DynamicCollectionDeleteMany(userGroup, newUsers);
+            dbContext.Users.DynamicCollectionDeleteMany(userGroup, users);
 
             // 验证删除是否成功
-            var deletedUser = dbContext.Users.DynamicCollectionWhere(userGroup, w => w.Email == "zhangfei@qq.com").CountDocuments();
-            Assert.AreEqual(deletedUser, 0, "用户未成功删除。");
+            var deletedUserCount = dbContext.Users.DynamicCollectionWhere(userGroup, w => true).CountDocuments();
+            Assert.AreEqual(0, deletedUserCount, "用户未成功删除。");
         }
 
         /// <summary>
@@ -299,24 +289,24 @@ namespace Apteryx.Mongodb.Driver.Extend.Tests
             {
                 session.StartTransaction();
 
-                dbContext.Users.DeleteMany(session, d => d.Email == "zhangfei@qq.com");
+                dbContext.Users.DeleteMany(session, d => d.Password == "123456");
 
-                dbContext.Users.AddMany(session, newUsers);
+                dbContext.Users.AddMany(session, users);
 
                 // 验证添加是否成功
-                var addedUser = dbContext.Users.Where(session, w => w.Email == "zhangfei@qq.com").CountDocuments();
+                var addedUserCount = dbContext.Users.Where(session, w => w.Email == "zhangfei@qq.com").CountDocuments();
 
-                Assert.IsNotNull(addedUser, "未成功添加用户。");
+                Assert.IsNotNull(addedUserCount, "未成功添加用户。");
 
-                Assert.AreEqual(addedUser, 3, "未成功添加，数量不正确");
+                Assert.AreEqual(3, addedUserCount, "未成功添加，数量不正确");
 
 
                 // 删除用户
-                dbContext.Users.DeleteMany(session, newUsers);
+                dbContext.Users.DeleteMany(session, users);
 
                 // 验证删除是否成功
-                var deletedUser = dbContext.Users.Where(session, w => w.Email == "zhangfei@qq.com").CountDocuments();
-                Assert.AreEqual(deletedUser, 0, "用户未成功删除。");
+                var deletedUserCount = dbContext.Users.Where(session, w => true).CountDocuments();
+                Assert.AreEqual(0, deletedUserCount, "用户未成功删除。");
 
                 session.CommitTransaction();
             }
@@ -331,24 +321,21 @@ namespace Apteryx.Mongodb.Driver.Extend.Tests
             {
                 session.StartTransaction();
 
-                dbContext.Users.DynamicCollectionDeleteMany(session, userGroup, d => d.Email == "zhangfei@qq.com");
+                dbContext.Users.DynamicCollectionDeleteMany(session, userGroup, d => d.Password == "123456");
 
-                dbContext.Users.DynamicCollectionAddMany(session, userGroup, newUsers);
+                dbContext.Users.DynamicCollectionAddMany(session, userGroup, users);
 
                 // 验证添加是否成功
-                var addedUser = dbContext.Users.DynamicCollectionWhere(session, userGroup, w => w.Email == "zhangfei@qq.com").CountDocuments();
-
-                Assert.IsNotNull(addedUser, "未成功添加用户。");
-
-                Assert.AreEqual(addedUser, 3, "未成功添加，数量不正确");
+                var addedUserCount = dbContext.Users.DynamicCollectionWhere(session, userGroup, w => w.Email == "zhangfei@qq.com").CountDocuments();
+                Assert.AreEqual(3, addedUserCount, "未成功添加，数量不正确");
 
 
                 // 删除用户
-                dbContext.Users.DynamicCollectionDeleteMany(session, userGroup, newUsers);
+                dbContext.Users.DynamicCollectionDeleteMany(session, userGroup, users);
 
                 // 验证删除是否成功
-                var deletedUser = dbContext.Users.DynamicCollectionWhere(session, userGroup, w => w.Email == "zhangfei@qq.com").CountDocuments();
-                Assert.AreEqual(deletedUser, 0, "用户未成功删除。");
+                var deletedUserCount = dbContext.Users.DynamicCollectionWhere(session, userGroup, w => true).CountDocuments();
+                Assert.AreEqual(0, deletedUserCount, "用户未成功删除。");
 
                 session.CommitTransaction();
             }
@@ -361,9 +348,7 @@ namespace Apteryx.Mongodb.Driver.Extend.Tests
         [TestMethod]
         public async Task TestAddManyAsync()
         {
-            await dbContext.Users.DeleteManyAsync(d => d.Email == "zhangfei@qq.com");
-
-            await dbContext.Users.AddManyAsync(newUsers);
+            await dbContext.Users.AddManyAsync(users);
 
             // 验证添加是否成功
             List<User> addedUser = new();
@@ -371,21 +356,19 @@ namespace Apteryx.Mongodb.Driver.Extend.Tests
             {
                 addedUser.Add(user);
             }
-            Assert.IsNotNull(addedUser, "未成功添加用户。");
-
-            Assert.AreEqual(addedUser.Count, 3, "未成功添加，数量不正确");
+            Assert.AreEqual(3, addedUser.Count, "未成功添加，数量不正确");
 
 
             // 删除用户
-            await dbContext.Users.DeleteManyAsync(newUsers);
+            await dbContext.Users.DeleteManyAsync(users);
 
             // 验证删除是否成功
             addedUser.Clear();
-            await foreach (var user in dbContext.Users.WhereAsync(w => w.Email == "zhangfei@qq.com"))
+            await foreach (var user in dbContext.Users.WhereAsync(w => true))
             {
                 addedUser.Add(user);
             }
-            Assert.AreEqual(addedUser.Count, 0, "用户未成功删除。");
+            Assert.AreEqual(0, addedUser.Count, "用户未成功删除。");
         }
 
         /// <summary>
@@ -397,9 +380,7 @@ namespace Apteryx.Mongodb.Driver.Extend.Tests
         {
             var userGroup = DataHelper.GetNewUserGroup();
 
-            await dbContext.Users.DynamicCollectionDeleteManyAsync(userGroup, d => d.Email == "zhangfei@qq.com");
-
-            await dbContext.Users.DynamicCollectionAddManyAsync(userGroup, newUsers);
+            await dbContext.Users.DynamicCollectionAddManyAsync(userGroup, users);
 
             // 验证添加是否成功
             List<User> addedUser = new();
@@ -407,21 +388,19 @@ namespace Apteryx.Mongodb.Driver.Extend.Tests
             {
                 addedUser.Add(user);
             }
-            Assert.IsNotNull(addedUser, "未成功添加用户。");
-
-            Assert.AreEqual(addedUser.Count, 3, "未成功添加，数量不正确");
+            Assert.AreEqual(3, addedUser.Count, "未成功添加，数量不正确");
 
 
             // 删除用户
-            await dbContext.Users.DynamicCollectionDeleteManyAsync(userGroup, newUsers);
+            await dbContext.Users.DynamicCollectionDeleteManyAsync(userGroup, users);
 
             // 验证删除是否成功
             addedUser.Clear();
-            await foreach (var user in dbContext.Users.DynamicCollectionWhereAsync(userGroup, w => w.Email == "zhangfei@qq.com"))
+            await foreach (var user in dbContext.Users.DynamicCollectionWhereAsync(userGroup, w => true))
             {
                 addedUser.Add(user);
             }
-            Assert.AreEqual(addedUser.Count, 0, "用户未成功删除。");
+            Assert.AreEqual(0, addedUser.Count, "用户未成功删除。");
         }
 
         /// <summary>
@@ -435,9 +414,7 @@ namespace Apteryx.Mongodb.Driver.Extend.Tests
             {
                 session.StartTransaction();
 
-                await dbContext.Users.DeleteManyAsync(session, d => d.Email == "zhangfei@qq.com");
-
-                await dbContext.Users.AddManyAsync(session, newUsers);
+                await dbContext.Users.AddManyAsync(session, users);
 
                 // 验证添加是否成功
                 List<User> addedUser = new();
@@ -445,21 +422,19 @@ namespace Apteryx.Mongodb.Driver.Extend.Tests
                 {
                     addedUser.Add(user);
                 }
-                Assert.IsNotNull(addedUser, "未成功添加用户。");
-
-                Assert.AreEqual(addedUser.Count, 3, "未成功添加，数量不正确");
+                Assert.AreEqual(3, addedUser.Count, "未成功添加，数量不正确");
 
 
                 // 删除用户
-                await dbContext.Users.DeleteManyAsync(session, newUsers);
+                await dbContext.Users.DeleteManyAsync(session, users);
 
                 // 验证删除是否成功
                 addedUser.Clear();
-                await foreach (var user in dbContext.Users.WhereAsync(session, w => w.Email == "zhangfei@qq.com"))
+                await foreach (var user in dbContext.Users.WhereAsync(session, w => true))
                 {
                     addedUser.Add(user);
                 }
-                Assert.AreEqual(addedUser.Count, 0, "用户未成功删除。");
+                Assert.AreEqual(0, addedUser.Count, "用户未成功删除。");
 
                 session.CommitTransaction();
             }
@@ -478,9 +453,7 @@ namespace Apteryx.Mongodb.Driver.Extend.Tests
             {
                 session.StartTransaction();
 
-                await dbContext.Users.DynamicCollectionDeleteManyAsync(session, userGroup, d => d.Email == "zhangfei@qq.com");
-
-                await dbContext.Users.DynamicCollectionAddManyAsync(session, userGroup, newUsers);
+                await dbContext.Users.DynamicCollectionAddManyAsync(session, userGroup, users);
 
                 // 验证添加是否成功
                 List<User> addedUser = new();
@@ -488,20 +461,18 @@ namespace Apteryx.Mongodb.Driver.Extend.Tests
                 {
                     addedUser.Add(user);
                 }
-                Assert.IsNotNull(addedUser, "未成功添加用户。");
-
-                Assert.AreEqual(addedUser.Count, 3, "未成功添加，数量不正确");
+                Assert.AreEqual(3, addedUser.Count, "未成功添加，数量不正确");
 
                 // 删除用户
-                await dbContext.Users.DynamicCollectionDeleteManyAsync(session, userGroup, newUsers);
+                await dbContext.Users.DynamicCollectionDeleteManyAsync(session, userGroup, users);
 
                 // 验证删除是否成功
                 addedUser.Clear();
-                await foreach (var user in dbContext.Users.DynamicCollectionWhereAsync(session, userGroup, w => w.Email == "zhangfei@qq.com"))
+                await foreach (var user in dbContext.Users.DynamicCollectionWhereAsync(session, userGroup, w => true))
                 {
                     addedUser.Add(user);
                 }
-                Assert.AreEqual(addedUser.Count, 0, "用户未成功删除。");
+                Assert.AreEqual(0, addedUser.Count, "用户未成功删除。");
 
                 session.CommitTransaction();
             }

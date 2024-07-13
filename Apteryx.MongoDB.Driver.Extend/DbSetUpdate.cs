@@ -17,7 +17,7 @@ namespace Apteryx.MongoDB.Driver.Extend
         /// <param name="options">更新操作设置</param>
         /// <param name="cancellationToken">取消令牌</param>
         /// <returns></returns>
-        public UpdateResult WhereUpdateOne(
+        public UpdateResult UpdateOne(
             string id,
             UpdateDefinition<T> update,
             UpdateOptions options = null,
@@ -35,7 +35,7 @@ namespace Apteryx.MongoDB.Driver.Extend
         /// <param name="options">更新操作设置</param>
         /// <param name="cancellationToken">取消令牌</param>
         /// <returns></returns>
-        public UpdateResult WhereUpdateOne(
+        public UpdateResult UpdateOne(
             IClientSessionHandle session,
             string id,
             UpdateDefinition<T> update,
@@ -53,7 +53,7 @@ namespace Apteryx.MongoDB.Driver.Extend
         /// <param name="options">更新操作设置</param>
         /// <param name="cancellationToken">取消令牌</param>
         /// <returns></returns>
-        public UpdateResult WhereUpdateOne(
+        public UpdateResult UpdateOne(
             FilterDefinition<T> filter,
             UpdateDefinition<T> update,
             UpdateOptions options = null,
@@ -71,7 +71,7 @@ namespace Apteryx.MongoDB.Driver.Extend
         /// <param name="options">更新操作设置</param>
         /// <param name="cancellationToken">取消令牌</param>
         /// <returns></returns>
-        public UpdateResult WhereUpdateOne(
+        public UpdateResult UpdateOne(
             IClientSessionHandle session,
             FilterDefinition<T> filter,
             UpdateDefinition<T> update,
@@ -89,7 +89,7 @@ namespace Apteryx.MongoDB.Driver.Extend
         /// <param name="options">更新操作设置</param>
         /// <param name="cancellationToken">取消令牌</param>
         /// <returns></returns>
-        public UpdateResult WhereUpdateOne(
+        public UpdateResult UpdateOne(
             Expression<Func<T, bool>> expression,
             UpdateDefinition<T> update,
             UpdateOptions options = null,
@@ -107,7 +107,7 @@ namespace Apteryx.MongoDB.Driver.Extend
         /// <param name="options">更新操作设置</param>
         /// <param name="cancellationToken">取消令牌</param>
         /// <returns></returns>
-        public UpdateResult WhereUpdateOne(
+        public UpdateResult UpdateOne(
             IClientSessionHandle session,
             Expression<Func<T, bool>> expression,
             UpdateDefinition<T> update,
@@ -129,7 +129,7 @@ namespace Apteryx.MongoDB.Driver.Extend
         /// <param name="options">更新操作设置</param>
         /// <param name="cancellationToken">取消令牌</param>
         /// <returns></returns>
-        public UpdateResult DynamicCollectionWhereUpdateOne<TForeign>(
+        public UpdateResult DynamicCollectionUpdateOne<TForeign>(
             TForeign foreignDocument,
             string id,
             UpdateDefinition<T> update,
@@ -154,7 +154,7 @@ namespace Apteryx.MongoDB.Driver.Extend
         /// <param name="options">更新操作设置</param>
         /// <param name="cancellationToken">取消令牌</param>
         /// <returns></returns>
-        public UpdateResult DynamicCollectionWhereUpdateOne<TForeign>(
+        public UpdateResult DynamicCollectionUpdateOne<TForeign>(
             IClientSessionHandle session,
             TForeign foreignDocument,
             string id,
@@ -179,7 +179,7 @@ namespace Apteryx.MongoDB.Driver.Extend
         /// <param name="options">更新操作设置</param>
         /// <param name="cancellationToken">取消令牌</param>
         /// <returns></returns>
-        public UpdateResult DynamicCollectionWhereUpdateOne<TForeign>(
+        public UpdateResult DynamicCollectionUpdateOne<TForeign>(
             TForeign foreignDocument,
             FilterDefinition<T> filter,
             UpdateDefinition<T> update,
@@ -203,7 +203,7 @@ namespace Apteryx.MongoDB.Driver.Extend
         /// <param name="options">更新操作设置</param>
         /// <param name="cancellationToken">取消令牌</param>
         /// <returns></returns>
-        public UpdateResult DynamicCollectionWhereUpdateOne<TForeign>(
+        public UpdateResult DynamicCollectionUpdateOne<TForeign>(
             IClientSessionHandle session,
             TForeign foreignDocument,
             FilterDefinition<T> filter,
@@ -228,7 +228,7 @@ namespace Apteryx.MongoDB.Driver.Extend
         /// <param name="options">更新操作设置</param>
         /// <param name="cancellationToken">取消令牌</param>
         /// <returns></returns>
-        public UpdateResult DynamicCollectionWhereUpdateOne<TForeign>(
+        public UpdateResult DynamicCollectionUpdateOne<TForeign>(
             TForeign foreignDocument,
             Expression<Func<T, bool>> expression,
             UpdateDefinition<T> update,
@@ -252,7 +252,7 @@ namespace Apteryx.MongoDB.Driver.Extend
         /// <param name="options">更新操作设置</param>
         /// <param name="cancellationToken">取消令牌</param>
         /// <returns></returns>
-        public UpdateResult DynamicCollectionWhereUpdateOne<TForeign>(
+        public UpdateResult DynamicCollectionUpdateOne<TForeign>(
             IClientSessionHandle session,
             TForeign foreignDocument,
             Expression<Func<T, bool>> expression,
@@ -376,7 +376,7 @@ namespace Apteryx.MongoDB.Driver.Extend
             FindOneAndUpdateOptions<T> options = null,
             CancellationToken cancellationToken = default)
         {
-            return _collection.FindOneAndUpdate(expression,
+            return _collection.FindOneAndUpdate(session, expression,
                 update.Set(s => s.UpdateTime, DateTime.Now), options, cancellationToken);
         }
 
@@ -525,7 +525,7 @@ namespace Apteryx.MongoDB.Driver.Extend
             CancellationToken cancellationToken = default)
             where TForeign : BaseMongoEntity
         {
-            return _database.GetCollection<T>($"{foreignDocument.Id}_{_collectionName}", settings).FindOneAndUpdate(expression,
+            return _database.GetCollection<T>($"{foreignDocument.Id}_{_collectionName}", settings).FindOneAndUpdate(session, expression,
                 update.Set(s => s.UpdateTime, DateTime.Now), options, cancellationToken);
         }
 
@@ -537,7 +537,7 @@ namespace Apteryx.MongoDB.Driver.Extend
         /// <param name="options">更新操作设置</param>
         /// <param name="cancellationToken">取消令牌</param>
         /// <returns></returns>
-        public UpdateResult WhereUpdateMany(
+        public UpdateResult UpdateMany(
             FilterDefinition<T> filter,
             UpdateDefinition<T> update,
             UpdateOptions options = null,
@@ -556,7 +556,7 @@ namespace Apteryx.MongoDB.Driver.Extend
         /// <param name="options">更新操作设置</param>
         /// <param name="cancellationToken">取消令牌</param>
         /// <returns></returns>
-        public UpdateResult WhereUpdateMany(
+        public UpdateResult UpdateMany(
             IClientSessionHandle session,
             FilterDefinition<T> filter,
             UpdateDefinition<T> update,
@@ -575,7 +575,7 @@ namespace Apteryx.MongoDB.Driver.Extend
         /// <param name="options">更新操作设置</param>
         /// <param name="cancellationToken">取消令牌</param>
         /// <returns></returns>
-        public UpdateResult WhereUpdateMany(
+        public UpdateResult UpdateMany(
             Expression<Func<T, bool>> expression,
             UpdateDefinition<T> update,
             UpdateOptions options = null,
@@ -594,7 +594,7 @@ namespace Apteryx.MongoDB.Driver.Extend
         /// <param name="options">更新操作设置</param>
         /// <param name="cancellationToken">取消令牌</param>
         /// <returns></returns>
-        public UpdateResult WhereUpdateMany(
+        public UpdateResult UpdateMany(
             IClientSessionHandle session,
             Expression<Func<T, bool>> expression,
             UpdateDefinition<T> update,
@@ -616,7 +616,7 @@ namespace Apteryx.MongoDB.Driver.Extend
         /// <param name="options">更新操作设置</param>
         /// <param name="cancellationToken">取消令牌</param>
         /// <returns></returns>
-        public UpdateResult DynamicCollectionWhereUpdateMany<TForeign>(
+        public UpdateResult DynamicCollectionUpdateMany<TForeign>(
             TForeign foreignDocument,
             FilterDefinition<T> filter,
             UpdateDefinition<T> update,
@@ -641,7 +641,7 @@ namespace Apteryx.MongoDB.Driver.Extend
         /// <param name="options">更新操作设置</param>
         /// <param name="cancellationToken">取消令牌</param>
         /// <returns></returns>
-        public UpdateResult DynamicCollectionWhereUpdateMany<TForeign>(
+        public UpdateResult DynamicCollectionUpdateMany<TForeign>(
             IClientSessionHandle session,
             TForeign foreignDocument,
             FilterDefinition<T> filter,
@@ -666,7 +666,7 @@ namespace Apteryx.MongoDB.Driver.Extend
         /// <param name="options">更新操作设置</param>
         /// <param name="cancellationToken">取消令牌</param>
         /// <returns></returns>
-        public UpdateResult DynamicCollectionWhereUpdateMany<TForeign>(
+        public UpdateResult DynamicCollectionUpdateMany<TForeign>(
             TForeign foreignDocument,
             Expression<Func<T, bool>> expression,
             UpdateDefinition<T> update,
@@ -691,7 +691,7 @@ namespace Apteryx.MongoDB.Driver.Extend
         /// <param name="options">更新操作设置</param>
         /// <param name="cancellationToken">取消令牌</param>
         /// <returns></returns>
-        public UpdateResult DynamicCollectionWhereUpdateMany<TForeign>(
+        public UpdateResult DynamicCollectionUpdateMany<TForeign>(
             IClientSessionHandle session,
             TForeign foreignDocument,
             Expression<Func<T, bool>> expression,
@@ -701,7 +701,7 @@ namespace Apteryx.MongoDB.Driver.Extend
             CancellationToken cancellationToken = default)
             where TForeign : BaseMongoEntity
         {
-            return _database.GetCollection<T>($"{foreignDocument.Id}_{_collectionName}",settings).UpdateMany(session, expression,
+            return _database.GetCollection<T>($"{foreignDocument.Id}_{_collectionName}", settings).UpdateMany(session, expression,
                 update.Set(s => s.UpdateTime, DateTime.Now), options, cancellationToken);
         }
 
