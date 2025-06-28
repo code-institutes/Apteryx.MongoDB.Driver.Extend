@@ -7,5 +7,6 @@ namespace Apteryx.MongoDB.Driver.Extend
         string Id { get; set; }
         DateTime CreateTime { get; set; }
         DateTime UpdateTime { get; set; }
+        long TimeStamp { get; }
     }
 }

@@ -39,6 +39,9 @@ namespace Apteryx.WebApi.Controllers
                 var r = await _db.Users.FindOneAsync(item.Id);
             }
 
+
+            var dataBase = _db.Database;
+
             var count = await _db.Users.CountDocumentsAsync(_=>true);
 
             return Enumerable.Range(1, 5).Select(index => new WeatherForecast

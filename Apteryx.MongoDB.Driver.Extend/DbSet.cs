@@ -21,5 +21,7 @@ namespace Apteryx.MongoDB.Driver.Extend
                 return _collection;
             }
         }
+
+        public IMongoDatabase DataBase { get { return _database; } }
     }
 }

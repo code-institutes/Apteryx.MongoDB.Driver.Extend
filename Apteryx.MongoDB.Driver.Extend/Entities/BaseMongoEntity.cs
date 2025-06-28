@@ -24,5 +24,10 @@ namespace Apteryx.MongoDB.Driver.Extend
         /// </summary>
         [BsonDateTimeOptions(Kind = DateTimeKind.Local)]
         public DateTime UpdateTime { get; set; } = DateTime.Now;
+
+        /// <summary>
+        /// 时间戳
+        /// </summary>
+        public long TimeStamp => (new DateTimeOffset(CreateTime)).ToUnixTimeMilliseconds();
     }
 }
