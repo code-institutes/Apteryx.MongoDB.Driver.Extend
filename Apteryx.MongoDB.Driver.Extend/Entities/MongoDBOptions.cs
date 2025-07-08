@@ -1,7 +1,7 @@
-﻿namespace Apteryx.MongoDB.Driver.Extend
+﻿namespace Apteryx.MongoDB.Driver.Extend;
+
+public class MongoDBOptions
 {
-    public class MongoDBOptions
-    {
-        public string ConnectionString { get; set; }
-    }
+    public string ConnectionString { get; set; }
 }
+

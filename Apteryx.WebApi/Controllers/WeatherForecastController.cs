@@ -1,56 +1,55 @@
 using Apteryx.WebApi.Data;
 using Microsoft.AspNetCore.Mvc;
 
-namespace Apteryx.WebApi.Controllers
+namespace Apteryx.WebApi.Controllers;
+
+[ApiController]
+[Route("[controller]")]
+public class WeatherForecastController : ControllerBase
 {
-    [ApiController]
-    [Route("[controller]")]
-    public class WeatherForecastController : ControllerBase
+    private static readonly string[] Summaries = new[]
     {
-        private static readonly string[] Summaries = new[]
-        {
         "Freezing", "Bracing", "Chilly", "Cool", "Mild", "Warm", "Balmy", "Hot", "Sweltering", "Scorching"
     };
 
-        private readonly ILogger<WeatherForecastController> _logger;
-        private readonly ApteryxDbContext _db;
-        public WeatherForecastController(ILogger<WeatherForecastController> logger,ApteryxDbContext context)
+    private readonly ILogger<WeatherForecastController> _logger;
+    private readonly ApteryxDbContext _db;
+    public WeatherForecastController(ILogger<WeatherForecastController> logger, ApteryxDbContext context)
+    {
+        _logger = logger;
+        _db = context;
+    }
+
+    [HttpGet(Name = "GetWeatherForecast")]
+    public async Task<IEnumerable<WeatherForecast>> Get()
+    {
+        var user = _db.Users.FindOne(f => true);
+        if (user == null)
         {
-            _logger = logger;
-            _db = context;
+            _db.Users.Add(new User()
+            {
+                Name = "张三",
+                Email = "wyspaces@outlook.com",
+                Password = "asdlkfjaldk"
+            });
         }
 
-        [HttpGet(Name = "GetWeatherForecast")]
-        public async Task<IEnumerable<WeatherForecast>> Get()
+        await foreach (var item in _db.Users.FindAllAsync())
         {
-            var user = _db.Users.FindOne(f => true);
-            if (user == null)
-            {
-                _db.Users.Add(new User()
-                {
-                    Name = "张三",
-                    Email = "wyspaces@outlook.com",
-                    Password = "asdlkfjaldk"
-                });
-            }
-
-            await foreach (var item in _db.Users.FindAllAsync())
-            {
-                var r = await _db.Users.FindOneAsync(item.Id);
-            }
-
-
-            var dataBase = _db.Database;
-
-            var count = await _db.Users.CountDocumentsAsync(_=>true);
-
-            return Enumerable.Range(1, 5).Select(index => new WeatherForecast
-            {
-                Date = DateOnly.FromDateTime(DateTime.Now.AddDays(index)),
-                TemperatureC = Random.Shared.Next(-20, 55),
-                Summary = Summaries[Random.Shared.Next(Summaries.Length)]
-            })
-            .ToArray();
+            var r = await _db.Users.FindOneAsync(item.Id);
         }
+
+
+        var dataBase = _db.Database;
+
+        var count = await _db.Users.CountDocumentsAsync(_ => true);
+
+        return Enumerable.Range(1, 5).Select(index => new WeatherForecast
+        {
+            Date = DateOnly.FromDateTime(DateTime.Now.AddDays(index)),
+            TemperatureC = Random.Shared.Next(-20, 55),
+            Summary = Summaries[Random.Shared.Next(Summaries.Length)]
+        })
+        .ToArray();
     }
 }

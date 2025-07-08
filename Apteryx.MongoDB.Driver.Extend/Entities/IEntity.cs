@@ -1,12 +1,12 @@
 ﻿using System;
 
-namespace Apteryx.MongoDB.Driver.Extend
+namespace Apteryx.MongoDB.Driver.Extend;
+
+public interface IEntity
 {
-    public interface IEntity
-    {
-        string Id { get; set; }
-        DateTime CreateTime { get; set; }
-        DateTime UpdateTime { get; set; }
-        long TimeStamp { get; }
-    }
+    string Id { get; set; }
+    DateTime CreateTime { get; set; }
+    DateTime UpdateTime { get; set; }
+    long TimeStamp { get; }
 }
+
