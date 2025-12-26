@@ -2,9 +2,9 @@
 using Apteryx.Mongodb.Driver.Extend.Tests.Data;
 using Microsoft.Extensions.DependencyInjection;
 
-namespace Apteryx.Mongodb.Driver.Extend.Tests
+namespace Apteryx.Mongodb.Driver.Extend.Tests;
 
-    [TestClass]
+[TestClass]
 public class TestDbSetWhere : TestBase
 {
     private readonly ApteryxDbContext? dbContext;

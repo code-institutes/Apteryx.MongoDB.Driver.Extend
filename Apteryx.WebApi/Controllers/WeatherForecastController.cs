@@ -1,3 +1,4 @@
+using MongoDB.Driver;
 using Apteryx.WebApi.Data;
 using Microsoft.AspNetCore.Mvc;
 
@@ -42,7 +43,8 @@ public class WeatherForecastController : ControllerBase
 
         var dataBase = _db.Database;
 
-        var count = await _db.Users.CountDocumentsAsync(_ => true);
+        var count1 = await _db.Users.CountDocumentsAsync(_ => true);
+        var count2 = await _db.Users.AsMongoCollection.CountDocumentsAsync(_ => true);
 
         return Enumerable.Range(1, 5).Select(index => new WeatherForecast
         {
