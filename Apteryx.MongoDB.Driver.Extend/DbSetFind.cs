@@ -246,7 +246,7 @@ public partial class DbSet<T>
     /// <param name="filter">过滤器</param>        
     /// <param name="options">计数选项</param>
     /// <returns></returns>
-    public IFindFluent<T, T> Where(FilterDefinition<T> filter, FindOptions options = null)
+    public IFindFluent<T, T> Find(FilterDefinition<T> filter, FindOptions options = null)
     {
         return _collection.Find(filter, options);
     }
@@ -258,7 +258,7 @@ public partial class DbSet<T>
     /// <param name="filter">过滤器</param>        
     /// <param name="options">计数选项</param>
     /// <returns></returns>
-    public IFindFluent<T, T> Where(IClientSessionHandle session, FilterDefinition<T> filter, FindOptions options = null)
+    public IFindFluent<T, T> Find(IClientSessionHandle session, FilterDefinition<T> filter, FindOptions options = null)
     {
         return _collection.Find(session, filter, options);
     }
@@ -269,7 +269,7 @@ public partial class DbSet<T>
     /// <param name="expression">Lambda过滤器</param>        
     /// <param name="options">计数选项</param>
     /// <returns></returns>
-    public IFindFluent<T, T> Where(Expression<Func<T, bool>> expression, FindOptions options = null)
+    public IFindFluent<T, T> Find(Expression<Func<T, bool>> expression, FindOptions options = null)
     {
         return _collection.Find(expression, options);
     }
@@ -281,7 +281,7 @@ public partial class DbSet<T>
     /// <param name="expression">Lambda过滤器</param>        
     /// <param name="options">计数选项</param>
     /// <returns></returns>
-    public IFindFluent<T, T> Where(IClientSessionHandle session, Expression<Func<T, bool>> expression, FindOptions options = null)
+    public IFindFluent<T, T> Find(IClientSessionHandle session, Expression<Func<T, bool>> expression, FindOptions options = null)
     {
         return _collection.Find(session, expression, options);
     }
@@ -295,7 +295,7 @@ public partial class DbSet<T>
     /// <param name="settings">集合设置</param>
     /// <param name="options">计数选项</param>
     /// <returns></returns>
-    public IFindFluent<T, T> DynamicCollectionWhere<TForeign>(
+    public IFindFluent<T, T> DynamicCollectionFind<TForeign>(
         TForeign foreignDocument,
         FilterDefinition<T> filter,
         MongoCollectionSettings settings = null,
@@ -314,7 +314,7 @@ public partial class DbSet<T>
     /// <param name="filter">过滤器</param>        
     /// <param name="options">计数选项</param>
     /// <returns></returns>
-    public IFindFluent<T, T> DynamicCollectionWhere<TForeign>(
+    public IFindFluent<T, T> DynamicCollectionFind<TForeign>(
         IClientSessionHandle session,
         TForeign foreignDocument,
         FilterDefinition<T> filter,
@@ -334,7 +334,7 @@ public partial class DbSet<T>
     /// <param name="settings">集合设置</param>
     /// <param name="options">计数选项</param>
     /// <returns></returns>
-    public IFindFluent<T, T> DynamicCollectionWhere<TForeign>(
+    public IFindFluent<T, T> DynamicCollectionFind<TForeign>(
         TForeign foreignDocument,
         Expression<Func<T, bool>> expression,
         MongoCollectionSettings settings = null,
@@ -354,7 +354,7 @@ public partial class DbSet<T>
     /// <param name="settings">集合设置</param>
     /// <param name="options">计数选项</param>
     /// <returns></returns>
-    public IFindFluent<T, T> DynamicCollectionWhere<TForeign>(
+    public IFindFluent<T, T> DynamicCollectionFind<TForeign>(
         IClientSessionHandle session,
         TForeign foreignDocument,
         Expression<Func<T, bool>> expression,

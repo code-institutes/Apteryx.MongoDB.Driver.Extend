@@ -1,6 +1,7 @@
 using MongoDB.Driver;
 using Apteryx.WebApi.Data;
 using Microsoft.AspNetCore.Mvc;
+using MongoDB.Driver.Linq;
 
 namespace Apteryx.WebApi.Controllers;
 
@@ -34,6 +35,12 @@ public class WeatherForecastController : ControllerBase
                 Password = "asdlkfjaldk"
             });
         }
+
+        var query = from u in _db.Users
+                    where u.Name != null && u.Name.Contains("уе")
+                    select u;
+        
+        var list = _db.Users.Where(u => u.Name != null && u.Name.Contains("уе")).ToList();
 
         await foreach (var item in _db.Users.FindAllAsync())
         {

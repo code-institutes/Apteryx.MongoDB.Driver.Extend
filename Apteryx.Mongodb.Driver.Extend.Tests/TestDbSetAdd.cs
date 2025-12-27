@@ -244,7 +244,7 @@ public class TestDbSetAdd : TestBase
         dbContext.Users.AddMany(users);
 
         // 验证添加是否成功
-        var addedUserCount = dbContext.Users.Where(w => w.Email == "zhangfei@qq.com").CountDocuments();
+        var addedUserCount = dbContext.Users.Find(w => w.Email == "zhangfei@qq.com").CountDocuments();
         Assert.AreEqual(3, addedUserCount, "未成功添加，数量不正确");
 
 
@@ -252,7 +252,7 @@ public class TestDbSetAdd : TestBase
         var result = dbContext.Users.DeleteMany(users);
 
         // 验证删除是否成功
-        var deletedUserCount = dbContext.Users.Where(w => true).CountDocuments();
+        var deletedUserCount = dbContext.Users.Find(w => true).CountDocuments();
         Assert.AreEqual(0, deletedUserCount, "用户未成功删除。");
     }
 
@@ -267,7 +267,7 @@ public class TestDbSetAdd : TestBase
         dbContext.Users.DynamicCollectionAddMany(userGroup, users);
 
         // 验证添加是否成功
-        var addedUserCount = dbContext.Users.DynamicCollectionWhere(userGroup, w => w.Email == "zhangfei@qq.com").CountDocuments();
+        var addedUserCount = dbContext.Users.DynamicCollectionFind(userGroup, w => w.Email == "zhangfei@qq.com").CountDocuments();
         Assert.AreEqual(3, addedUserCount, "未成功添加，数量不正确");
 
 
@@ -275,7 +275,7 @@ public class TestDbSetAdd : TestBase
         dbContext.Users.DynamicCollectionDeleteMany(userGroup, users);
 
         // 验证删除是否成功
-        var deletedUserCount = dbContext.Users.DynamicCollectionWhere(userGroup, w => true).CountDocuments();
+        var deletedUserCount = dbContext.Users.DynamicCollectionFind(userGroup, w => true).CountDocuments();
         Assert.AreEqual(0, deletedUserCount, "用户未成功删除。");
     }
 
@@ -292,7 +292,7 @@ public class TestDbSetAdd : TestBase
             dbContext.Users.AddMany(session, users);
 
             // 验证添加是否成功
-            var addedUserCount = dbContext.Users.Where(session, w => w.Email == "zhangfei@qq.com").CountDocuments();
+            var addedUserCount = dbContext.Users.Find(session, w => w.Email == "zhangfei@qq.com").CountDocuments();
 
             Assert.IsNotNull(addedUserCount, "未成功添加用户。");
 
@@ -303,7 +303,7 @@ public class TestDbSetAdd : TestBase
             var result = dbContext.Users.DeleteMany(session, users);
 
             // 验证删除是否成功
-            var deletedUserCount = dbContext.Users.Where(session, w => true).CountDocuments();
+            var deletedUserCount = dbContext.Users.Find(session, w => true).CountDocuments();
             Assert.AreEqual(0, deletedUserCount, "用户未成功删除。");
 
             session.CommitTransaction();
@@ -324,7 +324,7 @@ public class TestDbSetAdd : TestBase
             dbContext.Users.DynamicCollectionAddMany(session, userGroup, users);
 
             // 验证添加是否成功
-            var addedUserCount = dbContext.Users.DynamicCollectionWhere(session, userGroup, w => w.Email == "zhangfei@qq.com").CountDocuments();
+            var addedUserCount = dbContext.Users.DynamicCollectionFind(session, userGroup, w => w.Email == "zhangfei@qq.com").CountDocuments();
             Assert.AreEqual(3, addedUserCount, "未成功添加，数量不正确");
 
 
@@ -332,7 +332,7 @@ public class TestDbSetAdd : TestBase
             dbContext.Users.DynamicCollectionDeleteMany(session, userGroup, users);
 
             // 验证删除是否成功
-            var deletedUserCount = dbContext.Users.DynamicCollectionWhere(session, userGroup, w => true).CountDocuments();
+            var deletedUserCount = dbContext.Users.DynamicCollectionFind(session, userGroup, w => true).CountDocuments();
             Assert.AreEqual(0, deletedUserCount, "用户未成功删除。");
 
             session.CommitTransaction();
@@ -350,7 +350,7 @@ public class TestDbSetAdd : TestBase
 
         // 验证添加是否成功
         List<User> addedUser = new();
-        await foreach (var user in dbContext.Users.WhereAsync(w => w.Email == "zhangfei@qq.com"))
+        await foreach (var user in dbContext.Users.FindAsync(w => w.Email == "zhangfei@qq.com"))
         {
             addedUser.Add(user);
         }
@@ -362,7 +362,7 @@ public class TestDbSetAdd : TestBase
 
         // 验证删除是否成功
         addedUser.Clear();
-        await foreach (var user in dbContext.Users.WhereAsync(w => true))
+        await foreach (var user in dbContext.Users.FindAsync(w => true))
         {
             addedUser.Add(user);
         }
@@ -382,7 +382,7 @@ public class TestDbSetAdd : TestBase
 
         // 验证添加是否成功
         List<User> addedUser = new();
-        await foreach (var user in dbContext.Users.DynamicCollectionWhereAsync(userGroup, w => w.Email == "zhangfei@qq.com"))
+        await foreach (var user in dbContext.Users.DynamicCollectionFindAsync(userGroup, w => w.Email == "zhangfei@qq.com"))
         {
             addedUser.Add(user);
         }
@@ -394,7 +394,7 @@ public class TestDbSetAdd : TestBase
 
         // 验证删除是否成功
         addedUser.Clear();
-        await foreach (var user in dbContext.Users.DynamicCollectionWhereAsync(userGroup, w => true))
+        await foreach (var user in dbContext.Users.DynamicCollectionFindAsync(userGroup, w => true))
         {
             addedUser.Add(user);
         }
@@ -416,7 +416,7 @@ public class TestDbSetAdd : TestBase
 
             // 验证添加是否成功
             List<User> addedUser = new();
-            await foreach (var user in dbContext.Users.WhereAsync(session, w => w.Email == "zhangfei@qq.com"))
+            await foreach (var user in dbContext.Users.FindAsync(session, w => w.Email == "zhangfei@qq.com"))
             {
                 addedUser.Add(user);
             }
@@ -428,7 +428,7 @@ public class TestDbSetAdd : TestBase
 
             // 验证删除是否成功
             addedUser.Clear();
-            await foreach (var user in dbContext.Users.WhereAsync(session, w => true))
+            await foreach (var user in dbContext.Users.FindAsync(session, w => true))
             {
                 addedUser.Add(user);
             }
@@ -455,7 +455,7 @@ public class TestDbSetAdd : TestBase
 
             // 验证添加是否成功
             List<User> addedUser = new();
-            await foreach (var user in dbContext.Users.DynamicCollectionWhereAsync(session, userGroup, w => w.Email == "zhangfei@qq.com"))
+            await foreach (var user in dbContext.Users.DynamicCollectionFindAsync(session, userGroup, w => w.Email == "zhangfei@qq.com"))
             {
                 addedUser.Add(user);
             }
@@ -466,7 +466,7 @@ public class TestDbSetAdd : TestBase
 
             // 验证删除是否成功
             addedUser.Clear();
-            await foreach (var user in dbContext.Users.DynamicCollectionWhereAsync(session, userGroup, w => true))
+            await foreach (var user in dbContext.Users.DynamicCollectionFindAsync(session, userGroup, w => true))
             {
                 addedUser.Add(user);
             }

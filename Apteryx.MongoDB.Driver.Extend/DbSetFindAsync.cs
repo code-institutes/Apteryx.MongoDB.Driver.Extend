@@ -323,7 +323,7 @@ public partial class DbSet<T>
     /// <param name="settings">集合设置</param>
     /// <param name="options">查找操作设置</param>
     /// <returns></returns>
-    public async IAsyncEnumerable<T> WhereAsync(FilterDefinition<T> filter, FindOptions<T> options = null)
+    public async IAsyncEnumerable<T> FindAsync(FilterDefinition<T> filter, FindOptions<T> options = null)
     {
         using (var cursor = await _collection.FindAsync(filter, options))
         {
@@ -345,7 +345,7 @@ public partial class DbSet<T>
     /// <param name="settings">集合设置</param>
     /// <param name="options">查找操作设置</param>
     /// <returns></returns>
-    public async IAsyncEnumerable<T> WhereAsync(IClientSessionHandle session, FilterDefinition<T> filter, FindOptions<T> options = null)
+    public async IAsyncEnumerable<T> FindAsync(IClientSessionHandle session, FilterDefinition<T> filter, FindOptions<T> options = null)
     {
         using (var cursor = await _collection.FindAsync(session, filter, options))
         {
@@ -366,7 +366,7 @@ public partial class DbSet<T>
     /// <param name="settings">集合设置</param>
     /// <param name="options">查找操作设置</param>
     /// <returns></returns>
-    public async IAsyncEnumerable<T> WhereAsync(Expression<Func<T, bool>> expression, FindOptions<T> options = null)
+    public async IAsyncEnumerable<T> FindAsync(Expression<Func<T, bool>> expression, FindOptions<T> options = null)
     {
         using (var cursor = await _collection.FindAsync(expression, options))
         {
@@ -388,7 +388,7 @@ public partial class DbSet<T>
     /// <param name="settings">集合设置</param>
     /// <param name="options">查找操作设置</param>
     /// <returns></returns>
-    public async IAsyncEnumerable<T> WhereAsync(IClientSessionHandle session, Expression<Func<T, bool>> expression, FindOptions<T> options = null)
+    public async IAsyncEnumerable<T> FindAsync(IClientSessionHandle session, Expression<Func<T, bool>> expression, FindOptions<T> options = null)
     {
         using (var cursor = await _collection.FindAsync(session, expression, options))
         {
@@ -411,7 +411,7 @@ public partial class DbSet<T>
     /// <param name="settings">集合设置</param>
     /// <param name="options">查找操作设置</param>
     /// <returns></returns>
-    public async IAsyncEnumerable<T> DynamicCollectionWhereAsync<TForeign>(
+    public async IAsyncEnumerable<T> DynamicCollectionFindAsync<TForeign>(
         TForeign foreignDocument,
         FilterDefinition<T> filter,
         MongoCollectionSettings settings = null,
@@ -440,7 +440,7 @@ public partial class DbSet<T>
     /// <param name="settings">集合设置</param>
     /// <param name="options">查找操作设置</param>
     /// <returns></returns>
-    public async IAsyncEnumerable<T> DynamicCollectionWhereAsync<TForeign>(
+    public async IAsyncEnumerable<T> DynamicCollectionFindAsync<TForeign>(
         IClientSessionHandle session,
         TForeign foreignDocument,
         FilterDefinition<T> filter,
@@ -469,7 +469,7 @@ public partial class DbSet<T>
     /// <param name="settings">集合设置</param>
     /// <param name="options">查找操作设置</param>
     /// <returns></returns>
-    public async IAsyncEnumerable<T> DynamicCollectionWhereAsync<TForeign>(
+    public async IAsyncEnumerable<T> DynamicCollectionFindAsync<TForeign>(
         TForeign foreignDocument,
         Expression<Func<T, bool>> expression,
         MongoCollectionSettings settings = null,
@@ -498,7 +498,7 @@ public partial class DbSet<T>
     /// <param name="settings">集合设置</param>
     /// <param name="options">查找操作设置</param>
     /// <returns></returns>
-    public async IAsyncEnumerable<T> DynamicCollectionWhereAsync<TForeign>(
+    public async IAsyncEnumerable<T> DynamicCollectionFindAsync<TForeign>(
         IClientSessionHandle session,
         TForeign foreignDocument,
         Expression<Func<T, bool>> expression,
