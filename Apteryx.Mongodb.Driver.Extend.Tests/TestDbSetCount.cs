@@ -32,8 +32,8 @@ public class TestDbSetCount : TestBase
         var users1 = DataHelper.GetNewUsers(pwd1);
         var users2 = DataHelper.GetNewUsers(pwd2);
 
-        dbContext.Users.AddMany(users1);
-        dbContext.Users.AddMany(users2);
+        dbContext.Users.InsertMany(users1);
+        dbContext.Users.InsertMany(users2);
 
         //验证查询数量是否成功
         var userCount1 = dbContext.Users.CountDocuments(Builders<User>.Filter.Eq(e => e.Password, pwd1));
@@ -54,8 +54,8 @@ public class TestDbSetCount : TestBase
         var users1 = DataHelper.GetNewUsers(pwd1);
         var users2 = DataHelper.GetNewUsers(pwd2);
 
-        await dbContext.Users.AddManyAsync(users1);
-        await dbContext.Users.AddManyAsync(users2);
+        await dbContext.Users.InsertManyAsync(users1);
+        await dbContext.Users.InsertManyAsync(users2);
 
         //验证查询数量是否成功
         var userCount1 = await dbContext.Users.CountDocumentsAsync(Builders<User>.Filter.Eq(e => e.Password, pwd1));
@@ -80,8 +80,8 @@ public class TestDbSetCount : TestBase
         {
             session.StartTransaction();
 
-            dbContext.Users.AddMany(session, users1);
-            dbContext.Users.AddMany(session, users2);
+            dbContext.Users.InsertMany(session, users1);
+            dbContext.Users.InsertMany(session, users2);
 
             //验证查询数量是否成功
             var userCount1 = dbContext.Users.CountDocuments(session, Builders<User>.Filter.Eq(e => e.Password, pwd1));
@@ -109,8 +109,8 @@ public class TestDbSetCount : TestBase
         {
             session.StartTransaction();
 
-            await dbContext.Users.AddManyAsync(session, users1);
-            await dbContext.Users.AddManyAsync(session, users2);
+            await dbContext.Users.InsertManyAsync(session, users1);
+            await dbContext.Users.InsertManyAsync(session, users2);
 
             //验证查询数量是否成功
             var userCount1 = await dbContext.Users.CountDocumentsAsync(session, Builders<User>.Filter.Eq(e => e.Password, pwd1));
@@ -136,8 +136,8 @@ public class TestDbSetCount : TestBase
         var users1 = DataHelper.GetNewUsers(pwd1);
         var users2 = DataHelper.GetNewUsers(pwd2);
 
-        dbContext.Users.DynamicCollectionAddMany(userGroup, users1);
-        dbContext.Users.DynamicCollectionAddMany(userGroup, users2);
+        dbContext.Users.DynamicCollectionInsertMany(userGroup, users1);
+        dbContext.Users.DynamicCollectionInsertMany(userGroup, users2);
 
         //验证查询数量是否成功
         var userCount1 = dbContext.Users.DynamicCollectionCountDocuments(userGroup, Builders<User>.Filter.Eq(e => e.Password, pwd1));
@@ -160,8 +160,8 @@ public class TestDbSetCount : TestBase
         var users1 = DataHelper.GetNewUsers(pwd1);
         var users2 = DataHelper.GetNewUsers(pwd2);
 
-        await dbContext.Users.DynamicCollectionAddManyAsync(userGroup, users1);
-        await dbContext.Users.DynamicCollectionAddManyAsync(userGroup, users2);
+        await dbContext.Users.DynamicCollectionInsertManyAsync(userGroup, users1);
+        await dbContext.Users.DynamicCollectionInsertManyAsync(userGroup, users2);
 
         //验证查询数量是否成功
         var userCount1 = await dbContext.Users.DynamicCollectionCountDocumentsAsync(userGroup, Builders<User>.Filter.Eq(e => e.Password, pwd1));
@@ -188,8 +188,8 @@ public class TestDbSetCount : TestBase
         {
             session.StartTransaction();
 
-            dbContext.Users.DynamicCollectionAddMany(session, userGroup, users1);
-            dbContext.Users.DynamicCollectionAddMany(session, userGroup, users2);
+            dbContext.Users.DynamicCollectionInsertMany(session, userGroup, users1);
+            dbContext.Users.DynamicCollectionInsertMany(session, userGroup, users2);
 
             //验证查询数量是否成功
             var userCount1 = dbContext.Users.DynamicCollectionCountDocuments(session, userGroup, Builders<User>.Filter.Eq(e => e.Password, pwd1));
@@ -219,8 +219,8 @@ public class TestDbSetCount : TestBase
         {
             session.StartTransaction();
 
-            await dbContext.Users.DynamicCollectionAddManyAsync(session, userGroup, users1);
-            await dbContext.Users.DynamicCollectionAddManyAsync(session, userGroup, users2);
+            await dbContext.Users.DynamicCollectionInsertManyAsync(session, userGroup, users1);
+            await dbContext.Users.DynamicCollectionInsertManyAsync(session, userGroup, users2);
 
             //验证查询数量是否成功
             var userCount1 = await dbContext.Users.DynamicCollectionCountDocumentsAsync(session, userGroup, Builders<User>.Filter.Eq(e => e.Password, pwd1));

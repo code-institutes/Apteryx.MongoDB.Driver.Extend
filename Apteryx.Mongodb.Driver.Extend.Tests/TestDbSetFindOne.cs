@@ -26,7 +26,7 @@ public class TestDbSetFindOne : TestBase
     {
         var user = DataHelper.GetNewUser();
 
-        dbContext.Users.Add(user);
+        dbContext.Users.Insert(user);
 
         // 验证添加是否成功
         var addedUser = dbContext.Users.FindOne(user.Id);
@@ -59,7 +59,7 @@ public class TestDbSetFindOne : TestBase
     {
         var user = DataHelper.GetNewUser();
 
-        await dbContext.Users.AddAsync(user);
+        await dbContext.Users.InsertAsync(user);
 
         // 验证添加是否成功
         var addedUser = await dbContext.Users.FindOneAsync(user.Id);
@@ -96,7 +96,7 @@ public class TestDbSetFindOne : TestBase
         {
             session.StartTransaction();
 
-            dbContext.Users.Add(session, user);
+            dbContext.Users.Insert(session, user);
 
             // 验证添加是否成功
             var addedUser = dbContext.Users.FindOne(session, user.Id);
@@ -137,7 +137,7 @@ public class TestDbSetFindOne : TestBase
         {
             session.StartTransaction();
 
-            await dbContext.Users.AddAsync(session, user);
+            await dbContext.Users.InsertAsync(session, user);
 
             // 验证添加是否成功
             var addedUser = await dbContext.Users.FindOneAsync(session, user.Id);
@@ -174,7 +174,7 @@ public class TestDbSetFindOne : TestBase
         var userGroup = DataHelper.GetNewUserGroup();
         var user = DataHelper.GetNewUser();
 
-        dbContext.Users.DynamicCollectionAdd(userGroup, user);
+        dbContext.Users.DynamicCollectionInsert(userGroup, user);
 
         // 验证添加是否成功
         var addedUser = dbContext.Users.DynamicCollectionFindOne(userGroup, user.Id);
@@ -208,7 +208,7 @@ public class TestDbSetFindOne : TestBase
         var userGroup = DataHelper.GetNewUserGroup();
         var user = DataHelper.GetNewUser();
 
-        await dbContext.Users.DynamicCollectionAddAsync(userGroup, user);
+        await dbContext.Users.DynamicCollectionInsertAsync(userGroup, user);
 
         // 验证添加是否成功
         var addedUser = await dbContext.Users.DynamicCollectionFindOneAsync(userGroup, user.Id);
@@ -246,7 +246,7 @@ public class TestDbSetFindOne : TestBase
         {
             session.StartTransaction();
 
-            dbContext.Users.DynamicCollectionAdd(session, userGroup, user);
+            dbContext.Users.DynamicCollectionInsert(session, userGroup, user);
 
             // 验证添加是否成功
             var addedUser = dbContext.Users.DynamicCollectionFindOne(session, userGroup, user.Id);
@@ -288,7 +288,7 @@ public class TestDbSetFindOne : TestBase
         {
             session.StartTransaction();
 
-            await dbContext.Users.DynamicCollectionAddAsync(session, userGroup, user);
+            await dbContext.Users.DynamicCollectionInsertAsync(session, userGroup, user);
 
             // 验证添加是否成功
             var addedUser = await dbContext.Users.DynamicCollectionFindOneAsync(session, userGroup, user.Id);
@@ -325,7 +325,7 @@ public class TestDbSetFindOne : TestBase
     {
         var users = DataHelper.GetNewUsers();
 
-        dbContext.Users.AddMany(users);
+        dbContext.Users.InsertMany(users);
 
         //验证查询是否成功
         var findUsers = dbContext.Users.FindAll();
@@ -341,7 +341,7 @@ public class TestDbSetFindOne : TestBase
     {
         var users = DataHelper.GetNewUsers();
 
-        await dbContext.Users.AddManyAsync(users);
+        await dbContext.Users.InsertManyAsync(users);
 
         //验证查询是否成功
         List<User> findUsers = new();
@@ -365,7 +365,7 @@ public class TestDbSetFindOne : TestBase
         {
             session.StartTransaction();
 
-            dbContext.Users.AddMany(session, users);
+            dbContext.Users.InsertMany(session, users);
 
             //验证查询是否成功
             var findUsers = dbContext.Users.FindAll(session);
@@ -388,7 +388,7 @@ public class TestDbSetFindOne : TestBase
         {
             session.StartTransaction();
 
-            await dbContext.Users.AddManyAsync(session, users);
+            await dbContext.Users.InsertManyAsync(session, users);
 
             //验证查询是否成功
             List<User> findUsers = new();
@@ -412,7 +412,7 @@ public class TestDbSetFindOne : TestBase
         var userGroup = DataHelper.GetNewUserGroup();
         var users = DataHelper.GetNewUsers();
 
-        dbContext.Users.DynamicCollectionAddMany(userGroup, users);
+        dbContext.Users.DynamicCollectionInsertMany(userGroup, users);
 
         //验证查询是否成功
         var findUsers = dbContext.Users.DynamicCollectionFindAll(userGroup);
@@ -429,7 +429,7 @@ public class TestDbSetFindOne : TestBase
         var userGroup = DataHelper.GetNewUserGroup();
         var users = DataHelper.GetNewUsers();
 
-        await dbContext.Users.DynamicCollectionAddManyAsync(userGroup, users);
+        await dbContext.Users.DynamicCollectionInsertManyAsync(userGroup, users);
 
         //验证查询是否成功
         List<User> findUsers = new();
@@ -454,7 +454,7 @@ public class TestDbSetFindOne : TestBase
         {
             session.StartTransaction();
 
-            dbContext.Users.DynamicCollectionAddMany(session, userGroup, users);
+            dbContext.Users.DynamicCollectionInsertMany(session, userGroup, users);
 
             //验证查询是否成功
             var findUsers = dbContext.Users.DynamicCollectionFindAll(session, userGroup);
@@ -478,7 +478,7 @@ public class TestDbSetFindOne : TestBase
         {
             session.StartTransaction();
 
-            await dbContext.Users.DynamicCollectionAddManyAsync(session, userGroup, users);
+            await dbContext.Users.DynamicCollectionInsertManyAsync(session, userGroup, users);
 
             //验证查询是否成功
             List<User> findUsers = new();

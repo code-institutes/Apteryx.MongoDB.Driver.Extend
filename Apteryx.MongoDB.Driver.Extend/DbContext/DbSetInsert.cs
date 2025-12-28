@@ -13,7 +13,7 @@ public partial class DbSet<T>
     /// <param name="document">文档对象</param>
     /// <param name="options">插入操作设置</param>
     /// <param name="cancellationToken">取消令牌</param>
-    public void Add(T document, InsertOneOptions options = null, CancellationToken cancellationToken = default)
+    public void Insert(T document, InsertOneOptions options = null, CancellationToken cancellationToken = default)
     {
         _collection.InsertOne(document, options, cancellationToken);
     }
@@ -25,7 +25,7 @@ public partial class DbSet<T>
     /// <param name="document">文档对象</param>
     /// <param name="options">插入操作设置</param>
     /// <param name="cancellationToken">取消令牌</param>
-    public void Add(IClientSessionHandle session, T document, InsertOneOptions options = null, CancellationToken cancellationToken = default)
+    public void Insert(IClientSessionHandle session, T document, InsertOneOptions options = null, CancellationToken cancellationToken = default)
     {
         _collection.InsertOne(session, document, options, cancellationToken);
     }
@@ -36,7 +36,7 @@ public partial class DbSet<T>
     /// <param name="documents">文档对象</param>
     /// <param name="options">插入操作设置</param>
     /// <param name="cancellationToken">取消令牌</param>
-    public void AddMany(IEnumerable<T> documents, InsertManyOptions options = null, CancellationToken cancellationToken = default)
+    public void InsertMany(IEnumerable<T> documents, InsertManyOptions options = null, CancellationToken cancellationToken = default)
     {
         _collection.InsertMany(documents, options, cancellationToken);
     }
@@ -48,7 +48,7 @@ public partial class DbSet<T>
     /// <param name="documents">文档对象</param>
     /// <param name="options">插入操作设置</param>
     /// <param name="cancellationToken">取消令牌</param>
-    public void AddMany(IClientSessionHandle session, IEnumerable<T> documents, InsertManyOptions options = null, CancellationToken cancellationToken = default)
+    public void InsertMany(IClientSessionHandle session, IEnumerable<T> documents, InsertManyOptions options = null, CancellationToken cancellationToken = default)
     {
         _collection.InsertMany(session, documents, options, cancellationToken);
     }
@@ -62,7 +62,7 @@ public partial class DbSet<T>
     /// <param name="settings">集合设置</param>
     /// <param name="options">插入操作设置</param>
     /// <param name="cancellationToken">取消令牌</param>
-    public void DynamicCollectionAdd<TForeign>(
+    public void DynamicCollectionInsert<TForeign>(
         TForeign foreignDocument,
         T document,
         MongoCollectionSettings settings = null,
@@ -83,7 +83,7 @@ public partial class DbSet<T>
     /// <param name="settings">集合设置</param>
     /// <param name="options">插入操作设置</param>
     /// <param name="cancellationToken">取消令牌</param>
-    public void DynamicCollectionAdd<TForeign>(
+    public void DynamicCollectionInsert<TForeign>(
         IClientSessionHandle session,
         TForeign foreignDocument,
         T document,
@@ -104,7 +104,7 @@ public partial class DbSet<T>
     /// <param name="settings">集合设置</param>
     /// <param name="options">插入操作设置</param>
     /// <param name="cancellationToken">取消令牌</param>
-    public void DynamicCollectionAddMany<TForeign>(
+    public void DynamicCollectionInsertMany<TForeign>(
         TForeign foreignDocument,
         IEnumerable<T> documents,
         MongoCollectionSettings settings = null,
@@ -125,7 +125,7 @@ public partial class DbSet<T>
     /// <param name="settings">集合设置</param>
     /// <param name="options">插入操作设置</param>
     /// <param name="cancellationToken">取消令牌</param>
-    public void DynamicCollectionAddMany<TForeign>(
+    public void DynamicCollectionInsertMany<TForeign>(
         IClientSessionHandle session,
         TForeign foreignDocument,
         IEnumerable<T> documents,

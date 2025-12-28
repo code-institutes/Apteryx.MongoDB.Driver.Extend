@@ -15,7 +15,7 @@ public partial class DbSet<T>
     /// <param name="document">文档对象</param>
     /// <param name="options">插入操作设置</param>
     /// <param name="cancellationToken">取消令牌</param>
-    public Task AddAsync(T document, InsertOneOptions options = null, CancellationToken cancellationToken = default)
+    public Task InsertAsync(T document, InsertOneOptions options = null, CancellationToken cancellationToken = default)
     {
         return _collection.InsertOneAsync(document, options, cancellationToken);
     }
@@ -28,7 +28,7 @@ public partial class DbSet<T>
     /// <param name="document">文档对象</param>
     /// <param name="options">插入操作设置</param>
     /// <param name="cancellationToken">取消令牌</param>
-    public Task AddAsync(IClientSessionHandle session, T document, InsertOneOptions options = null, CancellationToken cancellationToken = default)
+    public Task InsertAsync(IClientSessionHandle session, T document, InsertOneOptions options = null, CancellationToken cancellationToken = default)
     {
         return _collection.InsertOneAsync(session, document, options, cancellationToken);
     }
@@ -40,7 +40,7 @@ public partial class DbSet<T>
     /// <param name="documents">文档对象</param>
     /// <param name="options">插入操作设置</param>
     /// <param name="cancellationToken">取消令牌</param>
-    public Task AddManyAsync(IEnumerable<T> documents, InsertManyOptions options = null, CancellationToken cancellationToken = default)
+    public Task InsertManyAsync(IEnumerable<T> documents, InsertManyOptions options = null, CancellationToken cancellationToken = default)
     {
         return _collection.InsertManyAsync(documents, options, cancellationToken);
     }
@@ -53,7 +53,7 @@ public partial class DbSet<T>
     /// <param name="documents">文档对象</param>
     /// <param name="options">插入操作设置</param>
     /// <param name="cancellationToken">取消令牌</param>
-    public Task AddManyAsync(IClientSessionHandle session, IEnumerable<T> documents, InsertManyOptions options = null, CancellationToken cancellationToken = default)
+    public Task InsertManyAsync(IClientSessionHandle session, IEnumerable<T> documents, InsertManyOptions options = null, CancellationToken cancellationToken = default)
     {
         return _collection.InsertManyAsync(session, documents, options, cancellationToken);
     }
@@ -67,7 +67,7 @@ public partial class DbSet<T>
     /// <param name="settings">集合设置</param>
     /// <param name="options">插入操作设置</param>
     /// <param name="cancellationToken">取消令牌</param>
-    public Task DynamicCollectionAddAsync<TForeign>(
+    public Task DynamicCollectionInsertAsync<TForeign>(
         TForeign foreignDocument,
         T document,
         MongoCollectionSettings settings = null,
@@ -88,7 +88,7 @@ public partial class DbSet<T>
     /// <param name="settings">集合设置</param>
     /// <param name="options">插入操作设置</param>
     /// <param name="cancellationToken">取消令牌</param>
-    public Task DynamicCollectionAddAsync<TForeign>(
+    public Task DynamicCollectionInsertAsync<TForeign>(
         IClientSessionHandle session,
         TForeign foreignDocument,
         T document,
@@ -109,7 +109,7 @@ public partial class DbSet<T>
     /// <param name="settings">集合设置</param>
     /// <param name="options">插入操作设置</param>
     /// <param name="cancellationToken">取消令牌</param>
-    public Task DynamicCollectionAddManyAsync<TForeign>(
+    public Task DynamicCollectionInsertManyAsync<TForeign>(
         TForeign foreignDocument,
         IEnumerable<T> documents,
         MongoCollectionSettings settings = null,
@@ -130,7 +130,7 @@ public partial class DbSet<T>
     /// <param name="settings">集合设置</param>
     /// <param name="options">插入操作设置</param>
     /// <param name="cancellationToken">取消令牌</param>
-    public Task DynamicCollectionAddManyAsync<TForeign>(
+    public Task DynamicCollectionInsertManyAsync<TForeign>(
         IClientSessionHandle session,
         TForeign foreignDocument,
         IEnumerable<T> documents,

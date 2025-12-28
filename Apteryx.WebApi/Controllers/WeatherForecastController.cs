@@ -28,7 +28,7 @@ public class WeatherForecastController : ControllerBase
         var user = _db.Users.FindOne(f => true);
         if (user == null)
         {
-            _db.Users.Add(new User()
+            _db.Users.Insert(new User()
             {
                 Name = "уехЩ",
                 Email = "wyspaces@outlook.com",
@@ -46,7 +46,6 @@ public class WeatherForecastController : ControllerBase
         {
             var r = await _db.Users.FindOneAsync(item.Id);
         }
-
 
         var dataBase = _db.Database;
 

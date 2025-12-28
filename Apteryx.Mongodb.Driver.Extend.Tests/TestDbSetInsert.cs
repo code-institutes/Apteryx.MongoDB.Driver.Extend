@@ -5,7 +5,7 @@ using Microsoft.Extensions.DependencyInjection;
 namespace Apteryx.Mongodb.Driver.Extend.Tests;
 
 [TestClass]
-public class TestDbSetAdd : TestBase
+public class TestDbSetInsert : TestBase
 {
     private readonly ApteryxDbContext? dbContext;
 
@@ -20,7 +20,7 @@ public class TestDbSetAdd : TestBase
         Assert.IsNotNull(dbContext, "无法从服务提供程序获取ApteryxDbContext。"); ;
     }
 
-    public TestDbSetAdd()
+    public TestDbSetInsert()
     {
         this.dbContext = ServiceProvider.GetService<ApteryxDbContext>();
     }
@@ -31,7 +31,7 @@ public class TestDbSetAdd : TestBase
     [TestMethod]
     public void TestAdd()
     {
-        dbContext.Users.Add(user);
+        dbContext.Users.Insert(user);
 
         // 验证添加是否成功
         var addedUser = dbContext.Users.FindOne(user.Id);
@@ -54,7 +54,7 @@ public class TestDbSetAdd : TestBase
     {
         var userGroup = DataHelper.GetNewUserGroup();
 
-        dbContext.Users.DynamicCollectionAdd(userGroup, user);
+        dbContext.Users.DynamicCollectionInsert(userGroup, user);
 
         // 验证添加是否成功
         var addedUser = dbContext.Users.DynamicCollectionFindOne(userGroup, user.Id);
@@ -82,7 +82,7 @@ public class TestDbSetAdd : TestBase
         {
             session.StartTransaction();
 
-            dbContext.Users.Add(session, newUser);
+            dbContext.Users.Insert(session, newUser);
 
             // 验证添加是否成功
             var addedUser = dbContext.Users.FindOne(session, newUser.Id);
@@ -112,7 +112,7 @@ public class TestDbSetAdd : TestBase
 
             var userGroup = DataHelper.GetNewUserGroup();
 
-            dbContext.Users.DynamicCollectionAdd(session, userGroup, user);
+            dbContext.Users.DynamicCollectionInsert(session, userGroup, user);
 
             // 验证添加是否成功
             var addedUser = dbContext.Users.DynamicCollectionFindOne(session, userGroup, user.Id);
@@ -138,7 +138,7 @@ public class TestDbSetAdd : TestBase
         // 创建一个新的 User 实例
         var newUser = new User { Id = ObjectId.GenerateNewId().ToString(), Name = "Test User" };
 
-        await dbContext.Users.AddAsync(newUser);
+        await dbContext.Users.InsertAsync(newUser);
 
         // 验证添加是否成功
         var addedUser = await dbContext.Users.FindOneAsync(newUser.Id);
@@ -161,7 +161,7 @@ public class TestDbSetAdd : TestBase
     {
         var userGroup = DataHelper.GetNewUserGroup();
 
-        await dbContext.Users.DynamicCollectionAddAsync(userGroup, user);
+        await dbContext.Users.DynamicCollectionInsertAsync(userGroup, user);
 
         // 验证添加是否成功
         var addedUser = dbContext.Users.DynamicCollectionFindOne(userGroup, user.Id);
@@ -190,7 +190,7 @@ public class TestDbSetAdd : TestBase
         {
             session.StartTransaction();
 
-            await dbContext.Users.AddAsync(session, newUser);
+            await dbContext.Users.InsertAsync(session, newUser);
 
             // 验证添加是否成功
             var addedUser = await dbContext.Users.FindOneAsync(session, newUser.Id);
@@ -219,7 +219,7 @@ public class TestDbSetAdd : TestBase
             session.StartTransaction();
             var userGroup = DataHelper.GetNewUserGroup();
 
-            await dbContext.Users.DynamicCollectionAddAsync(session, userGroup, user);
+            await dbContext.Users.DynamicCollectionInsertAsync(session, userGroup, user);
 
             // 验证添加是否成功
             var addedUser = await dbContext.Users.DynamicCollectionFindOneAsync(session, userGroup, user.Id);
@@ -241,7 +241,7 @@ public class TestDbSetAdd : TestBase
     [TestMethod]
     public void TestAddMany()
     {
-        dbContext.Users.AddMany(users);
+        dbContext.Users.InsertMany(users);
 
         // 验证添加是否成功
         var addedUserCount = dbContext.Users.Find(w => w.Email == "zhangfei@qq.com").CountDocuments();
@@ -264,7 +264,7 @@ public class TestDbSetAdd : TestBase
     {
         var userGroup = DataHelper.GetNewUserGroup();
 
-        dbContext.Users.DynamicCollectionAddMany(userGroup, users);
+        dbContext.Users.DynamicCollectionInsertMany(userGroup, users);
 
         // 验证添加是否成功
         var addedUserCount = dbContext.Users.DynamicCollectionFind(userGroup, w => w.Email == "zhangfei@qq.com").CountDocuments();
@@ -283,13 +283,13 @@ public class TestDbSetAdd : TestBase
     /// 测试事务批量添加、查询、删除（同步方法）
     /// </summary>
     [TestMethod]
-    public void AddManySession()
+    public void InsertManySession()
     {
         using (var session = dbContext.Client.StartSession())
         {
             session.StartTransaction();
 
-            dbContext.Users.AddMany(session, users);
+            dbContext.Users.InsertMany(session, users);
 
             // 验证添加是否成功
             var addedUserCount = dbContext.Users.Find(session, w => w.Email == "zhangfei@qq.com").CountDocuments();
@@ -311,7 +311,7 @@ public class TestDbSetAdd : TestBase
     }
 
     [TestMethod]
-    public void AddManyDynamicSession()
+    public void InsertManyDynamicSession()
     {
         var userGroup = DataHelper.GetNewUserGroup();
 
@@ -321,7 +321,7 @@ public class TestDbSetAdd : TestBase
 
             dbContext.Users.DynamicCollectionDeleteMany(session, userGroup, d => d.Password == "123456");
 
-            dbContext.Users.DynamicCollectionAddMany(session, userGroup, users);
+            dbContext.Users.DynamicCollectionInsertMany(session, userGroup, users);
 
             // 验证添加是否成功
             var addedUserCount = dbContext.Users.DynamicCollectionFind(session, userGroup, w => w.Email == "zhangfei@qq.com").CountDocuments();
@@ -346,7 +346,7 @@ public class TestDbSetAdd : TestBase
     [TestMethod]
     public async Task TestAddManyAsync()
     {
-        await dbContext.Users.AddManyAsync(users);
+        await dbContext.Users.InsertManyAsync(users);
 
         // 验证添加是否成功
         List<User> addedUser = new();
@@ -378,7 +378,7 @@ public class TestDbSetAdd : TestBase
     {
         var userGroup = DataHelper.GetNewUserGroup();
 
-        await dbContext.Users.DynamicCollectionAddManyAsync(userGroup, users);
+        await dbContext.Users.DynamicCollectionInsertManyAsync(userGroup, users);
 
         // 验证添加是否成功
         List<User> addedUser = new();
@@ -412,7 +412,7 @@ public class TestDbSetAdd : TestBase
         {
             session.StartTransaction();
 
-            await dbContext.Users.AddManyAsync(session, users);
+            await dbContext.Users.InsertManyAsync(session, users);
 
             // 验证添加是否成功
             List<User> addedUser = new();
@@ -451,7 +451,7 @@ public class TestDbSetAdd : TestBase
         {
             session.StartTransaction();
 
-            await dbContext.Users.DynamicCollectionAddManyAsync(session, userGroup, users);
+            await dbContext.Users.DynamicCollectionInsertManyAsync(session, userGroup, users);
 
             // 验证添加是否成功
             List<User> addedUser = new();

@@ -11,14 +11,14 @@ public interface IDbSetProvider<T>
 {
     #region 插入(同步)
 
-    void Add(T document, InsertOneOptions options = null, CancellationToken cancellationToken = default);
-    void Add(IClientSessionHandle session, T document, InsertOneOptions options = null, CancellationToken cancellationToken = default);
-    void AddMany(IEnumerable<T> documents, InsertManyOptions options = null, CancellationToken cancellationToken = default);
-    void AddMany(IClientSessionHandle session, IEnumerable<T> documents, InsertManyOptions options = null, CancellationToken cancellationToken = default);
-    void DynamicCollectionAdd<TForeign>(TForeign foreignDocument, T document, MongoCollectionSettings settings = null, InsertOneOptions options = null, CancellationToken cancellationToken = default) where TForeign : BaseMongoEntity;
-    void DynamicCollectionAdd<TForeign>(IClientSessionHandle session, TForeign foreignDocument, T document, MongoCollectionSettings settings = null, InsertOneOptions options = null, CancellationToken cancellationToken = default) where TForeign : BaseMongoEntity;
-    void DynamicCollectionAddMany<TForeign>(TForeign foreignDocument, IEnumerable<T> documents, MongoCollectionSettings settings = null, InsertManyOptions options = null, CancellationToken cancellationToken = default) where TForeign : BaseMongoEntity;
-    void DynamicCollectionAddMany<TForeign>(IClientSessionHandle session, TForeign foreignDocument, IEnumerable<T> documents, MongoCollectionSettings settings = null, InsertManyOptions options = null, CancellationToken cancellationToken = default) where TForeign : BaseMongoEntity;
+    void Insert(T document, InsertOneOptions options = null, CancellationToken cancellationToken = default);
+    void Insert(IClientSessionHandle session, T document, InsertOneOptions options = null, CancellationToken cancellationToken = default);
+    void InsertMany(IEnumerable<T> documents, InsertManyOptions options = null, CancellationToken cancellationToken = default);
+    void InsertMany(IClientSessionHandle session, IEnumerable<T> documents, InsertManyOptions options = null, CancellationToken cancellationToken = default);
+    void DynamicCollectionInsert<TForeign>(TForeign foreignDocument, T document, MongoCollectionSettings settings = null, InsertOneOptions options = null, CancellationToken cancellationToken = default) where TForeign : BaseMongoEntity;
+    void DynamicCollectionInsert<TForeign>(IClientSessionHandle session, TForeign foreignDocument, T document, MongoCollectionSettings settings = null, InsertOneOptions options = null, CancellationToken cancellationToken = default) where TForeign : BaseMongoEntity;
+    void DynamicCollectionInsertMany<TForeign>(TForeign foreignDocument, IEnumerable<T> documents, MongoCollectionSettings settings = null, InsertManyOptions options = null, CancellationToken cancellationToken = default) where TForeign : BaseMongoEntity;
+    void DynamicCollectionInsertMany<TForeign>(IClientSessionHandle session, TForeign foreignDocument, IEnumerable<T> documents, MongoCollectionSettings settings = null, InsertManyOptions options = null, CancellationToken cancellationToken = default) where TForeign : BaseMongoEntity;
 
     #endregion
 
@@ -26,14 +26,14 @@ public interface IDbSetProvider<T>
 
     #region 插入(异步)
 
-    Task AddAsync(T document, InsertOneOptions options = null, CancellationToken cancellationToken = default);
-    Task AddAsync(IClientSessionHandle session, T document, InsertOneOptions options = null, CancellationToken cancellationToken = default);
-    Task AddManyAsync(IEnumerable<T> documents, InsertManyOptions options = null, CancellationToken cancellationToken = default);
-    Task AddManyAsync(IClientSessionHandle session, IEnumerable<T> documents, InsertManyOptions options = null, CancellationToken cancellationToken = default);
-    Task DynamicCollectionAddAsync<TForeign>(TForeign foreignDocument, T document, MongoCollectionSettings settings = null, InsertOneOptions options = null, CancellationToken cancellationToken = default) where TForeign : BaseMongoEntity;
-    Task DynamicCollectionAddAsync<TForeign>(IClientSessionHandle session, TForeign foreignDocument, T document, MongoCollectionSettings settings = null, InsertOneOptions options = null, CancellationToken cancellationToken = default) where TForeign : BaseMongoEntity;
-    Task DynamicCollectionAddManyAsync<TForeign>(TForeign foreignDocument, IEnumerable<T> documents, MongoCollectionSettings settings = null, InsertManyOptions options = null, CancellationToken cancellationToken = default) where TForeign : BaseMongoEntity;
-    Task DynamicCollectionAddManyAsync<TForeign>(IClientSessionHandle session, TForeign foreignDocument, IEnumerable<T> documents, MongoCollectionSettings settings = null, InsertManyOptions options = null, CancellationToken cancellationToken = default) where TForeign : BaseMongoEntity;
+    Task InsertAsync(T document, InsertOneOptions options = null, CancellationToken cancellationToken = default);
+    Task InsertAsync(IClientSessionHandle session, T document, InsertOneOptions options = null, CancellationToken cancellationToken = default);
+    Task InsertManyAsync(IEnumerable<T> documents, InsertManyOptions options = null, CancellationToken cancellationToken = default);
+    Task InsertManyAsync(IClientSessionHandle session, IEnumerable<T> documents, InsertManyOptions options = null, CancellationToken cancellationToken = default);
+    Task DynamicCollectionInsertAsync<TForeign>(TForeign foreignDocument, T document, MongoCollectionSettings settings = null, InsertOneOptions options = null, CancellationToken cancellationToken = default) where TForeign : BaseMongoEntity;
+    Task DynamicCollectionInsertAsync<TForeign>(IClientSessionHandle session, TForeign foreignDocument, T document, MongoCollectionSettings settings = null, InsertOneOptions options = null, CancellationToken cancellationToken = default) where TForeign : BaseMongoEntity;
+    Task DynamicCollectionInsertManyAsync<TForeign>(TForeign foreignDocument, IEnumerable<T> documents, MongoCollectionSettings settings = null, InsertManyOptions options = null, CancellationToken cancellationToken = default) where TForeign : BaseMongoEntity;
+    Task DynamicCollectionInsertManyAsync<TForeign>(IClientSessionHandle session, TForeign foreignDocument, IEnumerable<T> documents, MongoCollectionSettings settings = null, InsertManyOptions options = null, CancellationToken cancellationToken = default) where TForeign : BaseMongoEntity;
 
     #endregion
 

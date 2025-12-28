@@ -30,8 +30,8 @@ public class TestDbSetFind : TestBase
         var users1 = DataHelper.GetNewUsers(pwd1);
         var users2 = DataHelper.GetNewUsers(pwd2);
 
-        dbContext.Users.AddMany(users1);
-        dbContext.Users.AddMany(users2);
+        dbContext.Users.InsertMany(users1);
+        dbContext.Users.InsertMany(users2);
 
         //验证查询是否成功
         var findUsers = dbContext.Users.Find(u => u.Password == pwd1).ToList();
@@ -53,8 +53,8 @@ public class TestDbSetFind : TestBase
         var users1 = DataHelper.GetNewUsers(pwd1);
         var users2 = DataHelper.GetNewUsers(pwd2);
 
-        await dbContext.Users.AddManyAsync(users1);
-        await dbContext.Users.AddManyAsync(users2);
+        await dbContext.Users.InsertManyAsync(users1);
+        await dbContext.Users.InsertManyAsync(users2);
 
         List<User> whereUsers1 = new();
         //验证查询是否成功
@@ -89,8 +89,8 @@ public class TestDbSetFind : TestBase
         {
             session.StartTransaction();
 
-            dbContext.Users.AddMany(session, users1);
-            dbContext.Users.AddMany(session, users2);
+            dbContext.Users.InsertMany(session, users1);
+            dbContext.Users.InsertMany(session, users2);
 
             //验证查询是否成功
             var findUsers = dbContext.Users.Find(session, u => u.Password == pwd1).ToList();
@@ -119,8 +119,8 @@ public class TestDbSetFind : TestBase
         {
             session.StartTransaction();
 
-            await dbContext.Users.AddManyAsync(session, users1);
-            await dbContext.Users.AddManyAsync(session, users2);
+            await dbContext.Users.InsertManyAsync(session, users1);
+            await dbContext.Users.InsertManyAsync(session, users2);
 
             List<User> whereUsers1 = new();
             //验证查询是否成功
@@ -155,8 +155,8 @@ public class TestDbSetFind : TestBase
         var users1 = DataHelper.GetNewUsers(pwd1);
         var users2 = DataHelper.GetNewUsers(pwd2);
 
-        dbContext.Users.DynamicCollectionAddMany(userGroup, users1);
-        dbContext.Users.DynamicCollectionAddMany(userGroup, users2);
+        dbContext.Users.DynamicCollectionInsertMany(userGroup, users1);
+        dbContext.Users.DynamicCollectionInsertMany(userGroup, users2);
 
         //验证查询是否成功
         var findUsers = dbContext.Users.DynamicCollectionFind(userGroup, u => u.Password == pwd1).ToList();
@@ -180,8 +180,8 @@ public class TestDbSetFind : TestBase
         var users1 = DataHelper.GetNewUsers(pwd1);
         var users2 = DataHelper.GetNewUsers(pwd2);
 
-        await dbContext.Users.DynamicCollectionAddManyAsync(userGroup, users1);
-        await dbContext.Users.DynamicCollectionAddManyAsync(userGroup, users2);
+        await dbContext.Users.DynamicCollectionInsertManyAsync(userGroup, users1);
+        await dbContext.Users.DynamicCollectionInsertManyAsync(userGroup, users2);
 
         List<User> whereUsers1 = new();
         //验证查询是否成功
@@ -217,8 +217,8 @@ public class TestDbSetFind : TestBase
         {
             session.StartTransaction();
 
-            dbContext.Users.DynamicCollectionAddMany(session, userGroup, users1);
-            dbContext.Users.DynamicCollectionAddMany(session, userGroup, users2);
+            dbContext.Users.DynamicCollectionInsertMany(session, userGroup, users1);
+            dbContext.Users.DynamicCollectionInsertMany(session, userGroup, users2);
 
             //验证查询是否成功
             var findUsers = dbContext.Users.DynamicCollectionFind(session, userGroup, u => u.Password == pwd1).ToList();
@@ -249,8 +249,8 @@ public class TestDbSetFind : TestBase
         {
             session.StartTransaction();
 
-            await dbContext.Users.DynamicCollectionAddManyAsync(session, userGroup, users1);
-            await dbContext.Users.DynamicCollectionAddManyAsync(session, userGroup, users2);
+            await dbContext.Users.DynamicCollectionInsertManyAsync(session, userGroup, users1);
+            await dbContext.Users.DynamicCollectionInsertManyAsync(session, userGroup, users2);
 
             List<User> whereUsers1 = new();
             //验证查询是否成功
