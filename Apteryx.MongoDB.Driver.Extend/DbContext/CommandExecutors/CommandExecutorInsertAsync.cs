@@ -4,7 +4,7 @@ using System.Threading.Tasks;
 using System.Collections.Generic;
 
 namespace Apteryx.MongoDB.Driver.Extend;
-public partial class ImmediateExecutor<T>
+public partial class CommandExecutor<T>
 {
     #region 添加（异步）
 

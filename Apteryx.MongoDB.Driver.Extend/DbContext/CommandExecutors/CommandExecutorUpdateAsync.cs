@@ -6,7 +6,7 @@ using System.Linq.Expressions;
 
 namespace Apteryx.MongoDB.Driver.Extend;
 
-public partial class ImmediateExecutor<T>
+public partial class CommandExecutor<T>
 {
 
     #region 更新(异步)

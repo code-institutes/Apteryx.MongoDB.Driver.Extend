@@ -33,13 +33,13 @@ public partial class DbSet<T> : IDbSet<T> where T : BaseMongoEntity
     /// <summary>
     /// 获取用于在当前线程上立即调度任务执行的执行器。
     /// </summary>
-    public ImmediateExecutor<T> Immediate { get; }
+    public CommandExecutor<T> Commands { get; }
     public DbSet(IMongoDatabase database, string collectionName)
     {
         _database = database;
         _collectionName = collectionName;
         _collection = database.GetCollection<T>(collectionName);
-        Immediate = new ImmediateExecutor<T>(database, _collection);
+        Commands = new CommandExecutor<T>(database, _collection);
     }
 
 

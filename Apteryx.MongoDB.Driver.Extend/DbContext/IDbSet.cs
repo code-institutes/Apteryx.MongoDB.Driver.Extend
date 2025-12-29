@@ -25,7 +25,7 @@ public interface IDbSet<T> : IDbSet, IQueryable<T> where T : BaseMongoEntity
     /// <summary>
     /// 获取用于在当前线程上立即调度任务执行的执行器。
     /// </summary>
-    ImmediateExecutor<T> Immediate { get; }
+    CommandExecutor<T> Commands { get; }
     /// <summary>
     /// 获取底层MongoDB集合，以便直接访问原生驱动操作。
     /// </summary>

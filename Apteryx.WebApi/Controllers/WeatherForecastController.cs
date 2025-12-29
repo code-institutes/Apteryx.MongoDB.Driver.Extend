@@ -25,10 +25,10 @@ public class WeatherForecastController : ControllerBase
     [HttpGet(Name = "GetWeatherForecast")]
     public async Task<IEnumerable<WeatherForecast>> Get()
     {
-        var user = _db.Users.Immediate.FindOne(f => true);
+        var user = _db.Users.Commands.FindOne(f => true);
         if (user == null)
         {
-            _db.Users.Immediate.Insert(new User()
+            _db.Users.Commands.Insert(new User()
             {
                 Name = "уехЩ",
                 Email = "wyspaces@outlook.com",
@@ -64,14 +64,14 @@ public class WeatherForecastController : ControllerBase
 
         var list = _db.Users.Where(u => u.Name != null && u.Name.Contains("уе")).ToList();
 
-        await foreach (var item in _db.Users.Immediate.FindAllAsync())
+        await foreach (var item in _db.Users.Commands.FindAllAsync())
         {
-            var r = await _db.Users.Immediate.FindOneAsync(item.Id);
+            var r = await _db.Users.Commands.FindOneAsync(item.Id);
         }
 
         var dataBase = _db.Database;
 
-        var count1 = await _db.Users.Immediate.CountDocumentsAsync(_ => true);
+        var count1 = await _db.Users.Commands.CountDocumentsAsync(_ => true);
         var count2 = await _db.Users.Native.CountDocumentsAsync(_ => true);
 
         return Enumerable.Range(1, 5).Select(index => new WeatherForecast

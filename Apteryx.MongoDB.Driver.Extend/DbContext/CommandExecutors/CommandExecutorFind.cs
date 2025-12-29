@@ -5,7 +5,7 @@ using System.Collections.Generic;
 
 namespace Apteryx.MongoDB.Driver.Extend;
 
-public partial class ImmediateExecutor<T>
+public partial class CommandExecutor<T>
 {
     #region 查询(同步)
     /// <summary>

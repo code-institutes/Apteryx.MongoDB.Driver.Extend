@@ -1,13 +1,14 @@
 ﻿using System;
 using MongoDB.Driver;
 using System.Threading;
+using System.Threading.Tasks;
 using System.Linq.Expressions;
 
 namespace Apteryx.MongoDB.Driver.Extend;
 
-public partial class ImmediateExecutor<T>
+public partial class CommandExecutor<T>
 {
-    #region 替换(同步)
+    #region 替换(异步)
 
     /// <summary>
     /// 替换（单个）(自动更新UpdateTime字段)
@@ -17,34 +18,32 @@ public partial class ImmediateExecutor<T>
     /// <param name="options">替换操作设置</param>
     /// <param name="cancellationToken">取消令牌</param>
     /// <returns></returns>
-    public ReplaceOneResult ReplaceOne(
+    public Task<ReplaceOneResult> ReplaceOneAsync(
         string id,
         T document,
         ReplaceOptions options = null,
         CancellationToken cancellationToken = default)
     {
-        document.UpdateTime = DateTime.Now;
-        return _collection.ReplaceOne(r => r.Id == id, document, options, cancellationToken);
+        return _collection.ReplaceOneAsync(d => d.Id == id, document, options, cancellationToken);
     }
 
     /// <summary>
     /// 替换（单个）(自动更新UpdateTime字段)
     /// </summary>        
     /// <param name="session">会话句柄(作用于事务)</param>
-    /// <param name="id">文档默认ID</param>
+    /// <param name="filter">文档默认ID</param>
     /// <param name="document">文档对象</param>
     /// <param name="options">替换操作设置</param>
     /// <param name="cancellationToken">取消令牌</param>
     /// <returns></returns>
-    public ReplaceOneResult ReplaceOne(
+    public Task<ReplaceOneResult> ReplaceOneAsync(
         IClientSessionHandle session,
         string id,
         T document,
         ReplaceOptions options = null,
         CancellationToken cancellationToken = default)
     {
-        document.UpdateTime = DateTime.Now;
-        return _collection.ReplaceOne(session, r => r.Id == id, document, options, cancellationToken);
+        return _collection.ReplaceOneAsync(session, d => d.Id == id, document, options, cancellationToken);
     }
 
     /// <summary>
@@ -55,14 +54,13 @@ public partial class ImmediateExecutor<T>
     /// <param name="options">替换操作设置</param>
     /// <param name="cancellationToken">取消令牌</param>
     /// <returns></returns>
-    public ReplaceOneResult ReplaceOne(
+    public Task<ReplaceOneResult> ReplaceOneAsync(
         FilterDefinition<T> filter,
         T document,
         ReplaceOptions options = null,
         CancellationToken cancellationToken = default)
     {
-        document.UpdateTime = DateTime.Now;
-        return _collection.ReplaceOne(filter, document, options, cancellationToken);
+        return _collection.ReplaceOneAsync(filter, document, options, cancellationToken);
     }
 
     /// <summary>
@@ -74,15 +72,14 @@ public partial class ImmediateExecutor<T>
     /// <param name="options">替换操作设置</param>
     /// <param name="cancellationToken">取消令牌</param>
     /// <returns></returns>
-    public ReplaceOneResult ReplaceOne(
+    public Task<ReplaceOneResult> ReplaceOneAsync(
         IClientSessionHandle session,
         FilterDefinition<T> filter,
         T document,
         ReplaceOptions options = null,
         CancellationToken cancellationToken = default)
     {
-        document.UpdateTime = DateTime.Now;
-        return _collection.ReplaceOne(session, filter, document, options, cancellationToken);
+        return _collection.ReplaceOneAsync(session, filter, document, options, cancellationToken);
     }
 
     /// <summary>
@@ -93,14 +90,13 @@ public partial class ImmediateExecutor<T>
     /// <param name="options">替换操作设置</param>
     /// <param name="cancellationToken">取消令牌</param>
     /// <returns></returns>
-    public ReplaceOneResult ReplaceOne(
+    public Task<ReplaceOneResult> ReplaceOneAsync(
         Expression<Func<T, bool>> expression,
         T document,
         ReplaceOptions options = null,
         CancellationToken cancellationToken = default)
     {
-        document.UpdateTime = DateTime.Now;
-        return _collection.ReplaceOne(expression, document, options, cancellationToken);
+        return _collection.ReplaceOneAsync(expression, document, options, cancellationToken);
     }
 
     /// <summary>
@@ -112,15 +108,14 @@ public partial class ImmediateExecutor<T>
     /// <param name="options">替换操作设置</param>
     /// <param name="cancellationToken">取消令牌</param>
     /// <returns></returns>
-    public ReplaceOneResult ReplaceOne(
+    public Task<ReplaceOneResult> ReplaceOneAsync(
         IClientSessionHandle session,
         Expression<Func<T, bool>> expression,
         T document,
         ReplaceOptions options = null,
         CancellationToken cancellationToken = default)
     {
-        document.UpdateTime = DateTime.Now;
-        return _collection.ReplaceOne(session, expression, document, options, cancellationToken);
+        return _collection.ReplaceOneAsync(session, expression, document, options, cancellationToken);
     }
 
     /// <summary>
@@ -134,7 +129,7 @@ public partial class ImmediateExecutor<T>
     /// <param name="options">替换操作设置</param>
     /// <param name="cancellationToken">取消令牌</param>
     /// <returns></returns>
-    public ReplaceOneResult DynamicCollectionReplaceOne<TForeign>(
+    public Task<ReplaceOneResult> DynamicCollectionReplaceOneAsync<TForeign>(
         TForeign foreignDocument,
         string id,
         T document,
@@ -143,8 +138,7 @@ public partial class ImmediateExecutor<T>
         CancellationToken cancellationToken = default)
         where TForeign : BaseMongoEntity
     {
-        document.UpdateTime = DateTime.Now;
-        return _database.GetCollection<T>($"{foreignDocument.Id}_{_collectionName}", settings).ReplaceOne(r => r.Id == id, document, options, cancellationToken);
+        return _database.GetCollection<T>($"{foreignDocument.Id}_{_collectionName}", settings).ReplaceOneAsync(r => r.Id == id, document, options, cancellationToken);
     }
 
     /// <summary>
@@ -155,10 +149,11 @@ public partial class ImmediateExecutor<T>
     /// <param name="foreignDocument">上级文档对象</param>
     /// <param name="id">文档默认ID</param>
     /// <param name="document">文档对象</param>
+    /// <param name="settings">集合设置</param>
     /// <param name="options">替换操作设置</param>
     /// <param name="cancellationToken">取消令牌</param>
     /// <returns></returns>
-    public ReplaceOneResult DynamicCollectionReplaceOne<TForeign>(
+    public Task<ReplaceOneResult> DynamicCollectionReplaceOneAsync<TForeign>(
         IClientSessionHandle session,
         TForeign foreignDocument,
         string id,
@@ -168,8 +163,7 @@ public partial class ImmediateExecutor<T>
         CancellationToken cancellationToken = default)
         where TForeign : BaseMongoEntity
     {
-        document.UpdateTime = DateTime.Now;
-        return _database.GetCollection<T>($"{foreignDocument.Id}_{_collectionName}", settings).ReplaceOne(session, r => r.Id == id, document, options, cancellationToken);
+        return _database.GetCollection<T>($"{foreignDocument.Id}_{_collectionName}", settings).ReplaceOneAsync(session, r => r.Id == id, document, options, cancellationToken);
     }
 
     /// <summary>
@@ -183,7 +177,7 @@ public partial class ImmediateExecutor<T>
     /// <param name="options">替换操作设置</param>
     /// <param name="cancellationToken">取消令牌</param>
     /// <returns></returns>
-    public ReplaceOneResult DynamicCollectionReplaceOne<TForeign>(
+    public Task<ReplaceOneResult> DynamicCollectionReplaceOneAsync<TForeign>(
         TForeign foreignDocument,
         FilterDefinition<T> filter,
         T document,
@@ -192,8 +186,7 @@ public partial class ImmediateExecutor<T>
         CancellationToken cancellationToken = default)
         where TForeign : BaseMongoEntity
     {
-        document.UpdateTime = DateTime.Now;
-        return _database.GetCollection<T>($"{foreignDocument.Id}_{_collectionName}", settings).ReplaceOne(filter, document, options, cancellationToken);
+        return _database.GetCollection<T>($"{foreignDocument.Id}_{_collectionName}", settings).ReplaceOneAsync(filter, document, options, cancellationToken);
     }
 
     /// <summary>
@@ -204,10 +197,11 @@ public partial class ImmediateExecutor<T>
     /// <param name="foreignDocument">上级文档对象</param>
     /// <param name="filter">过滤器</param>
     /// <param name="document">文档对象</param>
+    /// <param name="settings">集合设置</param>
     /// <param name="options">替换操作设置</param>
     /// <param name="cancellationToken">取消令牌</param>
     /// <returns></returns>
-    public ReplaceOneResult DynamicCollectionReplaceOne<TForeign>(
+    public Task<ReplaceOneResult> DynamicCollectionReplaceOneAsync<TForeign>(
         IClientSessionHandle session,
         TForeign foreignDocument,
         FilterDefinition<T> filter,
@@ -217,8 +211,7 @@ public partial class ImmediateExecutor<T>
         CancellationToken cancellationToken = default)
         where TForeign : BaseMongoEntity
     {
-        document.UpdateTime = DateTime.Now;
-        return _database.GetCollection<T>($"{foreignDocument.Id}_{_collectionName}", settings).ReplaceOne(session, filter, document, options, cancellationToken);
+        return _database.GetCollection<T>($"{foreignDocument.Id}_{_collectionName}", settings).ReplaceOneAsync(session, filter, document, options, cancellationToken);
     }
 
     /// <summary>
@@ -228,10 +221,11 @@ public partial class ImmediateExecutor<T>
     /// <param name="foreignDocument">上级文档对象</param>
     /// <param name="expression">Lambda过滤器</param>
     /// <param name="document">文档对象</param>
+    /// <param name="settings">集合设置</param>
     /// <param name="options">替换操作设置</param>
     /// <param name="cancellationToken">取消令牌</param>
     /// <returns></returns>
-    public ReplaceOneResult DynamicCollectionReplaceOne<TForeign>(
+    public Task<ReplaceOneResult> DynamicCollectionReplaceOneAsync<TForeign>(
         TForeign foreignDocument,
         Expression<Func<T, bool>> expression,
         T document,
@@ -240,8 +234,8 @@ public partial class ImmediateExecutor<T>
         CancellationToken cancellationToken = default)
         where TForeign : BaseMongoEntity
     {
-        document.UpdateTime = DateTime.Now;
-        return _database.GetCollection<T>($"{foreignDocument.Id}_{_collectionName}", settings).ReplaceOne(expression, document, options, cancellationToken);
+        return _database.GetCollection<T>($"{foreignDocument.Id}_{_collectionName}", settings).ReplaceOneAsync(expression, document, options, cancellationToken);
+
     }
 
     /// <summary>
@@ -252,10 +246,11 @@ public partial class ImmediateExecutor<T>
     /// <param name="foreignDocument">上级文档对象</param>
     /// <param name="expression">Lambda过滤器</param>
     /// <param name="document">文档对象</param>
+    /// <param name="settings">集合设置</param>
     /// <param name="options">替换操作设置</param>
     /// <param name="cancellationToken">取消令牌</param>
     /// <returns></returns>
-    public ReplaceOneResult DynamicCollectionReplaceOne<TForeign>(
+    public Task<ReplaceOneResult> DynamicCollectionReplaceOneAsync<TForeign>(
         IClientSessionHandle session,
         TForeign foreignDocument,
         Expression<Func<T, bool>> expression,
@@ -265,8 +260,7 @@ public partial class ImmediateExecutor<T>
         CancellationToken cancellationToken = default)
         where TForeign : BaseMongoEntity
     {
-        document.UpdateTime = DateTime.Now;
-        return _database.GetCollection<T>($"{foreignDocument.Id}_{_collectionName}", settings).ReplaceOne(session, expression, document, options, cancellationToken);
+        return _database.GetCollection<T>($"{foreignDocument.Id}_{_collectionName}", settings).ReplaceOneAsync(session, expression, document, options, cancellationToken);
     }
 
     /// <summary>
@@ -277,14 +271,49 @@ public partial class ImmediateExecutor<T>
     /// <param name="options">查询替换操作设置</param>
     /// <param name="cancellationToken">取消令牌</param>
     /// <returns></returns>
-    public T FindOneAndReplaceOne(
+    public Task<T> FindOneAndReplaceOneAsync(
         string id,
         T document,
         FindOneAndReplaceOptions<T> options = null,
         CancellationToken cancellationToken = default)
     {
-        document.UpdateTime = DateTime.Now;
-        return _collection.FindOneAndReplace<T>(r => r.Id == id, document, options, cancellationToken);
+        return _collection.FindOneAndReplaceAsync<T>(r => r.Id == id, document, options, cancellationToken);
+    }
+
+    /// <summary>
+    /// 查询替换（单个）(自动更新UpdateTime字段)
+    /// </summary>        
+    /// <param name="session">会话句柄(作用于事务)</param>
+    /// <param name="id">文档默认ID</param>
+    /// <param name="document">文档对象</param>
+    /// <param name="options">查询替换操作设置</param>
+    /// <param name="cancellationToken">取消令牌</param>
+    /// <returns></returns>
+    public Task<T> FindOneAndReplaceOneAsync(
+        IClientSessionHandle session,
+        string id,
+        T document,
+        FindOneAndReplaceOptions<T> options = null,
+        CancellationToken cancellationToken = default)
+    {
+        return _collection.FindOneAndReplaceAsync(session, r => r.Id == id, document, options, cancellationToken);
+    }
+
+    /// <summary>
+    /// 查询替换（单个）(自动更新UpdateTime字段)
+    /// </summary>        
+    /// <param name="filter">过滤器</param>
+    /// <param name="document">文档对象</param>
+    /// <param name="options">查询替换操作设置</param>
+    /// <param name="cancellationToken">取消令牌</param>
+    /// <returns></returns>
+    public Task<T> FindOneAndReplaceOneAsync(
+        FilterDefinition<T> filter,
+        T document,
+        FindOneAndReplaceOptions<T> options = null,
+        CancellationToken cancellationToken = default)
+    {
+        return _collection.FindOneAndReplaceAsync(filter, document, options, cancellationToken);
     }
 
     /// <summary>
@@ -296,53 +325,14 @@ public partial class ImmediateExecutor<T>
     /// <param name="options">查询替换操作设置</param>
     /// <param name="cancellationToken">取消令牌</param>
     /// <returns></returns>
-    public T FindOneAndReplaceOne(
-        IClientSessionHandle session,
-        string id,
-        T document,
-        FindOneAndReplaceOptions<T> options = null,
-        CancellationToken cancellationToken = default)
-    {
-        document.UpdateTime = DateTime.Now;
-        return _collection.FindOneAndReplace<T>(session, r => r.Id == id, document, options, cancellationToken);
-    }
-
-    /// <summary>
-    /// 查询替换（单个）(自动更新UpdateTime字段)
-    /// </summary>        
-    /// <param name="filter">过滤器</param>
-    /// <param name="document">文档对象</param>
-    /// <param name="options">查询替换操作设置</param>
-    /// <param name="cancellationToken">取消令牌</param>
-    /// <returns></returns>
-    public T FindOneAndReplaceOne(
-        FilterDefinition<T> filter,
-        T document,
-        FindOneAndReplaceOptions<T> options = null,
-        CancellationToken cancellationToken = default)
-    {
-        document.UpdateTime = DateTime.Now;
-        return _collection.FindOneAndReplace(filter, document, options, cancellationToken);
-    }
-
-    /// <summary>
-    /// 查询替换（单个）(自动更新UpdateTime字段)
-    /// </summary>        
-    /// <param name="session">会话句柄(作用于事务)</param>
-    /// <param name="filter">过滤器</param>
-    /// <param name="document">文档对象</param>
-    /// <param name="options">查询替换操作设置</param>
-    /// <param name="cancellationToken">取消令牌</param>
-    /// <returns></returns>
-    public T FindOneAndReplaceOne(
+    public Task<T> FindOneAndReplaceOneAsync(
         IClientSessionHandle session,
         FilterDefinition<T> filter,
         T document,
         FindOneAndReplaceOptions<T> options = null,
         CancellationToken cancellationToken = default)
     {
-        document.UpdateTime = DateTime.Now;
-        return _collection.FindOneAndReplace(session, filter, document, options, cancellationToken);
+        return _collection.FindOneAndReplaceAsync(session, filter, document, options, cancellationToken);
     }
 
     /// <summary>
@@ -353,34 +343,31 @@ public partial class ImmediateExecutor<T>
     /// <param name="options">查询替换操作设置</param>
     /// <param name="cancellationToken">取消令牌</param>
     /// <returns></returns>
-    public T FindOneAndReplaceOne(
+    public Task<T> FindOneAndReplaceOneAsync(
         Expression<Func<T, bool>> expression,
         T document,
         FindOneAndReplaceOptions<T> options = null,
         CancellationToken cancellationToken = default)
     {
-        document.UpdateTime = DateTime.Now;
-        return _collection.FindOneAndReplace(expression, document, options, cancellationToken);
+        return _collection.FindOneAndReplaceAsync(expression, document, options, cancellationToken);
     }
 
     /// <summary>
     /// 查询替换（单个）(自动更新UpdateTime字段)
     /// </summary>        
-    /// <param name="session">会话句柄(作用于事务)</param>
     /// <param name="expression">Lambda过滤器</param>
     /// <param name="document">文档对象</param>
     /// <param name="options">查询替换操作设置</param>
     /// <param name="cancellationToken">取消令牌</param>
     /// <returns></returns>
-    public T FindOneAndReplaceOne(
+    public Task<T> FindOneAndReplaceOneAsync(
         IClientSessionHandle session,
         Expression<Func<T, bool>> expression,
         T document,
         FindOneAndReplaceOptions<T> options = null,
         CancellationToken cancellationToken = default)
     {
-        document.UpdateTime = DateTime.Now;
-        return _collection.FindOneAndReplace(session, expression, document, options, cancellationToken);
+        return _collection.FindOneAndReplaceAsync(expression, session, document, options, cancellationToken);
     }
 
     /// <summary>
@@ -394,7 +381,7 @@ public partial class ImmediateExecutor<T>
     /// <param name="options">查询替换操作设置</param>
     /// <param name="cancellationToken">取消令牌</param>
     /// <returns></returns>
-    public T DynamicCollectionFindOneAndReplaceOne<TForeign>(
+    public Task<T> DynamicCollectionFindOneAndReplaceOneAsync<TForeign>(
         TForeign foreignDocument,
         string id,
         T document,
@@ -403,8 +390,7 @@ public partial class ImmediateExecutor<T>
         CancellationToken cancellationToken = default)
         where TForeign : BaseMongoEntity
     {
-        document.UpdateTime = DateTime.Now;
-        return _database.GetCollection<T>($"{foreignDocument.Id}_{_collectionName}", settings).FindOneAndReplace<T>(r => r.Id == id, document, options, cancellationToken);
+        return _database.GetCollection<T>($"{foreignDocument.Id}_{_collectionName}", settings).FindOneAndReplaceAsync<T>(r => r.Id == id, document, options, cancellationToken);
     }
 
     /// <summary>
@@ -419,7 +405,7 @@ public partial class ImmediateExecutor<T>
     /// <param name="options">查询替换操作设置</param>
     /// <param name="cancellationToken">取消令牌</param>
     /// <returns></returns>
-    public T DynamicCollectionFindOneAndReplaceOne<TForeign>(
+    public Task<T> DynamicCollectionFindOneAndReplaceOneAsync<TForeign>(
         IClientSessionHandle session,
         TForeign foreignDocument,
         string id,
@@ -429,8 +415,7 @@ public partial class ImmediateExecutor<T>
         CancellationToken cancellationToken = default)
         where TForeign : BaseMongoEntity
     {
-        document.UpdateTime = DateTime.Now;
-        return _database.GetCollection<T>($"{foreignDocument.Id}_{_collectionName}", settings).FindOneAndReplace<T>(session, r => r.Id == id, document, options, cancellationToken);
+        return _database.GetCollection<T>($"{foreignDocument.Id}_{_collectionName}", settings).FindOneAndReplaceAsync<T>(r => r.Id == id, session, document, options, cancellationToken);
     }
 
     /// <summary>
@@ -444,7 +429,7 @@ public partial class ImmediateExecutor<T>
     /// <param name="options">查询替换操作设置</param>
     /// <param name="cancellationToken">取消令牌</param>
     /// <returns></returns>
-    public T DynamicCollectionFindOneAndReplaceOne<TForeign>(
+    public Task<T> DynamicCollectionFindOneAndReplaceOneAsync<TForeign>(
         TForeign foreignDocument,
         FilterDefinition<T> filter,
         T document,
@@ -453,8 +438,7 @@ public partial class ImmediateExecutor<T>
         CancellationToken cancellationToken = default)
         where TForeign : BaseMongoEntity
     {
-        document.UpdateTime = DateTime.Now;
-        return _database.GetCollection<T>($"{foreignDocument.Id}_{_collectionName}", settings).FindOneAndReplace(filter, document, options, cancellationToken);
+        return _database.GetCollection<T>($"{foreignDocument.Id}_{_collectionName}", settings).FindOneAndReplaceAsync<T>(filter, document, options, cancellationToken);
     }
 
     /// <summary>
@@ -469,7 +453,7 @@ public partial class ImmediateExecutor<T>
     /// <param name="options">查询替换操作设置</param>
     /// <param name="cancellationToken">取消令牌</param>
     /// <returns></returns>
-    public T DynamicCollectionFindOneAndReplaceOne<TForeign>(
+    public Task<T> DynamicCollectionFindOneAndReplaceOneAsync<TForeign>(
         IClientSessionHandle session,
         TForeign foreignDocument,
         FilterDefinition<T> filter,
@@ -479,8 +463,7 @@ public partial class ImmediateExecutor<T>
         CancellationToken cancellationToken = default)
         where TForeign : BaseMongoEntity
     {
-        document.UpdateTime = DateTime.Now;
-        return _database.GetCollection<T>($"{foreignDocument.Id}_{_collectionName}", settings).FindOneAndReplace(session, filter, document, options, cancellationToken);
+        return _database.GetCollection<T>($"{foreignDocument.Id}_{_collectionName}", settings).FindOneAndReplaceAsync<T>(session, filter, document, options, cancellationToken);
     }
 
     /// <summary>
@@ -494,7 +477,7 @@ public partial class ImmediateExecutor<T>
     /// <param name="options">查询替换操作设置</param>
     /// <param name="cancellationToken">取消令牌</param>
     /// <returns></returns>
-    public T DynamicCollectionFindOneAndReplaceOne<TForeign>(
+    public Task<T> DynamicCollectionFindOneAndReplaceOneAsync<TForeign>(
         TForeign foreignDocument,
         Expression<Func<T, bool>> expression,
         T document,
@@ -503,8 +486,7 @@ public partial class ImmediateExecutor<T>
         CancellationToken cancellationToken = default)
         where TForeign : BaseMongoEntity
     {
-        document.UpdateTime = DateTime.Now;
-        return _database.GetCollection<T>($"{foreignDocument.Id}_{_collectionName}", settings).FindOneAndReplace(expression, document, options, cancellationToken);
+        return _database.GetCollection<T>($"{foreignDocument.Id}_{_collectionName}", settings).FindOneAndReplaceAsync<T>(expression, document, options, cancellationToken);
     }
 
     /// <summary>
@@ -519,7 +501,7 @@ public partial class ImmediateExecutor<T>
     /// <param name="options">查询替换操作设置</param>
     /// <param name="cancellationToken">取消令牌</param>
     /// <returns></returns>
-    public T DynamicCollectionFindOneAndReplaceOne<TForeign>(
+    public Task<T> DynamicCollectionFindOneAndReplaceOneAsync<TForeign>(
         IClientSessionHandle session,
         TForeign foreignDocument,
         Expression<Func<T, bool>> expression,
@@ -529,8 +511,7 @@ public partial class ImmediateExecutor<T>
         CancellationToken cancellationToken = default)
         where TForeign : BaseMongoEntity
     {
-        document.UpdateTime = DateTime.Now;
-        return _database.GetCollection<T>($"{foreignDocument.Id}_{_collectionName}", settings).FindOneAndReplace(session, expression, document, options, cancellationToken);
+        return _database.GetCollection<T>($"{foreignDocument.Id}_{_collectionName}", settings).FindOneAndReplaceAsync<T>(expression, session, document, options, cancellationToken);
     }
 
     #endregion
