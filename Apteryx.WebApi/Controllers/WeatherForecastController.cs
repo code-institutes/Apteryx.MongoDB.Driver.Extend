@@ -36,6 +36,16 @@ public class WeatherForecastController : ControllerBase
             });
         }
 
+        var userLinq = await _db.Users.FirstOrDefaultAsync(f => f.Name == "李四");
+ 
+
+        userLinq.Name = "李四";
+
+        await _db.SaveChangesAsync();
+
+
+
+
         var query = from u in _db.Users
                     where u.Name != null && u.Name.Contains("张")
                     select u;

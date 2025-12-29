@@ -7,7 +7,7 @@ using System.Collections.Generic;
 
 namespace Apteryx.MongoDB.Driver.Extend;
 
-public interface IDbSetProvider<T>
+public interface IImmediateExecutor<T>
 {
     #region 插入(同步)
 

@@ -4,7 +4,7 @@ using Microsoft.Extensions.DependencyInjection;
 namespace Apteryx.MongoDB.Driver.Extend;
 public static class MongoDBServiceCollectionExtensions
 {
-    public static IServiceCollection AddMongoDB<T>(this IServiceCollection services, Action<MongoDBOptions> options) where T : MongoDbProvider
+    public static IServiceCollection AddMongoDB<T>(this IServiceCollection services, Action<MongoDBOptions> options) where T : MongoDbContext
     {
         services.AddSingleton<T>();
         if (options != null)

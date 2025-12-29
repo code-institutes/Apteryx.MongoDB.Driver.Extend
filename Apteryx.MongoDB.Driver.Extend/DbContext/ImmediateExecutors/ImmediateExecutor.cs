@@ -3,7 +3,7 @@ using MongoDB.Driver;
 
 namespace Apteryx.MongoDB.Driver.Extend;
 
-public partial class ImmediateExecutor<T> : IDbSetProvider<T> where T : BaseMongoEntity
+public partial class ImmediateExecutor<T> : IImmediateExecutor<T> where T : BaseMongoEntity
 {
     private readonly IMongoCollection<T> _collection;
     private readonly IMongoDatabase _database;

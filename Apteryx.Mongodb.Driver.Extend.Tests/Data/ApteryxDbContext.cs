@@ -3,7 +3,7 @@ using Microsoft.Extensions.Options;
 
 namespace Apteryx.Mongodb.Driver.Extend.Tests.Data
 {
-    public class ApteryxDbContext : MongoDbProvider
+    public class ApteryxDbContext : MongoDbContext
     {
         /// <summary>
         /// 

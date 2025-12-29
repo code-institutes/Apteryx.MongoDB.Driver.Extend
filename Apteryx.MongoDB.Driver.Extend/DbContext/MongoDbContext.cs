@@ -1,16 +1,15 @@
 ﻿using Apteryx.Mongodb.Driver.Extend;
-using Apteryx.Mongodb.Driver.Extend.Infrastructure;
 using Microsoft.Extensions.Options;
-using MongoDB.Bson;
 using MongoDB.Driver;
 using System;
 using System.Linq;
 using System.Reflection;
 using System.Threading;
+using System.Threading.Tasks;
 
 namespace Apteryx.MongoDB.Driver.Extend;
 
-public abstract class MongoDbProvider
+public abstract class MongoDbContext
 {
     //定义数据库
     public IMongoDatabase Database { get; set; }
@@ -20,7 +19,7 @@ public abstract class MongoDbProvider
     /// 连接字符串
     /// </summary>
     /// <param name="conn"></param>
-    public MongoDbProvider(string conn)
+    public MongoDbContext(string conn)
     {
         var connsetting = new MongoUrlBuilder(conn);
         Client = new MongoClient(connsetting.ToMongoUrl());
@@ -35,7 +34,87 @@ public abstract class MongoDbProvider
     /// 连接选项
     /// </summary>
     /// <param name="options"></param>
-    public MongoDbProvider(IOptionsMonitor<MongoDBOptions> options) : this(options.CurrentValue.ConnectionString) { }
+    public MongoDbContext(IOptionsMonitor<MongoDBOptions> options) : this(options.CurrentValue.ConnectionString) { }
+
+    // --------------------------------------------------------------------
+    // SaveChanges（默认开启事务）
+    // --------------------------------------------------------------------
+
+    public int SaveChanges(CancellationToken cancellationToken = default)
+    {
+        using var session = Client.StartSession(cancellationToken: cancellationToken);
+        session.StartTransaction();
+
+        try
+        {
+            int total = SaveChangesInternal(session, cancellationToken);
+            session.CommitTransaction(cancellationToken);
+            return total;
+        }
+        catch
+        {
+            session.AbortTransaction(cancellationToken);
+            throw;
+        }
+    }
+
+    public async Task<int> SaveChangesAsync(CancellationToken cancellationToken = default)
+    {
+        using var session = await Client.StartSessionAsync(cancellationToken: cancellationToken);
+        session.StartTransaction();
+
+        try
+        {
+            int total = await SaveChangesInternalAsync(session, cancellationToken);
+            await session.CommitTransactionAsync(cancellationToken);
+            return total;
+        }
+        catch
+        {
+            await session.AbortTransactionAsync(cancellationToken);
+            throw;
+        }
+    }
+
+    // --------------------------------------------------------------------
+    // 遍历所有 DbSet<T> 并调用内部 SaveChanges
+    // --------------------------------------------------------------------
+
+    private int SaveChangesInternal(IClientSessionHandle session, CancellationToken ct)
+    {
+        int total = 0;
+
+        var dbSets = GetType().GetProperties()
+            .Where(p => typeof(IDbSet)
+            .IsAssignableFrom(p.PropertyType))
+            .Select(p => (IDbSet)p.GetValue(this))
+            .Where(s => s.HasChanges); // 只处理有变更的 DbSet
+
+        foreach (var set in dbSets)
+        {
+            total += set.SaveChanges(session, ct);
+        }
+
+        return total;
+    }
+
+    private async Task<int> SaveChangesInternalAsync(IClientSessionHandle session, CancellationToken ct)
+    {
+        int total = 0;
+
+        var dbSets = GetType().GetProperties()
+            .Where(p => typeof(IDbSet)
+            .IsAssignableFrom(p.PropertyType))
+            .Select(p => (IDbSet)p.GetValue(this))
+            .Where(s => s.HasChanges); // 只处理有变更的 DbSet
+
+        foreach (var set in dbSets)
+        {
+            total += await set.SaveChangesAsync(session, ct);
+        }
+
+        return total;
+    }
 
     /// <summary>
     /// 初始化以DbSet<>声明的Mongo集合
@@ -43,7 +122,8 @@ public abstract class MongoDbProvider
     private void InitializeDbSets()
     {
         var properties = GetType().GetProperties();
-        var dbSetProperties = properties.Where(p => p.PropertyType.IsGenericType && p.PropertyType.GetGenericTypeDefinition() == typeof(DbSet<>));
+        var dbSetProperties = properties.Where(p => p.PropertyType.IsGenericType && p.PropertyType.GetGenericTypeDefinition() == typeof(DbSet<>) ||
+        p.PropertyType.IsGenericType && p.PropertyType.GetGenericTypeDefinition() == typeof(IDbSet<>));
         foreach (var property in dbSetProperties)
         {
             var collectionName = property.Name;
@@ -228,7 +308,6 @@ public abstract class MongoDbProvider
             throw new InvalidOperationException(
                 $"TTL 索引字段必须是 DateTime 或 DateTimeOffset。实体：{entityType.Name}.{fieldName}");
     }
-
 
     private object GetCollection(Type entityType, string collectionName)
     {

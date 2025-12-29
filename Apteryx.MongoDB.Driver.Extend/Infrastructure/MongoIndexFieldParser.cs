@@ -1,5 +1,4 @@
-﻿using Apteryx.Mongodb.Driver.Extend.Infrastructure;
-using System;
+﻿using System;
 
 namespace Apteryx.MongoDB.Driver.Extend;
 

@@ -1,8 +1,4 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Text;
-
-namespace Apteryx.Mongodb.Driver.Extend.Infrastructure;
+﻿namespace Apteryx.MongoDB.Driver.Extend;
 
 public enum IndexType
 {
