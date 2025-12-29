@@ -26,31 +26,31 @@ public class TestDbSetFindOne : TestBase
     {
         var user = DataHelper.GetNewUser();
 
-        dbContext.Users.Insert(user);
+        dbContext.Users.Immediate.Insert(user);
 
         // 验证添加是否成功
-        var addedUser = dbContext.Users.FindOne(user.Id);
+        var addedUser = dbContext.Users.Immediate.FindOne(user.Id);
         Assert.IsNotNull(addedUser, "未成功添加用户。");
 
 
         // 验证查询是否成功
-        var findUser1 = dbContext.Users.FindOne(user.Id);
+        var findUser1 = dbContext.Users.Immediate.FindOne(user.Id);
         Assert.IsNotNull(findUser1, "未成功查询用户。");
 
         // 验证查询是否成功
-        var findUser2 = dbContext.Users.FindOne(r => r.Id == user.Id);
+        var findUser2 = dbContext.Users.Immediate.FindOne(r => r.Id == user.Id);
         Assert.IsNotNull(findUser2, "未成功查询用户。");
 
         // 验证查询是否成功
-        var findUser3 = dbContext.Users.FindOne(Builders<User>.Filter.Eq(r => r.Id, user.Id));
+        var findUser3 = dbContext.Users.Immediate.FindOne(Builders<User>.Filter.Eq(r => r.Id, user.Id));
         Assert.IsNotNull(findUser3, "未成功查询用户。");
 
 
         // 删除用户
-        var result = dbContext.Users.DeleteOne(addedUser);
+        var result = dbContext.Users.Immediate.DeleteOne(addedUser);
 
         // 验证删除是否成功
-        var deletedUser = dbContext.Users.FindOne(user.Id);
+        var deletedUser = dbContext.Users.Immediate.FindOne(user.Id);
         Assert.IsNull(deletedUser, "用户未成功删除。");
     }
 
@@ -59,31 +59,31 @@ public class TestDbSetFindOne : TestBase
     {
         var user = DataHelper.GetNewUser();
 
-        await dbContext.Users.InsertAsync(user);
+        await dbContext.Users.Immediate.InsertAsync(user);
 
         // 验证添加是否成功
-        var addedUser = await dbContext.Users.FindOneAsync(user.Id);
+        var addedUser = await dbContext.Users.Immediate.FindOneAsync(user.Id);
         Assert.IsNotNull(addedUser, "未成功添加用户。");
 
 
         // 验证查询是否成功
-        var findUser1 = await dbContext.Users.FindOneAsync(user.Id);
+        var findUser1 = await dbContext.Users.Immediate.FindOneAsync(user.Id);
         Assert.IsNotNull(findUser1, "未成功查询用户。");
 
         // 验证查询是否成功
-        var findUser2 = await dbContext.Users.FindOneAsync(r => r.Id == user.Id);
+        var findUser2 = await dbContext.Users.Immediate.FindOneAsync(r => r.Id == user.Id);
         Assert.IsNotNull(findUser2, "未成功查询用户。");
 
         // 验证查询是否成功
-        var findUser3 = await dbContext.Users.FindOneAsync(Builders<User>.Filter.Eq(r => r.Id, user.Id));
+        var findUser3 = await dbContext.Users.Immediate.FindOneAsync(Builders<User>.Filter.Eq(r => r.Id, user.Id));
         Assert.IsNotNull(findUser3, "未成功查询用户。");
 
 
         // 删除用户
-        var result = await dbContext.Users.DeleteOneAsync(addedUser);
+        var result = await dbContext.Users.Immediate.DeleteOneAsync(addedUser);
 
         // 验证删除是否成功
-        var deletedUser = await dbContext.Users.FindOneAsync(user.Id);
+        var deletedUser = await dbContext.Users.Immediate.FindOneAsync(user.Id);
         Assert.IsNull(deletedUser, "用户未成功删除。");
     }
 
@@ -96,31 +96,31 @@ public class TestDbSetFindOne : TestBase
         {
             session.StartTransaction();
 
-            dbContext.Users.Insert(session, user);
+            dbContext.Users.Immediate.Insert(session, user);
 
             // 验证添加是否成功
-            var addedUser = dbContext.Users.FindOne(session, user.Id);
+            var addedUser = dbContext.Users.Immediate.FindOne(session, user.Id);
             Assert.IsNotNull(addedUser, "未成功添加用户。");
 
 
             // 验证查询是否成功
-            var findUser1 = dbContext.Users.FindOne(session, user.Id);
+            var findUser1 = dbContext.Users.Immediate.FindOne(session, user.Id);
             Assert.IsNotNull(findUser1, "未成功查询用户。");
 
             // 验证查询是否成功
-            var findUser2 = dbContext.Users.FindOne(session, r => r.Id == user.Id);
+            var findUser2 = dbContext.Users.Immediate.FindOne(session, r => r.Id == user.Id);
             Assert.IsNotNull(findUser2, "未成功查询用户。");
 
             // 验证查询是否成功
-            var findUser3 = dbContext.Users.FindOne(session, Builders<User>.Filter.Eq(r => r.Id, user.Id));
+            var findUser3 = dbContext.Users.Immediate.FindOne(session, Builders<User>.Filter.Eq(r => r.Id, user.Id));
             Assert.IsNotNull(findUser3, "未成功查询用户。");
 
 
             // 删除用户
-            var result = dbContext.Users.DeleteOne(session, addedUser);
+            var result = dbContext.Users.Immediate.DeleteOne(session, addedUser);
 
             // 验证删除是否成功
-            var deletedUser = dbContext.Users.FindOne(session, user.Id);
+            var deletedUser = dbContext.Users.Immediate.FindOne(session, user.Id);
             Assert.IsNull(deletedUser, "用户未成功删除。");
 
 
@@ -137,31 +137,31 @@ public class TestDbSetFindOne : TestBase
         {
             session.StartTransaction();
 
-            await dbContext.Users.InsertAsync(session, user);
+            await dbContext.Users.Immediate.InsertAsync(session, user);
 
             // 验证添加是否成功
-            var addedUser = await dbContext.Users.FindOneAsync(session, user.Id);
+            var addedUser = await dbContext.Users.Immediate.FindOneAsync(session, user.Id);
             Assert.IsNotNull(addedUser, "未成功添加用户。");
 
 
             // 验证查询是否成功
-            var findUser1 = await dbContext.Users.FindOneAsync(session, user.Id);
+            var findUser1 = await dbContext.Users.Immediate.FindOneAsync(session, user.Id);
             Assert.IsNotNull(findUser1, "未成功查询用户。");
 
             // 验证查询是否成功
-            var findUser2 = await dbContext.Users.FindOneAsync(session, r => r.Id == user.Id);
+            var findUser2 = await dbContext.Users.Immediate.FindOneAsync(session, r => r.Id == user.Id);
             Assert.IsNotNull(findUser2, "未成功查询用户。");
 
             // 验证查询是否成功
-            var findUser3 = await dbContext.Users.FindOneAsync(session, Builders<User>.Filter.Eq(r => r.Id, user.Id));
+            var findUser3 = await dbContext.Users.Immediate.FindOneAsync(session, Builders<User>.Filter.Eq(r => r.Id, user.Id));
             Assert.IsNotNull(findUser3, "未成功查询用户。");
 
 
             // 删除用户
-            var result = await dbContext.Users.DeleteOneAsync(session, addedUser);
+            var result = await dbContext.Users.Immediate.DeleteOneAsync(session, addedUser);
 
             // 验证删除是否成功
-            var deletedUser = await dbContext.Users.FindOneAsync(session, user.Id);
+            var deletedUser = await dbContext.Users.Immediate.FindOneAsync(session, user.Id);
             Assert.IsNull(deletedUser, "用户未成功删除。");
 
             session.CommitTransaction();
@@ -174,31 +174,31 @@ public class TestDbSetFindOne : TestBase
         var userGroup = DataHelper.GetNewUserGroup();
         var user = DataHelper.GetNewUser();
 
-        dbContext.Users.DynamicCollectionInsert(userGroup, user);
+        dbContext.Users.Immediate.DynamicCollectionInsert(userGroup, user);
 
         // 验证添加是否成功
-        var addedUser = dbContext.Users.DynamicCollectionFindOne(userGroup, user.Id);
+        var addedUser = dbContext.Users.Immediate.DynamicCollectionFindOne(userGroup, user.Id);
         Assert.IsNotNull(addedUser, "未成功添加用户。");
 
 
         // 验证查询是否成功
-        var findUser1 = dbContext.Users.DynamicCollectionFindOne(userGroup, user.Id);
+        var findUser1 = dbContext.Users.Immediate.DynamicCollectionFindOne(userGroup, user.Id);
         Assert.IsNotNull(findUser1, "未成功查询用户。");
 
         // 验证查询是否成功
-        var findUser2 = dbContext.Users.DynamicCollectionFindOne(userGroup, r => r.Id == user.Id);
+        var findUser2 = dbContext.Users.Immediate.DynamicCollectionFindOne(userGroup, r => r.Id == user.Id);
         Assert.IsNotNull(findUser2, "未成功查询用户。");
 
         // 验证查询是否成功
-        var findUser3 = dbContext.Users.DynamicCollectionFindOne(userGroup, Builders<User>.Filter.Eq(r => r.Id, user.Id));
+        var findUser3 = dbContext.Users.Immediate.DynamicCollectionFindOne(userGroup, Builders<User>.Filter.Eq(r => r.Id, user.Id));
         Assert.IsNotNull(findUser3, "未成功查询用户。");
 
 
         // 删除用户
-        var result = dbContext.Users.DynamicCollectionDeleteOne(userGroup, addedUser);
+        var result = dbContext.Users.Immediate.DynamicCollectionDeleteOne(userGroup, addedUser);
 
         // 验证删除是否成功
-        var deletedUser = dbContext.Users.DynamicCollectionFindOne(userGroup, user.Id);
+        var deletedUser = dbContext.Users.Immediate.DynamicCollectionFindOne(userGroup, user.Id);
         Assert.IsNull(deletedUser, "用户未成功删除。");
     }
 
@@ -208,31 +208,31 @@ public class TestDbSetFindOne : TestBase
         var userGroup = DataHelper.GetNewUserGroup();
         var user = DataHelper.GetNewUser();
 
-        await dbContext.Users.DynamicCollectionInsertAsync(userGroup, user);
+        await dbContext.Users.Immediate.DynamicCollectionInsertAsync(userGroup, user);
 
         // 验证添加是否成功
-        var addedUser = await dbContext.Users.DynamicCollectionFindOneAsync(userGroup, user.Id);
+        var addedUser = await dbContext.Users.Immediate.DynamicCollectionFindOneAsync(userGroup, user.Id);
         Assert.IsNotNull(addedUser, "未成功添加用户。");
 
 
         // 验证查询是否成功
-        var findUser1 = await dbContext.Users.DynamicCollectionFindOneAsync(userGroup, user.Id);
+        var findUser1 = await dbContext.Users.Immediate.DynamicCollectionFindOneAsync(userGroup, user.Id);
         Assert.IsNotNull(findUser1, "未成功查询用户。");
 
         // 验证查询是否成功
-        var findUser2 = await dbContext.Users.DynamicCollectionFindOneAsync(userGroup, r => r.Id == user.Id);
+        var findUser2 = await dbContext.Users.Immediate.DynamicCollectionFindOneAsync(userGroup, r => r.Id == user.Id);
         Assert.IsNotNull(findUser2, "未成功查询用户。");
 
         // 验证查询是否成功
-        var findUser3 = await dbContext.Users.DynamicCollectionFindOneAsync(userGroup, Builders<User>.Filter.Eq(r => r.Id, user.Id));
+        var findUser3 = await dbContext.Users.Immediate.DynamicCollectionFindOneAsync(userGroup, Builders<User>.Filter.Eq(r => r.Id, user.Id));
         Assert.IsNotNull(findUser3, "未成功查询用户。");
 
 
         // 删除用户
-        var result = await dbContext.Users.DynamicCollectionDeleteOneAsync(userGroup, addedUser);
+        var result = await dbContext.Users.Immediate.DynamicCollectionDeleteOneAsync(userGroup, addedUser);
 
         // 验证删除是否成功
-        var deletedUser = await dbContext.Users.DynamicCollectionFindOneAsync(userGroup, user.Id);
+        var deletedUser = await dbContext.Users.Immediate.DynamicCollectionFindOneAsync(userGroup, user.Id);
         Assert.IsNull(deletedUser, "用户未成功删除。");
     }
 
@@ -246,31 +246,31 @@ public class TestDbSetFindOne : TestBase
         {
             session.StartTransaction();
 
-            dbContext.Users.DynamicCollectionInsert(session, userGroup, user);
+            dbContext.Users.Immediate.DynamicCollectionInsert(session, userGroup, user);
 
             // 验证添加是否成功
-            var addedUser = dbContext.Users.DynamicCollectionFindOne(session, userGroup, user.Id);
+            var addedUser = dbContext.Users.Immediate.DynamicCollectionFindOne(session, userGroup, user.Id);
             Assert.IsNotNull(addedUser, "未成功添加用户。");
 
 
             // 验证查询是否成功
-            var findUser1 = dbContext.Users.DynamicCollectionFindOne(session, userGroup, user.Id);
+            var findUser1 = dbContext.Users.Immediate.DynamicCollectionFindOne(session, userGroup, user.Id);
             Assert.IsNotNull(findUser1, "未成功查询用户。");
 
             // 验证查询是否成功
-            var findUser2 = dbContext.Users.DynamicCollectionFindOne(session, userGroup, r => r.Id == user.Id);
+            var findUser2 = dbContext.Users.Immediate.DynamicCollectionFindOne(session, userGroup, r => r.Id == user.Id);
             Assert.IsNotNull(findUser2, "未成功查询用户。");
 
             // 验证查询是否成功
-            var findUser3 = dbContext.Users.DynamicCollectionFindOne(session, userGroup, Builders<User>.Filter.Eq(r => r.Id, user.Id));
+            var findUser3 = dbContext.Users.Immediate.DynamicCollectionFindOne(session, userGroup, Builders<User>.Filter.Eq(r => r.Id, user.Id));
             Assert.IsNotNull(findUser3, "未成功查询用户。");
 
 
             // 删除用户
-            var result = dbContext.Users.DynamicCollectionDeleteOne(session, userGroup, addedUser);
+            var result = dbContext.Users.Immediate.DynamicCollectionDeleteOne(session, userGroup, addedUser);
 
             // 验证删除是否成功
-            var deletedUser = dbContext.Users.DynamicCollectionFindOne(session, userGroup, user.Id);
+            var deletedUser = dbContext.Users.Immediate.DynamicCollectionFindOne(session, userGroup, user.Id);
             Assert.IsNull(deletedUser, "用户未成功删除。");
 
 
@@ -288,31 +288,31 @@ public class TestDbSetFindOne : TestBase
         {
             session.StartTransaction();
 
-            await dbContext.Users.DynamicCollectionInsertAsync(session, userGroup, user);
+            await dbContext.Users.Immediate.DynamicCollectionInsertAsync(session, userGroup, user);
 
             // 验证添加是否成功
-            var addedUser = await dbContext.Users.DynamicCollectionFindOneAsync(session, userGroup, user.Id);
+            var addedUser = await dbContext.Users.Immediate.DynamicCollectionFindOneAsync(session, userGroup, user.Id);
             Assert.IsNotNull(addedUser, "未成功添加用户。");
 
 
             // 验证查询是否成功
-            var findUser1 = await dbContext.Users.DynamicCollectionFindOneAsync(session, userGroup, user.Id);
+            var findUser1 = await dbContext.Users.Immediate.DynamicCollectionFindOneAsync(session, userGroup, user.Id);
             Assert.IsNotNull(findUser1, "未成功查询用户。");
 
             // 验证查询是否成功
-            var findUser2 = await dbContext.Users.DynamicCollectionFindOneAsync(session, userGroup, r => r.Id == user.Id);
+            var findUser2 = await dbContext.Users.Immediate.DynamicCollectionFindOneAsync(session, userGroup, r => r.Id == user.Id);
             Assert.IsNotNull(findUser2, "未成功查询用户。");
 
             // 验证查询是否成功
-            var findUser3 = await dbContext.Users.DynamicCollectionFindOneAsync(session, userGroup, Builders<User>.Filter.Eq(r => r.Id, user.Id));
+            var findUser3 = await dbContext.Users.Immediate.DynamicCollectionFindOneAsync(session, userGroup, Builders<User>.Filter.Eq(r => r.Id, user.Id));
             Assert.IsNotNull(findUser3, "未成功查询用户。");
 
 
             // 删除用户
-            var result = await dbContext.Users.DynamicCollectionDeleteOneAsync(session, userGroup, addedUser);
+            var result = await dbContext.Users.Immediate.DynamicCollectionDeleteOneAsync(session, userGroup, addedUser);
 
             // 验证删除是否成功
-            var deletedUser = await dbContext.Users.DynamicCollectionFindOneAsync(session, userGroup, user.Id);
+            var deletedUser = await dbContext.Users.Immediate.DynamicCollectionFindOneAsync(session, userGroup, user.Id);
             Assert.IsNull(deletedUser, "用户未成功删除。");
 
 
@@ -325,14 +325,14 @@ public class TestDbSetFindOne : TestBase
     {
         var users = DataHelper.GetNewUsers();
 
-        dbContext.Users.InsertMany(users);
+        dbContext.Users.Immediate.InsertMany(users);
 
         //验证查询是否成功
-        var findUsers = dbContext.Users.FindAll();
+        var findUsers = dbContext.Users.Immediate.FindAll();
         Assert.AreEqual(6, findUsers.Count(), "未成功查询用户。");
 
         // 验证删除是否成功
-        var deletedUser = dbContext.Users.DeleteMany(users);
+        var deletedUser = dbContext.Users.Immediate.DeleteMany(users);
         Assert.AreEqual(6, deletedUser.Count(a => a.DeletedCount == 1), "用户未成功删除。");
     }
 
@@ -341,18 +341,18 @@ public class TestDbSetFindOne : TestBase
     {
         var users = DataHelper.GetNewUsers();
 
-        await dbContext.Users.InsertManyAsync(users);
+        await dbContext.Users.Immediate.InsertManyAsync(users);
 
         //验证查询是否成功
         List<User> findUsers = new();
-        await foreach (var user in dbContext.Users.FindAllAsync())
+        await foreach (var user in dbContext.Users.Immediate.FindAllAsync())
         {
             findUsers.Add(user);
         }
         Assert.AreEqual(6, findUsers.Count(), "未成功查询用户。");
 
         // 验证删除是否成功
-        var deletedUser = await dbContext.Users.DeleteManyAsync(users);
+        var deletedUser = await dbContext.Users.Immediate.DeleteManyAsync(users);
         Assert.AreEqual(6, deletedUser.Count(a => a.DeletedCount == 1), "用户未成功删除。");
     }
 
@@ -365,14 +365,14 @@ public class TestDbSetFindOne : TestBase
         {
             session.StartTransaction();
 
-            dbContext.Users.InsertMany(session, users);
+            dbContext.Users.Immediate.InsertMany(session, users);
 
             //验证查询是否成功
-            var findUsers = dbContext.Users.FindAll(session);
+            var findUsers = dbContext.Users.Immediate.FindAll(session);
             Assert.AreEqual(6, findUsers.Count(), "未成功查询用户。");
 
             // 验证删除是否成功
-            var deletedUser = dbContext.Users.DeleteMany(session, users);
+            var deletedUser = dbContext.Users.Immediate.DeleteMany(session, users);
             Assert.AreEqual(6, deletedUser.Count(a => a.DeletedCount == 1), "用户未成功删除。");
 
             session.CommitTransaction();
@@ -388,18 +388,18 @@ public class TestDbSetFindOne : TestBase
         {
             session.StartTransaction();
 
-            await dbContext.Users.InsertManyAsync(session, users);
+            await dbContext.Users.Immediate.InsertManyAsync(session, users);
 
             //验证查询是否成功
             List<User> findUsers = new();
-            await foreach (var user in dbContext.Users.FindAllAsync(session))
+            await foreach (var user in dbContext.Users.Immediate.FindAllAsync(session))
             {
                 findUsers.Add(user);
             }
             Assert.AreEqual(6, findUsers.Count(), "未成功查询用户。");
 
             // 验证删除是否成功
-            var deletedUser = await dbContext.Users.DeleteManyAsync(session, users);
+            var deletedUser = await dbContext.Users.Immediate.DeleteManyAsync(session, users);
             Assert.AreEqual(6, deletedUser.Count(a => a.DeletedCount == 1), "用户未成功删除。");
 
             session.CommitTransaction();
@@ -412,14 +412,14 @@ public class TestDbSetFindOne : TestBase
         var userGroup = DataHelper.GetNewUserGroup();
         var users = DataHelper.GetNewUsers();
 
-        dbContext.Users.DynamicCollectionInsertMany(userGroup, users);
+        dbContext.Users.Immediate.DynamicCollectionInsertMany(userGroup, users);
 
         //验证查询是否成功
-        var findUsers = dbContext.Users.DynamicCollectionFindAll(userGroup);
+        var findUsers = dbContext.Users.Immediate.DynamicCollectionFindAll(userGroup);
         Assert.AreEqual(6, findUsers.Count(), "未成功查询用户。");
 
         // 验证删除是否成功
-        var deletedUser = dbContext.Users.DynamicCollectionDeleteMany(userGroup, users);
+        var deletedUser = dbContext.Users.Immediate.DynamicCollectionDeleteMany(userGroup, users);
         Assert.AreEqual(6, deletedUser.Count(a => a.DeletedCount == 1), "用户未成功删除。");
     }
 
@@ -429,18 +429,18 @@ public class TestDbSetFindOne : TestBase
         var userGroup = DataHelper.GetNewUserGroup();
         var users = DataHelper.GetNewUsers();
 
-        await dbContext.Users.DynamicCollectionInsertManyAsync(userGroup, users);
+        await dbContext.Users.Immediate.DynamicCollectionInsertManyAsync(userGroup, users);
 
         //验证查询是否成功
         List<User> findUsers = new();
-        await foreach (var user in dbContext.Users.DynamicCollectionFindAllAsync(userGroup))
+        await foreach (var user in dbContext.Users.Immediate.DynamicCollectionFindAllAsync(userGroup))
         {
             findUsers.Add(user);
         }
         Assert.AreEqual(6, findUsers.Count(), "未成功查询用户。");
 
         // 验证删除是否成功
-        var deletedUser = await dbContext.Users.DynamicCollectionDeleteManyAsync(userGroup, users);
+        var deletedUser = await dbContext.Users.Immediate.DynamicCollectionDeleteManyAsync(userGroup, users);
         Assert.AreEqual(6, deletedUser.Count(a => a.DeletedCount == 1), "用户未成功删除。");
     }
 
@@ -454,14 +454,14 @@ public class TestDbSetFindOne : TestBase
         {
             session.StartTransaction();
 
-            dbContext.Users.DynamicCollectionInsertMany(session, userGroup, users);
+            dbContext.Users.Immediate.DynamicCollectionInsertMany(session, userGroup, users);
 
             //验证查询是否成功
-            var findUsers = dbContext.Users.DynamicCollectionFindAll(session, userGroup);
+            var findUsers = dbContext.Users.Immediate.DynamicCollectionFindAll(session, userGroup);
             Assert.AreEqual(6, findUsers.Count(), "未成功查询用户。");
 
             // 验证删除是否成功
-            var deletedUser = dbContext.Users.DynamicCollectionDeleteMany(session, userGroup, users);
+            var deletedUser = dbContext.Users.Immediate.DynamicCollectionDeleteMany(session, userGroup, users);
             Assert.AreEqual(6, deletedUser.Count(a => a.DeletedCount == 1), "用户未成功删除。");
 
             session.CommitTransaction();
@@ -478,18 +478,18 @@ public class TestDbSetFindOne : TestBase
         {
             session.StartTransaction();
 
-            await dbContext.Users.DynamicCollectionInsertManyAsync(session, userGroup, users);
+            await dbContext.Users.Immediate.DynamicCollectionInsertManyAsync(session, userGroup, users);
 
             //验证查询是否成功
             List<User> findUsers = new();
-            await foreach (var user in dbContext.Users.DynamicCollectionFindAllAsync(session, userGroup))
+            await foreach (var user in dbContext.Users.Immediate.DynamicCollectionFindAllAsync(session, userGroup))
             {
                 findUsers.Add(user);
             }
             Assert.AreEqual(6, findUsers.Count(), "未成功查询用户。");
 
             // 验证删除是否成功
-            var deletedUser = await dbContext.Users.DynamicCollectionDeleteManyAsync(session, userGroup, users);
+            var deletedUser = await dbContext.Users.Immediate.DynamicCollectionDeleteManyAsync(session, userGroup, users);
             Assert.AreEqual(6, deletedUser.Count(a => a.DeletedCount == 1), "用户未成功删除。");
 
             session.CommitTransaction();

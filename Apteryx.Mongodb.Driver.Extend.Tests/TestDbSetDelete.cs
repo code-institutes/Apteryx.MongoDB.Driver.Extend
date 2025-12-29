@@ -26,26 +26,26 @@ public class TestDbSetDelete : TestBase
     {
         var users = DataHelper.GetNewUsers();
 
-        dbContext.Users.InsertMany(users);
+        dbContext.Users.Immediate.InsertMany(users);
 
         // 删除用户
-        var result1 = dbContext.Users.DeleteOne(users[0]);
+        var result1 = dbContext.Users.Immediate.DeleteOne(users[0]);
         Assert.AreEqual(true, result1.IsAcknowledged, "用户1，未成功删除。");
 
         // 删除用户
-        var result2 = dbContext.Users.DeleteOne(users[1].Id);
+        var result2 = dbContext.Users.Immediate.DeleteOne(users[1].Id);
         Assert.AreEqual(true, result2.IsAcknowledged, "用户2，未成功删除。");
 
         // 删除用户
-        var result3 = dbContext.Users.DeleteOne(d => d.Id == users[2].Id);
+        var result3 = dbContext.Users.Immediate.DeleteOne(d => d.Id == users[2].Id);
         Assert.AreEqual(true, result3.IsAcknowledged, "用户3，未成功删除。");
 
         // 删除用户
-        var result4 = dbContext.Users.DeleteOne(Builders<User>.Filter.Eq(f => f.Id, users[3].Id));
+        var result4 = dbContext.Users.Immediate.DeleteOne(Builders<User>.Filter.Eq(f => f.Id, users[3].Id));
         Assert.AreEqual(true, result4.IsAcknowledged, "用户4，未成功删除。");
 
         // 验证删除是否成功
-        var deletedUser = dbContext.Users.DeleteMany(users);
+        var deletedUser = dbContext.Users.Immediate.DeleteMany(users);
         Assert.AreEqual(2, deletedUser.Count(a => a.DeletedCount == 1), "用户未成功删除。");
     }
 
@@ -54,26 +54,26 @@ public class TestDbSetDelete : TestBase
     {
         var users = DataHelper.GetNewUsers();
 
-        await dbContext.Users.InsertManyAsync(users);
+        await dbContext.Users.Immediate.InsertManyAsync(users);
 
         // 删除用户
-        var result1 = await dbContext.Users.DeleteOneAsync(users[0]);
+        var result1 = await dbContext.Users.Immediate.DeleteOneAsync(users[0]);
         Assert.AreEqual(true, result1.IsAcknowledged, "用户1，未成功删除。");
 
         // 删除用户
-        var result2 = await dbContext.Users.DeleteOneAsync(users[1].Id);
+        var result2 = await dbContext.Users.Immediate.DeleteOneAsync(users[1].Id);
         Assert.AreEqual(true, result2.IsAcknowledged, "用户2，未成功删除。");
 
         // 删除用户
-        var result3 = await dbContext.Users.DeleteOneAsync(d => d.Id == users[2].Id);
+        var result3 = await dbContext.Users.Immediate.DeleteOneAsync(d => d.Id == users[2].Id);
         Assert.AreEqual(true, result3.IsAcknowledged, "用户3，未成功删除。");
 
         // 删除用户
-        var result4 = await dbContext.Users.DeleteOneAsync(Builders<User>.Filter.Eq(f => f.Id, users[3].Id));
+        var result4 = await dbContext.Users.Immediate.DeleteOneAsync(Builders<User>.Filter.Eq(f => f.Id, users[3].Id));
         Assert.AreEqual(true, result4.IsAcknowledged, "用户4，未成功删除。");
 
         // 验证删除是否成功
-        var deletedUser = await dbContext.Users.DeleteManyAsync(users);
+        var deletedUser = await dbContext.Users.Immediate.DeleteManyAsync(users);
         Assert.AreEqual(2, deletedUser.Count(a => a.DeletedCount == 1), "用户未成功删除。");
     }
 
@@ -86,26 +86,26 @@ public class TestDbSetDelete : TestBase
         {
             session.StartTransaction();
 
-            dbContext.Users.InsertMany(session, users);
+            dbContext.Users.Immediate.InsertMany(session, users);
 
             // 删除用户
-            var result1 = dbContext.Users.DeleteOne(session, users[0]);
+            var result1 = dbContext.Users.Immediate.DeleteOne(session, users[0]);
             Assert.AreEqual(true, result1.IsAcknowledged, "用户1，未成功删除。");
 
             // 删除用户
-            var result2 = dbContext.Users.DeleteOne(session, users[1].Id);
+            var result2 = dbContext.Users.Immediate.DeleteOne(session, users[1].Id);
             Assert.AreEqual(true, result2.IsAcknowledged, "用户2，未成功删除。");
 
             // 删除用户
-            var result3 = dbContext.Users.DeleteOne(session, d => d.Id == users[2].Id);
+            var result3 = dbContext.Users.Immediate.DeleteOne(session, d => d.Id == users[2].Id);
             Assert.AreEqual(true, result3.IsAcknowledged, "用户3，未成功删除。");
 
             // 删除用户
-            var result4 = dbContext.Users.DeleteOne(session, Builders<User>.Filter.Eq(f => f.Id, users[3].Id));
+            var result4 = dbContext.Users.Immediate.DeleteOne(session, Builders<User>.Filter.Eq(f => f.Id, users[3].Id));
             Assert.AreEqual(true, result4.IsAcknowledged, "用户4，未成功删除。");
 
             // 验证删除是否成功
-            var deletedUser = dbContext.Users.DeleteMany(session, users);
+            var deletedUser = dbContext.Users.Immediate.DeleteMany(session, users);
             Assert.AreEqual(2, deletedUser.Count(a => a.DeletedCount == 1), "用户未成功删除。");
 
             session.CommitTransaction();
@@ -121,26 +121,26 @@ public class TestDbSetDelete : TestBase
         {
             session.StartTransaction();
 
-            await dbContext.Users.InsertManyAsync(session, users);
+            await dbContext.Users.Immediate.InsertManyAsync(session, users);
 
             // 删除用户
-            var result1 = await dbContext.Users.DeleteOneAsync(session, users[0]);
+            var result1 = await dbContext.Users.Immediate.DeleteOneAsync(session, users[0]);
             Assert.AreEqual(true, result1.IsAcknowledged, "用户1，未成功删除。");
 
             // 删除用户
-            var result2 = await dbContext.Users.DeleteOneAsync(session, users[1].Id);
+            var result2 = await dbContext.Users.Immediate.DeleteOneAsync(session, users[1].Id);
             Assert.AreEqual(true, result2.IsAcknowledged, "用户2，未成功删除。");
 
             // 删除用户
-            var result3 = await dbContext.Users.DeleteOneAsync(session, d => d.Id == users[2].Id);
+            var result3 = await dbContext.Users.Immediate.DeleteOneAsync(session, d => d.Id == users[2].Id);
             Assert.AreEqual(true, result3.IsAcknowledged, "用户3，未成功删除。");
 
             // 删除用户
-            var result4 = await dbContext.Users.DeleteOneAsync(session, Builders<User>.Filter.Eq(f => f.Id, users[3].Id));
+            var result4 = await dbContext.Users.Immediate.DeleteOneAsync(session, Builders<User>.Filter.Eq(f => f.Id, users[3].Id));
             Assert.AreEqual(true, result4.IsAcknowledged, "用户4，未成功删除。");
 
             // 验证删除是否成功
-            var deletedUser = await dbContext.Users.DeleteManyAsync(session, users);
+            var deletedUser = await dbContext.Users.Immediate.DeleteManyAsync(session, users);
             Assert.AreEqual(2, deletedUser.Count(a => a.DeletedCount == 1), "用户未成功删除。");
 
             session.CommitTransaction();
@@ -153,26 +153,26 @@ public class TestDbSetDelete : TestBase
         var userGroup = DataHelper.GetNewUserGroup();
         var users = DataHelper.GetNewUsers();
 
-        dbContext.Users.DynamicCollectionInsertMany(userGroup, users);
+        dbContext.Users.Immediate.DynamicCollectionInsertMany(userGroup, users);
 
         // 删除用户
-        var result1 = dbContext.Users.DynamicCollectionDeleteOne(userGroup, users[0]);
+        var result1 = dbContext.Users.Immediate.DynamicCollectionDeleteOne(userGroup, users[0]);
         Assert.AreEqual(true, result1.IsAcknowledged, "用户1，未成功删除。");
 
         // 删除用户
-        var result2 = dbContext.Users.DynamicCollectionDeleteOne(userGroup, users[1].Id);
+        var result2 = dbContext.Users.Immediate.DynamicCollectionDeleteOne(userGroup, users[1].Id);
         Assert.AreEqual(true, result2.IsAcknowledged, "用户2，未成功删除。");
 
         // 删除用户
-        var result3 = dbContext.Users.DynamicCollectionDeleteOne(userGroup, d => d.Id == users[2].Id);
+        var result3 = dbContext.Users.Immediate.DynamicCollectionDeleteOne(userGroup, d => d.Id == users[2].Id);
         Assert.AreEqual(true, result3.IsAcknowledged, "用户3，未成功删除。");
 
         // 删除用户
-        var result4 = dbContext.Users.DynamicCollectionDeleteOne(userGroup, Builders<User>.Filter.Eq(f => f.Id, users[3].Id));
+        var result4 = dbContext.Users.Immediate.DynamicCollectionDeleteOne(userGroup, Builders<User>.Filter.Eq(f => f.Id, users[3].Id));
         Assert.AreEqual(true, result4.IsAcknowledged, "用户4，未成功删除。");
 
         // 验证删除是否成功
-        var deletedUser = dbContext.Users.DynamicCollectionDeleteMany(userGroup, users);
+        var deletedUser = dbContext.Users.Immediate.DynamicCollectionDeleteMany(userGroup, users);
         Assert.AreEqual(2, deletedUser.Count(a => a.DeletedCount == 1), "用户未成功删除。");
     }
 
@@ -182,26 +182,26 @@ public class TestDbSetDelete : TestBase
         var userGroup = DataHelper.GetNewUserGroup();
         var users = DataHelper.GetNewUsers();
 
-        await dbContext.Users.DynamicCollectionInsertManyAsync(userGroup, users);
+        await dbContext.Users.Immediate.DynamicCollectionInsertManyAsync(userGroup, users);
 
         // 删除用户
-        var result1 = await dbContext.Users.DynamicCollectionDeleteOneAsync(userGroup, users[0]);
+        var result1 = await dbContext.Users.Immediate.DynamicCollectionDeleteOneAsync(userGroup, users[0]);
         Assert.AreEqual(true, result1.IsAcknowledged, "用户1，未成功删除。");
 
         // 删除用户
-        var result2 = await dbContext.Users.DynamicCollectionDeleteOneAsync(userGroup, users[1].Id);
+        var result2 = await dbContext.Users.Immediate.DynamicCollectionDeleteOneAsync(userGroup, users[1].Id);
         Assert.AreEqual(true, result2.IsAcknowledged, "用户2，未成功删除。");
 
         // 删除用户
-        var result3 = await dbContext.Users.DynamicCollectionDeleteOneAsync(userGroup, d => d.Id == users[2].Id);
+        var result3 = await dbContext.Users.Immediate.DynamicCollectionDeleteOneAsync(userGroup, d => d.Id == users[2].Id);
         Assert.AreEqual(true, result3.IsAcknowledged, "用户3，未成功删除。");
 
         // 删除用户
-        var result4 = await dbContext.Users.DynamicCollectionDeleteOneAsync(userGroup, Builders<User>.Filter.Eq(f => f.Id, users[3].Id));
+        var result4 = await dbContext.Users.Immediate.DynamicCollectionDeleteOneAsync(userGroup, Builders<User>.Filter.Eq(f => f.Id, users[3].Id));
         Assert.AreEqual(true, result4.IsAcknowledged, "用户4，未成功删除。");
 
         // 验证删除是否成功
-        var deletedUser = await dbContext.Users.DynamicCollectionDeleteManyAsync(userGroup, users);
+        var deletedUser = await dbContext.Users.Immediate.DynamicCollectionDeleteManyAsync(userGroup, users);
         Assert.AreEqual(2, deletedUser.Count(a => a.DeletedCount == 1), "用户未成功删除。");
     }
 
@@ -215,26 +215,26 @@ public class TestDbSetDelete : TestBase
         {
             session.StartTransaction();
 
-            dbContext.Users.DynamicCollectionInsertMany(session, userGroup, users);
+            dbContext.Users.Immediate.DynamicCollectionInsertMany(session, userGroup, users);
 
             // 删除用户
-            var result1 = dbContext.Users.DynamicCollectionDeleteOne(session, userGroup, users[0]);
+            var result1 = dbContext.Users.Immediate.DynamicCollectionDeleteOne(session, userGroup, users[0]);
             Assert.AreEqual(true, result1.IsAcknowledged, "用户1，未成功删除。");
 
             // 删除用户
-            var result2 = dbContext.Users.DynamicCollectionDeleteOne(session, userGroup, users[1].Id);
+            var result2 = dbContext.Users.Immediate.DynamicCollectionDeleteOne(session, userGroup, users[1].Id);
             Assert.AreEqual(true, result2.IsAcknowledged, "用户2，未成功删除。");
 
             // 删除用户
-            var result3 = dbContext.Users.DynamicCollectionDeleteOne(session, userGroup, d => d.Id == users[2].Id);
+            var result3 = dbContext.Users.Immediate.DynamicCollectionDeleteOne(session, userGroup, d => d.Id == users[2].Id);
             Assert.AreEqual(true, result3.IsAcknowledged, "用户3，未成功删除。");
 
             // 删除用户
-            var result4 = dbContext.Users.DynamicCollectionDeleteOne(session, userGroup, Builders<User>.Filter.Eq(f => f.Id, users[3].Id));
+            var result4 = dbContext.Users.Immediate.DynamicCollectionDeleteOne(session, userGroup, Builders<User>.Filter.Eq(f => f.Id, users[3].Id));
             Assert.AreEqual(true, result4.IsAcknowledged, "用户4，未成功删除。");
 
             // 验证删除是否成功
-            var deletedUser = dbContext.Users.DynamicCollectionDeleteMany(session, userGroup, users);
+            var deletedUser = dbContext.Users.Immediate.DynamicCollectionDeleteMany(session, userGroup, users);
             Assert.AreEqual(2, deletedUser.Count(a => a.DeletedCount == 1), "用户未成功删除。");
 
             session.CommitTransaction();
@@ -251,26 +251,26 @@ public class TestDbSetDelete : TestBase
         {
             session.StartTransaction();
 
-            await dbContext.Users.DynamicCollectionInsertManyAsync(session, userGroup, users);
+            await dbContext.Users.Immediate.DynamicCollectionInsertManyAsync(session, userGroup, users);
 
             // 删除用户
-            var result1 = await dbContext.Users.DynamicCollectionDeleteOneAsync(session, userGroup, users[0]);
+            var result1 = await dbContext.Users.Immediate.DynamicCollectionDeleteOneAsync(session, userGroup, users[0]);
             Assert.AreEqual(true, result1.IsAcknowledged, "用户1，未成功删除。");
 
             // 删除用户
-            var result2 = await dbContext.Users.DynamicCollectionDeleteOneAsync(session, userGroup, users[1].Id);
+            var result2 = await dbContext.Users.Immediate.DynamicCollectionDeleteOneAsync(session, userGroup, users[1].Id);
             Assert.AreEqual(true, result2.IsAcknowledged, "用户2，未成功删除。");
 
             // 删除用户
-            var result3 = await dbContext.Users.DynamicCollectionDeleteOneAsync(session, userGroup, d => d.Id == users[2].Id);
+            var result3 = await dbContext.Users.Immediate.DynamicCollectionDeleteOneAsync(session, userGroup, d => d.Id == users[2].Id);
             Assert.AreEqual(true, result3.IsAcknowledged, "用户3，未成功删除。");
 
             // 删除用户
-            var result4 = await dbContext.Users.DynamicCollectionDeleteOneAsync(session, userGroup, Builders<User>.Filter.Eq(f => f.Id, users[3].Id));
+            var result4 = await dbContext.Users.Immediate.DynamicCollectionDeleteOneAsync(session, userGroup, Builders<User>.Filter.Eq(f => f.Id, users[3].Id));
             Assert.AreEqual(true, result4.IsAcknowledged, "用户4，未成功删除。");
 
             // 验证删除是否成功
-            var deletedUser = await dbContext.Users.DynamicCollectionDeleteManyAsync(session, userGroup, users);
+            var deletedUser = await dbContext.Users.Immediate.DynamicCollectionDeleteManyAsync(session, userGroup, users);
             Assert.AreEqual(2, deletedUser.Count(a => a.DeletedCount == 1), "用户未成功删除。");
 
             session.CommitTransaction();
@@ -282,21 +282,21 @@ public class TestDbSetDelete : TestBase
     {
         var users = DataHelper.GetNewUsers();
 
-        dbContext.Users.InsertMany(users);
+        dbContext.Users.Immediate.InsertMany(users);
 
         // 删除用户
-        var result1 = dbContext.Users.FindOneAndDelete(users[0].Id);
+        var result1 = dbContext.Users.Immediate.FindOneAndDelete(users[0].Id);
         Assert.IsNotNull(result1, "用户1，未成功删除。");
 
         // 删除用户
-        var result2 = dbContext.Users.FindOneAndDelete(d => d.Id == users[1].Id);
+        var result2 = dbContext.Users.Immediate.FindOneAndDelete(d => d.Id == users[1].Id);
         Assert.IsNotNull(result2, "用户2，未成功删除。");
 
         // 删除用户
-        var result3 = dbContext.Users.FindOneAndDelete(Builders<User>.Filter.Eq(f => f.Id, users[2].Id));
+        var result3 = dbContext.Users.Immediate.FindOneAndDelete(Builders<User>.Filter.Eq(f => f.Id, users[2].Id));
         Assert.IsNotNull(result3, "用户3，未成功删除。");
 
-        var deletedUser = dbContext.Users.DeleteMany(users);
+        var deletedUser = dbContext.Users.Immediate.DeleteMany(users);
     }
 
     [TestMethod]
@@ -304,21 +304,21 @@ public class TestDbSetDelete : TestBase
     {
         var users = DataHelper.GetNewUsers();
 
-        await dbContext.Users.InsertManyAsync(users);
+        await dbContext.Users.Immediate.InsertManyAsync(users);
 
         // 删除用户
-        var result1 = await dbContext.Users.FindOneAndDeleteAsync(users[0].Id);
+        var result1 = await dbContext.Users.Immediate.FindOneAndDeleteAsync(users[0].Id);
         Assert.IsNotNull(result1, "用户1，未成功删除。");
 
         // 删除用户
-        var result2 = await dbContext.Users.FindOneAndDeleteAsync(d => d.Id == users[1].Id);
+        var result2 = await dbContext.Users.Immediate.FindOneAndDeleteAsync(d => d.Id == users[1].Id);
         Assert.IsNotNull(result2, "用户2，未成功删除。");
 
         // 删除用户
-        var result3 = await dbContext.Users.FindOneAndDeleteAsync(Builders<User>.Filter.Eq(f => f.Id, users[2].Id));
+        var result3 = await dbContext.Users.Immediate.FindOneAndDeleteAsync(Builders<User>.Filter.Eq(f => f.Id, users[2].Id));
         Assert.IsNotNull(result3, "用户3，未成功删除。");
 
-        var deletedUser = dbContext.Users.DeleteMany(users);
+        var deletedUser = dbContext.Users.Immediate.DeleteMany(users);
     }
 
     [TestMethod]
@@ -330,21 +330,21 @@ public class TestDbSetDelete : TestBase
         {
             session.StartTransaction();
 
-            dbContext.Users.InsertMany(session, users);
+            dbContext.Users.Immediate.InsertMany(session, users);
 
             // 删除用户
-            var result1 = dbContext.Users.FindOneAndDelete(session, users[0].Id);
+            var result1 = dbContext.Users.Immediate.FindOneAndDelete(session, users[0].Id);
             Assert.IsNotNull(result1, "用户1，未成功删除。");
 
             // 删除用户
-            var result2 = dbContext.Users.FindOneAndDelete(session, d => d.Id == users[1].Id);
+            var result2 = dbContext.Users.Immediate.FindOneAndDelete(session, d => d.Id == users[1].Id);
             Assert.IsNotNull(result2, "用户2，未成功删除。");
 
             // 删除用户
-            var result3 = dbContext.Users.FindOneAndDelete(session, Builders<User>.Filter.Eq(f => f.Id, users[2].Id));
+            var result3 = dbContext.Users.Immediate.FindOneAndDelete(session, Builders<User>.Filter.Eq(f => f.Id, users[2].Id));
             Assert.IsNotNull(result3, "用户3，未成功删除。");
 
-            var deletedUser = dbContext.Users.DeleteMany(session, users);
+            var deletedUser = dbContext.Users.Immediate.DeleteMany(session, users);
 
             session.CommitTransaction();
         }
@@ -359,21 +359,21 @@ public class TestDbSetDelete : TestBase
         {
             session.StartTransaction();
 
-            await dbContext.Users.InsertManyAsync(session, users);
+            await dbContext.Users.Immediate.InsertManyAsync(session, users);
 
             // 删除用户
-            var result1 = await dbContext.Users.FindOneAndDeleteAsync(session, users[0].Id);
+            var result1 = await dbContext.Users.Immediate.FindOneAndDeleteAsync(session, users[0].Id);
             Assert.IsNotNull(result1, "用户1，未成功删除。");
 
             // 删除用户
-            var result2 = await dbContext.Users.FindOneAndDeleteAsync(session, d => d.Id == users[1].Id);
+            var result2 = await dbContext.Users.Immediate.FindOneAndDeleteAsync(session, d => d.Id == users[1].Id);
             Assert.IsNotNull(result2, "用户2，未成功删除。");
 
             // 删除用户
-            var result3 = await dbContext.Users.FindOneAndDeleteAsync(session, Builders<User>.Filter.Eq(f => f.Id, users[2].Id));
+            var result3 = await dbContext.Users.Immediate.FindOneAndDeleteAsync(session, Builders<User>.Filter.Eq(f => f.Id, users[2].Id));
             Assert.IsNotNull(result3, "用户3，未成功删除。");
 
-            var deletedUser = dbContext.Users.DeleteMany(session, users);
+            var deletedUser = dbContext.Users.Immediate.DeleteMany(session, users);
 
             session.CommitTransaction();
         }
@@ -385,21 +385,21 @@ public class TestDbSetDelete : TestBase
         var userGroup = DataHelper.GetNewUserGroup();
         var users = DataHelper.GetNewUsers();
 
-        dbContext.Users.DynamicCollectionInsertMany(userGroup, users);
+        dbContext.Users.Immediate.DynamicCollectionInsertMany(userGroup, users);
 
         // 删除用户
-        var result1 = dbContext.Users.DynamicCollectionFindOneAndDelete(userGroup, users[0].Id);
+        var result1 = dbContext.Users.Immediate.DynamicCollectionFindOneAndDelete(userGroup, users[0].Id);
         Assert.IsNotNull(result1, "用户1，未成功删除。");
 
         // 删除用户
-        var result2 = dbContext.Users.DynamicCollectionFindOneAndDelete(userGroup, d => d.Id == users[1].Id);
+        var result2 = dbContext.Users.Immediate.DynamicCollectionFindOneAndDelete(userGroup, d => d.Id == users[1].Id);
         Assert.IsNotNull(result2, "用户2，未成功删除。");
 
         // 删除用户
-        var result3 = dbContext.Users.DynamicCollectionFindOneAndDelete(userGroup, Builders<User>.Filter.Eq(f => f.Id, users[2].Id));
+        var result3 = dbContext.Users.Immediate.DynamicCollectionFindOneAndDelete(userGroup, Builders<User>.Filter.Eq(f => f.Id, users[2].Id));
         Assert.IsNotNull(result3, "用户3，未成功删除。");
 
-        var deletedUser = dbContext.Users.DynamicCollectionDeleteMany(userGroup, users);
+        var deletedUser = dbContext.Users.Immediate.DynamicCollectionDeleteMany(userGroup, users);
     }
 
     [TestMethod]
@@ -408,21 +408,21 @@ public class TestDbSetDelete : TestBase
         var userGroup = DataHelper.GetNewUserGroup();
         var users = DataHelper.GetNewUsers();
 
-        await dbContext.Users.DynamicCollectionInsertManyAsync(userGroup, users);
+        await dbContext.Users.Immediate.DynamicCollectionInsertManyAsync(userGroup, users);
 
         // 删除用户
-        var result1 = await dbContext.Users.DynamicCollectionFindOneAndDeleteAsync(userGroup, users[0].Id);
+        var result1 = await dbContext.Users.Immediate.DynamicCollectionFindOneAndDeleteAsync(userGroup, users[0].Id);
         Assert.IsNotNull(result1, "用户1，未成功删除。");
 
         // 删除用户
-        var result2 = await dbContext.Users.DynamicCollectionFindOneAndDeleteAsync(userGroup, d => d.Id == users[1].Id);
+        var result2 = await dbContext.Users.Immediate.DynamicCollectionFindOneAndDeleteAsync(userGroup, d => d.Id == users[1].Id);
         Assert.IsNotNull(result2, "用户2，未成功删除。");
 
         // 删除用户
-        var result3 = await dbContext.Users.DynamicCollectionFindOneAndDeleteAsync(userGroup, Builders<User>.Filter.Eq(f => f.Id, users[2].Id));
+        var result3 = await dbContext.Users.Immediate.DynamicCollectionFindOneAndDeleteAsync(userGroup, Builders<User>.Filter.Eq(f => f.Id, users[2].Id));
         Assert.IsNotNull(result3, "用户3，未成功删除。");
 
-        var deletedUser = await dbContext.Users.DynamicCollectionDeleteManyAsync(userGroup, users);
+        var deletedUser = await dbContext.Users.Immediate.DynamicCollectionDeleteManyAsync(userGroup, users);
     }
 
     [TestMethod]
@@ -435,21 +435,21 @@ public class TestDbSetDelete : TestBase
         {
             session.StartTransaction();
 
-            dbContext.Users.DynamicCollectionInsertMany(session, userGroup, users);
+            dbContext.Users.Immediate.DynamicCollectionInsertMany(session, userGroup, users);
 
             // 删除用户
-            var result1 = dbContext.Users.DynamicCollectionFindOneAndDelete(session, userGroup, users[0].Id);
+            var result1 = dbContext.Users.Immediate.DynamicCollectionFindOneAndDelete(session, userGroup, users[0].Id);
             Assert.IsNotNull(result1, "用户1，未成功删除。");
 
             // 删除用户
-            var result2 = dbContext.Users.DynamicCollectionFindOneAndDelete(session, userGroup, d => d.Id == users[1].Id);
+            var result2 = dbContext.Users.Immediate.DynamicCollectionFindOneAndDelete(session, userGroup, d => d.Id == users[1].Id);
             Assert.IsNotNull(result2, "用户2，未成功删除。");
 
             // 删除用户
-            var result3 = dbContext.Users.DynamicCollectionFindOneAndDelete(session, userGroup, Builders<User>.Filter.Eq(f => f.Id, users[2].Id));
+            var result3 = dbContext.Users.Immediate.DynamicCollectionFindOneAndDelete(session, userGroup, Builders<User>.Filter.Eq(f => f.Id, users[2].Id));
             Assert.IsNotNull(result3, "用户3，未成功删除。");
 
-            var deletedUser = dbContext.Users.DynamicCollectionDeleteMany(session, userGroup, users);
+            var deletedUser = dbContext.Users.Immediate.DynamicCollectionDeleteMany(session, userGroup, users);
 
             session.CommitTransaction();
         }
@@ -465,21 +465,21 @@ public class TestDbSetDelete : TestBase
         {
             session.StartTransaction();
 
-            await dbContext.Users.DynamicCollectionInsertManyAsync(session, userGroup, users);
+            await dbContext.Users.Immediate.DynamicCollectionInsertManyAsync(session, userGroup, users);
 
             // 删除用户
-            var result1 = await dbContext.Users.DynamicCollectionFindOneAndDeleteAsync(session, userGroup, users[0].Id);
+            var result1 = await dbContext.Users.Immediate.DynamicCollectionFindOneAndDeleteAsync(session, userGroup, users[0].Id);
             Assert.IsNotNull(result1, "用户1，未成功删除。");
 
             // 删除用户
-            var result2 = await dbContext.Users.DynamicCollectionFindOneAndDeleteAsync(session, userGroup, d => d.Id == users[1].Id);
+            var result2 = await dbContext.Users.Immediate.DynamicCollectionFindOneAndDeleteAsync(session, userGroup, d => d.Id == users[1].Id);
             Assert.IsNotNull(result2, "用户2，未成功删除。");
 
             // 删除用户
-            var result3 = await dbContext.Users.DynamicCollectionFindOneAndDeleteAsync(session, userGroup, Builders<User>.Filter.Eq(f => f.Id, users[2].Id));
+            var result3 = await dbContext.Users.Immediate.DynamicCollectionFindOneAndDeleteAsync(session, userGroup, Builders<User>.Filter.Eq(f => f.Id, users[2].Id));
             Assert.IsNotNull(result3, "用户3，未成功删除。");
 
-            var deletedUser = await dbContext.Users.DynamicCollectionDeleteManyAsync(session, userGroup, users);
+            var deletedUser = await dbContext.Users.Immediate.DynamicCollectionDeleteManyAsync(session, userGroup, users);
 
             session.CommitTransaction();
         }
@@ -493,21 +493,21 @@ public class TestDbSetDelete : TestBase
         var users3 = DataHelper.GetNewUsers();
 
         //添加用户
-        dbContext.Users.InsertMany(users1);
+        dbContext.Users.Immediate.InsertMany(users1);
         // 验证删除是否成功
-        var deletedUser1 = dbContext.Users.DeleteMany(users1);
+        var deletedUser1 = dbContext.Users.Immediate.DeleteMany(users1);
         Assert.AreEqual(6, deletedUser1.Count(a => a.DeletedCount == 1), "用户1，未成功删除。");
 
         //添加用户
-        dbContext.Users.InsertMany(users2);
+        dbContext.Users.Immediate.InsertMany(users2);
         // 验证删除是否成功
-        var deletedUser2 = dbContext.Users.DeleteMany(Builders<User>.Filter.Eq(f => f.Password, "123456"));
+        var deletedUser2 = dbContext.Users.Immediate.DeleteMany(Builders<User>.Filter.Eq(f => f.Password, "123456"));
         Assert.AreEqual(6, deletedUser2.DeletedCount, "用户2，未成功删除。");
 
         //添加用户
-        dbContext.Users.InsertMany(users3);
+        dbContext.Users.Immediate.InsertMany(users3);
         // 验证删除是否成功
-        var deletedUser3 = dbContext.Users.DeleteMany(d => d.Password == "123456");
+        var deletedUser3 = dbContext.Users.Immediate.DeleteMany(d => d.Password == "123456");
         Assert.AreEqual(6, deletedUser3.DeletedCount, "用户3，未成功删除。");
     }
 
@@ -519,21 +519,21 @@ public class TestDbSetDelete : TestBase
         var users3 = DataHelper.GetNewUsers();
 
         //添加用户
-        await dbContext.Users.InsertManyAsync(users1);
+        await dbContext.Users.Immediate.InsertManyAsync(users1);
         // 验证删除是否成功
-        var deletedUser1 = await dbContext.Users.DeleteManyAsync(users1);
+        var deletedUser1 = await dbContext.Users.Immediate.DeleteManyAsync(users1);
         Assert.AreEqual(6, deletedUser1.Count(a => a.DeletedCount == 1), "用户1，未成功删除。");
 
         //添加用户
-        await dbContext.Users.InsertManyAsync(users2);
+        await dbContext.Users.Immediate.InsertManyAsync(users2);
         // 验证删除是否成功
-        var deletedUser2 = await dbContext.Users.DeleteManyAsync(Builders<User>.Filter.Eq(f => f.Password, "123456"));
+        var deletedUser2 = await dbContext.Users.Immediate.DeleteManyAsync(Builders<User>.Filter.Eq(f => f.Password, "123456"));
         Assert.AreEqual(6, deletedUser2.DeletedCount, "用户2，未成功删除。");
 
         //添加用户
-        await dbContext.Users.InsertManyAsync(users3);
+        await dbContext.Users.Immediate.InsertManyAsync(users3);
         // 验证删除是否成功
-        var deletedUser3 = await dbContext.Users.DeleteManyAsync(d => d.Password == "123456");
+        var deletedUser3 = await dbContext.Users.Immediate.DeleteManyAsync(d => d.Password == "123456");
         Assert.AreEqual(6, deletedUser3.DeletedCount, "用户3，未成功删除。");
     }
 
@@ -553,21 +553,21 @@ public class TestDbSetDelete : TestBase
             session.StartTransaction();
 
             //添加用户
-            dbContext.Users.InsertMany(session, users1);
+            dbContext.Users.Immediate.InsertMany(session, users1);
             // 验证删除是否成功
-            var deletedUser1 = dbContext.Users.DeleteMany(session, users1);
+            var deletedUser1 = dbContext.Users.Immediate.DeleteMany(session, users1);
             Assert.AreEqual(6, deletedUser1.Count(a => a.DeletedCount == 1), "用户1，未成功删除。");
 
             //添加用户
-            dbContext.Users.InsertMany(session, users2);
+            dbContext.Users.Immediate.InsertMany(session, users2);
             // 验证删除是否成功
-            var deletedUser2 = dbContext.Users.DeleteMany(session, Builders<User>.Filter.Eq(f => f.Password, pwd2));
+            var deletedUser2 = dbContext.Users.Immediate.DeleteMany(session, Builders<User>.Filter.Eq(f => f.Password, pwd2));
             Assert.AreEqual(6, deletedUser2.DeletedCount, "用户2，未成功删除。");
 
             //添加用户
-            dbContext.Users.InsertMany(session, users3);
+            dbContext.Users.Immediate.InsertMany(session, users3);
             // 验证删除是否成功
-            var deletedUser3 = dbContext.Users.DeleteMany(session, d => d.Password == pwd3);
+            var deletedUser3 = dbContext.Users.Immediate.DeleteMany(session, d => d.Password == pwd3);
             Assert.AreEqual(6, deletedUser3.DeletedCount, "用户3，未成功删除。");
 
             session.CommitTransaction();
@@ -590,21 +590,21 @@ public class TestDbSetDelete : TestBase
             session.StartTransaction();
 
             //添加用户
-            await dbContext.Users.InsertManyAsync(session, users1);
+            await dbContext.Users.Immediate.InsertManyAsync(session, users1);
             // 验证删除是否成功
-            var deletedUser1 = await dbContext.Users.DeleteManyAsync(session, users1);
+            var deletedUser1 = await dbContext.Users.Immediate.DeleteManyAsync(session, users1);
             Assert.AreEqual(6, deletedUser1.Count(a => a.DeletedCount == 1), "用户1，未成功删除。");
 
             //添加用户
-            await dbContext.Users.InsertManyAsync(session, users2);
+            await dbContext.Users.Immediate.InsertManyAsync(session, users2);
             // 验证删除是否成功
-            var deletedUser2 = await dbContext.Users.DeleteManyAsync(session, Builders<User>.Filter.Eq(f => f.Password, pwd2));
+            var deletedUser2 = await dbContext.Users.Immediate.DeleteManyAsync(session, Builders<User>.Filter.Eq(f => f.Password, pwd2));
             Assert.AreEqual(6, deletedUser2.DeletedCount, "用户2，未成功删除。");
 
             //添加用户
-            await dbContext.Users.InsertManyAsync(session, users3);
+            await dbContext.Users.Immediate.InsertManyAsync(session, users3);
             // 验证删除是否成功
-            var deletedUser3 = await dbContext.Users.DeleteManyAsync(session, d => d.Password == pwd3);
+            var deletedUser3 = await dbContext.Users.Immediate.DeleteManyAsync(session, d => d.Password == pwd3);
             Assert.AreEqual(6, deletedUser3.DeletedCount, "用户3，未成功删除。");
 
             session.CommitTransaction();
@@ -620,21 +620,21 @@ public class TestDbSetDelete : TestBase
         var users3 = DataHelper.GetNewUsers();
 
         //添加用户
-        dbContext.Users.DynamicCollectionInsertMany(userGroup, users1);
+        dbContext.Users.Immediate.DynamicCollectionInsertMany(userGroup, users1);
         // 验证删除是否成功
-        var deletedUser1 = dbContext.Users.DynamicCollectionDeleteMany(userGroup, users1);
+        var deletedUser1 = dbContext.Users.Immediate.DynamicCollectionDeleteMany(userGroup, users1);
         Assert.AreEqual(6, deletedUser1.Count(a => a.DeletedCount == 1), "用户1，未成功删除。");
 
         //添加用户
-        dbContext.Users.DynamicCollectionInsertMany(userGroup, users2);
+        dbContext.Users.Immediate.DynamicCollectionInsertMany(userGroup, users2);
         // 验证删除是否成功
-        var deletedUser2 = dbContext.Users.DynamicCollectionDeleteMany(userGroup, Builders<User>.Filter.Eq(f => f.Password, "123456"));
+        var deletedUser2 = dbContext.Users.Immediate.DynamicCollectionDeleteMany(userGroup, Builders<User>.Filter.Eq(f => f.Password, "123456"));
         Assert.AreEqual(6, deletedUser2.DeletedCount, "用户2，未成功删除。");
 
         //添加用户
-        dbContext.Users.DynamicCollectionInsertMany(userGroup, users3);
+        dbContext.Users.Immediate.DynamicCollectionInsertMany(userGroup, users3);
         // 验证删除是否成功
-        var deletedUser3 = dbContext.Users.DynamicCollectionDeleteMany(userGroup, d => d.Password == "123456");
+        var deletedUser3 = dbContext.Users.Immediate.DynamicCollectionDeleteMany(userGroup, d => d.Password == "123456");
         Assert.AreEqual(6, deletedUser3.DeletedCount, "用户3，未成功删除。");
     }
 
@@ -647,21 +647,21 @@ public class TestDbSetDelete : TestBase
         var users3 = DataHelper.GetNewUsers();
 
         //添加用户
-        await dbContext.Users.DynamicCollectionInsertManyAsync(userGroup, users1);
+        await dbContext.Users.Immediate.DynamicCollectionInsertManyAsync(userGroup, users1);
         // 验证删除是否成功
-        var deletedUser1 = await dbContext.Users.DynamicCollectionDeleteManyAsync(userGroup, users1);
+        var deletedUser1 = await dbContext.Users.Immediate.DynamicCollectionDeleteManyAsync(userGroup, users1);
         Assert.AreEqual(6, deletedUser1.Count(a => a.DeletedCount == 1), "用户1，未成功删除。");
 
         //添加用户
-        await dbContext.Users.DynamicCollectionInsertManyAsync(userGroup, users2);
+        await dbContext.Users.Immediate.DynamicCollectionInsertManyAsync(userGroup, users2);
         // 验证删除是否成功
-        var deletedUser2 = await dbContext.Users.DynamicCollectionDeleteManyAsync(userGroup, Builders<User>.Filter.Eq(f => f.Password, "123456"));
+        var deletedUser2 = await dbContext.Users.Immediate.DynamicCollectionDeleteManyAsync(userGroup, Builders<User>.Filter.Eq(f => f.Password, "123456"));
         Assert.AreEqual(6, deletedUser2.DeletedCount, "用户2，未成功删除。");
 
         //添加用户
-        await dbContext.Users.DynamicCollectionInsertManyAsync(userGroup, users3);
+        await dbContext.Users.Immediate.DynamicCollectionInsertManyAsync(userGroup, users3);
         // 验证删除是否成功
-        var deletedUser3 = await dbContext.Users.DynamicCollectionDeleteManyAsync(userGroup, d => d.Password == "123456");
+        var deletedUser3 = await dbContext.Users.Immediate.DynamicCollectionDeleteManyAsync(userGroup, d => d.Password == "123456");
         Assert.AreEqual(6, deletedUser3.DeletedCount, "用户3，未成功删除。");
     }
 
@@ -683,21 +683,21 @@ public class TestDbSetDelete : TestBase
             session.StartTransaction();
 
             //添加用户
-            dbContext.Users.DynamicCollectionInsertMany(session, userGroup, users1);
+            dbContext.Users.Immediate.DynamicCollectionInsertMany(session, userGroup, users1);
             // 验证删除是否成功
-            var deletedUser1 = dbContext.Users.DynamicCollectionDeleteMany(session, userGroup, users1);
+            var deletedUser1 = dbContext.Users.Immediate.DynamicCollectionDeleteMany(session, userGroup, users1);
             Assert.AreEqual(6, deletedUser1.Count(a => a.DeletedCount == 1), "用户1，未成功删除。");
 
             //添加用户
-            dbContext.Users.DynamicCollectionInsertMany(session, userGroup, users2);
+            dbContext.Users.Immediate.DynamicCollectionInsertMany(session, userGroup, users2);
             // 验证删除是否成功
-            var deletedUser2 = dbContext.Users.DynamicCollectionDeleteMany(session, userGroup, Builders<User>.Filter.Eq(f => f.Password, pwd2));
+            var deletedUser2 = dbContext.Users.Immediate.DynamicCollectionDeleteMany(session, userGroup, Builders<User>.Filter.Eq(f => f.Password, pwd2));
             Assert.AreEqual(6, deletedUser2.DeletedCount, "用户2，未成功删除。");
 
             //添加用户
-            dbContext.Users.DynamicCollectionInsertMany(session, userGroup, users3);
+            dbContext.Users.Immediate.DynamicCollectionInsertMany(session, userGroup, users3);
             // 验证删除是否成功
-            var deletedUser3 = dbContext.Users.DynamicCollectionDeleteMany(session, userGroup, d => d.Password == pwd3);
+            var deletedUser3 = dbContext.Users.Immediate.DynamicCollectionDeleteMany(session, userGroup, d => d.Password == pwd3);
             Assert.AreEqual(6, deletedUser3.DeletedCount, "用户3，未成功删除。");
 
             session.CommitTransaction();
@@ -722,21 +722,21 @@ public class TestDbSetDelete : TestBase
             session.StartTransaction();
 
             //添加用户
-            await dbContext.Users.DynamicCollectionInsertManyAsync(session, userGroup, users1);
+            await dbContext.Users.Immediate.DynamicCollectionInsertManyAsync(session, userGroup, users1);
             // 验证删除是否成功
-            var deletedUser1 = await dbContext.Users.DynamicCollectionDeleteManyAsync(session, userGroup, users1);
+            var deletedUser1 = await dbContext.Users.Immediate.DynamicCollectionDeleteManyAsync(session, userGroup, users1);
             Assert.AreEqual(6, deletedUser1.Count(a => a.DeletedCount == 1), "用户1，未成功删除。");
 
             //添加用户
-            await dbContext.Users.DynamicCollectionInsertManyAsync(session, userGroup, users2);
+            await dbContext.Users.Immediate.DynamicCollectionInsertManyAsync(session, userGroup, users2);
             // 验证删除是否成功
-            var deletedUser2 = await dbContext.Users.DynamicCollectionDeleteManyAsync(session, userGroup, Builders<User>.Filter.Eq(f => f.Password, pwd2));
+            var deletedUser2 = await dbContext.Users.Immediate.DynamicCollectionDeleteManyAsync(session, userGroup, Builders<User>.Filter.Eq(f => f.Password, pwd2));
             Assert.AreEqual(6, deletedUser2.DeletedCount, "用户2，未成功删除。");
 
             //添加用户
-            await dbContext.Users.DynamicCollectionInsertManyAsync(session, userGroup, users3);
+            await dbContext.Users.Immediate.DynamicCollectionInsertManyAsync(session, userGroup, users3);
             // 验证删除是否成功
-            var deletedUser3 = await dbContext.Users.DynamicCollectionDeleteManyAsync(session, userGroup, d => d.Password == pwd3);
+            var deletedUser3 = await dbContext.Users.Immediate.DynamicCollectionDeleteManyAsync(session, userGroup, d => d.Password == pwd3);
             Assert.AreEqual(6, deletedUser3.DeletedCount, "用户3，未成功删除。");
 
             session.CommitTransaction();

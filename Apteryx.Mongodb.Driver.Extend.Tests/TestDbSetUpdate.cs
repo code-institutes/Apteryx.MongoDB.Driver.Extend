@@ -25,42 +25,42 @@ public class TestDbSetUpdate : TestBase
     public void TestUpdateOne()
     {
         var user = DataHelper.GetNewUser();
-        dbContext.Users.Insert(user);
+        dbContext.Users.Immediate.Insert(user);
 
         // 验证添加是否成功
-        var addedUser = dbContext.Users.FindOne(user.Id);
+        var addedUser = dbContext.Users.Immediate.FindOne(user.Id);
         Assert.IsNotNull(addedUser, "未成功添加用户。");
 
 
         // 更新用户1
         var name1 = $"乔峰{Guid.NewGuid().ToString()}";
-        dbContext.Users.UpdateOne(user.Id, Builders<User>.Update.Set(u => u.Name, name1));
+        dbContext.Users.Immediate.UpdateOne(user.Id, Builders<User>.Update.Set(u => u.Name, name1));
 
         // 验证更新是否成功
-        var updatedUser1 = dbContext.Users.FindOne(user.Id);
+        var updatedUser1 = dbContext.Users.Immediate.FindOne(user.Id);
         Assert.AreEqual(updatedUser1.Name, name1, "未成功更新用户。");
 
         // 更新用户2
         var name2 = $"虚竹{Guid.NewGuid().ToString()}";
-        dbContext.Users.UpdateOne(r => r.Id == user.Id, Builders<User>.Update.Set(u => u.Name, name2));
+        dbContext.Users.Immediate.UpdateOne(r => r.Id == user.Id, Builders<User>.Update.Set(u => u.Name, name2));
 
         // 验证更新是否成功
-        var updatedUser2 = dbContext.Users.FindOne(user.Id);
+        var updatedUser2 = dbContext.Users.Immediate.FindOne(user.Id);
         Assert.AreEqual(updatedUser2.Name, name2, "未成功更新用户。");
 
         // 更新用户3
         var name3 = $"段誉{Guid.NewGuid().ToString()}";
-        dbContext.Users.UpdateOne(Builders<User>.Filter.Eq(f => f.Id, user.Id), Builders<User>.Update.Set(u => u.Name, name3));
+        dbContext.Users.Immediate.UpdateOne(Builders<User>.Filter.Eq(f => f.Id, user.Id), Builders<User>.Update.Set(u => u.Name, name3));
 
-        var updatedUser3 = dbContext.Users.FindOne(user.Id);
+        var updatedUser3 = dbContext.Users.Immediate.FindOne(user.Id);
         Assert.AreEqual(updatedUser3.Name, name3, "未成功更新用户。");
 
 
         // 删除用户
-        var result = dbContext.Users.DeleteOne(user);
+        var result = dbContext.Users.Immediate.DeleteOne(user);
 
         // 验证删除是否成功
-        var deletedUser = dbContext.Users.FindOne(user.Id);
+        var deletedUser = dbContext.Users.Immediate.FindOne(user.Id);
         Assert.IsNull(deletedUser, "用户未成功删除。");
     }
 
@@ -68,42 +68,42 @@ public class TestDbSetUpdate : TestBase
     public async Task TestUpdateOneAsync()
     {
         var user = DataHelper.GetNewUser();
-        await dbContext.Users.InsertAsync(user);
+        await dbContext.Users.Immediate.InsertAsync(user);
 
         // 验证添加是否成功
-        var addedUser = await dbContext.Users.FindOneAsync(user.Id);
+        var addedUser = await dbContext.Users.Immediate.FindOneAsync(user.Id);
         Assert.IsNotNull(addedUser, "未成功添加用户。");
 
 
         // 更新用户1
         var name1 = $"乔峰{Guid.NewGuid().ToString()}";
-        await dbContext.Users.UpdateOneAsync(user.Id, Builders<User>.Update.Set(u => u.Name, name1));
+        await dbContext.Users.Immediate.UpdateOneAsync(user.Id, Builders<User>.Update.Set(u => u.Name, name1));
 
         // 验证更新是否成功
-        var updatedUser1 = dbContext.Users.FindOne(user.Id);
+        var updatedUser1 = dbContext.Users.Immediate.FindOne(user.Id);
         Assert.AreEqual(updatedUser1.Name, name1, "未成功更新用户。");
 
         // 更新用户2
         var name2 = $"虚竹{Guid.NewGuid().ToString()}";
-        await dbContext.Users.UpdateOneAsync(r => r.Id == user.Id, Builders<User>.Update.Set(u => u.Name, name2));
+        await dbContext.Users.Immediate.UpdateOneAsync(r => r.Id == user.Id, Builders<User>.Update.Set(u => u.Name, name2));
 
         // 验证更新是否成功
-        var updatedUser2 = dbContext.Users.FindOne(user.Id);
+        var updatedUser2 = dbContext.Users.Immediate.FindOne(user.Id);
         Assert.AreEqual(updatedUser2.Name, name2, "未成功更新用户。");
 
         // 更新用户3
         var name3 = $"段誉{Guid.NewGuid().ToString()}";
-        await dbContext.Users.UpdateOneAsync(Builders<User>.Filter.Eq(f => f.Id, user.Id), Builders<User>.Update.Set(u => u.Name, name3));
+        await dbContext.Users.Immediate.UpdateOneAsync(Builders<User>.Filter.Eq(f => f.Id, user.Id), Builders<User>.Update.Set(u => u.Name, name3));
 
-        var updatedUser3 = dbContext.Users.FindOne(user.Id);
+        var updatedUser3 = dbContext.Users.Immediate.FindOne(user.Id);
         Assert.AreEqual(updatedUser3.Name, name3, "未成功更新用户。");
 
 
         // 删除用户
-        var result = await dbContext.Users.DeleteOneAsync(user);
+        var result = await dbContext.Users.Immediate.DeleteOneAsync(user);
 
         // 验证删除是否成功
-        var deletedUser = await dbContext.Users.FindOneAsync(user.Id);
+        var deletedUser = await dbContext.Users.Immediate.FindOneAsync(user.Id);
         Assert.IsNull(deletedUser, "用户未成功删除。");
     }
 
@@ -116,42 +116,42 @@ public class TestDbSetUpdate : TestBase
 
             var user = DataHelper.GetNewUser();
 
-            dbContext.Users.Insert(session, user);
+            dbContext.Users.Immediate.Insert(session, user);
 
             // 验证添加是否成功
-            var addedUser = dbContext.Users.FindOne(session, user.Id);
+            var addedUser = dbContext.Users.Immediate.FindOne(session, user.Id);
             Assert.IsNotNull(addedUser, "未成功添加用户。");
 
 
             // 更新用户1
             var name1 = $"乔峰{Guid.NewGuid().ToString()}";
-            dbContext.Users.UpdateOne(session, user.Id, Builders<User>.Update.Set(u => u.Name, name1));
+            dbContext.Users.Immediate.UpdateOne(session, user.Id, Builders<User>.Update.Set(u => u.Name, name1));
 
             // 验证更新是否成功
-            var updatedUser1 = dbContext.Users.FindOne(session, user.Id);
+            var updatedUser1 = dbContext.Users.Immediate.FindOne(session, user.Id);
             Assert.AreEqual(updatedUser1.Name, name1, "未成功更新用户。");
 
             // 更新用户2
             var name2 = $"虚竹{Guid.NewGuid().ToString()}";
-            dbContext.Users.UpdateOne(session, r => r.Id == user.Id, Builders<User>.Update.Set(u => u.Name, name2));
+            dbContext.Users.Immediate.UpdateOne(session, r => r.Id == user.Id, Builders<User>.Update.Set(u => u.Name, name2));
 
             // 验证更新是否成功
-            var updatedUser2 = dbContext.Users.FindOne(session, user.Id);
+            var updatedUser2 = dbContext.Users.Immediate.FindOne(session, user.Id);
             Assert.AreEqual(updatedUser2.Name, name2, "未成功更新用户。");
 
             // 更新用户3
             var name3 = $"段誉{Guid.NewGuid().ToString()}";
-            dbContext.Users.UpdateOne(session, Builders<User>.Filter.Eq(f => f.Id, user.Id), Builders<User>.Update.Set(u => u.Name, name3));
+            dbContext.Users.Immediate.UpdateOne(session, Builders<User>.Filter.Eq(f => f.Id, user.Id), Builders<User>.Update.Set(u => u.Name, name3));
 
-            var updatedUser3 = dbContext.Users.FindOne(session, user.Id);
+            var updatedUser3 = dbContext.Users.Immediate.FindOne(session, user.Id);
             Assert.AreEqual(updatedUser3.Name, name3, "未成功更新用户。");
 
 
             // 删除用户
-            var result = dbContext.Users.DeleteOne(session, user);
+            var result = dbContext.Users.Immediate.DeleteOne(session, user);
 
             // 验证删除是否成功
-            var deletedUser = dbContext.Users.FindOne(session, user.Id);
+            var deletedUser = dbContext.Users.Immediate.FindOne(session, user.Id);
             Assert.IsNull(deletedUser, "用户未成功删除。");
 
             session.CommitTransaction();
@@ -167,42 +167,42 @@ public class TestDbSetUpdate : TestBase
 
             var user = DataHelper.GetNewUser();
 
-            await dbContext.Users.InsertAsync(session, user);
+            await dbContext.Users.Immediate.InsertAsync(session, user);
 
             // 验证添加是否成功
-            var addedUser = await dbContext.Users.FindOneAsync(session, user.Id);
+            var addedUser = await dbContext.Users.Immediate.FindOneAsync(session, user.Id);
             Assert.IsNotNull(addedUser, "未成功添加用户。");
 
 
             // 更新用户1
             var name1 = $"乔峰{Guid.NewGuid().ToString()}";
-            await dbContext.Users.UpdateOneAsync(session, user.Id, Builders<User>.Update.Set(u => u.Name, name1));
+            await dbContext.Users.Immediate.UpdateOneAsync(session, user.Id, Builders<User>.Update.Set(u => u.Name, name1));
 
             // 验证更新是否成功
-            var updatedUser1 = await dbContext.Users.FindOneAsync(session, user.Id);
+            var updatedUser1 = await dbContext.Users.Immediate.FindOneAsync(session, user.Id);
             Assert.AreEqual(updatedUser1.Name, name1, "未成功更新用户。");
 
             // 更新用户2
             var name2 = $"虚竹{Guid.NewGuid().ToString()}";
-            await dbContext.Users.UpdateOneAsync(session, r => r.Id == user.Id, Builders<User>.Update.Set(u => u.Name, name2));
+            await dbContext.Users.Immediate.UpdateOneAsync(session, r => r.Id == user.Id, Builders<User>.Update.Set(u => u.Name, name2));
 
             // 验证更新是否成功
-            var updatedUser2 = await dbContext.Users.FindOneAsync(session, user.Id);
+            var updatedUser2 = await dbContext.Users.Immediate.FindOneAsync(session, user.Id);
             Assert.AreEqual(updatedUser2.Name, name2, "未成功更新用户。");
 
             // 更新用户3
             var name3 = $"段誉{Guid.NewGuid().ToString()}";
-            await dbContext.Users.UpdateOneAsync(session, Builders<User>.Filter.Eq(f => f.Id, user.Id), Builders<User>.Update.Set(u => u.Name, name3));
+            await dbContext.Users.Immediate.UpdateOneAsync(session, Builders<User>.Filter.Eq(f => f.Id, user.Id), Builders<User>.Update.Set(u => u.Name, name3));
 
-            var updatedUser3 = await dbContext.Users.FindOneAsync(session, user.Id);
+            var updatedUser3 = await dbContext.Users.Immediate.FindOneAsync(session, user.Id);
             Assert.AreEqual(updatedUser3.Name, name3, "未成功更新用户。");
 
 
             // 删除用户
-            var result = await dbContext.Users.DeleteOneAsync(session, user);
+            var result = await dbContext.Users.Immediate.DeleteOneAsync(session, user);
 
             // 验证删除是否成功
-            var deletedUser = await dbContext.Users.FindOneAsync(session, user.Id);
+            var deletedUser = await dbContext.Users.Immediate.FindOneAsync(session, user.Id);
             Assert.IsNull(deletedUser, "用户未成功删除。");
 
             session.CommitTransaction();
@@ -214,42 +214,42 @@ public class TestDbSetUpdate : TestBase
     {
         var user = DataHelper.GetNewUser();
         var userGroup = DataHelper.GetNewUserGroup();
-        dbContext.Users.DynamicCollectionInsert(userGroup, user);
+        dbContext.Users.Immediate.DynamicCollectionInsert(userGroup, user);
 
         // 验证添加是否成功
-        var addedUser = dbContext.Users.DynamicCollectionFindOne(userGroup, user.Id);
+        var addedUser = dbContext.Users.Immediate.DynamicCollectionFindOne(userGroup, user.Id);
         Assert.IsNotNull(addedUser, "未成功添加用户。");
 
 
         // 更新用户1
         var name1 = $"乔峰{Guid.NewGuid().ToString()}";
-        dbContext.Users.DynamicCollectionUpdateOne(userGroup, user.Id, Builders<User>.Update.Set(u => u.Name, name1));
+        dbContext.Users.Immediate.DynamicCollectionUpdateOne(userGroup, user.Id, Builders<User>.Update.Set(u => u.Name, name1));
 
         // 验证更新是否成功
-        var updatedUser1 = dbContext.Users.DynamicCollectionFindOne(userGroup, user.Id);
+        var updatedUser1 = dbContext.Users.Immediate.DynamicCollectionFindOne(userGroup, user.Id);
         Assert.AreEqual(updatedUser1.Name, name1, "未成功更新用户。");
 
         // 更新用户2
         var name2 = $"虚竹{Guid.NewGuid().ToString()}";
-        dbContext.Users.DynamicCollectionUpdateOne(userGroup, r => r.Id == user.Id, Builders<User>.Update.Set(u => u.Name, name2));
+        dbContext.Users.Immediate.DynamicCollectionUpdateOne(userGroup, r => r.Id == user.Id, Builders<User>.Update.Set(u => u.Name, name2));
 
         // 验证更新是否成功
-        var updatedUser2 = dbContext.Users.DynamicCollectionFindOne(userGroup, user.Id);
+        var updatedUser2 = dbContext.Users.Immediate.DynamicCollectionFindOne(userGroup, user.Id);
         Assert.AreEqual(updatedUser2.Name, name2, "未成功更新用户。");
 
         // 更新用户3
         var name3 = $"段誉{Guid.NewGuid().ToString()}";
-        dbContext.Users.DynamicCollectionUpdateOne(userGroup, Builders<User>.Filter.Eq(f => f.Id, user.Id), Builders<User>.Update.Set(u => u.Name, name3));
+        dbContext.Users.Immediate.DynamicCollectionUpdateOne(userGroup, Builders<User>.Filter.Eq(f => f.Id, user.Id), Builders<User>.Update.Set(u => u.Name, name3));
 
-        var updatedUser3 = dbContext.Users.DynamicCollectionFindOne(userGroup, user.Id);
+        var updatedUser3 = dbContext.Users.Immediate.DynamicCollectionFindOne(userGroup, user.Id);
         Assert.AreEqual(updatedUser3.Name, name3, "未成功更新用户。");
 
 
         // 删除用户
-        var result = dbContext.Users.DynamicCollectionDeleteOne(userGroup, user);
+        var result = dbContext.Users.Immediate.DynamicCollectionDeleteOne(userGroup, user);
 
         // 验证删除是否成功
-        var deletedUser = dbContext.Users.DynamicCollectionFindOne(userGroup, user.Id);
+        var deletedUser = dbContext.Users.Immediate.DynamicCollectionFindOne(userGroup, user.Id);
         Assert.IsNull(deletedUser, "用户未成功删除。");
     }
 
@@ -258,42 +258,42 @@ public class TestDbSetUpdate : TestBase
     {
         var user = DataHelper.GetNewUser();
         var userGroup = DataHelper.GetNewUserGroup();
-        await dbContext.Users.DynamicCollectionInsertAsync(userGroup, user);
+        await dbContext.Users.Immediate.DynamicCollectionInsertAsync(userGroup, user);
 
         // 验证添加是否成功
-        var addedUser = await dbContext.Users.DynamicCollectionFindOneAsync(userGroup, user.Id);
+        var addedUser = await dbContext.Users.Immediate.DynamicCollectionFindOneAsync(userGroup, user.Id);
         Assert.IsNotNull(addedUser, "未成功添加用户。");
 
 
         // 更新用户1
         var name1 = $"乔峰{Guid.NewGuid().ToString()}";
-        await dbContext.Users.DynamicCollectionUpdateOneAsync(userGroup, user.Id, Builders<User>.Update.Set(u => u.Name, name1));
+        await dbContext.Users.Immediate.DynamicCollectionUpdateOneAsync(userGroup, user.Id, Builders<User>.Update.Set(u => u.Name, name1));
 
         // 验证更新是否成功
-        var updatedUser1 = await dbContext.Users.DynamicCollectionFindOneAsync(userGroup, user.Id);
+        var updatedUser1 = await dbContext.Users.Immediate.DynamicCollectionFindOneAsync(userGroup, user.Id);
         Assert.AreEqual(updatedUser1.Name, name1, "未成功更新用户。");
 
         // 更新用户2
         var name2 = $"虚竹{Guid.NewGuid().ToString()}";
-        await dbContext.Users.DynamicCollectionUpdateOneAsync(userGroup, r => r.Id == user.Id, Builders<User>.Update.Set(u => u.Name, name2));
+        await dbContext.Users.Immediate.DynamicCollectionUpdateOneAsync(userGroup, r => r.Id == user.Id, Builders<User>.Update.Set(u => u.Name, name2));
 
         // 验证更新是否成功
-        var updatedUser2 = await dbContext.Users.DynamicCollectionFindOneAsync(userGroup, user.Id);
+        var updatedUser2 = await dbContext.Users.Immediate.DynamicCollectionFindOneAsync(userGroup, user.Id);
         Assert.AreEqual(updatedUser2.Name, name2, "未成功更新用户。");
 
         // 更新用户3
         var name3 = $"段誉{Guid.NewGuid().ToString()}";
-        await dbContext.Users.DynamicCollectionUpdateOneAsync(userGroup, Builders<User>.Filter.Eq(f => f.Id, user.Id), Builders<User>.Update.Set(u => u.Name, name3));
+        await dbContext.Users.Immediate.DynamicCollectionUpdateOneAsync(userGroup, Builders<User>.Filter.Eq(f => f.Id, user.Id), Builders<User>.Update.Set(u => u.Name, name3));
 
-        var updatedUser3 = await dbContext.Users.DynamicCollectionFindOneAsync(userGroup, user.Id);
+        var updatedUser3 = await dbContext.Users.Immediate.DynamicCollectionFindOneAsync(userGroup, user.Id);
         Assert.AreEqual(updatedUser3.Name, name3, "未成功更新用户。");
 
 
         // 删除用户
-        var result = await dbContext.Users.DynamicCollectionDeleteOneAsync(userGroup, user);
+        var result = await dbContext.Users.Immediate.DynamicCollectionDeleteOneAsync(userGroup, user);
 
         // 验证删除是否成功
-        var deletedUser = await dbContext.Users.DynamicCollectionFindOneAsync(userGroup, user.Id);
+        var deletedUser = await dbContext.Users.Immediate.DynamicCollectionFindOneAsync(userGroup, user.Id);
         Assert.IsNull(deletedUser, "用户未成功删除。");
     }
 
@@ -307,42 +307,42 @@ public class TestDbSetUpdate : TestBase
 
             var user = DataHelper.GetNewUser();
 
-            dbContext.Users.DynamicCollectionInsert(session, userGroup, user);
+            dbContext.Users.Immediate.DynamicCollectionInsert(session, userGroup, user);
 
             // 验证添加是否成功
-            var addedUser = dbContext.Users.DynamicCollectionFindOne(session, userGroup, user.Id);
+            var addedUser = dbContext.Users.Immediate.DynamicCollectionFindOne(session, userGroup, user.Id);
             Assert.IsNotNull(addedUser, "未成功添加用户。");
 
 
             // 更新用户1
             var name1 = $"乔峰{Guid.NewGuid().ToString()}";
-            dbContext.Users.DynamicCollectionUpdateOne(session, userGroup, user.Id, Builders<User>.Update.Set(u => u.Name, name1));
+            dbContext.Users.Immediate.DynamicCollectionUpdateOne(session, userGroup, user.Id, Builders<User>.Update.Set(u => u.Name, name1));
 
             // 验证更新是否成功
-            var updatedUser1 = dbContext.Users.DynamicCollectionFindOne(session, userGroup, user.Id);
+            var updatedUser1 = dbContext.Users.Immediate.DynamicCollectionFindOne(session, userGroup, user.Id);
             Assert.AreEqual(updatedUser1.Name, name1, "未成功更新用户。");
 
             // 更新用户2
             var name2 = $"虚竹{Guid.NewGuid().ToString()}";
-            dbContext.Users.DynamicCollectionUpdateOne(session, userGroup, r => r.Id == user.Id, Builders<User>.Update.Set(u => u.Name, name2));
+            dbContext.Users.Immediate.DynamicCollectionUpdateOne(session, userGroup, r => r.Id == user.Id, Builders<User>.Update.Set(u => u.Name, name2));
 
             // 验证更新是否成功
-            var updatedUser2 = dbContext.Users.DynamicCollectionFindOne(session, userGroup, user.Id);
+            var updatedUser2 = dbContext.Users.Immediate.DynamicCollectionFindOne(session, userGroup, user.Id);
             Assert.AreEqual(updatedUser2.Name, name2, "未成功更新用户。");
 
             // 更新用户3
             var name3 = $"段誉{Guid.NewGuid().ToString()}";
-            dbContext.Users.DynamicCollectionUpdateOne(session, userGroup, Builders<User>.Filter.Eq(f => f.Id, user.Id), Builders<User>.Update.Set(u => u.Name, name3));
+            dbContext.Users.Immediate.DynamicCollectionUpdateOne(session, userGroup, Builders<User>.Filter.Eq(f => f.Id, user.Id), Builders<User>.Update.Set(u => u.Name, name3));
 
-            var updatedUser3 = dbContext.Users.DynamicCollectionFindOne(session, userGroup, user.Id);
+            var updatedUser3 = dbContext.Users.Immediate.DynamicCollectionFindOne(session, userGroup, user.Id);
             Assert.AreEqual(updatedUser3.Name, name3, "未成功更新用户。");
 
 
             // 删除用户
-            var result = dbContext.Users.DynamicCollectionDeleteOne(session, userGroup, user);
+            var result = dbContext.Users.Immediate.DynamicCollectionDeleteOne(session, userGroup, user);
 
             // 验证删除是否成功
-            var deletedUser = dbContext.Users.DynamicCollectionFindOne(session, userGroup, user.Id);
+            var deletedUser = dbContext.Users.Immediate.DynamicCollectionFindOne(session, userGroup, user.Id);
             Assert.IsNull(deletedUser, "用户未成功删除。");
 
             session.CommitTransaction();
@@ -359,42 +359,42 @@ public class TestDbSetUpdate : TestBase
 
             var user = DataHelper.GetNewUser();
 
-            await dbContext.Users.DynamicCollectionInsertAsync(session, userGroup, user);
+            await dbContext.Users.Immediate.DynamicCollectionInsertAsync(session, userGroup, user);
 
             // 验证添加是否成功
-            var addedUser = await dbContext.Users.DynamicCollectionFindOneAsync(session, userGroup, user.Id);
+            var addedUser = await dbContext.Users.Immediate.DynamicCollectionFindOneAsync(session, userGroup, user.Id);
             Assert.IsNotNull(addedUser, "未成功添加用户。");
 
 
             // 更新用户1
             var name1 = $"乔峰{Guid.NewGuid().ToString()}";
-            await dbContext.Users.DynamicCollectionUpdateOneAsync(session, userGroup, user.Id, Builders<User>.Update.Set(u => u.Name, name1));
+            await dbContext.Users.Immediate.DynamicCollectionUpdateOneAsync(session, userGroup, user.Id, Builders<User>.Update.Set(u => u.Name, name1));
 
             // 验证更新是否成功
-            var updatedUser1 = await dbContext.Users.DynamicCollectionFindOneAsync(session, userGroup, user.Id);
+            var updatedUser1 = await dbContext.Users.Immediate.DynamicCollectionFindOneAsync(session, userGroup, user.Id);
             Assert.AreEqual(updatedUser1.Name, name1, "未成功更新用户。");
 
             // 更新用户2
             var name2 = $"虚竹{Guid.NewGuid().ToString()}";
-            await dbContext.Users.DynamicCollectionUpdateOneAsync(session, userGroup, r => r.Id == user.Id, Builders<User>.Update.Set(u => u.Name, name2));
+            await dbContext.Users.Immediate.DynamicCollectionUpdateOneAsync(session, userGroup, r => r.Id == user.Id, Builders<User>.Update.Set(u => u.Name, name2));
 
             // 验证更新是否成功
-            var updatedUser2 = await dbContext.Users.DynamicCollectionFindOneAsync(session, userGroup, user.Id);
+            var updatedUser2 = await dbContext.Users.Immediate.DynamicCollectionFindOneAsync(session, userGroup, user.Id);
             Assert.AreEqual(updatedUser2.Name, name2, "未成功更新用户。");
 
             // 更新用户3
             var name3 = $"段誉{Guid.NewGuid().ToString()}";
-            await dbContext.Users.DynamicCollectionUpdateOneAsync(session, userGroup, Builders<User>.Filter.Eq(f => f.Id, user.Id), Builders<User>.Update.Set(u => u.Name, name3));
+            await dbContext.Users.Immediate.DynamicCollectionUpdateOneAsync(session, userGroup, Builders<User>.Filter.Eq(f => f.Id, user.Id), Builders<User>.Update.Set(u => u.Name, name3));
 
-            var updatedUser3 = await dbContext.Users.DynamicCollectionFindOneAsync(session, userGroup, user.Id);
+            var updatedUser3 = await dbContext.Users.Immediate.DynamicCollectionFindOneAsync(session, userGroup, user.Id);
             Assert.AreEqual(updatedUser3.Name, name3, "未成功更新用户。");
 
 
             // 删除用户
-            var result = await dbContext.Users.DynamicCollectionDeleteOneAsync(session, userGroup, user);
+            var result = await dbContext.Users.Immediate.DynamicCollectionDeleteOneAsync(session, userGroup, user);
 
             // 验证删除是否成功
-            var deletedUser = await dbContext.Users.DynamicCollectionFindOneAsync(session, userGroup, user.Id);
+            var deletedUser = await dbContext.Users.Immediate.DynamicCollectionFindOneAsync(session, userGroup, user.Id);
             Assert.IsNull(deletedUser, "用户未成功删除。");
 
             session.CommitTransaction();
@@ -405,42 +405,42 @@ public class TestDbSetUpdate : TestBase
     public void TestFindOneAndUpdateOne()
     {
         var user = DataHelper.GetNewUser();
-        dbContext.Users.Insert(user);
+        dbContext.Users.Immediate.Insert(user);
 
         // 验证添加是否成功
-        var addedUser = dbContext.Users.FindOne(user.Id);
+        var addedUser = dbContext.Users.Immediate.FindOne(user.Id);
         Assert.IsNotNull(addedUser, "未成功添加用户。");
 
 
         // 更新用户1
         var name1 = $"乔峰{Guid.NewGuid().ToString()}";
-        var result1 = dbContext.Users.FindOneAndUpdateOne(user.Id, Builders<User>.Update.Set(u => u.Name, name1));
+        var result1 = dbContext.Users.Immediate.FindOneAndUpdateOne(user.Id, Builders<User>.Update.Set(u => u.Name, name1));
 
         // 验证更新是否成功
-        var updatedUser1 = dbContext.Users.FindOne(user.Id);
+        var updatedUser1 = dbContext.Users.Immediate.FindOne(user.Id);
         Assert.AreNotEqual(updatedUser1.Name, result1.Name, "未成功更新用户。");
 
 
         // 更新用户2
         var name2 = $"虚竹{Guid.NewGuid().ToString()}";
-        var result2 = dbContext.Users.FindOneAndUpdateOne(r => r.Id == user.Id, Builders<User>.Update.Set(u => u.Name, name2));
+        var result2 = dbContext.Users.Immediate.FindOneAndUpdateOne(r => r.Id == user.Id, Builders<User>.Update.Set(u => u.Name, name2));
 
         // 验证更新是否成功
-        var updatedUser2 = dbContext.Users.FindOne(user.Id);
+        var updatedUser2 = dbContext.Users.Immediate.FindOne(user.Id);
         Assert.AreNotEqual(updatedUser2.Name, result2.Name, "未成功更新用户。");
 
         // 更新用户3
         var name3 = $"段誉{Guid.NewGuid().ToString()}";
-        var result3 = dbContext.Users.FindOneAndUpdateOne(Builders<User>.Filter.Eq(f => f.Id, user.Id), Builders<User>.Update.Set(u => u.Name, name3));
+        var result3 = dbContext.Users.Immediate.FindOneAndUpdateOne(Builders<User>.Filter.Eq(f => f.Id, user.Id), Builders<User>.Update.Set(u => u.Name, name3));
 
-        var updatedUser3 = dbContext.Users.FindOne(user.Id);
+        var updatedUser3 = dbContext.Users.Immediate.FindOne(user.Id);
         Assert.AreNotEqual(updatedUser3.Name, result3.Name, "未成功更新用户。");
 
         // 删除用户
-        var result = dbContext.Users.DeleteOne(user);
+        var result = dbContext.Users.Immediate.DeleteOne(user);
 
         // 验证删除是否成功
-        var deletedUser = dbContext.Users.FindOne(user.Id);
+        var deletedUser = dbContext.Users.Immediate.FindOne(user.Id);
         Assert.IsNull(deletedUser, "用户未成功删除。");
     }
 
@@ -448,42 +448,42 @@ public class TestDbSetUpdate : TestBase
     public async Task TestFindOneAndUpdateOneAsync()
     {
         var user = DataHelper.GetNewUser();
-        await dbContext.Users.InsertAsync(user);
+        await dbContext.Users.Immediate.InsertAsync(user);
 
         // 验证添加是否成功
-        var addedUser = await dbContext.Users.FindOneAsync(user.Id);
+        var addedUser = await dbContext.Users.Immediate.FindOneAsync(user.Id);
         Assert.IsNotNull(addedUser, "未成功添加用户。");
 
         // 更新用户1
         var name1 = $"乔峰{Guid.NewGuid().ToString()}";
-        var result1 = await dbContext.Users.FindOneAndUpdateOneAsync(user.Id, Builders<User>.Update.Set(u => u.Name, name1));
+        var result1 = await dbContext.Users.Immediate.FindOneAndUpdateOneAsync(user.Id, Builders<User>.Update.Set(u => u.Name, name1));
 
         // 验证更新是否成功
-        var replaceedUser1 = await dbContext.Users.FindOneAsync(user.Id);
+        var replaceedUser1 = await dbContext.Users.Immediate.FindOneAsync(user.Id);
         Assert.AreNotEqual(replaceedUser1.Name, result1.Name, "未成功更新用户。");
 
 
         // 更新用户2
         var name2 = $"虚竹{Guid.NewGuid().ToString()}";
-        var result2 = await dbContext.Users.FindOneAndUpdateOneAsync(r => r.Id == user.Id, Builders<User>.Update.Set(u => u.Name, name2));
+        var result2 = await dbContext.Users.Immediate.FindOneAndUpdateOneAsync(r => r.Id == user.Id, Builders<User>.Update.Set(u => u.Name, name2));
 
         // 验证更新是否成功
-        var replaceedUser2 = await dbContext.Users.FindOneAsync(user.Id);
+        var replaceedUser2 = await dbContext.Users.Immediate.FindOneAsync(user.Id);
         Assert.AreNotEqual(replaceedUser2.Name, result2.Name, "未成功更新用户。");
 
         // 更新用户3
         var name3 = $"段誉{Guid.NewGuid().ToString()}";
-        var result3 = await dbContext.Users.FindOneAndUpdateOneAsync(Builders<User>.Filter.Eq(f => f.Id, user.Id), Builders<User>.Update.Set(u => u.Name, name3));
+        var result3 = await dbContext.Users.Immediate.FindOneAndUpdateOneAsync(Builders<User>.Filter.Eq(f => f.Id, user.Id), Builders<User>.Update.Set(u => u.Name, name3));
 
-        var replaceedUser3 = await dbContext.Users.FindOneAsync(user.Id);
+        var replaceedUser3 = await dbContext.Users.Immediate.FindOneAsync(user.Id);
         Assert.AreNotEqual(replaceedUser3.Name, result3.Name, "未成功更新用户。");
 
 
         // 删除用户
-        var result = await dbContext.Users.DeleteOneAsync(user);
+        var result = await dbContext.Users.Immediate.DeleteOneAsync(user);
 
         // 验证删除是否成功
-        var deletedUser = await dbContext.Users.FindOneAsync(user.Id);
+        var deletedUser = await dbContext.Users.Immediate.FindOneAsync(user.Id);
         Assert.IsNull(deletedUser, "用户未成功删除。");
     }
 
@@ -496,42 +496,42 @@ public class TestDbSetUpdate : TestBase
 
             var user = DataHelper.GetNewUser();
 
-            dbContext.Users.Insert(session, user);
+            dbContext.Users.Immediate.Insert(session, user);
 
             // 验证添加是否成功
-            var addedUser = dbContext.Users.FindOne(session, user.Id);
+            var addedUser = dbContext.Users.Immediate.FindOne(session, user.Id);
             Assert.IsNotNull(addedUser, "未成功添加用户。");
 
 
             // 更新用户1
             var name1 = $"乔峰{Guid.NewGuid().ToString()}";
-            var result1 = dbContext.Users.FindOneAndUpdateOne(session, user.Id, Builders<User>.Update.Set(u => u.Name, name1));
+            var result1 = dbContext.Users.Immediate.FindOneAndUpdateOne(session, user.Id, Builders<User>.Update.Set(u => u.Name, name1));
 
             // 验证更新是否成功
-            var replaceedUser1 = dbContext.Users.FindOne(session, user.Id);
+            var replaceedUser1 = dbContext.Users.Immediate.FindOne(session, user.Id);
             Assert.AreNotEqual(replaceedUser1.Name, result1.Name, "未成功更新用户。");
 
 
             // 更新用户2
             var name2 = $"虚竹{Guid.NewGuid().ToString()}";
-            var result2 = dbContext.Users.FindOneAndUpdateOne(session, r => r.Id == user.Id, Builders<User>.Update.Set(u => u.Name, name2));
+            var result2 = dbContext.Users.Immediate.FindOneAndUpdateOne(session, r => r.Id == user.Id, Builders<User>.Update.Set(u => u.Name, name2));
 
             // 验证更新是否成功
-            var replaceedUser2 = dbContext.Users.FindOne(session, user.Id);
+            var replaceedUser2 = dbContext.Users.Immediate.FindOne(session, user.Id);
             Assert.AreNotEqual(replaceedUser2.Name, result2.Name, "未成功更新用户。");
 
             // 更新用户3
             var name3 = $"段誉{Guid.NewGuid().ToString()}";
-            var result3 = dbContext.Users.FindOneAndUpdateOne(session, Builders<User>.Filter.Eq(f => f.Id, user.Id), Builders<User>.Update.Set(u => u.Name, name3));
+            var result3 = dbContext.Users.Immediate.FindOneAndUpdateOne(session, Builders<User>.Filter.Eq(f => f.Id, user.Id), Builders<User>.Update.Set(u => u.Name, name3));
 
-            var replaceedUser3 = dbContext.Users.FindOne(session, user.Id);
+            var replaceedUser3 = dbContext.Users.Immediate.FindOne(session, user.Id);
             Assert.AreNotEqual(replaceedUser3.Name, result3.Name, "未成功更新用户。");
 
             // 删除用户
-            var result = dbContext.Users.DeleteOne(session, user);
+            var result = dbContext.Users.Immediate.DeleteOne(session, user);
 
             // 验证删除是否成功
-            var deletedUser = dbContext.Users.FindOne(session, user.Id);
+            var deletedUser = dbContext.Users.Immediate.FindOne(session, user.Id);
             Assert.IsNull(deletedUser, "用户未成功删除。");
 
             session.CommitTransaction();
@@ -547,42 +547,42 @@ public class TestDbSetUpdate : TestBase
 
             var user = DataHelper.GetNewUser();
 
-            await dbContext.Users.InsertAsync(session, user);
+            await dbContext.Users.Immediate.InsertAsync(session, user);
 
             // 验证添加是否成功
-            var addedUser = await dbContext.Users.FindOneAsync(session, user.Id);
+            var addedUser = await dbContext.Users.Immediate.FindOneAsync(session, user.Id);
             Assert.IsNotNull(addedUser, "未成功添加用户。");
 
 
             // 更新用户1
             var name1 = $"乔峰{Guid.NewGuid().ToString()}";
-            var result1 = await dbContext.Users.FindOneAndUpdateOneAsync(session, user.Id, Builders<User>.Update.Set(u => u.Name, name1));
+            var result1 = await dbContext.Users.Immediate.FindOneAndUpdateOneAsync(session, user.Id, Builders<User>.Update.Set(u => u.Name, name1));
 
             // 验证更新是否成功
-            var replaceedUser1 = await dbContext.Users.FindOneAsync(session, user.Id);
+            var replaceedUser1 = await dbContext.Users.Immediate.FindOneAsync(session, user.Id);
             Assert.AreNotEqual(replaceedUser1.Name, result1.Name, "未成功更新用户。");
 
 
             // 更新用户2
             var name2 = $"虚竹{Guid.NewGuid().ToString()}";
-            var result2 = await dbContext.Users.FindOneAndUpdateOneAsync(session, r => r.Id == user.Id, Builders<User>.Update.Set(u => u.Name, name2));
+            var result2 = await dbContext.Users.Immediate.FindOneAndUpdateOneAsync(session, r => r.Id == user.Id, Builders<User>.Update.Set(u => u.Name, name2));
 
             // 验证更新是否成功
-            var replaceedUser2 = await dbContext.Users.FindOneAsync(session, user.Id);
+            var replaceedUser2 = await dbContext.Users.Immediate.FindOneAsync(session, user.Id);
             Assert.AreNotEqual(replaceedUser2.Name, result2.Name, "未成功更新用户。");
 
             // 更新用户3
             var name3 = $"段誉{Guid.NewGuid().ToString()}";
-            var result3 = await dbContext.Users.FindOneAndUpdateOneAsync(session, Builders<User>.Filter.Eq(f => f.Id, user.Id), Builders<User>.Update.Set(u => u.Name, name3));
+            var result3 = await dbContext.Users.Immediate.FindOneAndUpdateOneAsync(session, Builders<User>.Filter.Eq(f => f.Id, user.Id), Builders<User>.Update.Set(u => u.Name, name3));
 
-            var replaceedUser3 = await dbContext.Users.FindOneAsync(session, user.Id);
+            var replaceedUser3 = await dbContext.Users.Immediate.FindOneAsync(session, user.Id);
             Assert.AreNotEqual(replaceedUser3.Name, result3.Name, "未成功更新用户。");
 
             // 删除用户
-            var result = await dbContext.Users.DeleteOneAsync(session, user);
+            var result = await dbContext.Users.Immediate.DeleteOneAsync(session, user);
 
             // 验证删除是否成功
-            var deletedUser = await dbContext.Users.FindOneAsync(session, user.Id);
+            var deletedUser = await dbContext.Users.Immediate.FindOneAsync(session, user.Id);
             Assert.IsNull(deletedUser, "用户未成功删除。");
 
             session.CommitTransaction();
@@ -594,42 +594,42 @@ public class TestDbSetUpdate : TestBase
     {
         var user = DataHelper.GetNewUser();
         var userGroup = DataHelper.GetNewUserGroup();
-        dbContext.Users.DynamicCollectionInsert(userGroup, user);
+        dbContext.Users.Immediate.DynamicCollectionInsert(userGroup, user);
 
         // 验证添加是否成功
-        var addedUser = dbContext.Users.DynamicCollectionFindOne(userGroup, user.Id);
+        var addedUser = dbContext.Users.Immediate.DynamicCollectionFindOne(userGroup, user.Id);
         Assert.IsNotNull(addedUser, "未成功添加用户。");
 
 
         // 更新用户1
         var name1 = $"乔峰{Guid.NewGuid().ToString()}";
-        var result1 = dbContext.Users.DynamicCollectionFindOneAndUpdateOne(userGroup, user.Id, Builders<User>.Update.Set(u => u.Name, name1));
+        var result1 = dbContext.Users.Immediate.DynamicCollectionFindOneAndUpdateOne(userGroup, user.Id, Builders<User>.Update.Set(u => u.Name, name1));
 
         // 验证更新是否成功
-        var replaceedUser1 = dbContext.Users.DynamicCollectionFindOne(userGroup, user.Id);
+        var replaceedUser1 = dbContext.Users.Immediate.DynamicCollectionFindOne(userGroup, user.Id);
         Assert.AreNotEqual(replaceedUser1.Name, result1.Name, "未成功更新用户。");
 
 
         // 更新用户2
         var name2 = $"虚竹{Guid.NewGuid().ToString()}";
-        var result2 = dbContext.Users.DynamicCollectionFindOneAndUpdateOne(userGroup, r => r.Id == user.Id, Builders<User>.Update.Set(u => u.Name, name2));
+        var result2 = dbContext.Users.Immediate.DynamicCollectionFindOneAndUpdateOne(userGroup, r => r.Id == user.Id, Builders<User>.Update.Set(u => u.Name, name2));
 
         // 验证更新是否成功
-        var replaceedUser2 = dbContext.Users.DynamicCollectionFindOne(userGroup, user.Id);
+        var replaceedUser2 = dbContext.Users.Immediate.DynamicCollectionFindOne(userGroup, user.Id);
         Assert.AreNotEqual(replaceedUser2.Name, result2.Name, "未成功更新用户。");
 
         // 更新用户3
         var name3 = $"段誉{Guid.NewGuid().ToString()}";
-        var result3 = dbContext.Users.DynamicCollectionFindOneAndUpdateOne(userGroup, Builders<User>.Filter.Eq(f => f.Id, user.Id), Builders<User>.Update.Set(u => u.Name, name3));
+        var result3 = dbContext.Users.Immediate.DynamicCollectionFindOneAndUpdateOne(userGroup, Builders<User>.Filter.Eq(f => f.Id, user.Id), Builders<User>.Update.Set(u => u.Name, name3));
 
-        var replaceedUser3 = dbContext.Users.DynamicCollectionFindOne(userGroup, user.Id);
+        var replaceedUser3 = dbContext.Users.Immediate.DynamicCollectionFindOne(userGroup, user.Id);
         Assert.AreNotEqual(replaceedUser3.Name, result3.Name, "未成功更新用户。");
 
         // 删除用户
-        var result = dbContext.Users.DynamicCollectionDeleteOne(userGroup, user);
+        var result = dbContext.Users.Immediate.DynamicCollectionDeleteOne(userGroup, user);
 
         // 验证删除是否成功
-        var deletedUser = dbContext.Users.DynamicCollectionFindOne(userGroup, user.Id);
+        var deletedUser = dbContext.Users.Immediate.DynamicCollectionFindOne(userGroup, user.Id);
         Assert.IsNull(deletedUser, "用户未成功删除。");
     }
 
@@ -638,42 +638,42 @@ public class TestDbSetUpdate : TestBase
     {
         var user = DataHelper.GetNewUser();
         var userGroup = DataHelper.GetNewUserGroup();
-        await dbContext.Users.DynamicCollectionInsertAsync(userGroup, user);
+        await dbContext.Users.Immediate.DynamicCollectionInsertAsync(userGroup, user);
 
         // 验证添加是否成功
-        var addedUser = await dbContext.Users.DynamicCollectionFindOneAsync(userGroup, user.Id);
+        var addedUser = await dbContext.Users.Immediate.DynamicCollectionFindOneAsync(userGroup, user.Id);
         Assert.IsNotNull(addedUser, "未成功添加用户。");
 
 
         // 更新用户1
         var name1 = $"乔峰{Guid.NewGuid().ToString()}";
-        var result1 = await dbContext.Users.DynamicCollectionFindOneAndUpdateOneAsync(userGroup, user.Id, Builders<User>.Update.Set(u => u.Name, name1));
+        var result1 = await dbContext.Users.Immediate.DynamicCollectionFindOneAndUpdateOneAsync(userGroup, user.Id, Builders<User>.Update.Set(u => u.Name, name1));
 
         // 验证更新是否成功
-        var replaceedUser1 = await dbContext.Users.DynamicCollectionFindOneAsync(userGroup, user.Id);
+        var replaceedUser1 = await dbContext.Users.Immediate.DynamicCollectionFindOneAsync(userGroup, user.Id);
         Assert.AreNotEqual(replaceedUser1.Name, result1.Name, "未成功更新用户。");
 
 
         // 更新用户2
         var name2 = $"虚竹{Guid.NewGuid().ToString()}";
-        var result2 = await dbContext.Users.DynamicCollectionFindOneAndUpdateOneAsync(userGroup, r => r.Id == user.Id, Builders<User>.Update.Set(u => u.Name, name2));
+        var result2 = await dbContext.Users.Immediate.DynamicCollectionFindOneAndUpdateOneAsync(userGroup, r => r.Id == user.Id, Builders<User>.Update.Set(u => u.Name, name2));
 
         // 验证更新是否成功
-        var replaceedUser2 = await dbContext.Users.DynamicCollectionFindOneAsync(userGroup, user.Id);
+        var replaceedUser2 = await dbContext.Users.Immediate.DynamicCollectionFindOneAsync(userGroup, user.Id);
         Assert.AreNotEqual(replaceedUser2.Name, result2.Name, "未成功更新用户。");
 
         // 更新用户3
         var name3 = $"段誉{Guid.NewGuid().ToString()}";
-        var result3 = await dbContext.Users.DynamicCollectionFindOneAndUpdateOneAsync(userGroup, Builders<User>.Filter.Eq(f => f.Id, user.Id), Builders<User>.Update.Set(u => u.Name, name3));
+        var result3 = await dbContext.Users.Immediate.DynamicCollectionFindOneAndUpdateOneAsync(userGroup, Builders<User>.Filter.Eq(f => f.Id, user.Id), Builders<User>.Update.Set(u => u.Name, name3));
 
-        var replaceedUser3 = await dbContext.Users.DynamicCollectionFindOneAsync(userGroup, user.Id);
+        var replaceedUser3 = await dbContext.Users.Immediate.DynamicCollectionFindOneAsync(userGroup, user.Id);
         Assert.AreNotEqual(replaceedUser3.Name, result3.Name, "未成功更新用户。");
 
         // 删除用户
-        var result = await dbContext.Users.DynamicCollectionDeleteOneAsync(userGroup, user);
+        var result = await dbContext.Users.Immediate.DynamicCollectionDeleteOneAsync(userGroup, user);
 
         // 验证删除是否成功
-        var deletedUser = await dbContext.Users.DynamicCollectionFindOneAsync(userGroup, user.Id);
+        var deletedUser = await dbContext.Users.Immediate.DynamicCollectionFindOneAsync(userGroup, user.Id);
         Assert.IsNull(deletedUser, "用户未成功删除。");
     }
 
@@ -687,42 +687,42 @@ public class TestDbSetUpdate : TestBase
 
             var user = DataHelper.GetNewUser();
 
-            dbContext.Users.DynamicCollectionInsert(session, userGroup, user);
+            dbContext.Users.Immediate.DynamicCollectionInsert(session, userGroup, user);
 
             // 验证添加是否成功
-            var addedUser = dbContext.Users.DynamicCollectionFindOne(session, userGroup, user.Id);
+            var addedUser = dbContext.Users.Immediate.DynamicCollectionFindOne(session, userGroup, user.Id);
             Assert.IsNotNull(addedUser, "未成功添加用户。");
 
 
             // 更新用户1
             var name1 = $"乔峰{Guid.NewGuid().ToString()}";
-            var result1 = dbContext.Users.DynamicCollectionFindOneAndUpdateOne(session, userGroup, user.Id, Builders<User>.Update.Set(u => u.Name, name1));
+            var result1 = dbContext.Users.Immediate.DynamicCollectionFindOneAndUpdateOne(session, userGroup, user.Id, Builders<User>.Update.Set(u => u.Name, name1));
 
             // 验证更新是否成功
-            var replaceedUser1 = dbContext.Users.DynamicCollectionFindOne(session, userGroup, user.Id);
+            var replaceedUser1 = dbContext.Users.Immediate.DynamicCollectionFindOne(session, userGroup, user.Id);
             Assert.AreNotEqual(replaceedUser1.Name, result1.Name, "未成功更新用户。");
 
 
             // 更新用户2
             var name2 = $"虚竹{Guid.NewGuid().ToString()}";
-            var result2 = dbContext.Users.DynamicCollectionFindOneAndUpdateOne(session, userGroup, r => r.Id == user.Id, Builders<User>.Update.Set(u => u.Name, name2));
+            var result2 = dbContext.Users.Immediate.DynamicCollectionFindOneAndUpdateOne(session, userGroup, r => r.Id == user.Id, Builders<User>.Update.Set(u => u.Name, name2));
 
             // 验证更新是否成功
-            var replaceedUser2 = dbContext.Users.DynamicCollectionFindOne(session, userGroup, user.Id);
+            var replaceedUser2 = dbContext.Users.Immediate.DynamicCollectionFindOne(session, userGroup, user.Id);
             Assert.AreNotEqual(replaceedUser2.Name, result2.Name, "未成功更新用户。");
 
             // 更新用户3
             var name3 = $"段誉{Guid.NewGuid().ToString()}";
-            var result3 = dbContext.Users.DynamicCollectionFindOneAndUpdateOne(session, userGroup, Builders<User>.Filter.Eq(f => f.Id, user.Id), Builders<User>.Update.Set(u => u.Name, name3));
+            var result3 = dbContext.Users.Immediate.DynamicCollectionFindOneAndUpdateOne(session, userGroup, Builders<User>.Filter.Eq(f => f.Id, user.Id), Builders<User>.Update.Set(u => u.Name, name3));
 
-            var replaceedUser3 = dbContext.Users.DynamicCollectionFindOne(session, userGroup, user.Id);
+            var replaceedUser3 = dbContext.Users.Immediate.DynamicCollectionFindOne(session, userGroup, user.Id);
             Assert.AreNotEqual(replaceedUser3.Name, result3.Name, "未成功更新用户。");
 
             // 删除用户
-            var result = dbContext.Users.DynamicCollectionDeleteOne(session, userGroup, user);
+            var result = dbContext.Users.Immediate.DynamicCollectionDeleteOne(session, userGroup, user);
 
             // 验证删除是否成功
-            var deletedUser = dbContext.Users.DynamicCollectionFindOne(session, userGroup, user.Id);
+            var deletedUser = dbContext.Users.Immediate.DynamicCollectionFindOne(session, userGroup, user.Id);
             Assert.IsNull(deletedUser, "用户未成功删除。");
 
             session.CommitTransaction();
@@ -739,45 +739,45 @@ public class TestDbSetUpdate : TestBase
 
             var user = DataHelper.GetNewUser();
 
-            await dbContext.Users.DynamicCollectionInsertAsync(session, userGroup, user);
+            await dbContext.Users.Immediate.DynamicCollectionInsertAsync(session, userGroup, user);
 
             // 验证添加是否成功
-            var addedUser = await dbContext.Users.DynamicCollectionFindOneAsync(session, userGroup, user.Id);
+            var addedUser = await dbContext.Users.Immediate.DynamicCollectionFindOneAsync(session, userGroup, user.Id);
             Assert.IsNotNull(addedUser, "未成功添加用户。");
 
 
             // 更新用户1
             var name1 = $"乔峰{Guid.NewGuid().ToString()}";
             user.Name = name1;
-            var result1 = await dbContext.Users.DynamicCollectionFindOneAndUpdateOneAsync(session, userGroup, user.Id, Builders<User>.Update.Set(u => u.Name, name1));
+            var result1 = await dbContext.Users.Immediate.DynamicCollectionFindOneAndUpdateOneAsync(session, userGroup, user.Id, Builders<User>.Update.Set(u => u.Name, name1));
 
             // 验证更新是否成功
-            var replaceedUser1 = await dbContext.Users.DynamicCollectionFindOneAsync(session, userGroup, user.Id);
+            var replaceedUser1 = await dbContext.Users.Immediate.DynamicCollectionFindOneAsync(session, userGroup, user.Id);
             Assert.AreNotEqual(replaceedUser1.Name, result1.Name, "未成功更新用户。");
 
 
             // 更新用户2
             var name2 = $"虚竹{Guid.NewGuid().ToString()}";
             user.Name = name2;
-            var result2 = await dbContext.Users.DynamicCollectionFindOneAndUpdateOneAsync(session, userGroup, r => r.Id == user.Id, Builders<User>.Update.Set(u => u.Name, name2));
+            var result2 = await dbContext.Users.Immediate.DynamicCollectionFindOneAndUpdateOneAsync(session, userGroup, r => r.Id == user.Id, Builders<User>.Update.Set(u => u.Name, name2));
 
             // 验证更新是否成功
-            var replaceedUser2 = await dbContext.Users.DynamicCollectionFindOneAsync(session, userGroup, user.Id);
+            var replaceedUser2 = await dbContext.Users.Immediate.DynamicCollectionFindOneAsync(session, userGroup, user.Id);
             Assert.AreNotEqual(replaceedUser2.Name, result2.Name, "未成功更新用户。");
 
             // 更新用户3
             var name3 = $"段誉{Guid.NewGuid().ToString()}";
             user.Name = name3;
-            var result3 = await dbContext.Users.DynamicCollectionFindOneAndUpdateOneAsync(session, userGroup, Builders<User>.Filter.Eq(f => f.Id, user.Id), Builders<User>.Update.Set(u => u.Name, name3));
+            var result3 = await dbContext.Users.Immediate.DynamicCollectionFindOneAndUpdateOneAsync(session, userGroup, Builders<User>.Filter.Eq(f => f.Id, user.Id), Builders<User>.Update.Set(u => u.Name, name3));
 
-            var replaceedUser3 = await dbContext.Users.DynamicCollectionFindOneAsync(session, userGroup, user.Id);
+            var replaceedUser3 = await dbContext.Users.Immediate.DynamicCollectionFindOneAsync(session, userGroup, user.Id);
             Assert.AreNotEqual(replaceedUser3.Name, result3.Name, "未成功更新用户。");
 
             // 删除用户
-            var result = await dbContext.Users.DynamicCollectionDeleteOneAsync(session, userGroup, user);
+            var result = await dbContext.Users.Immediate.DynamicCollectionDeleteOneAsync(session, userGroup, user);
 
             // 验证删除是否成功
-            var deletedUser = await dbContext.Users.DynamicCollectionFindOneAsync(session, userGroup, user.Id);
+            var deletedUser = await dbContext.Users.Immediate.DynamicCollectionFindOneAsync(session, userGroup, user.Id);
             Assert.IsNull(deletedUser, "用户未成功删除。");
 
             session.CommitTransaction();
@@ -789,25 +789,25 @@ public class TestDbSetUpdate : TestBase
     {
         var users = DataHelper.GetNewUsers();
 
-        dbContext.Users.InsertMany(users);
+        dbContext.Users.Immediate.InsertMany(users);
 
         // 验证添加是否成功
-        var addedUserCount = dbContext.Users.Find(w => w.Email == "zhangfei@qq.com").CountDocuments();
+        var addedUserCount = dbContext.Users.Immediate.Find(w => w.Email == "zhangfei@qq.com").CountDocuments();
         Assert.AreEqual(3, addedUserCount, "未成功添加，数量不正确");
 
         //验证更新是否成功
-        var result1 = dbContext.Users.UpdateMany(u => u.Email == "zhangfei@qq.com", Builders<User>.Update.Set(s => s.Description, Guid.NewGuid().ToString()));
+        var result1 = dbContext.Users.Immediate.UpdateMany(u => u.Email == "zhangfei@qq.com", Builders<User>.Update.Set(s => s.Description, Guid.NewGuid().ToString()));
         Assert.AreEqual(3, result1.ModifiedCount, "未成功更新，数量不正确");
 
         //验证更新是否成功
-        var result2 = dbContext.Users.UpdateMany(Builders<User>.Filter.Eq(f => f.Email, "zhangfei@qq.com"), Builders<User>.Update.Set(s => s.Description, Guid.NewGuid().ToString()));
+        var result2 = dbContext.Users.Immediate.UpdateMany(Builders<User>.Filter.Eq(f => f.Email, "zhangfei@qq.com"), Builders<User>.Update.Set(s => s.Description, Guid.NewGuid().ToString()));
         Assert.AreEqual(3, result2.ModifiedCount, "未成功更新，数量不正确");
 
         // 删除用户
-        var result = dbContext.Users.DeleteMany(users);
+        var result = dbContext.Users.Immediate.DeleteMany(users);
 
         // 验证删除是否成功
-        var deletedUserCount = dbContext.Users.Find(w => true).CountDocuments();
+        var deletedUserCount = dbContext.Users.Immediate.Find(w => true).CountDocuments();
         Assert.AreEqual(0, deletedUserCount, "用户未成功删除。");
     }
 
@@ -815,29 +815,29 @@ public class TestDbSetUpdate : TestBase
     public async Task TestUpdateManyAsync()
     {
         var users = DataHelper.GetNewUsers();
-        await dbContext.Users.InsertManyAsync(users);
+        await dbContext.Users.Immediate.InsertManyAsync(users);
 
         // 验证添加是否成功
         List<User> addedUser = new();
-        await foreach (var user in dbContext.Users.FindAsync(w => w.Email == "zhangfei@qq.com"))
+        await foreach (var user in dbContext.Users.Immediate.FindAsync(w => w.Email == "zhangfei@qq.com"))
         {
             addedUser.Add(user);
         }
         Assert.AreEqual(3, addedUser.Count, "未成功添加，数量不正确");
 
         //验证更新是否成功
-        var result1 = await dbContext.Users.UpdateManyAsync(u => u.Email == "zhangfei@qq.com", Builders<User>.Update.Set(s => s.Description, Guid.NewGuid().ToString()));
+        var result1 = await dbContext.Users.Immediate.UpdateManyAsync(u => u.Email == "zhangfei@qq.com", Builders<User>.Update.Set(s => s.Description, Guid.NewGuid().ToString()));
         Assert.AreEqual(3, result1.ModifiedCount, "未成功更新，数量不正确");
 
         //验证更新是否成功
-        var result2 = await dbContext.Users.UpdateManyAsync(Builders<User>.Filter.Eq(f => f.Email, "zhangfei@qq.com"), Builders<User>.Update.Set(s => s.Description, Guid.NewGuid().ToString()));
+        var result2 = await dbContext.Users.Immediate.UpdateManyAsync(Builders<User>.Filter.Eq(f => f.Email, "zhangfei@qq.com"), Builders<User>.Update.Set(s => s.Description, Guid.NewGuid().ToString()));
         Assert.AreEqual(3, result2.ModifiedCount, "未成功更新，数量不正确");
 
         // 删除用户
-        var result = await dbContext.Users.DeleteManyAsync(users);
+        var result = await dbContext.Users.Immediate.DeleteManyAsync(users);
 
         // 验证删除是否成功
-        var deletedUserCount = dbContext.Users.Find(w => true).CountDocuments();
+        var deletedUserCount = dbContext.Users.Immediate.Find(w => true).CountDocuments();
         Assert.AreEqual(0, deletedUserCount, "用户未成功删除。");
     }
 
@@ -850,25 +850,25 @@ public class TestDbSetUpdate : TestBase
         {
             session.StartTransaction();
 
-            dbContext.Users.InsertMany(session, users);
+            dbContext.Users.Immediate.InsertMany(session, users);
 
             // 验证添加是否成功
-            var addedUserCount = dbContext.Users.Find(session, w => w.Email == "zhangfei@qq.com").CountDocuments();
+            var addedUserCount = dbContext.Users.Immediate.Find(session, w => w.Email == "zhangfei@qq.com").CountDocuments();
             Assert.AreEqual(3, addedUserCount, "未成功添加，数量不正确");
 
             //验证更新是否成功
-            var result1 = dbContext.Users.UpdateMany(session, u => u.Email == "zhangfei@qq.com", Builders<User>.Update.Set(s => s.Description, Guid.NewGuid().ToString()));
+            var result1 = dbContext.Users.Immediate.UpdateMany(session, u => u.Email == "zhangfei@qq.com", Builders<User>.Update.Set(s => s.Description, Guid.NewGuid().ToString()));
             Assert.AreEqual(3, result1.ModifiedCount, "未成功更新，数量不正确");
 
             //验证更新是否成功
-            var result2 = dbContext.Users.UpdateMany(session, Builders<User>.Filter.Eq(f => f.Email, "zhangfei@qq.com"), Builders<User>.Update.Set(s => s.Description, Guid.NewGuid().ToString()));
+            var result2 = dbContext.Users.Immediate.UpdateMany(session, Builders<User>.Filter.Eq(f => f.Email, "zhangfei@qq.com"), Builders<User>.Update.Set(s => s.Description, Guid.NewGuid().ToString()));
             Assert.AreEqual(3, result2.ModifiedCount, "未成功更新，数量不正确");
 
             // 删除用户
-            var result = dbContext.Users.DeleteMany(session, users);
+            var result = dbContext.Users.Immediate.DeleteMany(session, users);
 
             // 验证删除是否成功
-            var deletedUserCount = dbContext.Users.Find(session, w => true).CountDocuments();
+            var deletedUserCount = dbContext.Users.Immediate.Find(session, w => true).CountDocuments();
             Assert.AreEqual(0, deletedUserCount, "用户未成功删除。");
 
             session.CommitTransaction();
@@ -883,29 +883,29 @@ public class TestDbSetUpdate : TestBase
         using (var session = await dbContext.Client.StartSessionAsync())
         {
             session.StartTransaction();
-            await dbContext.Users.InsertManyAsync(session, users);
+            await dbContext.Users.Immediate.InsertManyAsync(session, users);
 
             // 验证添加是否成功
             List<User> addedUser = new();
-            await foreach (var user in dbContext.Users.FindAsync(session, w => w.Email == "zhangfei@qq.com"))
+            await foreach (var user in dbContext.Users.Immediate.FindAsync(session, w => w.Email == "zhangfei@qq.com"))
             {
                 addedUser.Add(user);
             }
             Assert.AreEqual(3, addedUser.Count, "未成功添加，数量不正确");
 
             //验证更新是否成功
-            var result1 = await dbContext.Users.UpdateManyAsync(session, u => u.Email == "zhangfei@qq.com", Builders<User>.Update.Set(s => s.Description, Guid.NewGuid().ToString()));
+            var result1 = await dbContext.Users.Immediate.UpdateManyAsync(session, u => u.Email == "zhangfei@qq.com", Builders<User>.Update.Set(s => s.Description, Guid.NewGuid().ToString()));
             Assert.AreEqual(3, result1.ModifiedCount, "未成功更新，数量不正确");
 
             //验证更新是否成功
-            var result2 = await dbContext.Users.UpdateManyAsync(session, Builders<User>.Filter.Eq(f => f.Email, "zhangfei@qq.com"), Builders<User>.Update.Set(s => s.Description, Guid.NewGuid().ToString()));
+            var result2 = await dbContext.Users.Immediate.UpdateManyAsync(session, Builders<User>.Filter.Eq(f => f.Email, "zhangfei@qq.com"), Builders<User>.Update.Set(s => s.Description, Guid.NewGuid().ToString()));
             Assert.AreEqual(3, result2.ModifiedCount, "未成功更新，数量不正确");
 
             // 删除用户
-            var result = await dbContext.Users.DeleteManyAsync(session, users);
+            var result = await dbContext.Users.Immediate.DeleteManyAsync(session, users);
 
             // 验证删除是否成功
-            var deletedUserCount = dbContext.Users.Find(session, w => true).CountDocuments();
+            var deletedUserCount = dbContext.Users.Immediate.Find(session, w => true).CountDocuments();
             Assert.AreEqual(0, deletedUserCount, "用户未成功删除。");
 
             await session.CommitTransactionAsync();
@@ -918,25 +918,25 @@ public class TestDbSetUpdate : TestBase
         var userGroup = DataHelper.GetNewUserGroup();
         var users = DataHelper.GetNewUsers();
 
-        dbContext.Users.DynamicCollectionInsertMany(userGroup, users);
+        dbContext.Users.Immediate.DynamicCollectionInsertMany(userGroup, users);
 
         // 验证添加是否成功
-        var addedUserCount = dbContext.Users.DynamicCollectionFind(userGroup, w => w.Email == "zhangfei@qq.com").CountDocuments();
+        var addedUserCount = dbContext.Users.Immediate.DynamicCollectionFind(userGroup, w => w.Email == "zhangfei@qq.com").CountDocuments();
         Assert.AreEqual(3, addedUserCount, "未成功添加，数量不正确");
 
         //验证更新是否成功
-        var result1 = dbContext.Users.DynamicCollectionUpdateMany(userGroup, u => u.Email == "zhangfei@qq.com", Builders<User>.Update.Set(s => s.Description, Guid.NewGuid().ToString()));
+        var result1 = dbContext.Users.Immediate.DynamicCollectionUpdateMany(userGroup, u => u.Email == "zhangfei@qq.com", Builders<User>.Update.Set(s => s.Description, Guid.NewGuid().ToString()));
         Assert.AreEqual(3, result1.ModifiedCount, "未成功更新，数量不正确");
 
         //验证更新是否成功
-        var result2 = dbContext.Users.DynamicCollectionUpdateMany(userGroup, Builders<User>.Filter.Eq(f => f.Email, "zhangfei@qq.com"), Builders<User>.Update.Set(s => s.Description, Guid.NewGuid().ToString()));
+        var result2 = dbContext.Users.Immediate.DynamicCollectionUpdateMany(userGroup, Builders<User>.Filter.Eq(f => f.Email, "zhangfei@qq.com"), Builders<User>.Update.Set(s => s.Description, Guid.NewGuid().ToString()));
         Assert.AreEqual(3, result2.ModifiedCount, "未成功更新，数量不正确");
 
         // 删除用户
-        var result = dbContext.Users.DynamicCollectionDeleteMany(userGroup, users);
+        var result = dbContext.Users.Immediate.DynamicCollectionDeleteMany(userGroup, users);
 
         // 验证删除是否成功
-        var deletedUserCount = dbContext.Users.DynamicCollectionFind(userGroup, w => true).CountDocuments();
+        var deletedUserCount = dbContext.Users.Immediate.DynamicCollectionFind(userGroup, w => true).CountDocuments();
         Assert.AreEqual(0, deletedUserCount, "用户未成功删除。");
     }
 
@@ -946,29 +946,29 @@ public class TestDbSetUpdate : TestBase
         var userGroup = DataHelper.GetNewUserGroup();
         var users = DataHelper.GetNewUsers();
 
-        await dbContext.Users.DynamicCollectionInsertManyAsync(userGroup, users);
+        await dbContext.Users.Immediate.DynamicCollectionInsertManyAsync(userGroup, users);
 
         // 验证添加是否成功
         List<User> addedUser = new();
-        await foreach (var user in dbContext.Users.DynamicCollectionFindAsync(userGroup, w => w.Email == "zhangfei@qq.com"))
+        await foreach (var user in dbContext.Users.Immediate.DynamicCollectionFindAsync(userGroup, w => w.Email == "zhangfei@qq.com"))
         {
             addedUser.Add(user);
         }
         Assert.AreEqual(3, addedUser.Count, "未成功添加，数量不正确");
 
         //验证更新是否成功
-        var result1 = await dbContext.Users.DynamicCollectionUpdateManyAsync(userGroup, u => u.Email == "zhangfei@qq.com", Builders<User>.Update.Set(s => s.Description, Guid.NewGuid().ToString()));
+        var result1 = await dbContext.Users.Immediate.DynamicCollectionUpdateManyAsync(userGroup, u => u.Email == "zhangfei@qq.com", Builders<User>.Update.Set(s => s.Description, Guid.NewGuid().ToString()));
         Assert.AreEqual(3, result1.ModifiedCount, "未成功更新，数量不正确");
 
         //验证更新是否成功
-        var result2 = await dbContext.Users.DynamicCollectionUpdateManyAsync(userGroup, Builders<User>.Filter.Eq(f => f.Email, "zhangfei@qq.com"), Builders<User>.Update.Set(s => s.Description, Guid.NewGuid().ToString()));
+        var result2 = await dbContext.Users.Immediate.DynamicCollectionUpdateManyAsync(userGroup, Builders<User>.Filter.Eq(f => f.Email, "zhangfei@qq.com"), Builders<User>.Update.Set(s => s.Description, Guid.NewGuid().ToString()));
         Assert.AreEqual(3, result2.ModifiedCount, "未成功更新，数量不正确");
 
         // 删除用户
-        var result = await dbContext.Users.DynamicCollectionDeleteManyAsync(userGroup, users);
+        var result = await dbContext.Users.Immediate.DynamicCollectionDeleteManyAsync(userGroup, users);
 
         // 验证删除是否成功
-        var deletedUserCount = dbContext.Users.DynamicCollectionFind(userGroup, w => true).CountDocuments();
+        var deletedUserCount = dbContext.Users.Immediate.DynamicCollectionFind(userGroup, w => true).CountDocuments();
         Assert.AreEqual(0, deletedUserCount, "用户未成功删除。");
     }
 
@@ -982,25 +982,25 @@ public class TestDbSetUpdate : TestBase
         {
             session.StartTransaction();
 
-            dbContext.Users.DynamicCollectionInsertMany(session, userGroup, users);
+            dbContext.Users.Immediate.DynamicCollectionInsertMany(session, userGroup, users);
 
             // 验证添加是否成功
-            var addedUserCount = dbContext.Users.DynamicCollectionFind(session, userGroup, w => w.Email == "zhangfei@qq.com").CountDocuments();
+            var addedUserCount = dbContext.Users.Immediate.DynamicCollectionFind(session, userGroup, w => w.Email == "zhangfei@qq.com").CountDocuments();
             Assert.AreEqual(3, addedUserCount, "未成功添加，数量不正确");
 
             //验证更新是否成功
-            var result1 = dbContext.Users.DynamicCollectionUpdateMany(session, userGroup, u => u.Email == "zhangfei@qq.com", Builders<User>.Update.Set(s => s.Description, Guid.NewGuid().ToString()));
+            var result1 = dbContext.Users.Immediate.DynamicCollectionUpdateMany(session, userGroup, u => u.Email == "zhangfei@qq.com", Builders<User>.Update.Set(s => s.Description, Guid.NewGuid().ToString()));
             Assert.AreEqual(3, result1.ModifiedCount, "未成功更新，数量不正确");
 
             //验证更新是否成功
-            var result2 = dbContext.Users.DynamicCollectionUpdateMany(session, userGroup, Builders<User>.Filter.Eq(f => f.Email, "zhangfei@qq.com"), Builders<User>.Update.Set(s => s.Description, Guid.NewGuid().ToString()));
+            var result2 = dbContext.Users.Immediate.DynamicCollectionUpdateMany(session, userGroup, Builders<User>.Filter.Eq(f => f.Email, "zhangfei@qq.com"), Builders<User>.Update.Set(s => s.Description, Guid.NewGuid().ToString()));
             Assert.AreEqual(3, result2.ModifiedCount, "未成功更新，数量不正确");
 
             // 删除用户
-            var result = dbContext.Users.DynamicCollectionDeleteMany(session, userGroup, users);
+            var result = dbContext.Users.Immediate.DynamicCollectionDeleteMany(session, userGroup, users);
 
             // 验证删除是否成功
-            var deletedUserCount = dbContext.Users.DynamicCollectionFind(session, userGroup, w => true).CountDocuments();
+            var deletedUserCount = dbContext.Users.Immediate.DynamicCollectionFind(session, userGroup, w => true).CountDocuments();
             Assert.AreEqual(0, deletedUserCount, "用户未成功删除。");
 
             session.CommitTransaction();
@@ -1015,29 +1015,29 @@ public class TestDbSetUpdate : TestBase
 
         using (var session = await dbContext.Client.StartSessionAsync())
         {
-            await dbContext.Users.DynamicCollectionInsertManyAsync(session, userGroup, users);
+            await dbContext.Users.Immediate.DynamicCollectionInsertManyAsync(session, userGroup, users);
 
             // 验证添加是否成功
             List<User> addedUser = new();
-            await foreach (var user in dbContext.Users.DynamicCollectionFindAsync(session, userGroup, w => w.Email == "zhangfei@qq.com"))
+            await foreach (var user in dbContext.Users.Immediate.DynamicCollectionFindAsync(session, userGroup, w => w.Email == "zhangfei@qq.com"))
             {
                 addedUser.Add(user);
             }
             Assert.AreEqual(3, addedUser.Count, "未成功添加，数量不正确");
 
             //验证更新是否成功
-            var result1 = await dbContext.Users.DynamicCollectionUpdateManyAsync(session, userGroup, u => u.Email == "zhangfei@qq.com", Builders<User>.Update.Set(s => s.Description, Guid.NewGuid().ToString()));
+            var result1 = await dbContext.Users.Immediate.DynamicCollectionUpdateManyAsync(session, userGroup, u => u.Email == "zhangfei@qq.com", Builders<User>.Update.Set(s => s.Description, Guid.NewGuid().ToString()));
             Assert.AreEqual(3, result1.ModifiedCount, "未成功更新，数量不正确");
 
             //验证更新是否成功
-            var result2 = await dbContext.Users.DynamicCollectionUpdateManyAsync(session, userGroup, Builders<User>.Filter.Eq(f => f.Email, "zhangfei@qq.com"), Builders<User>.Update.Set(s => s.Description, Guid.NewGuid().ToString()));
+            var result2 = await dbContext.Users.Immediate.DynamicCollectionUpdateManyAsync(session, userGroup, Builders<User>.Filter.Eq(f => f.Email, "zhangfei@qq.com"), Builders<User>.Update.Set(s => s.Description, Guid.NewGuid().ToString()));
             Assert.AreEqual(3, result2.ModifiedCount, "未成功更新，数量不正确");
 
             // 删除用户
-            var result = await dbContext.Users.DynamicCollectionDeleteManyAsync(session, userGroup, users);
+            var result = await dbContext.Users.Immediate.DynamicCollectionDeleteManyAsync(session, userGroup, users);
 
             // 验证删除是否成功
-            var deletedUserCount = dbContext.Users.DynamicCollectionFind(session, userGroup, w => true).CountDocuments();
+            var deletedUserCount = dbContext.Users.Immediate.DynamicCollectionFind(session, userGroup, w => true).CountDocuments();
             Assert.AreEqual(0, deletedUserCount, "用户未成功删除。");
         }
     }

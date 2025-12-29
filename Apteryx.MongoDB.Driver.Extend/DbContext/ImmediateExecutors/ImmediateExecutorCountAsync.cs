@@ -5,7 +5,7 @@ using System.Threading.Tasks;
 using System.Linq.Expressions;
 
 namespace Apteryx.MongoDB.Driver.Extend;
-public partial class DbSet<T>
+public partial class ImmediateExecutor<T>
 {
     #region 计数（异步）
 

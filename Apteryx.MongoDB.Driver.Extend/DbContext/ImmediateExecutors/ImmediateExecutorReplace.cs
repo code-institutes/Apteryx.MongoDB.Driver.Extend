@@ -5,7 +5,7 @@ using System.Linq.Expressions;
 
 namespace Apteryx.MongoDB.Driver.Extend;
 
-public partial class DbSet<T>
+public partial class ImmediateExecutor<T>
 {
     #region 替换(同步)
 

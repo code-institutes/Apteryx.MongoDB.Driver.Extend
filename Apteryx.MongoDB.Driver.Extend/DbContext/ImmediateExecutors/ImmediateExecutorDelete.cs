@@ -1,15 +1,14 @@
 ﻿using System;
 using MongoDB.Driver;
 using System.Threading;
-using System.Threading.Tasks;
 using System.Linq.Expressions;
 using System.Collections.Generic;
 
 namespace Apteryx.MongoDB.Driver.Extend;
 
-public partial class DbSet<T>
+public partial class ImmediateExecutor<T>
 {
-    #region 删除（异步）
+    #region 删除（同步）
 
     /// <summary>
     /// 删除（单个）
@@ -17,9 +16,9 @@ public partial class DbSet<T>
     /// <param name="id">文档对象ID</param>
     /// <param name="options">删除操作选项</param>
     /// <param name="cancellationToken">取消令牌</param>
-    public Task<DeleteResult> DeleteOneAsync(string id, DeleteOptions options = null, CancellationToken cancellationToken = default)
+    public DeleteResult DeleteOne(string id, DeleteOptions options = null, CancellationToken cancellationToken = default)
     {
-        return _collection.DeleteOneAsync(d => d.Id == id, options, cancellationToken);
+        return _collection.DeleteOne(d => d.Id == id, options, cancellationToken);
     }
 
     /// <summary>
@@ -29,9 +28,9 @@ public partial class DbSet<T>
     /// <param name="id">文档对象ID</param>
     /// <param name="options">删除操作选项</param>
     /// <param name="cancellationToken">取消令牌</param>
-    public Task<DeleteResult> DeleteOneAsync(IClientSessionHandle session, string id, DeleteOptions options = null, CancellationToken cancellationToken = default)
+    public DeleteResult DeleteOne(IClientSessionHandle session, string id, DeleteOptions options = null, CancellationToken cancellationToken = default)
     {
-        return _collection.DeleteOneAsync(session, d => d.Id == id, options, cancellationToken);
+        return _collection.DeleteOne(session, d => d.Id == id, options, cancellationToken);
     }
 
     /// <summary>
@@ -40,9 +39,9 @@ public partial class DbSet<T>
     /// <param name="document">文档对象</param>
     /// <param name="options">删除操作选项</param>
     /// <param name="cancellationToken">取消令牌</param>
-    public Task<DeleteResult> DeleteOneAsync(T document, DeleteOptions options = null, CancellationToken cancellationToken = default)
+    public DeleteResult DeleteOne(T document, DeleteOptions options = null, CancellationToken cancellationToken = default)
     {
-        return _collection.DeleteOneAsync(d => d.Id == document.Id, options, cancellationToken);
+        return _collection.DeleteOne(d => d.Id == document.Id, options, cancellationToken);
     }
 
     /// <summary>
@@ -52,9 +51,9 @@ public partial class DbSet<T>
     /// <param name="document">文档对象</param>
     /// <param name="options">删除操作选项</param>
     /// <param name="cancellationToken">取消令牌</param>
-    public Task<DeleteResult> DeleteOneAsync(IClientSessionHandle session, T document, DeleteOptions options = null, CancellationToken cancellationToken = default)
+    public DeleteResult DeleteOne(IClientSessionHandle session, T document, DeleteOptions options = null, CancellationToken cancellationToken = default)
     {
-        return _collection.DeleteOneAsync(session, d => d.Id == document.Id, options, cancellationToken);
+        return _collection.DeleteOne(session, d => d.Id == document.Id, options, cancellationToken);
     }
 
     /// <summary>
@@ -63,9 +62,9 @@ public partial class DbSet<T>
     /// <param name="filter">过滤器</param>
     /// <param name="options">删除操作选项</param>
     /// <param name="cancellationToken">取消令牌</param>
-    public Task<DeleteResult> DeleteOneAsync(FilterDefinition<T> filter, DeleteOptions options = null, CancellationToken cancellationToken = default)
+    public DeleteResult DeleteOne(FilterDefinition<T> filter, DeleteOptions options = null, CancellationToken cancellationToken = default)
     {
-        return _collection.DeleteOneAsync(filter, options, cancellationToken);
+        return _collection.DeleteOne(filter, options, cancellationToken);
     }
 
     /// <summary>
@@ -75,9 +74,9 @@ public partial class DbSet<T>
     /// <param name="filter">过滤器</param>
     /// <param name="options">删除操作选项</param>
     /// <param name="cancellationToken">取消令牌</param>
-    public Task<DeleteResult> DeleteOneAsync(IClientSessionHandle session, FilterDefinition<T> filter, DeleteOptions options = null, CancellationToken cancellationToken = default)
+    public DeleteResult DeleteOne(IClientSessionHandle session, FilterDefinition<T> filter, DeleteOptions options = null, CancellationToken cancellationToken = default)
     {
-        return _collection.DeleteOneAsync(session, filter, options, cancellationToken);
+        return _collection.DeleteOne(session, filter, options, cancellationToken);
     }
 
     /// <summary>
@@ -86,9 +85,9 @@ public partial class DbSet<T>
     /// <param name="expression">Lambda过滤器</param>
     /// <param name="options">删除操作选项</param>
     /// <param name="cancellationToken">取消令牌</param>
-    public Task<DeleteResult> DeleteOneAsync(Expression<Func<T, bool>> expression, DeleteOptions options = null, CancellationToken cancellationToken = default)
+    public DeleteResult DeleteOne(Expression<Func<T, bool>> expression, DeleteOptions options = null, CancellationToken cancellationToken = default)
     {
-        return _collection.DeleteOneAsync(expression, options, cancellationToken);
+        return _collection.DeleteOne(expression, options, cancellationToken);
     }
 
     /// <summary>
@@ -98,9 +97,9 @@ public partial class DbSet<T>
     /// <param name="expression">Lambda过滤器</param>
     /// <param name="options">删除操作选项</param>
     /// <param name="cancellationToken">取消令牌</param>
-    public Task<DeleteResult> DeleteOneAsync(IClientSessionHandle session, Expression<Func<T, bool>> expression, DeleteOptions options = null, CancellationToken cancellationToken = default)
+    public DeleteResult DeleteOne(IClientSessionHandle session, Expression<Func<T, bool>> expression, DeleteOptions options = null, CancellationToken cancellationToken = default)
     {
-        return _collection.DeleteOneAsync(session, expression, options, cancellationToken);
+        return _collection.DeleteOne(session, expression, options, cancellationToken);
     }
 
     /// <summary>
@@ -110,9 +109,9 @@ public partial class DbSet<T>
     /// <param name="options">删除操作选项</param>
     /// <param name="cancellationToken">取消令牌</param>
     /// <returns></returns>
-    public Task<T> FindOneAndDeleteAsync(string id, FindOneAndDeleteOptions<T> options = null, CancellationToken cancellationToken = default)
+    public T FindOneAndDelete(string id, FindOneAndDeleteOptions<T> options = null, CancellationToken cancellationToken = default)
     {
-        return _collection.FindOneAndDeleteAsync<T>(f => f.Id == id, options, cancellationToken);
+        return _collection.FindOneAndDelete<T>(f => f.Id == id, options, cancellationToken);
     }
 
     /// <summary>
@@ -123,9 +122,9 @@ public partial class DbSet<T>
     /// <param name="options">删除操作选项</param>
     /// <param name="cancellationToken">取消令牌</param>
     /// <returns></returns>
-    public Task<T> FindOneAndDeleteAsync(IClientSessionHandle session, string id, FindOneAndDeleteOptions<T> options = null, CancellationToken cancellationToken = default)
+    public T FindOneAndDelete(IClientSessionHandle session, string id, FindOneAndDeleteOptions<T> options = null, CancellationToken cancellationToken = default)
     {
-        return _collection.FindOneAndDeleteAsync<T>(session, f => f.Id == id, options, cancellationToken);
+        return _collection.FindOneAndDelete<T>(session, f => f.Id == id, options, cancellationToken);
     }
 
     /// <summary>
@@ -135,9 +134,9 @@ public partial class DbSet<T>
     /// <param name="options">删除操作选项</param>
     /// <param name="cancellationToken">取消令牌</param>
     /// <returns></returns>
-    public Task<T> FindOneAndDeleteAsync(FilterDefinition<T> filter, FindOneAndDeleteOptions<T> options = null, CancellationToken cancellationToken = default)
+    public T FindOneAndDelete(FilterDefinition<T> filter, FindOneAndDeleteOptions<T> options = null, CancellationToken cancellationToken = default)
     {
-        return _collection.FindOneAndDeleteAsync(filter, options, cancellationToken);
+        return _collection.FindOneAndDelete(filter, options, cancellationToken);
     }
 
     /// <summary>
@@ -148,9 +147,9 @@ public partial class DbSet<T>
     /// <param name="options">删除操作选项</param>
     /// <param name="cancellationToken">取消令牌</param>
     /// <returns></returns>
-    public Task<T> FindOneAndDeleteAsync(IClientSessionHandle session, FilterDefinition<T> filter, FindOneAndDeleteOptions<T> options = null, CancellationToken cancellationToken = default)
+    public T FindOneAndDelete(IClientSessionHandle session, FilterDefinition<T> filter, FindOneAndDeleteOptions<T> options = null, CancellationToken cancellationToken = default)
     {
-        return _collection.FindOneAndDeleteAsync(session, filter, options, cancellationToken);
+        return _collection.FindOneAndDelete(session, filter, options, cancellationToken);
     }
 
     /// <summary>
@@ -160,9 +159,9 @@ public partial class DbSet<T>
     /// <param name="options">删除操作选项</param>
     /// <param name="cancellationToken">取消令牌</param>
     /// <returns></returns>
-    public Task<T> FindOneAndDeleteAsync(Expression<Func<T, bool>> expression, FindOneAndDeleteOptions<T> options = null, CancellationToken cancellationToken = default)
+    public T FindOneAndDelete(Expression<Func<T, bool>> expression, FindOneAndDeleteOptions<T> options = null, CancellationToken cancellationToken = default)
     {
-        return _collection.FindOneAndDeleteAsync(expression, options, cancellationToken);
+        return _collection.FindOneAndDelete(expression, options, cancellationToken);
     }
 
     /// <summary>
@@ -173,9 +172,9 @@ public partial class DbSet<T>
     /// <param name="options">删除操作选项</param>
     /// <param name="cancellationToken">取消令牌</param>
     /// <returns></returns>
-    public Task<T> FindOneAndDeleteAsync(IClientSessionHandle session, Expression<Func<T, bool>> expression, FindOneAndDeleteOptions<T> options = null, CancellationToken cancellationToken = default)
+    public T FindOneAndDelete(IClientSessionHandle session, Expression<Func<T, bool>> expression, FindOneAndDeleteOptions<T> options = null, CancellationToken cancellationToken = default)
     {
-        return _collection.FindOneAndDeleteAsync(session, expression, options, cancellationToken);
+        return _collection.FindOneAndDelete(session, expression, options, cancellationToken);
     }
 
     /// <summary>
@@ -188,7 +187,7 @@ public partial class DbSet<T>
     /// <param name="options">删除操作选项</param>
     /// <param name="cancellationToken">取消令牌</param>
     /// <returns></returns>
-    public Task<T> DynamicCollectionFindOneAndDeleteAsync<TForeign>(
+    public T DynamicCollectionFindOneAndDelete<TForeign>(
         TForeign foreignDocument,
         string id,
         MongoCollectionSettings settings = null,
@@ -196,7 +195,7 @@ public partial class DbSet<T>
         CancellationToken cancellationToken = default)
         where TForeign : BaseMongoEntity
     {
-        return _database.GetCollection<T>($"{foreignDocument.Id}_{_collectionName}", settings).FindOneAndDeleteAsync<T>(d => d.Id == id, options, cancellationToken);
+        return _database.GetCollection<T>($"{foreignDocument.Id}_{_collectionName}", settings).FindOneAndDelete<T>(d => d.Id == id, options, cancellationToken);
     }
 
     /// <summary>
@@ -210,7 +209,7 @@ public partial class DbSet<T>
     /// <param name="options">删除操作选项</param>
     /// <param name="cancellationToken">取消令牌</param>
     /// <returns></returns>
-    public Task<T> DynamicCollectionFindOneAndDeleteAsync<TForeign>(
+    public T DynamicCollectionFindOneAndDelete<TForeign>(
         IClientSessionHandle session,
         TForeign foreignDocument,
         string id,
@@ -219,7 +218,7 @@ public partial class DbSet<T>
         CancellationToken cancellationToken = default)
         where TForeign : BaseMongoEntity
     {
-        return _database.GetCollection<T>($"{foreignDocument.Id}_{_collectionName}", settings).FindOneAndDeleteAsync<T>(session, d => d.Id == id, options, cancellationToken);
+        return _database.GetCollection<T>($"{foreignDocument.Id}_{_collectionName}", settings).FindOneAndDelete<T>(session, d => d.Id == id, options, cancellationToken);
     }
 
     /// <summary>
@@ -232,7 +231,7 @@ public partial class DbSet<T>
     /// <param name="options">删除操作选项</param>
     /// <param name="cancellationToken">取消令牌</param>
     /// <returns></returns>
-    public Task<T> DynamicCollectionFindOneAndDeleteAsync<TForeign>(
+    public T DynamicCollectionFindOneAndDelete<TForeign>(
         TForeign foreignDocument,
         FilterDefinition<T> filter,
         MongoCollectionSettings settings = null,
@@ -240,7 +239,7 @@ public partial class DbSet<T>
         CancellationToken cancellationToken = default)
         where TForeign : BaseMongoEntity
     {
-        return _database.GetCollection<T>($"{foreignDocument.Id}_{_collectionName}", settings).FindOneAndDeleteAsync<T>(filter, options, cancellationToken);
+        return _database.GetCollection<T>($"{foreignDocument.Id}_{_collectionName}", settings).FindOneAndDelete<T>(filter, options, cancellationToken);
     }
 
     /// <summary>
@@ -254,7 +253,7 @@ public partial class DbSet<T>
     /// <param name="options">删除操作选项</param>
     /// <param name="cancellationToken">取消令牌</param>
     /// <returns></returns>
-    public Task<T> DynamicCollectionFindOneAndDeleteAsync<TForeign>(
+    public T DynamicCollectionFindOneAndDelete<TForeign>(
         IClientSessionHandle session,
         TForeign foreignDocument,
         FilterDefinition<T> filter,
@@ -263,7 +262,7 @@ public partial class DbSet<T>
         CancellationToken cancellationToken = default)
         where TForeign : BaseMongoEntity
     {
-        return _database.GetCollection<T>($"{foreignDocument.Id}_{_collectionName}", settings).FindOneAndDeleteAsync<T>(session, filter, options, cancellationToken);
+        return _database.GetCollection<T>($"{foreignDocument.Id}_{_collectionName}", settings).FindOneAndDelete<T>(session, filter, options, cancellationToken);
     }
 
     /// <summary>
@@ -276,7 +275,7 @@ public partial class DbSet<T>
     /// <param name="options">删除操作选项</param>
     /// <param name="cancellationToken">取消令牌</param>
     /// <returns></returns>
-    public Task<T> DynamicCollectionFindOneAndDeleteAsync<TForeign>(
+    public T DynamicCollectionFindOneAndDelete<TForeign>(
         TForeign foreignDocument,
         Expression<Func<T, bool>> expression,
         MongoCollectionSettings settings = null,
@@ -284,7 +283,7 @@ public partial class DbSet<T>
         CancellationToken cancellationToken = default)
         where TForeign : BaseMongoEntity
     {
-        return _database.GetCollection<T>($"{foreignDocument.Id}_{_collectionName}", settings).FindOneAndDeleteAsync<T>(expression, options, cancellationToken);
+        return _database.GetCollection<T>($"{foreignDocument.Id}_{_collectionName}", settings).FindOneAndDelete<T>(expression, options, cancellationToken);
     }
 
     /// <summary>
@@ -298,7 +297,7 @@ public partial class DbSet<T>
     /// <param name="options">删除操作选项</param>
     /// <param name="cancellationToken">取消令牌</param>
     /// <returns></returns>
-    public Task<T> DynamicCollectionFindOneAndDeleteAsync<TForeign>(
+    public T DynamicCollectionFindOneAndDelete<TForeign>(
         IClientSessionHandle session,
         TForeign foreignDocument,
         Expression<Func<T, bool>> expression,
@@ -307,7 +306,7 @@ public partial class DbSet<T>
         CancellationToken cancellationToken = default)
         where TForeign : BaseMongoEntity
     {
-        return _database.GetCollection<T>($"{foreignDocument.Id}_{_collectionName}", settings).FindOneAndDeleteAsync<T>(session, expression, options, cancellationToken);
+        return _database.GetCollection<T>($"{foreignDocument.Id}_{_collectionName}", settings).FindOneAndDelete<T>(session, expression, options, cancellationToken);
     }
 
     /// <summary>
@@ -316,12 +315,12 @@ public partial class DbSet<T>
     /// <param name="documents">文档对象</param>
     /// <param name="options">删除操作选项</param>
     /// <param name="cancellationToken">取消令牌</param>
-    public async Task<List<DeleteResult>> DeleteManyAsync(IEnumerable<T> documents, DeleteOptions options = null, CancellationToken cancellationToken = default)
+    public List<DeleteResult> DeleteMany(IEnumerable<T> documents, DeleteOptions options = null, CancellationToken cancellationToken = default)
     {
         var results = new List<DeleteResult>();
         foreach (var document in documents)
         {
-            var result = await _collection.DeleteOneAsync(d => d.Id == document.Id, options, cancellationToken);
+            var result = _collection.DeleteOne(d => d.Id == document.Id, options, cancellationToken);
             results.Add(result);
         }
         return results;
@@ -334,12 +333,12 @@ public partial class DbSet<T>
     /// <param name="documents">文档对象</param>
     /// <param name="options">删除操作选项</param>
     /// <param name="cancellationToken">取消令牌</param>
-    public async Task<List<DeleteResult>> DeleteManyAsync(IClientSessionHandle session, IEnumerable<T> documents, DeleteOptions options = null, CancellationToken cancellationToken = default)
+    public List<DeleteResult> DeleteMany(IClientSessionHandle session, IEnumerable<T> documents, DeleteOptions options = null, CancellationToken cancellationToken = default)
     {
         var results = new List<DeleteResult>();
         foreach (var document in documents)
         {
-            var result = await _collection.DeleteOneAsync(session, d => d.Id == document.Id, options, cancellationToken);
+            var result = _collection.DeleteOne(session, d => d.Id == document.Id, options, cancellationToken);
             results.Add(result);
         }
         return results;
@@ -351,9 +350,9 @@ public partial class DbSet<T>
     /// <param name="filter">过滤器</param>
     /// <param name="options">删除操作选项</param>
     /// <param name="cancellationToken">取消令牌</param>
-    public Task<DeleteResult> DeleteManyAsync(FilterDefinition<T> filter, DeleteOptions options = null, CancellationToken cancellationToken = default)
+    public DeleteResult DeleteMany(FilterDefinition<T> filter, DeleteOptions options = null, CancellationToken cancellationToken = default)
     {
-        return _collection.DeleteManyAsync(filter, options, cancellationToken);
+        return _collection.DeleteMany(filter, options, cancellationToken);
     }
 
     /// <summary>
@@ -363,9 +362,9 @@ public partial class DbSet<T>
     /// <param name="filter">过滤器</param>
     /// <param name="options">删除操作选项</param>
     /// <param name="cancellationToken">取消令牌</param>
-    public Task<DeleteResult> DeleteManyAsync(IClientSessionHandle session, FilterDefinition<T> filter, DeleteOptions options = null, CancellationToken cancellationToken = default)
+    public DeleteResult DeleteMany(IClientSessionHandle session, FilterDefinition<T> filter, DeleteOptions options = null, CancellationToken cancellationToken = default)
     {
-        return _collection.DeleteManyAsync(session, filter, options, cancellationToken);
+        return _collection.DeleteMany(session, filter, options, cancellationToken);
     }
 
     /// <summary>
@@ -374,9 +373,9 @@ public partial class DbSet<T>
     /// <param name="expression">Lambda过滤器</param>
     /// <param name="options">删除操作选项</param>
     /// <param name="cancellationToken">取消令牌</param>
-    public Task<DeleteResult> DeleteManyAsync(Expression<Func<T, bool>> expression, DeleteOptions options = null, CancellationToken cancellationToken = default)
+    public DeleteResult DeleteMany(Expression<Func<T, bool>> expression, DeleteOptions options = null, CancellationToken cancellationToken = default)
     {
-        return _collection.DeleteManyAsync(expression, options, cancellationToken);
+        return _collection.DeleteMany(expression, options, cancellationToken);
     }
 
     /// <summary>
@@ -386,9 +385,9 @@ public partial class DbSet<T>
     /// <param name="expression">Lambda过滤器</param>
     /// <param name="options">删除操作选项</param>
     /// <param name="cancellationToken">取消令牌</param>
-    public Task<DeleteResult> DeleteManyAsync(IClientSessionHandle session, Expression<Func<T, bool>> expression, DeleteOptions options = null, CancellationToken cancellationToken = default)
+    public DeleteResult DeleteMany(IClientSessionHandle session, Expression<Func<T, bool>> expression, DeleteOptions options = null, CancellationToken cancellationToken = default)
     {
-        return _collection.DeleteManyAsync(session, expression, options, cancellationToken);
+        return _collection.DeleteMany(session, expression, options, cancellationToken);
     }
 
     /// <summary>
@@ -400,7 +399,7 @@ public partial class DbSet<T>
     /// <param name="settings">集合设置</param>
     /// <param name="options">删除操作选项</param>
     /// <param name="cancellationToken">取消令牌</param>
-    public Task<DeleteResult> DynamicCollectionDeleteOneAsync<TForeign>(
+    public DeleteResult DynamicCollectionDeleteOne<TForeign>(
         TForeign foreignDocument,
         string id,
         MongoCollectionSettings settings = null,
@@ -408,7 +407,7 @@ public partial class DbSet<T>
         CancellationToken cancellationToken = default)
         where TForeign : BaseMongoEntity
     {
-        return _database.GetCollection<T>($"{foreignDocument.Id}_{_collectionName}", settings).DeleteOneAsync(d => d.Id == id, options, cancellationToken);
+        return _database.GetCollection<T>($"{foreignDocument.Id}_{_collectionName}", settings).DeleteOne(d => d.Id == id, options, cancellationToken);
     }
 
     /// <summary>
@@ -421,7 +420,7 @@ public partial class DbSet<T>
     /// <param name="settings">集合设置</param>
     /// <param name="options">删除操作选项</param>
     /// <param name="cancellationToken">取消令牌</param>
-    public Task<DeleteResult> DynamicCollectionDeleteOneAsync<TForeign>(
+    public DeleteResult DynamicCollectionDeleteOne<TForeign>(
         IClientSessionHandle session,
         TForeign foreignDocument,
         string id,
@@ -430,7 +429,7 @@ public partial class DbSet<T>
         CancellationToken cancellationToken = default)
         where TForeign : BaseMongoEntity
     {
-        return _database.GetCollection<T>($"{foreignDocument.Id}_{_collectionName}", settings).DeleteOneAsync(session, d => d.Id == id, options, cancellationToken);
+        return _database.GetCollection<T>($"{foreignDocument.Id}_{_collectionName}", settings).DeleteOne(session, d => d.Id == id, options, cancellationToken);
     }
 
     /// <summary>
@@ -442,7 +441,7 @@ public partial class DbSet<T>
     /// <param name="settings">集合设置</param>
     /// <param name="options">删除操作选项</param>
     /// <param name="cancellationToken">取消令牌</param>
-    public Task<DeleteResult> DynamicCollectionDeleteOneAsync<TForeign>(
+    public DeleteResult DynamicCollectionDeleteOne<TForeign>(
         TForeign foreignDocument,
         T document,
         MongoCollectionSettings settings = null,
@@ -450,7 +449,7 @@ public partial class DbSet<T>
         CancellationToken cancellationToken = default)
         where TForeign : BaseMongoEntity
     {
-        return _database.GetCollection<T>($"{foreignDocument.Id}_{_collectionName}", settings).DeleteOneAsync(d => d.Id == document.Id, options, cancellationToken);
+        return _database.GetCollection<T>($"{foreignDocument.Id}_{_collectionName}", settings).DeleteOne(d => d.Id == document.Id, options, cancellationToken);
     }
 
     /// <summary>
@@ -463,7 +462,7 @@ public partial class DbSet<T>
     /// <param name="settings">集合设置</param>
     /// <param name="options">删除操作选项</param>
     /// <param name="cancellationToken">取消令牌</param>
-    public Task<DeleteResult> DynamicCollectionDeleteOneAsync<TForeign>(
+    public DeleteResult DynamicCollectionDeleteOne<TForeign>(
         IClientSessionHandle session,
         TForeign foreignDocument,
         T document,
@@ -472,7 +471,7 @@ public partial class DbSet<T>
         CancellationToken cancellationToken = default)
         where TForeign : BaseMongoEntity
     {
-        return _database.GetCollection<T>($"{foreignDocument.Id}_{_collectionName}", settings).DeleteOneAsync(session, d => d.Id == document.Id, options, cancellationToken);
+        return _database.GetCollection<T>($"{foreignDocument.Id}_{_collectionName}", settings).DeleteOne(session, d => d.Id == document.Id, options, cancellationToken);
     }
 
     /// <summary>
@@ -484,7 +483,7 @@ public partial class DbSet<T>
     /// <param name="settings">集合设置</param>
     /// <param name="options">删除操作选项</param>
     /// <param name="cancellationToken">取消令牌</param>
-    public Task<DeleteResult> DynamicCollectionDeleteOneAsync<TForeign>(
+    public DeleteResult DynamicCollectionDeleteOne<TForeign>(
         TForeign foreignDocument,
         FilterDefinition<T> filter,
         MongoCollectionSettings settings = null,
@@ -492,7 +491,7 @@ public partial class DbSet<T>
         CancellationToken cancellationToken = default)
         where TForeign : BaseMongoEntity
     {
-        return _database.GetCollection<T>($"{foreignDocument.Id}_{_collectionName}", settings).DeleteOneAsync(filter, options, cancellationToken);
+        return _database.GetCollection<T>($"{foreignDocument.Id}_{_collectionName}", settings).DeleteOne(filter, options, cancellationToken);
     }
 
     /// <summary>
@@ -505,7 +504,7 @@ public partial class DbSet<T>
     /// <param name="settings">集合设置</param>
     /// <param name="options">删除操作选项</param>
     /// <param name="cancellationToken">取消令牌</param>
-    public Task<DeleteResult> DynamicCollectionDeleteOneAsync<TForeign>(
+    public DeleteResult DynamicCollectionDeleteOne<TForeign>(
         IClientSessionHandle session,
         TForeign foreignDocument,
         FilterDefinition<T> filter,
@@ -514,7 +513,7 @@ public partial class DbSet<T>
         CancellationToken cancellationToken = default)
         where TForeign : BaseMongoEntity
     {
-        return _database.GetCollection<T>($"{foreignDocument.Id}_{_collectionName}", settings).DeleteOneAsync(session, filter, options, cancellationToken);
+        return _database.GetCollection<T>($"{foreignDocument.Id}_{_collectionName}", settings).DeleteOne(session, filter, options, cancellationToken);
     }
 
     /// <summary>
@@ -526,7 +525,7 @@ public partial class DbSet<T>
     /// <param name="settings">集合设置</param>
     /// <param name="options">删除操作选项</param>
     /// <param name="cancellationToken">取消令牌</param>
-    public Task<DeleteResult> DynamicCollectionDeleteOneAsync<TForeign>(
+    public DeleteResult DynamicCollectionDeleteOne<TForeign>(
         TForeign foreignDocument,
         Expression<Func<T, bool>> expression,
         MongoCollectionSettings settings = null,
@@ -534,7 +533,7 @@ public partial class DbSet<T>
         CancellationToken cancellationToken = default)
         where TForeign : BaseMongoEntity
     {
-        return _database.GetCollection<T>($"{foreignDocument.Id}_{_collectionName}", settings).DeleteOneAsync(expression, options, cancellationToken);
+        return _database.GetCollection<T>($"{foreignDocument.Id}_{_collectionName}", settings).DeleteOne(expression, options, cancellationToken);
     }
 
     /// <summary>
@@ -547,7 +546,7 @@ public partial class DbSet<T>
     /// <param name="settings">集合设置</param>
     /// <param name="options">删除操作选项</param>
     /// <param name="cancellationToken">取消令牌</param>
-    public Task<DeleteResult> DynamicCollectionDeleteOneAsync<TForeign>(
+    public DeleteResult DynamicCollectionDeleteOne<TForeign>(
         IClientSessionHandle session,
         TForeign foreignDocument,
         Expression<Func<T, bool>> expression,
@@ -556,7 +555,7 @@ public partial class DbSet<T>
         CancellationToken cancellationToken = default)
         where TForeign : BaseMongoEntity
     {
-        return _database.GetCollection<T>($"{foreignDocument.Id}_{_collectionName}", settings).DeleteOneAsync(session, expression, options, cancellationToken);
+        return _database.GetCollection<T>($"{foreignDocument.Id}_{_collectionName}", settings).DeleteOne(session, expression, options, cancellationToken);
     }
 
     /// <summary>
@@ -568,7 +567,7 @@ public partial class DbSet<T>
     /// <param name="settings">集合设置</param>
     /// <param name="options">删除操作选项</param>
     /// <param name="cancellationToken">取消令牌</param>
-    public async Task<List<DeleteResult>> DynamicCollectionDeleteManyAsync<TForeign>(
+    public List<DeleteResult> DynamicCollectionDeleteMany<TForeign>(
         TForeign foreignDocument,
         IEnumerable<T> documents,
         MongoCollectionSettings settings = null,
@@ -579,9 +578,10 @@ public partial class DbSet<T>
         var results = new List<DeleteResult>();
         foreach (var document in documents)
         {
-            var result = await _database.GetCollection<T>($"{foreignDocument.Id}_{_collectionName}", settings).DeleteOneAsync(d => d.Id == document.Id, options, cancellationToken);
+            var result = _database.GetCollection<T>($"{foreignDocument.Id}_{_collectionName}", settings).DeleteOne(d => d.Id == document.Id, options, cancellationToken);
             results.Add(result);
         }
+
         return results;
     }
 
@@ -595,7 +595,7 @@ public partial class DbSet<T>
     /// <param name="settings">集合设置</param>
     /// <param name="options">删除操作选项</param>
     /// <param name="cancellationToken">取消令牌</param>
-    public async Task<List<DeleteResult>> DynamicCollectionDeleteManyAsync<TForeign>(
+    public List<DeleteResult> DynamicCollectionDeleteMany<TForeign>(
         IClientSessionHandle session,
         TForeign foreignDocument,
         IEnumerable<T> documents,
@@ -607,7 +607,7 @@ public partial class DbSet<T>
         var results = new List<DeleteResult>();
         foreach (var document in documents)
         {
-            var result = await _database.GetCollection<T>($"{foreignDocument.Id}_{_collectionName}", settings).DeleteOneAsync(session, d => d.Id == document.Id, options, cancellationToken);
+            var result = _database.GetCollection<T>($"{foreignDocument.Id}_{_collectionName}", settings).DeleteOne(session, d => d.Id == document.Id, options, cancellationToken);
             results.Add(result);
         }
         return results;
@@ -622,7 +622,7 @@ public partial class DbSet<T>
     /// <param name="settings">集合设置</param>
     /// <param name="options">删除操作选项</param>
     /// <param name="cancellationToken">取消令牌</param>
-    public Task<DeleteResult> DynamicCollectionDeleteManyAsync<TForeign>(
+    public DeleteResult DynamicCollectionDeleteMany<TForeign>(
         TForeign foreignDocument,
         FilterDefinition<T> filter,
         MongoCollectionSettings settings = null,
@@ -630,7 +630,7 @@ public partial class DbSet<T>
         CancellationToken cancellationToken = default)
         where TForeign : BaseMongoEntity
     {
-        return _database.GetCollection<T>($"{foreignDocument.Id}_{_collectionName}", settings).DeleteManyAsync(filter, options, cancellationToken);
+        return _database.GetCollection<T>($"{foreignDocument.Id}_{_collectionName}", settings).DeleteMany(filter, options, cancellationToken);
 
     }
 
@@ -641,10 +641,10 @@ public partial class DbSet<T>
     /// <param name="session">会话句柄(作用于事务)</param>
     /// <param name="foreignDocument">上级文档</param>
     /// <param name="filter">过滤器</param>
-    /// <param name="settings">集合设置</param>
+    /// <param name="settings"></param>
     /// <param name="options">删除操作选项</param>
     /// <param name="cancellationToken">取消令牌</param>
-    public Task<DeleteResult> DynamicCollectionDeleteManyAsync<TForeign>(
+    public DeleteResult DynamicCollectionDeleteMany<TForeign>(
         IClientSessionHandle session,
         TForeign foreignDocument,
         FilterDefinition<T> filter,
@@ -653,7 +653,7 @@ public partial class DbSet<T>
         CancellationToken cancellationToken = default)
         where TForeign : BaseMongoEntity
     {
-        return _database.GetCollection<T>($"{foreignDocument.Id}_{_collectionName}", settings).DeleteManyAsync(session, filter, options, cancellationToken);
+        return _database.GetCollection<T>($"{foreignDocument.Id}_{_collectionName}", settings).DeleteMany(session, filter, options, cancellationToken);
     }
 
     /// <summary>
@@ -665,7 +665,7 @@ public partial class DbSet<T>
     /// <param name="settings">集合设置</param>
     /// <param name="options">删除操作选项</param>
     /// <param name="cancellationToken">取消令牌</param>
-    public Task<DeleteResult> DynamicCollectionDeleteManyAsync<TForeign>(
+    public DeleteResult DynamicCollectionDeleteMany<TForeign>(
         TForeign foreignDocument,
         Expression<Func<T, bool>> expression,
         MongoCollectionSettings settings = null,
@@ -673,7 +673,7 @@ public partial class DbSet<T>
         CancellationToken cancellationToken = default)
         where TForeign : BaseMongoEntity
     {
-        return _database.GetCollection<T>($"{foreignDocument.Id}_{_collectionName}", settings).DeleteManyAsync(expression, options, cancellationToken);
+        return _database.GetCollection<T>($"{foreignDocument.Id}_{_collectionName}", settings).DeleteMany(expression, options, cancellationToken);
 
     }
 
@@ -684,10 +684,10 @@ public partial class DbSet<T>
     /// <param name="session">会话句柄(作用于事务)</param>
     /// <param name="foreignDocument">上级文档</param>
     /// <param name="expression">Lambda过滤器</param>
-    /// <param name="settings">集合设置</param>
+    /// <param name="settings"></param>
     /// <param name="options">删除操作选项</param>
     /// <param name="cancellationToken">取消令牌</param>
-    public Task<DeleteResult> DynamicCollectionDeleteManyAsync<TForeign>(
+    public DeleteResult DynamicCollectionDeleteMany<TForeign>(
         IClientSessionHandle session,
         TForeign foreignDocument,
         Expression<Func<T, bool>> expression,
@@ -696,7 +696,7 @@ public partial class DbSet<T>
         CancellationToken cancellationToken = default)
         where TForeign : BaseMongoEntity
     {
-        return _database.GetCollection<T>($"{foreignDocument.Id}_{_collectionName}", settings).DeleteManyAsync(session, expression, options, cancellationToken);
+        return _database.GetCollection<T>($"{foreignDocument.Id}_{_collectionName}", settings).DeleteMany(session, expression, options, cancellationToken);
     }
 
     #endregion
