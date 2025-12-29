@@ -37,17 +37,30 @@ public abstract class MongoDbContext
     public MongoDbContext(IOptionsMonitor<MongoDBOptions> options) : this(options.CurrentValue.ConnectionString) { }
 
     // --------------------------------------------------------------------
-    // SaveChanges（默认开启事务）
+    // CommitCommands（默认开启事务）
     // --------------------------------------------------------------------
 
-    public int SaveChanges(CancellationToken cancellationToken = default)
+    public int CommitCommands(CancellationToken cancellationToken = default)
+    {
+        try
+        {
+            int total = CommitCommandsInternal(null, cancellationToken);
+            return total;
+        }
+        catch
+        {
+            throw;
+        }
+    }
+
+    public int CommitCommandsInTransaction(CancellationToken cancellationToken = default)
     {
         using var session = Client.StartSession(cancellationToken: cancellationToken);
         session.StartTransaction();
 
         try
         {
-            int total = SaveChangesInternal(session, cancellationToken);
+            int total = CommitCommandsInternal(session, cancellationToken);
             session.CommitTransaction(cancellationToken);
             return total;
         }
@@ -58,14 +71,27 @@ public abstract class MongoDbContext
         }
     }
 
-    public async Task<int> SaveChangesAsync(CancellationToken cancellationToken = default)
+    public async Task<int> CommitCommandsAsync(CancellationToken cancellationToken = default)
+    {
+        try
+        {
+            int total = await CommitCommandsInternalAsync(null, cancellationToken);
+            return total;
+        }
+        catch
+        {
+            throw;
+        }
+    }
+
+    public async Task<int> CommitCommandsInTransactionAsync(CancellationToken cancellationToken = default)
     {
         using var session = await Client.StartSessionAsync(cancellationToken: cancellationToken);
         session.StartTransaction();
 
         try
         {
-            int total = await SaveChangesInternalAsync(session, cancellationToken);
+            int total = await CommitCommandsInternalAsync(session, cancellationToken);
             await session.CommitTransactionAsync(cancellationToken);
             return total;
         }
@@ -77,10 +103,10 @@ public abstract class MongoDbContext
     }
 
     // --------------------------------------------------------------------
-    // 遍历所有 DbSet<T> 并调用内部 SaveChanges
+    // 只处理有变更的 DbSet<T> 并调用内部 CommitCommands
     // --------------------------------------------------------------------
 
-    private int SaveChangesInternal(IClientSessionHandle session, CancellationToken ct)
+    private int CommitCommandsInternal(IClientSessionHandle session, CancellationToken ct)
     {
         int total = 0;
 
@@ -92,13 +118,13 @@ public abstract class MongoDbContext
 
         foreach (var set in dbSets)
         {
-            total += set.SaveChanges(session, ct);
+            total += set.CommitCommands(session, ct);
         }
 
         return total;
     }
 
-    private async Task<int> SaveChangesInternalAsync(IClientSessionHandle session, CancellationToken ct)
+    private async Task<int> CommitCommandsInternalAsync(IClientSessionHandle session, CancellationToken ct)
     {
         int total = 0;
 
@@ -110,7 +136,7 @@ public abstract class MongoDbContext
 
         foreach (var set in dbSets)
         {
-            total += await set.SaveChangesAsync(session, ct);
+            total += await set.CommitCommandsAsync(session, ct);
         }
 
         return total;

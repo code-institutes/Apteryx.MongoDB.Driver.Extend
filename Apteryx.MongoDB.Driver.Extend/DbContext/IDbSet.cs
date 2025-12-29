@@ -13,8 +13,8 @@ namespace Apteryx.MongoDB.Driver.Extend;
 public interface IDbSet
 {
     bool HasChanges { get; }
-    int SaveChanges(IClientSessionHandle session, CancellationToken ct);
-    Task<int> SaveChangesAsync(IClientSessionHandle session, CancellationToken ct);
+    int CommitCommands(IClientSessionHandle session, CancellationToken ct);
+    Task<int> CommitCommandsAsync(IClientSessionHandle session, CancellationToken ct);
 
 
     public IMongoDatabase DataBase { get; }
@@ -25,7 +25,7 @@ public interface IDbSet<T> : IDbSet, IQueryable<T> where T : BaseMongoEntity
     /// <summary>
     /// 获取用于在当前线程上立即调度任务执行的执行器。
     /// </summary>
-    public ImmediateExecutor<T> Immediate { get; }
+    ImmediateExecutor<T> Immediate { get; }
     /// <summary>
     /// 获取底层MongoDB集合，以便直接访问原生驱动操作。
     /// </summary>

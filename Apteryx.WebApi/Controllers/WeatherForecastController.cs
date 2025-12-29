@@ -36,12 +36,24 @@ public class WeatherForecastController : ControllerBase
             });
         }
 
-        var userLinq = await _db.Users.FirstOrDefaultAsync(f => f.Name == "李四");
- 
+        var userLinq = await _db.Users.FirstOrDefaultAsync(f => f.Name == "赵六");
 
-        userLinq.Name = "李四";
+        if (userLinq == null)
+        {
+            userLinq = new User()
+            {
+                Name = "李四",
+                Email = "wyspaces@outlook.com",
+                Password = "asdlkfjaldk"
+            };
 
-        await _db.SaveChangesAsync();
+            _db.Users.Add(userLinq);
+        }
+
+        userLinq.Name = "赵六1";
+        _db.Users.Update(userLinq);
+
+        await _db.CommitCommandsAsync();
 
 
 
@@ -49,7 +61,7 @@ public class WeatherForecastController : ControllerBase
         var query = from u in _db.Users
                     where u.Name != null && u.Name.Contains("张")
                     select u;
-        
+
         var list = _db.Users.Where(u => u.Name != null && u.Name.Contains("张")).ToList();
 
         await foreach (var item in _db.Users.Immediate.FindAllAsync())

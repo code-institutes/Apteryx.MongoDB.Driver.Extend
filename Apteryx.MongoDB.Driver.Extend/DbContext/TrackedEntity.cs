@@ -2,10 +2,13 @@
 
 public enum EntityState
 {
-    Added = 1,
-    Modified,
-    Deleted
+    Detached = 0,
+    Unchanged = 1,
+    Added = 2,
+    Deleted = 3,
+    Modified = 4
 }
+
 
 internal class TrackedEntity<T>
 {

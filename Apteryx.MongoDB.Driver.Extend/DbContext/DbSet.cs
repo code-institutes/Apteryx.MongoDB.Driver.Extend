@@ -5,6 +5,7 @@ using System.Collections;
 using System.Collections.Generic;
 using System.Linq;
 using System.Linq.Expressions;
+using System.Text;
 using System.Threading;
 using System.Threading.Tasks;
 
@@ -52,8 +53,8 @@ public partial class DbSet<T> : IDbSet<T> where T : BaseMongoEntity
     IEnumerator IEnumerable.GetEnumerator() => GetEnumerator();
     #endregion
 
-    int IDbSet.SaveChanges(IClientSessionHandle session, CancellationToken ct) => SaveChanges(session, ct);
-    Task<int> IDbSet.SaveChangesAsync(IClientSessionHandle session, CancellationToken ct) => SaveChangesAsync(session, ct);
+    int IDbSet.CommitCommands(IClientSessionHandle session, CancellationToken ct) => CommitCommands(session, ct);
+    Task<int> IDbSet.CommitCommandsAsync(IClientSessionHandle session, CancellationToken ct) => CommitCommandsAsync(session, ct);
 
     #region ChangeTracker相关
     public void Add(T entity)
@@ -71,30 +72,74 @@ public partial class DbSet<T> : IDbSet<T> where T : BaseMongoEntity
         Track(entity, EntityState.Deleted);
     }
 
-    private void Track(T entity, EntityState state)
+    private void Track(T entity, EntityState incoming)
     {
         if (_changeTracker.TryGetValue(entity, out var tracked))
         {
-            tracked.State = state;
+            tracked.State = Resolve(tracked.State, incoming);
         }
         else
         {
-            _changeTracker[entity] = new TrackedEntity<T>(entity, state);
+            _changeTracker[entity] = new TrackedEntity<T>(entity, incoming);
         }
     }
 
-    internal bool HasChanges => _changeTracker.Count > 0;
-
-
-    internal void ClearChangeTracker()
+    private EntityState Resolve(EntityState current, EntityState incoming)
     {
-        _changeTracker.Clear();
+        switch (current)
+        {
+            case EntityState.Detached:
+                // 对游离实体，直接采用调用方的意图
+                return incoming;
+
+            case EntityState.Unchanged:
+                return incoming switch
+                {
+                    EntityState.Added => EntityState.Added,
+                    EntityState.Modified => EntityState.Modified,
+                    EntityState.Deleted => EntityState.Deleted,
+                    _ => current
+                };
+
+            case EntityState.Added:
+                return incoming switch
+                {
+                    EntityState.Deleted => EntityState.Detached, // EF Core：Add + Remove → Detached
+                    EntityState.Modified => EntityState.Added,    // 仍视为新实体
+                    EntityState.Added => EntityState.Added,
+                    _ => current
+                };
+
+            case EntityState.Modified:
+                return incoming switch
+                {
+                    EntityState.Deleted => EntityState.Deleted,
+                    EntityState.Added => EntityState.Modified, // Add 被忽略
+                    EntityState.Modified => EntityState.Modified,
+                    _ => current
+                };
+
+            case EntityState.Deleted:
+                return incoming switch
+                {
+                    EntityState.Added => EntityState.Added,    // 相当于“重新加入”
+                    EntityState.Modified => EntityState.Modified, // 认为你要重新修改
+                    EntityState.Deleted => EntityState.Deleted,
+                    _ => current
+                };
+
+            default:
+                return current;
+        }
     }
+
+
+    internal bool HasChanges => _changeTracker.Count > 0;
 
     #endregion
 
     #region SaveChanges（同步）
-    internal int SaveChanges(IClientSessionHandle session, CancellationToken cancellationToken = default)
+    internal int CommitCommands(IClientSessionHandle session, CancellationToken cancellationToken = default)
     {
         int count = 0;
 
@@ -119,6 +164,14 @@ public partial class DbSet<T> : IDbSet<T> where T : BaseMongoEntity
                     DeleteInternal(session, entity, cancellationToken);
                     count++;
                     break;
+
+                case EntityState.Detached:
+                    // EF Core 行为：Detached 不执行任何数据库操作
+                    break;
+
+                case EntityState.Unchanged:
+                    // 不执行任何操作
+                    break;
             }
         }
 
@@ -129,7 +182,7 @@ public partial class DbSet<T> : IDbSet<T> where T : BaseMongoEntity
     #endregion
 
     #region SaveChanges（异步）
-    internal async Task<int> SaveChangesAsync(IClientSessionHandle session, CancellationToken cancellationToken = default)
+    internal async Task<int> CommitCommandsAsync(IClientSessionHandle session, CancellationToken cancellationToken = default)
     {
         int count = 0;
 
@@ -154,6 +207,14 @@ public partial class DbSet<T> : IDbSet<T> where T : BaseMongoEntity
                     await DeleteInternalAsync(session, entity, cancellationToken);
                     count++;
                     break;
+
+                case EntityState.Detached:
+                    // EF Core 行为：Detached 不执行任何数据库操作
+                    break;
+
+                case EntityState.Unchanged:
+                    // 不执行任何操作
+                    break;
             }
         }
 
@@ -166,57 +227,57 @@ public partial class DbSet<T> : IDbSet<T> where T : BaseMongoEntity
     #region Mongo 操作（同步/异步 + 可选 session）
     private void InsertInternal(IClientSessionHandle session, T entity, CancellationToken ct)
     {
-        //if (session == null)
-        //    _collection.InsertOne(entity, cancellationToken: ct);
-        //else
+        if (session == null)
+            _collection.InsertOne(entity, cancellationToken: ct);
+        else
             _collection.InsertOne(session, entity, cancellationToken: ct);
     }
 
     private async Task InsertInternalAsync(IClientSessionHandle session, T entity, CancellationToken ct)
     {
-        //if (session == null)
-        //    await _collection.InsertOneAsync(entity, cancellationToken: ct);
-        //else
+        if (session == null)
+            await _collection.InsertOneAsync(entity, cancellationToken: ct);
+        else
             await _collection.InsertOneAsync(session, entity, cancellationToken: ct);
     }
 
     private void ReplaceInternal(IClientSessionHandle session, T entity, CancellationToken ct)
     {
-        var filter = Builders<T>.Filter.Eq("_id", entity.Id);
+        Expression<Func<T, bool>> filter = (e) => e.Id == entity.Id;
 
-        //if (session == null)
-        //    _collection.ReplaceOne(filter, entity, cancellationToken: ct);
-        //else
+        if (session == null)
+            _collection.ReplaceOne(filter, entity, cancellationToken: ct);
+        else
             _collection.ReplaceOne(session, filter, entity, cancellationToken: ct);
     }
 
     private async Task ReplaceInternalAsync(IClientSessionHandle session, T entity, CancellationToken ct)
     {
-        var filter = Builders<T>.Filter.Eq("_id", entity.Id);
+        Expression<Func<T, bool>> filter = (e) => e.Id == entity.Id;
 
-        //if (session == null)
-        //    await _collection.ReplaceOneAsync(filter, entity, cancellationToken: ct);
-        //else
+        if (session == null)
+            await _collection.ReplaceOneAsync(filter, entity, cancellationToken: ct);
+        else
             await _collection.ReplaceOneAsync(session, filter, entity, cancellationToken: ct);
     }
 
     private void DeleteInternal(IClientSessionHandle session, T entity, CancellationToken ct)
     {
-        var filter = Builders<T>.Filter.Eq("_id", entity.Id);
+        Expression<Func<T, bool>> filter = (e) => e.Id == entity.Id;
 
-        //if (session == null)
-        //    _collection.DeleteOne(filter, ct);
-        //else
+        if (session == null)
+            _collection.DeleteOne(filter, ct);
+        else
             _collection.DeleteOne(session, filter, cancellationToken: ct);
     }
 
     private async Task DeleteInternalAsync(IClientSessionHandle session, T entity, CancellationToken ct)
     {
-        var filter = Builders<T>.Filter.Eq("_id", entity.Id);
+        Expression<Func<T, bool>> filter = (e) => e.Id == entity.Id;
 
-        //if (session == null)
-        //    await _collection.DeleteOneAsync(filter, ct);
-        //else
+        if (session == null)
+            await _collection.DeleteOneAsync(filter, ct);
+        else
             await _collection.DeleteOneAsync(session, filter, cancellationToken: ct);
     }
     #endregion
