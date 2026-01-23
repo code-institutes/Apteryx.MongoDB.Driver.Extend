@@ -187,7 +187,9 @@ public abstract class MongoDbContext
         var contextType = GetType();
         var properties = contextType.GetProperties(BindingFlags.Public | BindingFlags.Instance);
 
-        var dbSetProperties = properties.Where(p => p.PropertyType.IsGenericType && p.PropertyType.GetGenericTypeDefinition() == typeof(DbSet<>));
+        var dbSetProperties = properties.Where(p => 
+        p.PropertyType.IsGenericType && p.PropertyType.GetGenericTypeDefinition() == typeof(DbSet<>) || 
+        p.PropertyType.IsGenericType && p.PropertyType.GetGenericTypeDefinition() == typeof(IDbSet<>));
 
         foreach (var prop in dbSetProperties)
         {
