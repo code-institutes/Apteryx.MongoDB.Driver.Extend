@@ -1,7 +1,6 @@
-﻿using Apteryx.MongoDB.Driver.Extend;
-using Microsoft.Extensions.Options;
+﻿using Microsoft.Extensions.Options;
 
-namespace Apteryx.Mongodb.Driver.Extend.Tests.Data;
+namespace Apteryx.MongoDB.Driver.Extend.Tests.Data;
 
 public class ApteryxDbContext : MongoDbContext
 {

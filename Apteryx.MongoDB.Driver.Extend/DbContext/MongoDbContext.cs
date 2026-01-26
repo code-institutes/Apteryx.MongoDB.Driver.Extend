@@ -1,11 +1,10 @@
-﻿using Apteryx.Mongodb.Driver.Extend;
-using Microsoft.Extensions.Options;
-using MongoDB.Driver;
-using System;
+﻿using System;
 using System.Linq;
+using MongoDB.Driver;
 using System.Reflection;
 using System.Threading;
 using System.Threading.Tasks;
+using Microsoft.Extensions.Options;
 
 namespace Apteryx.MongoDB.Driver.Extend;
 

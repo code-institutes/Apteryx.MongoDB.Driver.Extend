@@ -13,7 +13,7 @@
   </ItemGroup>
 
   <ItemGroup>
-    <ProjectReference Include="..\Apteryx.MongoDB.Driver.Extend\Apteryx.Mongodb.Driver.Extend.csproj" />
+    <ProjectReference Include="..\Apteryx.MongoDB.Driver.Extend\Apteryx.MongoDB.Driver.Extend.csproj" />
   </ItemGroup>
 
 </Project>

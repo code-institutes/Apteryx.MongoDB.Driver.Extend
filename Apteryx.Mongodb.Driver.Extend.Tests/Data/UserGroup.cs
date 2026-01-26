@@ -1,6 +1,4 @@
-﻿using Apteryx.MongoDB.Driver.Extend;
-
-namespace Apteryx.Mongodb.Driver.Extend.Tests.Data;
+﻿namespace Apteryx.MongoDB.Driver.Extend.Tests.Data;
 
 public class UserGroup:BaseMongoEntity
 {

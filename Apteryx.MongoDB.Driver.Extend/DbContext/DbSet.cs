@@ -1,5 +1,4 @@
-﻿using Apteryx.Mongodb.Driver.Extend;
-using MongoDB.Driver;
+﻿using MongoDB.Driver;
 using System;
 using System.Collections;
 using System.Collections.Generic;

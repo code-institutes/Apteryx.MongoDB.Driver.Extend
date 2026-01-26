@@ -1,4 +1,4 @@
-﻿namespace Apteryx.Mongodb.Driver.Extend;
+﻿namespace Apteryx.MongoDB.Driver.Extend;
 
 public enum EntityState
 {

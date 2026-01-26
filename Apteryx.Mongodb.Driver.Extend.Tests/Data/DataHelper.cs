@@ -1,6 +1,6 @@
 ﻿using MongoDB.Bson;
 
-namespace Apteryx.Mongodb.Driver.Extend.Tests.Data;
+namespace Apteryx.MongoDB.Driver.Extend.Tests.Data;
 
 public static class DataHelper
 {

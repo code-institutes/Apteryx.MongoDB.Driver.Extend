@@ -1,6 +1,6 @@
 ﻿using System;
 
-namespace Apteryx.Mongodb.Driver.Extend;
+namespace Apteryx.MongoDB.Driver.Extend;
 
 [AttributeUsage(AttributeTargets.Class, AllowMultiple = true)]
 public class MongoIndexAttribute : Attribute
