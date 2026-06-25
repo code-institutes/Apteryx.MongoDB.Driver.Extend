@@ -23,7 +23,7 @@ public partial class CommandExecutor<T>
         UpdateOptions options = null,
         CancellationToken cancellationToken = default)
     {
-        return _collection.UpdateOne(u => u.Id == id, update.Set(s => s.UpdateTime, DateTime.Now), options, cancellationToken);
+        return _collection.UpdateOne(u => u.Id == id, update.Set(s => s.UpdateTime, DateTime.UtcNow), options, cancellationToken);
     }
 
     /// <summary>
@@ -42,7 +42,7 @@ public partial class CommandExecutor<T>
         UpdateOptions options = null,
         CancellationToken cancellationToken = default)
     {
-        return _collection.UpdateOne(session, u => u.Id == id, update.Set(s => s.UpdateTime, DateTime.Now), options, cancellationToken);
+        return _collection.UpdateOne(session, u => u.Id == id, update.Set(s => s.UpdateTime, DateTime.UtcNow), options, cancellationToken);
     }
 
     /// <summary>
@@ -59,7 +59,7 @@ public partial class CommandExecutor<T>
         UpdateOptions options = null,
         CancellationToken cancellationToken = default)
     {
-        return _collection.UpdateOne(filter, update.Set(s => s.UpdateTime, DateTime.Now), options, cancellationToken);
+        return _collection.UpdateOne(filter, update.Set(s => s.UpdateTime, DateTime.UtcNow), options, cancellationToken);
     }
 
     /// <summary>
@@ -78,7 +78,7 @@ public partial class CommandExecutor<T>
         UpdateOptions options = null,
         CancellationToken cancellationToken = default)
     {
-        return _collection.UpdateOne(session, filter, update.Set(s => s.UpdateTime, DateTime.Now), options, cancellationToken);
+        return _collection.UpdateOne(session, filter, update.Set(s => s.UpdateTime, DateTime.UtcNow), options, cancellationToken);
     }
 
     /// <summary>
@@ -95,7 +95,7 @@ public partial class CommandExecutor<T>
         UpdateOptions options = null,
         CancellationToken cancellationToken = default)
     {
-        return _collection.UpdateOne(expression, update.Set(s => s.UpdateTime, DateTime.Now), options, cancellationToken);
+        return _collection.UpdateOne(expression, update.Set(s => s.UpdateTime, DateTime.UtcNow), options, cancellationToken);
     }
 
     /// <summary>
@@ -115,7 +115,7 @@ public partial class CommandExecutor<T>
         CancellationToken cancellationToken = default)
 
     {
-        return _collection.UpdateOne(session, expression, update.Set(s => s.UpdateTime, DateTime.Now), options, cancellationToken);
+        return _collection.UpdateOne(session, expression, update.Set(s => s.UpdateTime, DateTime.UtcNow), options, cancellationToken);
     }
 
     /// <summary>
@@ -140,7 +140,7 @@ public partial class CommandExecutor<T>
 
     {
         return _database.GetCollection<T>($"{foreignDocument.Id}_{_collectionName}", settings).UpdateOne(u => u.Id == id,
-            update.Set(s => s.UpdateTime, DateTime.Now), options, cancellationToken);
+            update.Set(s => s.UpdateTime, DateTime.UtcNow), options, cancellationToken);
     }
 
     /// <summary>
@@ -165,7 +165,7 @@ public partial class CommandExecutor<T>
         where TForeign : BaseMongoEntity
     {
         return _database.GetCollection<T>($"{foreignDocument.Id}_{_collectionName}", settings).UpdateOne(session, u => u.Id == id,
-            update.Set(s => s.UpdateTime, DateTime.Now), options, cancellationToken);
+            update.Set(s => s.UpdateTime, DateTime.UtcNow), options, cancellationToken);
     }
 
     /// <summary>
@@ -189,7 +189,7 @@ public partial class CommandExecutor<T>
         where TForeign : BaseMongoEntity
     {
         return _database.GetCollection<T>($"{foreignDocument.Id}_{_collectionName}", settings).UpdateOne(filter,
-            update.Set(s => s.UpdateTime, DateTime.Now), options, cancellationToken);
+            update.Set(s => s.UpdateTime, DateTime.UtcNow), options, cancellationToken);
     }
 
     /// <summary>
@@ -214,7 +214,7 @@ public partial class CommandExecutor<T>
         where TForeign : BaseMongoEntity
     {
         return _database.GetCollection<T>($"{foreignDocument.Id}_{_collectionName}", settings).UpdateOne(session, filter,
-            update.Set(s => s.UpdateTime, DateTime.Now), options, cancellationToken);
+            update.Set(s => s.UpdateTime, DateTime.UtcNow), options, cancellationToken);
     }
 
     /// <summary>
@@ -238,7 +238,7 @@ public partial class CommandExecutor<T>
         where TForeign : BaseMongoEntity
     {
         return _database.GetCollection<T>($"{foreignDocument.Id}_{_collectionName}", settings).UpdateOne(expression,
-            update.Set(s => s.UpdateTime, DateTime.Now), options, cancellationToken);
+            update.Set(s => s.UpdateTime, DateTime.UtcNow), options, cancellationToken);
     }
 
     /// <summary>
@@ -263,7 +263,7 @@ public partial class CommandExecutor<T>
         where TForeign : BaseMongoEntity
     {
         return _database.GetCollection<T>($"{foreignDocument.Id}_{_collectionName}", settings).UpdateOne(session, expression,
-            update.Set(s => s.UpdateTime, DateTime.Now), options, cancellationToken);
+            update.Set(s => s.UpdateTime, DateTime.UtcNow), options, cancellationToken);
     }
 
     /// <summary>
@@ -281,7 +281,7 @@ public partial class CommandExecutor<T>
         CancellationToken cancellationToken = default)
     {
         return _collection.FindOneAndUpdate<T>(u => u.Id == id,
-            update.Set(s => s.UpdateTime, DateTime.Now), options, cancellationToken);
+            update.Set(s => s.UpdateTime, DateTime.UtcNow), options, cancellationToken);
     }
 
     /// <summary>
@@ -301,7 +301,7 @@ public partial class CommandExecutor<T>
         CancellationToken cancellationToken = default)
     {
         return _collection.FindOneAndUpdate<T>(session, u => u.Id == id,
-            update.Set(s => s.UpdateTime, DateTime.Now), options, cancellationToken);
+            update.Set(s => s.UpdateTime, DateTime.UtcNow), options, cancellationToken);
     }
 
     /// <summary>
@@ -319,7 +319,7 @@ public partial class CommandExecutor<T>
         CancellationToken cancellationToken = default)
     {
         return _collection.FindOneAndUpdate(filter,
-            update.Set(s => s.UpdateTime, DateTime.Now), options, cancellationToken);
+            update.Set(s => s.UpdateTime, DateTime.UtcNow), options, cancellationToken);
     }
 
     /// <summary>
@@ -339,7 +339,7 @@ public partial class CommandExecutor<T>
         CancellationToken cancellationToken = default)
     {
         return _collection.FindOneAndUpdate(session, filter,
-            update.Set(s => s.UpdateTime, DateTime.Now), options, cancellationToken);
+            update.Set(s => s.UpdateTime, DateTime.UtcNow), options, cancellationToken);
     }
 
     /// <summary>
@@ -357,7 +357,7 @@ public partial class CommandExecutor<T>
         CancellationToken cancellationToken = default)
     {
         return _collection.FindOneAndUpdate(expression,
-            update.Set(s => s.UpdateTime, DateTime.Now), options, cancellationToken);
+            update.Set(s => s.UpdateTime, DateTime.UtcNow), options, cancellationToken);
     }
 
     /// <summary>
@@ -377,7 +377,7 @@ public partial class CommandExecutor<T>
         CancellationToken cancellationToken = default)
     {
         return _collection.FindOneAndUpdate(session, expression,
-            update.Set(s => s.UpdateTime, DateTime.Now), options, cancellationToken);
+            update.Set(s => s.UpdateTime, DateTime.UtcNow), options, cancellationToken);
     }
 
     /// <summary>
@@ -401,7 +401,7 @@ public partial class CommandExecutor<T>
         where TForeign : BaseMongoEntity
     {
         return _database.GetCollection<T>($"{foreignDocument.Id}_{_collectionName}", settings).FindOneAndUpdate<T>(u => u.Id == id,
-            update.Set(s => s.UpdateTime, DateTime.Now), options, cancellationToken);
+            update.Set(s => s.UpdateTime, DateTime.UtcNow), options, cancellationToken);
     }
 
     /// <summary>
@@ -426,7 +426,7 @@ public partial class CommandExecutor<T>
         where TForeign : BaseMongoEntity
     {
         return _database.GetCollection<T>($"{foreignDocument.Id}_{_collectionName}", settings).FindOneAndUpdate<T>(session, u => u.Id == id,
-            update.Set(s => s.UpdateTime, DateTime.Now), options, cancellationToken);
+            update.Set(s => s.UpdateTime, DateTime.UtcNow), options, cancellationToken);
     }
 
     /// <summary>
@@ -450,7 +450,7 @@ public partial class CommandExecutor<T>
         where TForeign : BaseMongoEntity
     {
         return _database.GetCollection<T>($"{foreignDocument.Id}_{_collectionName}", settings).FindOneAndUpdate(filter,
-            update.Set(s => s.UpdateTime, DateTime.Now), options, cancellationToken);
+            update.Set(s => s.UpdateTime, DateTime.UtcNow), options, cancellationToken);
     }
 
     /// <summary>
@@ -476,7 +476,7 @@ public partial class CommandExecutor<T>
         where TForeign : BaseMongoEntity
     {
         return _database.GetCollection<T>($"{foreignDocument.Id}_{_collectionName}", settings).FindOneAndUpdate(session, filter,
-            update.Set(s => s.UpdateTime, DateTime.Now), options, cancellationToken);
+            update.Set(s => s.UpdateTime, DateTime.UtcNow), options, cancellationToken);
     }
 
     /// <summary>
@@ -500,7 +500,7 @@ public partial class CommandExecutor<T>
         where TForeign : BaseMongoEntity
     {
         return _database.GetCollection<T>($"{foreignDocument.Id}_{_collectionName}", settings).FindOneAndUpdate(expression,
-            update.Set(s => s.UpdateTime, DateTime.Now), options, cancellationToken);
+            update.Set(s => s.UpdateTime, DateTime.UtcNow), options, cancellationToken);
     }
 
     /// <summary>
@@ -526,7 +526,7 @@ public partial class CommandExecutor<T>
         where TForeign : BaseMongoEntity
     {
         return _database.GetCollection<T>($"{foreignDocument.Id}_{_collectionName}", settings).FindOneAndUpdate(session, expression,
-            update.Set(s => s.UpdateTime, DateTime.Now), options, cancellationToken);
+            update.Set(s => s.UpdateTime, DateTime.UtcNow), options, cancellationToken);
     }
 
     /// <summary>
@@ -544,7 +544,7 @@ public partial class CommandExecutor<T>
         CancellationToken cancellationToken = default)
     {
         return _collection.UpdateMany(filter,
-            update.Set(s => s.UpdateTime, DateTime.Now), options, cancellationToken);
+            update.Set(s => s.UpdateTime, DateTime.UtcNow), options, cancellationToken);
     }
 
     /// <summary>
@@ -564,7 +564,7 @@ public partial class CommandExecutor<T>
         CancellationToken cancellationToken = default)
     {
         return _collection.UpdateMany(session, filter,
-            update.Set(s => s.UpdateTime, DateTime.Now), options, cancellationToken);
+            update.Set(s => s.UpdateTime, DateTime.UtcNow), options, cancellationToken);
     }
 
     /// <summary>
@@ -582,7 +582,7 @@ public partial class CommandExecutor<T>
         CancellationToken cancellationToken = default)
     {
         return _collection.UpdateMany(expression,
-            update.Set(s => s.UpdateTime, DateTime.Now), options, cancellationToken);
+            update.Set(s => s.UpdateTime, DateTime.UtcNow), options, cancellationToken);
     }
 
     /// <summary>
@@ -602,7 +602,7 @@ public partial class CommandExecutor<T>
         CancellationToken cancellationToken = default)
     {
         return _collection.UpdateMany(session, expression,
-            update.Set(s => s.UpdateTime, DateTime.Now), options, cancellationToken);
+            update.Set(s => s.UpdateTime, DateTime.UtcNow), options, cancellationToken);
     }
 
     /// <summary>
@@ -626,7 +626,7 @@ public partial class CommandExecutor<T>
         where TForeign : BaseMongoEntity
     {
         return _database.GetCollection<T>($"{foreignDocument.Id}_{_collectionName}", settings).UpdateMany(filter,
-            update.Set(s => s.UpdateTime, DateTime.Now), options, cancellationToken);
+            update.Set(s => s.UpdateTime, DateTime.UtcNow), options, cancellationToken);
     }
 
     /// <summary>
@@ -652,7 +652,7 @@ public partial class CommandExecutor<T>
         where TForeign : BaseMongoEntity
     {
         return _database.GetCollection<T>($"{foreignDocument.Id}_{_collectionName}", settings).UpdateMany(session, filter,
-            update.Set(s => s.UpdateTime, DateTime.Now), options, cancellationToken);
+            update.Set(s => s.UpdateTime, DateTime.UtcNow), options, cancellationToken);
     }
 
     /// <summary>
@@ -676,7 +676,7 @@ public partial class CommandExecutor<T>
         where TForeign : BaseMongoEntity
     {
         return _database.GetCollection<T>($"{foreignDocument.Id}_{_collectionName}", settings).UpdateMany(expression,
-            update.Set(s => s.UpdateTime, DateTime.Now), options, cancellationToken);
+            update.Set(s => s.UpdateTime, DateTime.UtcNow), options, cancellationToken);
     }
 
     /// <summary>
@@ -702,7 +702,7 @@ public partial class CommandExecutor<T>
         where TForeign : BaseMongoEntity
     {
         return _database.GetCollection<T>($"{foreignDocument.Id}_{_collectionName}", settings).UpdateMany(session, expression,
-            update.Set(s => s.UpdateTime, DateTime.Now), options, cancellationToken);
+            update.Set(s => s.UpdateTime, DateTime.UtcNow), options, cancellationToken);
     }
 
     #endregion

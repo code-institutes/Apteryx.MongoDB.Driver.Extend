@@ -25,7 +25,7 @@ public partial class CommandExecutor<T>
         UpdateOptions options = null,
         CancellationToken cancellationToken = default)
     {
-        return _collection.UpdateOneAsync(u => u.Id == id, update.Set(s => s.UpdateTime, DateTime.Now), options, cancellationToken);
+        return _collection.UpdateOneAsync(u => u.Id == id, update.Set(s => s.UpdateTime, DateTime.UtcNow), options, cancellationToken);
     }
 
     /// <summary>
@@ -44,7 +44,7 @@ public partial class CommandExecutor<T>
         UpdateOptions options = null,
         CancellationToken cancellationToken = default)
     {
-        return _collection.UpdateOneAsync(session, u => u.Id == id, update.Set(s => s.UpdateTime, DateTime.Now), options, cancellationToken);
+        return _collection.UpdateOneAsync(session, u => u.Id == id, update.Set(s => s.UpdateTime, DateTime.UtcNow), options, cancellationToken);
     }
 
     /// <summary>
@@ -61,7 +61,7 @@ public partial class CommandExecutor<T>
         UpdateOptions options = null,
         CancellationToken cancellationToken = default)
     {
-        return _collection.UpdateOneAsync(filter, update.Set(s => s.UpdateTime, DateTime.Now), options, cancellationToken);
+        return _collection.UpdateOneAsync(filter, update.Set(s => s.UpdateTime, DateTime.UtcNow), options, cancellationToken);
     }
 
     /// <summary>
@@ -80,7 +80,7 @@ public partial class CommandExecutor<T>
         UpdateOptions options = null,
         CancellationToken cancellationToken = default)
     {
-        return _collection.UpdateOneAsync(session, filter, update.Set(s => s.UpdateTime, DateTime.Now), options, cancellationToken);
+        return _collection.UpdateOneAsync(session, filter, update.Set(s => s.UpdateTime, DateTime.UtcNow), options, cancellationToken);
     }
 
     /// <summary>
@@ -97,7 +97,7 @@ public partial class CommandExecutor<T>
         UpdateOptions options = null,
         CancellationToken cancellationToken = default)
     {
-        return _collection.UpdateOneAsync(expression, update.Set(s => s.UpdateTime, DateTime.Now), options, cancellationToken);
+        return _collection.UpdateOneAsync(expression, update.Set(s => s.UpdateTime, DateTime.UtcNow), options, cancellationToken);
     }
 
     /// <summary>
@@ -116,7 +116,7 @@ public partial class CommandExecutor<T>
         UpdateOptions options = null,
         CancellationToken cancellationToken = default)
     {
-        return _collection.UpdateOneAsync(session, expression, update.Set(s => s.UpdateTime, DateTime.Now), options, cancellationToken);
+        return _collection.UpdateOneAsync(session, expression, update.Set(s => s.UpdateTime, DateTime.UtcNow), options, cancellationToken);
     }
 
     /// <summary>

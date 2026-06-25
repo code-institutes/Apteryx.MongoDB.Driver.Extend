@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Linq;
+using MongoDB.Bson;
 using MongoDB.Driver;
 using System.Reflection;
 using System.Threading;
@@ -10,9 +11,11 @@ namespace Apteryx.MongoDB.Driver.Extend;
 
 public abstract class MongoDbContext
 {
+    private bool _indexesInitialized;
+
     //定义数据库
-    public IMongoDatabase Database { get; set; }
-    public MongoClient Client { get; set; }
+    public IMongoDatabase Database { get; private set; }
+    public MongoClient Client { get; private set; }
 
     /// <summary>
     /// 连接字符串
@@ -26,7 +29,7 @@ public abstract class MongoDbContext
 
         InitializeDbSets();
         InitializeCollections();
-        InitializeIndexes(); // 在这里调用
+        // 索引创建改为惰性触发，避免构造阶段连接失败/建索引异常导致整个应用无法启动。
     }
 
     /// <summary>
@@ -35,21 +38,25 @@ public abstract class MongoDbContext
     /// <param name="options"></param>
     public MongoDbContext(IOptionsMonitor<MongoDBOptions> options) : this(options.CurrentValue.ConnectionString) { }
 
+    /// <summary>
+    /// 确保所有集合的索引已创建。首次调用时执行，后续调用为空操作。
+    /// </summary>
+    public void EnsureIndexesCreated()
+    {
+        if (_indexesInitialized)
+            return;
+
+        InitializeIndexes();
+        _indexesInitialized = true;
+    }
+
     // --------------------------------------------------------------------
-    // CommitCommands（默认开启事务）
+    // CommitCommands
     // --------------------------------------------------------------------
 
     public int CommitCommands(CancellationToken cancellationToken = default)
     {
-        try
-        {
-            int total = CommitCommandsInternal(null, cancellationToken);
-            return total;
-        }
-        catch
-        {
-            throw;
-        }
+        return CommitCommandsInternal(null, cancellationToken);
     }
 
     public int CommitCommandsInTransaction(CancellationToken cancellationToken = default)
@@ -72,15 +79,7 @@ public abstract class MongoDbContext
 
     public async Task<int> CommitCommandsAsync(CancellationToken cancellationToken = default)
     {
-        try
-        {
-            int total = await CommitCommandsInternalAsync(null, cancellationToken);
-            return total;
-        }
-        catch
-        {
-            throw;
-        }
+        return await CommitCommandsInternalAsync(null, cancellationToken);
     }
 
     public async Task<int> CommitCommandsInTransactionAsync(CancellationToken cancellationToken = default)
@@ -113,14 +112,28 @@ public abstract class MongoDbContext
             .Where(p => typeof(IDbSet)
             .IsAssignableFrom(p.PropertyType))
             .Select(p => (IDbSet)p.GetValue(this))
-            .Where(s => s.HasChanges); // 只处理有变更的 DbSet
+            .Where(s => s.HasChanges) // 只处理有变更的 DbSet
+            .ToList();
 
-        foreach (var set in dbSets)
+        try
         {
-            total += set.CommitCommands(session, ct);
+            foreach (var set in dbSets)
+            {
+                total += set.CommitCommands(session, ct);
+            }
+            return total;
         }
-
-        return total;
+        catch
+        {
+            // 非事务路径：已提交的部分无法回滚；清空所有 DbSet 的追踪状态，
+            // 避免下次提交重复处理残留条目（事务路径由调用方回滚整个事务）。
+            if (session == null)
+            {
+                foreach (var set in dbSets)
+                    set.DiscardChanges();
+            }
+            throw;
+        }
     }
 
     private async Task<int> CommitCommandsInternalAsync(IClientSessionHandle session, CancellationToken ct)
@@ -131,14 +144,26 @@ public abstract class MongoDbContext
             .Where(p => typeof(IDbSet)
             .IsAssignableFrom(p.PropertyType))
             .Select(p => (IDbSet)p.GetValue(this))
-            .Where(s => s.HasChanges); // 只处理有变更的 DbSet
+            .Where(s => s.HasChanges) // 只处理有变更的 DbSet
+            .ToList();
 
-        foreach (var set in dbSets)
+        try
         {
-            total += await set.CommitCommandsAsync(session, ct);
+            foreach (var set in dbSets)
+            {
+                total += await set.CommitCommandsAsync(session, ct);
+            }
+            return total;
         }
-
-        return total;
+        catch
+        {
+            if (session == null)
+            {
+                foreach (var set in dbSets)
+                    set.DiscardChanges();
+            }
+            throw;
+        }
     }
 
     /// <summary>
@@ -201,8 +226,10 @@ public abstract class MongoDbContext
     /// <summary>
     /// 根据给定实体类型上定义的索引属性，在指定的 MongoDB 集合上创建索引。
     /// </summary>
-    /// <remarks>T此方法检查所提供的实体类型是否存在自定义索引属性，并将相应的索引应用于指定的集合。
-    /// 如果未找到任何索引属性，则不执行任何操作。不会重复创建具有相同定义的现有索引。/remarks>
+    /// <remarks>
+    /// 此方法检查所提供的实体类型是否存在自定义索引属性，并将相应的索引应用于指定的集合。
+    /// 如果未找到任何索引属性，则不执行任何操作。不会重复创建具有相同定义的现有索引。
+    /// </remarks>
     /// <param name="entityType">用于为集合定义索引的实体索引属性的类型。不能为空。</param>
     /// <param name="collectionName">要应用索引的MongoDB集合名称。不能为空或空字符串。</param>
     private void ApplyIndexesForEntity(Type entityType, string collectionName)
@@ -297,17 +324,24 @@ public abstract class MongoDbContext
     }
     private CreateIndexOptions BuildIndexOptions(Type entityType, MongoIndexAttribute attr)
     {
-        var options = new CreateIndexOptions
-        {
-            Unique = attr.Unique,
-            Sparse = attr.Sparse,
-            Name = attr.Name
-        };
+        // 使用泛型 CreateIndexOptions<T>，以便支持 PartialFilterExpression（该属性仅在泛型版本上定义）。
+        var optionsType = typeof(CreateIndexOptions<>).MakeGenericType(entityType);
+        var options = (CreateIndexOptions)Activator.CreateInstance(optionsType);
+        options.Unique = attr.Unique;
+        options.Sparse = attr.Sparse;
+        options.Name = attr.Name;
 
         if (attr.TtlSeconds != -1)
         {
             ValidateTtlIndex(entityType, attr);
             options.ExpireAfter = TimeSpan.FromSeconds(attr.TtlSeconds);
+        }
+
+        // 部分索引：将 PartialFilterJson 解析为 BsonDocument 并通过反射设置（属性在泛型类型上）。
+        if (!string.IsNullOrWhiteSpace(attr.PartialFilterJson))
+        {
+            var partialProp = optionsType.GetProperty("PartialFilterExpression");
+            partialProp.SetValue(options, BsonDocument.Parse(attr.PartialFilterJson));
         }
 
         return options;

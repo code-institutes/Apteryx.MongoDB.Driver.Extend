@@ -14,16 +14,16 @@ public abstract class BaseMongoEntity : IEntity
     public string Id { get; set; }
 
     /// <summary>
-    /// 创建时间
+    /// 创建时间（UTC）
     /// </summary>
-    [BsonDateTimeOptions(Kind = DateTimeKind.Local)]
-    public DateTime CreateTime { get; set; } = DateTime.Now;
+    [BsonDateTimeOptions(Kind = DateTimeKind.Utc)]
+    public DateTime CreateTime { get; set; } = DateTime.UtcNow;
 
     /// <summary>
-    /// 更新时间
+    /// 更新时间（UTC）
     /// </summary>
-    [BsonDateTimeOptions(Kind = DateTimeKind.Local)]
-    public DateTime UpdateTime { get; set; } = DateTime.Now;
+    [BsonDateTimeOptions(Kind = DateTimeKind.Utc)]
+    public DateTime UpdateTime { get; set; } = DateTime.UtcNow;
 
     /// <summary>
     /// 时间戳

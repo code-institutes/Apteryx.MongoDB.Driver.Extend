@@ -23,7 +23,7 @@ public partial class CommandExecutor<T>
         ReplaceOptions options = null,
         CancellationToken cancellationToken = default)
     {
-        document.UpdateTime = DateTime.Now;
+        document.UpdateTime = DateTime.UtcNow;
         return _collection.ReplaceOne(r => r.Id == id, document, options, cancellationToken);
     }
 
@@ -43,7 +43,7 @@ public partial class CommandExecutor<T>
         ReplaceOptions options = null,
         CancellationToken cancellationToken = default)
     {
-        document.UpdateTime = DateTime.Now;
+        document.UpdateTime = DateTime.UtcNow;
         return _collection.ReplaceOne(session, r => r.Id == id, document, options, cancellationToken);
     }
 
@@ -61,7 +61,7 @@ public partial class CommandExecutor<T>
         ReplaceOptions options = null,
         CancellationToken cancellationToken = default)
     {
-        document.UpdateTime = DateTime.Now;
+        document.UpdateTime = DateTime.UtcNow;
         return _collection.ReplaceOne(filter, document, options, cancellationToken);
     }
 
@@ -81,7 +81,7 @@ public partial class CommandExecutor<T>
         ReplaceOptions options = null,
         CancellationToken cancellationToken = default)
     {
-        document.UpdateTime = DateTime.Now;
+        document.UpdateTime = DateTime.UtcNow;
         return _collection.ReplaceOne(session, filter, document, options, cancellationToken);
     }
 
@@ -99,7 +99,7 @@ public partial class CommandExecutor<T>
         ReplaceOptions options = null,
         CancellationToken cancellationToken = default)
     {
-        document.UpdateTime = DateTime.Now;
+        document.UpdateTime = DateTime.UtcNow;
         return _collection.ReplaceOne(expression, document, options, cancellationToken);
     }
 
@@ -119,7 +119,7 @@ public partial class CommandExecutor<T>
         ReplaceOptions options = null,
         CancellationToken cancellationToken = default)
     {
-        document.UpdateTime = DateTime.Now;
+        document.UpdateTime = DateTime.UtcNow;
         return _collection.ReplaceOne(session, expression, document, options, cancellationToken);
     }
 
@@ -143,7 +143,7 @@ public partial class CommandExecutor<T>
         CancellationToken cancellationToken = default)
         where TForeign : BaseMongoEntity
     {
-        document.UpdateTime = DateTime.Now;
+        document.UpdateTime = DateTime.UtcNow;
         return _database.GetCollection<T>($"{foreignDocument.Id}_{_collectionName}", settings).ReplaceOne(r => r.Id == id, document, options, cancellationToken);
     }
 
@@ -168,7 +168,7 @@ public partial class CommandExecutor<T>
         CancellationToken cancellationToken = default)
         where TForeign : BaseMongoEntity
     {
-        document.UpdateTime = DateTime.Now;
+        document.UpdateTime = DateTime.UtcNow;
         return _database.GetCollection<T>($"{foreignDocument.Id}_{_collectionName}", settings).ReplaceOne(session, r => r.Id == id, document, options, cancellationToken);
     }
 
@@ -192,7 +192,7 @@ public partial class CommandExecutor<T>
         CancellationToken cancellationToken = default)
         where TForeign : BaseMongoEntity
     {
-        document.UpdateTime = DateTime.Now;
+        document.UpdateTime = DateTime.UtcNow;
         return _database.GetCollection<T>($"{foreignDocument.Id}_{_collectionName}", settings).ReplaceOne(filter, document, options, cancellationToken);
     }
 
@@ -217,7 +217,7 @@ public partial class CommandExecutor<T>
         CancellationToken cancellationToken = default)
         where TForeign : BaseMongoEntity
     {
-        document.UpdateTime = DateTime.Now;
+        document.UpdateTime = DateTime.UtcNow;
         return _database.GetCollection<T>($"{foreignDocument.Id}_{_collectionName}", settings).ReplaceOne(session, filter, document, options, cancellationToken);
     }
 
@@ -240,7 +240,7 @@ public partial class CommandExecutor<T>
         CancellationToken cancellationToken = default)
         where TForeign : BaseMongoEntity
     {
-        document.UpdateTime = DateTime.Now;
+        document.UpdateTime = DateTime.UtcNow;
         return _database.GetCollection<T>($"{foreignDocument.Id}_{_collectionName}", settings).ReplaceOne(expression, document, options, cancellationToken);
     }
 
@@ -265,7 +265,7 @@ public partial class CommandExecutor<T>
         CancellationToken cancellationToken = default)
         where TForeign : BaseMongoEntity
     {
-        document.UpdateTime = DateTime.Now;
+        document.UpdateTime = DateTime.UtcNow;
         return _database.GetCollection<T>($"{foreignDocument.Id}_{_collectionName}", settings).ReplaceOne(session, expression, document, options, cancellationToken);
     }
 
@@ -283,7 +283,7 @@ public partial class CommandExecutor<T>
         FindOneAndReplaceOptions<T> options = null,
         CancellationToken cancellationToken = default)
     {
-        document.UpdateTime = DateTime.Now;
+        document.UpdateTime = DateTime.UtcNow;
         return _collection.FindOneAndReplace<T>(r => r.Id == id, document, options, cancellationToken);
     }
 
@@ -303,7 +303,7 @@ public partial class CommandExecutor<T>
         FindOneAndReplaceOptions<T> options = null,
         CancellationToken cancellationToken = default)
     {
-        document.UpdateTime = DateTime.Now;
+        document.UpdateTime = DateTime.UtcNow;
         return _collection.FindOneAndReplace<T>(session, r => r.Id == id, document, options, cancellationToken);
     }
 
@@ -321,7 +321,7 @@ public partial class CommandExecutor<T>
         FindOneAndReplaceOptions<T> options = null,
         CancellationToken cancellationToken = default)
     {
-        document.UpdateTime = DateTime.Now;
+        document.UpdateTime = DateTime.UtcNow;
         return _collection.FindOneAndReplace(filter, document, options, cancellationToken);
     }
 
@@ -341,7 +341,7 @@ public partial class CommandExecutor<T>
         FindOneAndReplaceOptions<T> options = null,
         CancellationToken cancellationToken = default)
     {
-        document.UpdateTime = DateTime.Now;
+        document.UpdateTime = DateTime.UtcNow;
         return _collection.FindOneAndReplace(session, filter, document, options, cancellationToken);
     }
 
@@ -359,7 +359,7 @@ public partial class CommandExecutor<T>
         FindOneAndReplaceOptions<T> options = null,
         CancellationToken cancellationToken = default)
     {
-        document.UpdateTime = DateTime.Now;
+        document.UpdateTime = DateTime.UtcNow;
         return _collection.FindOneAndReplace(expression, document, options, cancellationToken);
     }
 
@@ -379,7 +379,7 @@ public partial class CommandExecutor<T>
         FindOneAndReplaceOptions<T> options = null,
         CancellationToken cancellationToken = default)
     {
-        document.UpdateTime = DateTime.Now;
+        document.UpdateTime = DateTime.UtcNow;
         return _collection.FindOneAndReplace(session, expression, document, options, cancellationToken);
     }
 
@@ -403,7 +403,7 @@ public partial class CommandExecutor<T>
         CancellationToken cancellationToken = default)
         where TForeign : BaseMongoEntity
     {
-        document.UpdateTime = DateTime.Now;
+        document.UpdateTime = DateTime.UtcNow;
         return _database.GetCollection<T>($"{foreignDocument.Id}_{_collectionName}", settings).FindOneAndReplace<T>(r => r.Id == id, document, options, cancellationToken);
     }
 
@@ -429,7 +429,7 @@ public partial class CommandExecutor<T>
         CancellationToken cancellationToken = default)
         where TForeign : BaseMongoEntity
     {
-        document.UpdateTime = DateTime.Now;
+        document.UpdateTime = DateTime.UtcNow;
         return _database.GetCollection<T>($"{foreignDocument.Id}_{_collectionName}", settings).FindOneAndReplace<T>(session, r => r.Id == id, document, options, cancellationToken);
     }
 
@@ -453,7 +453,7 @@ public partial class CommandExecutor<T>
         CancellationToken cancellationToken = default)
         where TForeign : BaseMongoEntity
     {
-        document.UpdateTime = DateTime.Now;
+        document.UpdateTime = DateTime.UtcNow;
         return _database.GetCollection<T>($"{foreignDocument.Id}_{_collectionName}", settings).FindOneAndReplace(filter, document, options, cancellationToken);
     }
 
@@ -479,7 +479,7 @@ public partial class CommandExecutor<T>
         CancellationToken cancellationToken = default)
         where TForeign : BaseMongoEntity
     {
-        document.UpdateTime = DateTime.Now;
+        document.UpdateTime = DateTime.UtcNow;
         return _database.GetCollection<T>($"{foreignDocument.Id}_{_collectionName}", settings).FindOneAndReplace(session, filter, document, options, cancellationToken);
     }
 
@@ -503,7 +503,7 @@ public partial class CommandExecutor<T>
         CancellationToken cancellationToken = default)
         where TForeign : BaseMongoEntity
     {
-        document.UpdateTime = DateTime.Now;
+        document.UpdateTime = DateTime.UtcNow;
         return _database.GetCollection<T>($"{foreignDocument.Id}_{_collectionName}", settings).FindOneAndReplace(expression, document, options, cancellationToken);
     }
 
@@ -529,7 +529,7 @@ public partial class CommandExecutor<T>
         CancellationToken cancellationToken = default)
         where TForeign : BaseMongoEntity
     {
-        document.UpdateTime = DateTime.Now;
+        document.UpdateTime = DateTime.UtcNow;
         return _database.GetCollection<T>($"{foreignDocument.Id}_{_collectionName}", settings).FindOneAndReplace(session, expression, document, options, cancellationToken);
     }
 

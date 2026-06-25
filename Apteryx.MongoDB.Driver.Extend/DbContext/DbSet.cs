@@ -1,4 +1,5 @@
-﻿using MongoDB.Driver;
+﻿using MongoDB.Bson;
+using MongoDB.Driver;
 using System;
 using System.Collections;
 using System.Collections.Generic;
@@ -17,15 +18,12 @@ public partial class DbSet<T> : IDbSet<T> where T : BaseMongoEntity
     bool IDbSet.HasChanges => HasChanges;
 
     /// <summary>
-    /// ChangeTracker：使用字典，Key 为实体引用
+    /// ChangeTracker：以实体主键 Id 作为键进行去重（与 EF Core 行为一致），
+    /// 避免同一文档的不同对象实例被当作两条记录追踪。
     /// </summary>
-    private readonly Dictionary<T, TrackedEntity<T>> _changeTracker = new();
+    private readonly Dictionary<string, TrackedEntity<T>> _changeTracker = new(StringComparer.Ordinal);
     /// <summary>
     /// 获取底层MongoDB集合，以便直接访问原生驱动操作。
-    /// </summary>
-    public IMongoCollection<T> AsMongoCollection => _collection;
-    /// <summary>
-    ///  获取底层MongoDB集合，以便直接访问原生驱动操作。
     /// </summary>
     public IMongoCollection<T> Native => _collection;
     /// <summary>
@@ -37,11 +35,11 @@ public partial class DbSet<T> : IDbSet<T> where T : BaseMongoEntity
         _database = database;
         _collectionName = collectionName;
         _collection = database.GetCollection<T>(collectionName);
-        Commands = new CommandExecutor<T>(database, _collection);
+        Commands = new CommandExecutor<T>(database, _collection, collectionName);
     }
 
 
-    public IMongoDatabase DataBase { get { return _database; } }
+    public IMongoDatabase Database { get { return _database; } }
 
     #region IQueryable<T> 成员
     public Type ElementType => typeof(T);
@@ -53,6 +51,7 @@ public partial class DbSet<T> : IDbSet<T> where T : BaseMongoEntity
 
     int IDbSet.CommitCommands(IClientSessionHandle session, CancellationToken ct) => CommitCommands(session, ct);
     Task<int> IDbSet.CommitCommandsAsync(IClientSessionHandle session, CancellationToken ct) => CommitCommandsAsync(session, ct);
+    void IDbSet.DiscardChanges() => DiscardChanges();
 
     #region ChangeTracker相关
     public void Add(T entity)
@@ -72,13 +71,27 @@ public partial class DbSet<T> : IDbSet<T> where T : BaseMongoEntity
 
     private void Track(T entity, EntityState incoming)
     {
-        if (_changeTracker.TryGetValue(entity, out var tracked))
+        // 追踪前确保有 Id：无 Id 时自动生成，使追踪键稳定（按 Id 去重，与 EF Core 一致）。
+        if (string.IsNullOrEmpty(entity.Id))
         {
-            tracked.State = Resolve(tracked.State, incoming);
+            entity.Id = ObjectId.GenerateNewId().ToString();
+        }
+
+        if (_changeTracker.TryGetValue(entity.Id, out var tracked))
+        {
+            // 同一 Id 已被追踪：若为同一引用则合并状态；否则为不同对象实例，覆盖为新实例及意图。
+            if (ReferenceEquals(tracked.Entity, entity))
+            {
+                tracked.State = Resolve(tracked.State, incoming);
+            }
+            else
+            {
+                _changeTracker[entity.Id] = new TrackedEntity<T>(entity, Resolve(tracked.State, incoming));
+            }
         }
         else
         {
-            _changeTracker[entity] = new TrackedEntity<T>(entity, incoming);
+            _changeTracker[entity.Id] = new TrackedEntity<T>(entity, incoming);
         }
     }
 
@@ -133,6 +146,12 @@ public partial class DbSet<T> : IDbSet<T> where T : BaseMongoEntity
 
 
     internal bool HasChanges => _changeTracker.Count > 0;
+
+    /// <summary>
+    /// 清空变更追踪器（丢弃所有未提交的变更）。
+    /// 用于提交过程中发生异常后恢复一致状态，避免下次提交时重复处理残留条目。
+    /// </summary>
+    internal void DiscardChanges() => _changeTracker.Clear();
 
     #endregion
 
@@ -241,6 +260,8 @@ public partial class DbSet<T> : IDbSet<T> where T : BaseMongoEntity
 
     private void ReplaceInternal(IClientSessionHandle session, T entity, CancellationToken ct)
     {
+        // 与 CommandExecutor.ReplaceOne 语义一致：提交时自动刷新 UpdateTime。
+        entity.UpdateTime = DateTime.UtcNow;
         Expression<Func<T, bool>> filter = (e) => e.Id == entity.Id;
 
         if (session == null)
@@ -251,6 +272,8 @@ public partial class DbSet<T> : IDbSet<T> where T : BaseMongoEntity
 
     private async Task ReplaceInternalAsync(IClientSessionHandle session, T entity, CancellationToken ct)
     {
+        // 与 CommandExecutor.ReplaceOne 语义一致：提交时自动刷新 UpdateTime。
+        entity.UpdateTime = DateTime.UtcNow;
         Expression<Func<T, bool>> filter = (e) => e.Id == entity.Id;
 
         if (session == null)
