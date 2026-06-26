@@ -1,5 +1,6 @@
 using Apteryx.MongoDB.Driver.Extend;
 using Apteryx.WebApi.Data;
+using Apteryx.WebApi.Workers;
 
 var builder = WebApplication.CreateBuilder(args);
 
@@ -14,6 +15,10 @@ builder.Services.AddMongoDB<ApteryxDbContext>(options =>
 {
     options.ConnectionString = builder.Configuration.GetConnectionString("MongoDbConnection");
 });
+
+// 后台服务（Singleton 生命周期）：演示 IMongoDbContextFactory 的用法。
+// AddMongoDB 已自动注册 IMongoDbContextFactory<ApteryxDbContext>，无需额外配置。
+builder.Services.AddHostedService<UserStatsBackgroundService>();
 
 var app = builder.Build();
 

@@ -34,16 +34,19 @@ public class Account : BaseMongoEntity
 ```csharp
 using Apteryx.MongoDB.Driver.Extend;
 using Microsoft.Extensions.Options;
+using MongoDB.Driver;
 
 public class MyDbContext : MongoDbContext
 {
-    public MyDbContext(IOptionsMonitor<MongoDBOptions> options) : base(options) { }
+    // MongoClient 由 DI 以 Singleton 注入（全局唯一，复用连接池）；
+    // options 仅用于从连接串解析数据库名。
+    public MyDbContext(IMongoClient client, IOptions<MongoDBOptions> options) : base(client, options) { }
 
     public DbSet<Account> Accounts { get; set; }
 }
 ```
 
-### 3. 注册（Scoped 生命周期）
+### 3. 注册
 
 ```csharp
 builder.Services.AddMongoDB<MyDbContext>(options =>
@@ -53,9 +56,42 @@ builder.Services.AddMongoDB<MyDbContext>(options =>
 });
 ```
 
-> ⚠️ 上下文以 **Scoped** 注入（每个请求一个实例），与 EF Core 一致。请勿注册为 Singleton，否则多个请求会共享同一份 ChangeTracker，造成数据串号与线程安全问题。
+> `AddMongoDB` 内部做了两件事：
+> - **`MongoClient` 注册为 Singleton**（全局唯一）。官方驱动要求 `MongoClient` 进程级唯一，其内部管理连接池——若每个请求各 `new` 一个，连接池将无法复用，高并发下连接数会失控。本库自动保证这一点，无需手动注册。
+> - **`MongoDbContext` 注册为 Scoped**（每个请求一个实例），与 EF Core 一致。请勿把上下文本身注册为 Singleton，否则多个请求会共享同一份 ChangeTracker，造成数据串号与线程安全问题。
+> - **`IMongoDbContextFactory<T>` 注册为 Singleton**：供 Singleton 服务（后台任务、单例缓存）按需创建独立的 Scoped Context，用法见下节。
 
-### 4. 使用
+### 4. 在 Singleton / 后台服务中使用
+
+⚠️ **切勿把 `MongoDbContext` 直接注入到 Singleton 服务**（如 `IHostedService`/`BackgroundService`、单例缓存）。Context 是 Scoped 生命周期，被 Singleton 持有会被永久"俘获"（Captive Dependency）：ChangeTracker 无法释放、多请求共享同一非线程安全实例，导致内存泄漏与数据串号。
+
+正确做法是注入 `IMongoDbContextFactory<T>`（`AddMongoDB` 已自动注册），按需创建**全新、独立**的 Context，用完释放：
+
+```csharp
+using Apteryx.MongoDB.Driver.Extend;
+
+// 后台服务本身是 Singleton 生命周期 —— 注入工厂，而不是 Context
+public class ReportService(IMongoDbContextFactory<MyDbContext> factory) : BackgroundService
+{
+    protected override async Task ExecuteAsync(CancellationToken ct)
+    {
+        while (!ct.IsCancellationRequested)
+        {
+            // 工厂每次返回一个全新的 Scoped Context
+            using var db = factory.CreateDbContext();
+
+            db.Accounts.Add(new Account { Name = "tick" });
+            await db.CommitCommandsAsync(ct);
+
+            await Task.Delay(TimeSpan.FromSeconds(30), ct);
+        } // using 释放：ChangeTracker 随 Scope 一起回收，绝不泄漏
+    }
+}
+```
+
+工厂创建是纯内存操作（开临时作用域 + 实例化 Context），底层 `MongoClient` 仍复用全局单例，连接池照常复用——既避开 Captive Dependency，又不损失连接池复用的好处。普通请求路径仍直接注入 `MongoDbContext`，两条路并存，互不影响。
+
+### 5. 使用
 
 ```csharp
 public class AccountController(MyDbContext db)
@@ -115,6 +151,8 @@ public class Account : BaseMongoEntity
 - 上下文基类 `MongoDbProvider` → **`MongoDbContext`**。
 - `Add/Update/Remove` 不再立即写库，改为进入变更追踪，需 `CommitCommands` 提交。
 - DI 生命周期由 Singleton → **Scoped**。
+- **`MongoClient` 改为由 DI 以 Singleton 注入**（`AddMongoDB` 自动注册）。旧版每个上下文实例各自 `new MongoClient`，导致连接池无法复用、高并发下连接数失控；新版全进程复用同一个 Client。数据库名仍从连接串解析，**`AddMongoDB` 调用代码无需改动**。
+- **`MongoDbContext` 构造函数签名变更**：删除 `MongoDbContext(string conn)` 与 `MongoDbContext(IOptionsMonitor<MongoDBOptions>)` 两个重载（内部 `new MongoClient` 是已移除的反模式）。新增 `MongoDbContext(IMongoClient client, string databaseName)` 及便捷重载 `MongoDbContext(IMongoClient client, IOptions<MongoDBOptions> options)`。子类构造需相应改为 `: base(client, options)`。
 - 时间字段（`CreateTime`/`UpdateTime`）统一存储为 **UTC**。
 - `IDbSet<T>` 移除了重复成员 `AsMongoCollection`（请改用 `Native`）。
 - `IDbSet.DataBase` 重命名为 **`Database`**，与上下文统一。
