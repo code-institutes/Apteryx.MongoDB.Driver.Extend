@@ -5,27 +5,41 @@ using MongoDB.Driver;
 using System.Reflection;
 using System.Threading;
 using System.Threading.Tasks;
+using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Extensions.Options;
 
 namespace Apteryx.MongoDB.Driver.Extend;
 
-public abstract class MongoDbContext
+public abstract class MongoDbContext : IDisposable
 {
     private bool _indexesInitialized;
 
     //定义数据库
     public IMongoDatabase Database { get; private set; }
-    public MongoClient Client { get; private set; }
 
     /// <summary>
-    /// 连接字符串
+    /// MongoDB 客户端。由 DI 以 Singleton 生命周期注入，全进程复用同一实例与连接池，
+    /// 避免每个 Context 实例各自 new MongoClient 导致连接池无法复用（官方驱动要求 Client 全局唯一）。
     /// </summary>
-    /// <param name="conn"></param>
-    public MongoDbContext(string conn)
+    public IMongoClient Client { get; private set; }
+
+    /// <summary>
+    /// 由工厂（<see cref="MongoDbContextFactory{T}"/>）创建时绑定的 DI 作用域，
+    /// 以便本 Context 释放时连带释放 Scope（含 ChangeTracker 等瞬时依赖）。
+    /// 普通请求路径（直接注入）下为 null，<see cref="Dispose"/> 为空操作，不影响现有行为。
+    /// </summary>
+    private IServiceScope _ownedScope;
+
+    /// <summary>
+    /// 用注入的 <see cref="IMongoClient"/>（Singleton）与数据库名构造上下文。
+    /// Context 本身仍以 Scoped 注入，但其底层 Client 跨请求复用。
+    /// </summary>
+    /// <param name="client">由 DI 注入的 MongoClient 单例。</param>
+    /// <param name="databaseName">数据库名（通常从连接串解析）。</param>
+    public MongoDbContext(IMongoClient client, string databaseName)
     {
-        var connsetting = new MongoUrlBuilder(conn);
-        Client = new MongoClient(connsetting.ToMongoUrl());
-        Database = Client.GetDatabase(connsetting.DatabaseName);
+        Client = client;
+        Database = client.GetDatabase(databaseName);
 
         InitializeDbSets();
         InitializeCollections();
@@ -33,10 +47,28 @@ public abstract class MongoDbContext
     }
 
     /// <summary>
-    /// 连接选项
+    /// 便捷构造：由 DI 注入 <see cref="IMongoClient"/>（Singleton）与连接选项，
+    /// 并从连接串自动解析数据库名。子类通常透传这两个参数即可。
     /// </summary>
-    /// <param name="options"></param>
-    public MongoDbContext(IOptionsMonitor<MongoDBOptions> options) : this(options.CurrentValue.ConnectionString) { }
+    public MongoDbContext(IMongoClient client, IOptions<MongoDBOptions> options)
+        : this(client, new MongoUrlBuilder(options.Value.ConnectionString).DatabaseName) { }
+
+    /// <summary>
+    /// 由 <see cref="MongoDbContextFactory{T}"/> 在工厂创建路径上调用，把所属 Scope 绑定到本 Context，
+    /// 使 <see cref="Dispose"/> 能连带释放 Scope。普通 DI 注入路径不会调用此方法。
+    /// </summary>
+    internal void AttachScope(IServiceScope scope) => _ownedScope = scope;
+
+    /// <summary>
+    /// 释放由工厂绑定的 DI 作用域（含 ChangeTracker 等瞬时依赖）。
+    /// 普通请求路径下 <see cref="_ownedScope"/> 为 null，本方法为空操作。
+    /// </summary>
+    public void Dispose()
+    {
+        _ownedScope?.Dispose();
+        _ownedScope = null;
+        GC.SuppressFinalize(this);
+    }
 
     /// <summary>
     /// 确保所有集合的索引已创建。首次调用时执行，后续调用为空操作。
