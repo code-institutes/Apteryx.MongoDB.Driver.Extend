@@ -8,12 +8,12 @@
   </PropertyGroup>
 
   <ItemGroup>
-    <PackageReference Include="Microsoft.AspNetCore.OpenApi" Version="10.0.1" />
-    <PackageReference Include="Swashbuckle.AspNetCore" Version="10.1.0" />
+    <PackageReference Include="Microsoft.AspNetCore.OpenApi" Version="10.0.9" />
+    <PackageReference Include="Swashbuckle.AspNetCore" Version="10.2.3" />
   </ItemGroup>
 
   <ItemGroup>
-    <ProjectReference Include="..\Apteryx.MongoDB.Driver.Extend\Apteryx.Mongodb.Driver.Extend.csproj" />
+    <ProjectReference Include="..\Apteryx.MongoDB.Driver.Extend\Apteryx.MongoDB.Driver.Extend.csproj" />
   </ItemGroup>
 
 </Project>

@@ -1,19 +1,16 @@
-﻿using Apteryx.MongoDB.Driver.Extend;
-using Microsoft.Extensions.Options;
+﻿using Microsoft.Extensions.Options;
+using MongoDB.Driver;
 
-namespace Apteryx.Mongodb.Driver.Extend.Tests.Data
+namespace Apteryx.MongoDB.Driver.Extend.Tests.Data;
+
+public class ApteryxDbContext : MongoDbContext
 {
-    public class ApteryxDbContext : MongoDbProvider
-    {
-        /// <summary>
-        /// 
-        /// </summary>
-        /// <param name="options"></param>
-        /// <param name="serviceProvider"></param>
-        public ApteryxDbContext(IOptionsMonitor<MongoDBOptions> options) : base(options) { }
+    /// <summary>
+    /// MongoClient 由 DI 以 Singleton 注入并复用连接池；options 仅用于解析数据库名。
+    /// </summary>
+    public ApteryxDbContext(IMongoClient client, IOptions<MongoDBOptions> options) : base(client, options) { }
 
-        public DbSet<User> Users { get; set; }
+    public DbSet<User> Users { get; set; }
 
-        public DbSet<UserGroup> UserGroups { get; set; }
-    }
+    public DbSet<UserGroup> UserGroups { get; set; }
 }

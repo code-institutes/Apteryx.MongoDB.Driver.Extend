@@ -1,0 +1,39 @@
+﻿using MongoDB.Driver;
+using System.Linq;
+using System.Threading;
+using System.Threading.Tasks;
+
+namespace Apteryx.MongoDB.Driver.Extend;
+
+public interface IDbSet
+{
+    bool HasChanges { get; }
+    int CommitCommands(IClientSessionHandle session, CancellationToken ct);
+    Task<int> CommitCommandsAsync(IClientSessionHandle session, CancellationToken ct);
+    /// <summary>
+    /// 清空变更追踪器（丢弃所有未提交的变更）。
+    /// </summary>
+    void DiscardChanges();
+
+    public IMongoDatabase Database { get; }
+}
+
+public interface IDbSet<T> : IDbSet, IQueryable<T> where T : BaseMongoEntity
+{
+    /// <summary>
+    /// 获取用于在当前线程上立即调度任务执行的执行器。
+    /// </summary>
+    CommandExecutor<T> Commands { get; }
+    /// <summary>
+    ///  获取底层MongoDB集合，以便直接访问原生驱动操作。
+    /// </summary>
+    public IMongoCollection<T> Native { get; }
+
+    #region ChangeTracker相关
+    void Add(T entity);
+
+    void Update(T entity);
+
+    void Remove(T entity);
+    #endregion
+}

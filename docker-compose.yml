@@ -1,0 +1,37 @@
+# 仅用于 Apteryx.MongoDB.Driver.Extend 单元测试的单节点副本集。
+# 单节点副本集（single-node replica set）支持多文档事务，使 *Session* / 事务相关测试可通过。
+# 与 Apteryx.IoTPlatform 的 mongodb 容器（27017 standalone）完全隔离，互不影响。
+
+services:
+  mongodb-test:
+    # 复用本地已拉取的精确版本，避免 Docker Hub 直连超时。
+    image: mongo:8.0.19
+    container_name: apteryx-mongo-test
+    # 关键：以副本集模式启动（replSetName=rs0），事务的前提条件。
+    command: ["mongod", "--replSet", "rs0", "--bind_ip_all"]
+    ports:
+      - "37017:27017"
+    environment:
+      TZ: Asia/Shanghai
+    volumes:
+      - apteryx-mongo-test-data:/data/db
+    healthcheck:
+      # 1) 等待 mongod 可连接；2) 若副本集尚未初始化则初始化（幂等）。
+      test: >
+        mongosh --quiet --eval '
+          try {
+            const s = rs.status();
+            if (s.ok !== 1) throw new Error("rs not ready");
+          } catch (e) {
+            try { rs.initiate(); } catch (_) {}
+            rs.status();
+          }
+        '
+      interval: 5s
+      timeout: 5s
+      retries: 30
+      start_period: 10s
+    restart: unless-stopped
+
+volumes:
+  apteryx-mongo-test-data:

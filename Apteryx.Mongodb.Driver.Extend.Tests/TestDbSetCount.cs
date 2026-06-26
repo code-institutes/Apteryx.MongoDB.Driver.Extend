@@ -1,8 +1,8 @@
 ﻿using MongoDB.Driver;
-using Apteryx.Mongodb.Driver.Extend.Tests.Data;
+using Apteryx.MongoDB.Driver.Extend.Tests.Data;
 using Microsoft.Extensions.DependencyInjection;
 
-namespace Apteryx.Mongodb.Driver.Extend.Tests;
+namespace Apteryx.MongoDB.Driver.Extend.Tests;
 
 [TestClass]
 public class TestDbSetCount : TestBase
@@ -32,17 +32,17 @@ public class TestDbSetCount : TestBase
         var users1 = DataHelper.GetNewUsers(pwd1);
         var users2 = DataHelper.GetNewUsers(pwd2);
 
-        dbContext.Users.AddMany(users1);
-        dbContext.Users.AddMany(users2);
+        dbContext.Users.Commands.InsertMany(users1);
+        dbContext.Users.Commands.InsertMany(users2);
 
         //验证查询数量是否成功
-        var userCount1 = dbContext.Users.CountDocuments(Builders<User>.Filter.Eq(e => e.Password, pwd1));
+        var userCount1 = dbContext.Users.Commands.CountDocuments(Builders<User>.Filter.Eq(e => e.Password, pwd1));
         Assert.AreEqual(6, userCount1, "未成功统计用户数量。");
 
-        var userCount2 = dbContext.Users.CountDocuments(c => c.Password == pwd2);
+        var userCount2 = dbContext.Users.Commands.CountDocuments(c => c.Password == pwd2);
         Assert.AreEqual(6, userCount2, "未成功统计用户数量。");
 
-        var deletedUser = dbContext.Users.DeleteMany([.. users1, .. users2]);
+        var deletedUser = dbContext.Users.Commands.DeleteMany([.. users1, .. users2]);
     }
 
     [TestMethod]
@@ -54,17 +54,17 @@ public class TestDbSetCount : TestBase
         var users1 = DataHelper.GetNewUsers(pwd1);
         var users2 = DataHelper.GetNewUsers(pwd2);
 
-        await dbContext.Users.AddManyAsync(users1);
-        await dbContext.Users.AddManyAsync(users2);
+        await dbContext.Users.Commands.InsertManyAsync(users1);
+        await dbContext.Users.Commands.InsertManyAsync(users2);
 
         //验证查询数量是否成功
-        var userCount1 = await dbContext.Users.CountDocumentsAsync(Builders<User>.Filter.Eq(e => e.Password, pwd1));
+        var userCount1 = await dbContext.Users.Commands.CountDocumentsAsync(Builders<User>.Filter.Eq(e => e.Password, pwd1));
         Assert.AreEqual(6, userCount1, "未成功统计用户数量。");
 
-        var userCount2 = await dbContext.Users.CountDocumentsAsync(c => c.Password == pwd2);
+        var userCount2 = await dbContext.Users.Commands.CountDocumentsAsync(c => c.Password == pwd2);
         Assert.AreEqual(6, userCount2, "未成功统计用户数量。");
 
-        var deletedUser = await dbContext.Users.DeleteManyAsync([.. users1, .. users2]);
+        var deletedUser = await dbContext.Users.Commands.DeleteManyAsync([.. users1, .. users2]);
     }
 
     [TestMethod]
@@ -80,17 +80,17 @@ public class TestDbSetCount : TestBase
         {
             session.StartTransaction();
 
-            dbContext.Users.AddMany(session, users1);
-            dbContext.Users.AddMany(session, users2);
+            dbContext.Users.Commands.InsertMany(session, users1);
+            dbContext.Users.Commands.InsertMany(session, users2);
 
             //验证查询数量是否成功
-            var userCount1 = dbContext.Users.CountDocuments(session, Builders<User>.Filter.Eq(e => e.Password, pwd1));
+            var userCount1 = dbContext.Users.Commands.CountDocuments(session, Builders<User>.Filter.Eq(e => e.Password, pwd1));
             Assert.AreEqual(6, userCount1, "未成功统计用户数量。");
 
-            var userCount2 = dbContext.Users.CountDocuments(session, c => c.Password == pwd2);
+            var userCount2 = dbContext.Users.Commands.CountDocuments(session, c => c.Password == pwd2);
             Assert.AreEqual(6, userCount2, "未成功统计用户数量。");
 
-            var deletedUser = dbContext.Users.DeleteMany(session, [.. users1, .. users2]);
+            var deletedUser = dbContext.Users.Commands.DeleteMany(session, [.. users1, .. users2]);
 
             session.CommitTransaction();
         }
@@ -109,17 +109,17 @@ public class TestDbSetCount : TestBase
         {
             session.StartTransaction();
 
-            await dbContext.Users.AddManyAsync(session, users1);
-            await dbContext.Users.AddManyAsync(session, users2);
+            await dbContext.Users.Commands.InsertManyAsync(session, users1);
+            await dbContext.Users.Commands.InsertManyAsync(session, users2);
 
             //验证查询数量是否成功
-            var userCount1 = await dbContext.Users.CountDocumentsAsync(session, Builders<User>.Filter.Eq(e => e.Password, pwd1));
+            var userCount1 = await dbContext.Users.Commands.CountDocumentsAsync(session, Builders<User>.Filter.Eq(e => e.Password, pwd1));
             Assert.AreEqual(6, userCount1, "未成功统计用户数量。");
 
-            var userCount2 = await dbContext.Users.CountDocumentsAsync(session, c => c.Password == pwd2);
+            var userCount2 = await dbContext.Users.Commands.CountDocumentsAsync(session, c => c.Password == pwd2);
             Assert.AreEqual(6, userCount2, "未成功统计用户数量。");
 
-            var deletedUser = await dbContext.Users.DeleteManyAsync(session, [.. users1, .. users2]);
+            var deletedUser = await dbContext.Users.Commands.DeleteManyAsync(session, [.. users1, .. users2]);
 
             session.CommitTransaction();
         }
@@ -136,17 +136,17 @@ public class TestDbSetCount : TestBase
         var users1 = DataHelper.GetNewUsers(pwd1);
         var users2 = DataHelper.GetNewUsers(pwd2);
 
-        dbContext.Users.DynamicCollectionAddMany(userGroup, users1);
-        dbContext.Users.DynamicCollectionAddMany(userGroup, users2);
+        dbContext.Users.Commands.DynamicCollectionInsertMany(userGroup, users1);
+        dbContext.Users.Commands.DynamicCollectionInsertMany(userGroup, users2);
 
         //验证查询数量是否成功
-        var userCount1 = dbContext.Users.DynamicCollectionCountDocuments(userGroup, Builders<User>.Filter.Eq(e => e.Password, pwd1));
+        var userCount1 = dbContext.Users.Commands.DynamicCollectionCountDocuments(userGroup, Builders<User>.Filter.Eq(e => e.Password, pwd1));
         Assert.AreEqual(6, userCount1, "未成功统计用户数量。");
 
-        var userCount2 = dbContext.Users.DynamicCollectionCountDocuments(userGroup, c => c.Password == pwd2);
+        var userCount2 = dbContext.Users.Commands.DynamicCollectionCountDocuments(userGroup, c => c.Password == pwd2);
         Assert.AreEqual(6, userCount2, "未成功统计用户数量。");
 
-        var deletedUser = dbContext.Users.DynamicCollectionDeleteMany(userGroup, [.. users1, .. users2]);
+        var deletedUser = dbContext.Users.Commands.DynamicCollectionDeleteMany(userGroup, [.. users1, .. users2]);
     }
 
     [TestMethod]
@@ -160,17 +160,17 @@ public class TestDbSetCount : TestBase
         var users1 = DataHelper.GetNewUsers(pwd1);
         var users2 = DataHelper.GetNewUsers(pwd2);
 
-        await dbContext.Users.DynamicCollectionAddManyAsync(userGroup, users1);
-        await dbContext.Users.DynamicCollectionAddManyAsync(userGroup, users2);
+        await dbContext.Users.Commands.DynamicCollectionInsertManyAsync(userGroup, users1);
+        await dbContext.Users.Commands.DynamicCollectionInsertManyAsync(userGroup, users2);
 
         //验证查询数量是否成功
-        var userCount1 = await dbContext.Users.DynamicCollectionCountDocumentsAsync(userGroup, Builders<User>.Filter.Eq(e => e.Password, pwd1));
+        var userCount1 = await dbContext.Users.Commands.DynamicCollectionCountDocumentsAsync(userGroup, Builders<User>.Filter.Eq(e => e.Password, pwd1));
         Assert.AreEqual(6, userCount1, "未成功统计用户数量。");
 
-        var userCount2 = await dbContext.Users.DynamicCollectionCountDocumentsAsync(userGroup, c => c.Password == pwd2);
+        var userCount2 = await dbContext.Users.Commands.DynamicCollectionCountDocumentsAsync(userGroup, c => c.Password == pwd2);
         Assert.AreEqual(6, userCount2, "未成功统计用户数量。");
 
-        var deletedUser = await dbContext.Users.DynamicCollectionDeleteManyAsync(userGroup, [.. users1, .. users2]);
+        var deletedUser = await dbContext.Users.Commands.DynamicCollectionDeleteManyAsync(userGroup, [.. users1, .. users2]);
     }
 
     [TestMethod]
@@ -188,17 +188,17 @@ public class TestDbSetCount : TestBase
         {
             session.StartTransaction();
 
-            dbContext.Users.DynamicCollectionAddMany(session, userGroup, users1);
-            dbContext.Users.DynamicCollectionAddMany(session, userGroup, users2);
+            dbContext.Users.Commands.DynamicCollectionInsertMany(session, userGroup, users1);
+            dbContext.Users.Commands.DynamicCollectionInsertMany(session, userGroup, users2);
 
             //验证查询数量是否成功
-            var userCount1 = dbContext.Users.DynamicCollectionCountDocuments(session, userGroup, Builders<User>.Filter.Eq(e => e.Password, pwd1));
+            var userCount1 = dbContext.Users.Commands.DynamicCollectionCountDocuments(session, userGroup, Builders<User>.Filter.Eq(e => e.Password, pwd1));
             Assert.AreEqual(6, userCount1, "未成功统计用户数量。");
 
-            var userCount2 = dbContext.Users.DynamicCollectionCountDocuments(session, userGroup, c => c.Password == pwd2);
+            var userCount2 = dbContext.Users.Commands.DynamicCollectionCountDocuments(session, userGroup, c => c.Password == pwd2);
             Assert.AreEqual(6, userCount2, "未成功统计用户数量。");
 
-            var deletedUser = dbContext.Users.DynamicCollectionDeleteMany(session, userGroup, [.. users1, .. users2]);
+            var deletedUser = dbContext.Users.Commands.DynamicCollectionDeleteMany(session, userGroup, [.. users1, .. users2]);
 
             session.CommitTransaction();
         }
@@ -219,17 +219,17 @@ public class TestDbSetCount : TestBase
         {
             session.StartTransaction();
 
-            await dbContext.Users.DynamicCollectionAddManyAsync(session, userGroup, users1);
-            await dbContext.Users.DynamicCollectionAddManyAsync(session, userGroup, users2);
+            await dbContext.Users.Commands.DynamicCollectionInsertManyAsync(session, userGroup, users1);
+            await dbContext.Users.Commands.DynamicCollectionInsertManyAsync(session, userGroup, users2);
 
             //验证查询数量是否成功
-            var userCount1 = await dbContext.Users.DynamicCollectionCountDocumentsAsync(session, userGroup, Builders<User>.Filter.Eq(e => e.Password, pwd1));
+            var userCount1 = await dbContext.Users.Commands.DynamicCollectionCountDocumentsAsync(session, userGroup, Builders<User>.Filter.Eq(e => e.Password, pwd1));
             Assert.AreEqual(6, userCount1, "未成功统计用户数量。");
 
-            var userCount2 = await dbContext.Users.DynamicCollectionCountDocumentsAsync(session, userGroup, c => c.Password == pwd2);
+            var userCount2 = await dbContext.Users.Commands.DynamicCollectionCountDocumentsAsync(session, userGroup, c => c.Password == pwd2);
             Assert.AreEqual(6, userCount2, "未成功统计用户数量。");
 
-            var deletedUser = await dbContext.Users.DynamicCollectionDeleteManyAsync(session, userGroup, [.. users1, .. users2]);
+            var deletedUser = await dbContext.Users.Commands.DynamicCollectionDeleteManyAsync(session, userGroup, [.. users1, .. users2]);
 
             session.CommitTransaction();
 

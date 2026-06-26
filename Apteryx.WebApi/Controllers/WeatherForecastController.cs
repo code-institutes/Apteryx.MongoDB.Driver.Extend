@@ -25,10 +25,10 @@ public class WeatherForecastController : ControllerBase
     [HttpGet(Name = "GetWeatherForecast")]
     public async Task<IEnumerable<WeatherForecast>> Get()
     {
-        var user = _db.Users.FindOne(f => true);
+        var user = _db.Users.Commands.FindOne(f => true);
         if (user == null)
         {
-            _db.Users.Add(new User()
+            _db.Users.Commands.Insert(new User()
             {
                 Name = "张三",
                 Email = "wyspaces@outlook.com",
@@ -36,22 +36,43 @@ public class WeatherForecastController : ControllerBase
             });
         }
 
+        var userLinq = await _db.Users.FirstOrDefaultAsync(f => f.Name == "赵六");
+
+        if (userLinq == null)
+        {
+            userLinq = new User()
+            {
+                Name = "李四",
+                Email = "wyspaces@outlook.com",
+                Password = "asdlkfjaldk"
+            };
+
+            _db.Users.Add(userLinq);
+        }
+
+        userLinq.Name = "赵六1";
+        _db.Users.Update(userLinq);
+
+        await _db.CommitCommandsAsync();
+
+
+
+
         var query = from u in _db.Users
                     where u.Name != null && u.Name.Contains("张")
                     select u;
-        
+
         var list = _db.Users.Where(u => u.Name != null && u.Name.Contains("张")).ToList();
 
-        await foreach (var item in _db.Users.FindAllAsync())
+        await foreach (var item in _db.Users.Commands.FindAllAsync())
         {
-            var r = await _db.Users.FindOneAsync(item.Id);
+            var r = await _db.Users.Commands.FindOneAsync(item.Id);
         }
-
 
         var dataBase = _db.Database;
 
-        var count1 = await _db.Users.CountDocumentsAsync(_ => true);
-        var count2 = await _db.Users.AsMongoCollection.CountDocumentsAsync(_ => true);
+        var count1 = await _db.Users.Commands.CountDocumentsAsync(_ => true);
+        var count2 = await _db.Users.Native.CountDocumentsAsync(_ => true);
 
         return Enumerable.Range(1, 5).Select(index => new WeatherForecast
         {

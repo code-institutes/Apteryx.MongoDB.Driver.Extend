@@ -1,11 +1,11 @@
 using MongoDB.Bson;
-using Apteryx.Mongodb.Driver.Extend.Tests.Data;
+using Apteryx.MongoDB.Driver.Extend.Tests.Data;
 using Microsoft.Extensions.DependencyInjection;
 
-namespace Apteryx.Mongodb.Driver.Extend.Tests;
+namespace Apteryx.MongoDB.Driver.Extend.Tests;
 
 [TestClass]
-public class TestDbSetAdd : TestBase
+public class TestDbSetInsert : TestBase
 {
     private readonly ApteryxDbContext? dbContext;
 
@@ -20,7 +20,7 @@ public class TestDbSetAdd : TestBase
         Assert.IsNotNull(dbContext, "无法从服务提供程序获取ApteryxDbContext。"); ;
     }
 
-    public TestDbSetAdd()
+    public TestDbSetInsert()
     {
         this.dbContext = ServiceProvider.GetService<ApteryxDbContext>();
     }
@@ -31,18 +31,18 @@ public class TestDbSetAdd : TestBase
     [TestMethod]
     public void TestAdd()
     {
-        dbContext.Users.Add(user);
+        dbContext.Users.Commands.Insert(user);
 
         // 验证添加是否成功
-        var addedUser = dbContext.Users.FindOne(user.Id);
+        var addedUser = dbContext.Users.Commands.FindOne(user.Id);
         Assert.IsNotNull(addedUser, "未成功添加用户。");
 
 
         // 删除用户
-        var result = dbContext.Users.DeleteOne(addedUser);
+        var result = dbContext.Users.Commands.DeleteOne(addedUser);
 
         // 验证删除是否成功
-        var deletedUser = dbContext.Users.FindOne(user.Id);
+        var deletedUser = dbContext.Users.Commands.FindOne(user.Id);
         Assert.IsNull(deletedUser, "用户未成功删除。");
     }
 
@@ -54,18 +54,18 @@ public class TestDbSetAdd : TestBase
     {
         var userGroup = DataHelper.GetNewUserGroup();
 
-        dbContext.Users.DynamicCollectionAdd(userGroup, user);
+        dbContext.Users.Commands.DynamicCollectionInsert(userGroup, user);
 
         // 验证添加是否成功
-        var addedUser = dbContext.Users.DynamicCollectionFindOne(userGroup, user.Id);
+        var addedUser = dbContext.Users.Commands.DynamicCollectionFindOne(userGroup, user.Id);
         Assert.IsNotNull(addedUser, "未成功添加用户。");
 
 
         // 删除用户
-        dbContext.Users.DynamicCollectionDeleteOne(userGroup, addedUser);
+        dbContext.Users.Commands.DynamicCollectionDeleteOne(userGroup, addedUser);
 
         // 验证删除是否成功
-        var deletedUser = dbContext.Users.DynamicCollectionFindOne(userGroup, user.Id);
+        var deletedUser = dbContext.Users.Commands.DynamicCollectionFindOne(userGroup, user.Id);
         Assert.IsNull(deletedUser, "用户未成功删除。");
     }
 
@@ -82,18 +82,18 @@ public class TestDbSetAdd : TestBase
         {
             session.StartTransaction();
 
-            dbContext.Users.Add(session, newUser);
+            dbContext.Users.Commands.Insert(session, newUser);
 
             // 验证添加是否成功
-            var addedUser = dbContext.Users.FindOne(session, newUser.Id);
+            var addedUser = dbContext.Users.Commands.FindOne(session, newUser.Id);
             Assert.IsNotNull(addedUser, "未成功添加用户。");
 
 
             // 删除用户
-            var result = dbContext.Users.DeleteOne(session, addedUser);
+            var result = dbContext.Users.Commands.DeleteOne(session, addedUser);
 
             // 验证删除是否成功
-            var deletedUser = dbContext.Users.FindOne(session, newUser.Id);
+            var deletedUser = dbContext.Users.Commands.FindOne(session, newUser.Id);
             Assert.IsNull(deletedUser, "用户未成功删除。");
 
             session.CommitTransaction();
@@ -112,18 +112,18 @@ public class TestDbSetAdd : TestBase
 
             var userGroup = DataHelper.GetNewUserGroup();
 
-            dbContext.Users.DynamicCollectionAdd(session, userGroup, user);
+            dbContext.Users.Commands.DynamicCollectionInsert(session, userGroup, user);
 
             // 验证添加是否成功
-            var addedUser = dbContext.Users.DynamicCollectionFindOne(session, userGroup, user.Id);
+            var addedUser = dbContext.Users.Commands.DynamicCollectionFindOne(session, userGroup, user.Id);
             Assert.IsNotNull(addedUser, "未成功添加用户。");
 
 
             // 删除用户
-            dbContext.Users.DynamicCollectionDeleteOne(session, userGroup, addedUser);
+            dbContext.Users.Commands.DynamicCollectionDeleteOne(session, userGroup, addedUser);
 
             // 验证删除是否成功
-            var deletedUser = dbContext.Users.DynamicCollectionFindOne(session, userGroup, user.Id);
+            var deletedUser = dbContext.Users.Commands.DynamicCollectionFindOne(session, userGroup, user.Id);
             Assert.IsNull(deletedUser, "用户未成功删除。");
         }
     }
@@ -138,17 +138,17 @@ public class TestDbSetAdd : TestBase
         // 创建一个新的 User 实例
         var newUser = new User { Id = ObjectId.GenerateNewId().ToString(), Name = "Test User" };
 
-        await dbContext.Users.AddAsync(newUser);
+        await dbContext.Users.Commands.InsertAsync(newUser);
 
         // 验证添加是否成功
-        var addedUser = await dbContext.Users.FindOneAsync(newUser.Id);
+        var addedUser = await dbContext.Users.Commands.FindOneAsync(newUser.Id);
         Assert.IsNotNull(addedUser, "未成功添加用户。");
 
         // 删除用户
-        var result = await dbContext.Users.DeleteOneAsync(addedUser);
+        var result = await dbContext.Users.Commands.DeleteOneAsync(addedUser);
 
         // 验证删除是否成功
-        var deletedUser = await dbContext.Users.FindOneAsync(newUser.Id);
+        var deletedUser = await dbContext.Users.Commands.FindOneAsync(newUser.Id);
         Assert.IsNull(deletedUser, "用户未成功删除。");
     }
 
@@ -161,18 +161,18 @@ public class TestDbSetAdd : TestBase
     {
         var userGroup = DataHelper.GetNewUserGroup();
 
-        await dbContext.Users.DynamicCollectionAddAsync(userGroup, user);
+        await dbContext.Users.Commands.DynamicCollectionInsertAsync(userGroup, user);
 
         // 验证添加是否成功
-        var addedUser = dbContext.Users.DynamicCollectionFindOne(userGroup, user.Id);
+        var addedUser = dbContext.Users.Commands.DynamicCollectionFindOne(userGroup, user.Id);
         Assert.IsNotNull(addedUser, "未成功添加用户。");
 
 
         // 删除用户
-        dbContext.Users.DynamicCollectionDeleteOne(userGroup, addedUser);
+        dbContext.Users.Commands.DynamicCollectionDeleteOne(userGroup, addedUser);
 
         // 验证删除是否成功
-        var deletedUser = dbContext.Users.DynamicCollectionFindOne(userGroup, user.Id);
+        var deletedUser = dbContext.Users.Commands.DynamicCollectionFindOne(userGroup, user.Id);
         Assert.IsNull(deletedUser, "用户未成功删除。");
     }
 
@@ -190,17 +190,17 @@ public class TestDbSetAdd : TestBase
         {
             session.StartTransaction();
 
-            await dbContext.Users.AddAsync(session, newUser);
+            await dbContext.Users.Commands.InsertAsync(session, newUser);
 
             // 验证添加是否成功
-            var addedUser = await dbContext.Users.FindOneAsync(session, newUser.Id);
+            var addedUser = await dbContext.Users.Commands.FindOneAsync(session, newUser.Id);
             Assert.IsNotNull(addedUser, "未成功添加用户。");
 
             // 删除用户
-            var result = await dbContext.Users.DeleteOneAsync(session, addedUser);
+            var result = await dbContext.Users.Commands.DeleteOneAsync(session, addedUser);
 
             // 验证删除是否成功
-            var deletedUser = await dbContext.Users.FindOneAsync(session, newUser.Id);
+            var deletedUser = await dbContext.Users.Commands.FindOneAsync(session, newUser.Id);
             Assert.IsNull(deletedUser, "用户未成功删除。");
 
             session.CommitTransaction();
@@ -219,18 +219,18 @@ public class TestDbSetAdd : TestBase
             session.StartTransaction();
             var userGroup = DataHelper.GetNewUserGroup();
 
-            await dbContext.Users.DynamicCollectionAddAsync(session, userGroup, user);
+            await dbContext.Users.Commands.DynamicCollectionInsertAsync(session, userGroup, user);
 
             // 验证添加是否成功
-            var addedUser = await dbContext.Users.DynamicCollectionFindOneAsync(session, userGroup, user.Id);
+            var addedUser = await dbContext.Users.Commands.DynamicCollectionFindOneAsync(session, userGroup, user.Id);
             Assert.IsNotNull(addedUser, "未成功添加用户。");
 
 
             // 删除用户
-            var result = await dbContext.Users.DynamicCollectionDeleteOneAsync(session, userGroup, addedUser);
+            var result = await dbContext.Users.Commands.DynamicCollectionDeleteOneAsync(session, userGroup, addedUser);
 
             // 验证删除是否成功
-            var deletedUser = await dbContext.Users.DynamicCollectionFindOneAsync(session, userGroup, user.Id);
+            var deletedUser = await dbContext.Users.Commands.DynamicCollectionFindOneAsync(session, userGroup, user.Id);
             Assert.IsNull(deletedUser, "用户未成功删除。");
         }
     }
@@ -241,18 +241,18 @@ public class TestDbSetAdd : TestBase
     [TestMethod]
     public void TestAddMany()
     {
-        dbContext.Users.AddMany(users);
+        dbContext.Users.Commands.InsertMany(users);
 
         // 验证添加是否成功
-        var addedUserCount = dbContext.Users.Find(w => w.Email == "zhangfei@qq.com").CountDocuments();
+        var addedUserCount = dbContext.Users.Commands.Find(w => w.Email == "zhangfei@qq.com").CountDocuments();
         Assert.AreEqual(3, addedUserCount, "未成功添加，数量不正确");
 
 
         // 删除用户
-        var result = dbContext.Users.DeleteMany(users);
+        var result = dbContext.Users.Commands.DeleteMany(users);
 
         // 验证删除是否成功
-        var deletedUserCount = dbContext.Users.Find(w => true).CountDocuments();
+        var deletedUserCount = dbContext.Users.Commands.Find(w => true).CountDocuments();
         Assert.AreEqual(0, deletedUserCount, "用户未成功删除。");
     }
 
@@ -264,18 +264,18 @@ public class TestDbSetAdd : TestBase
     {
         var userGroup = DataHelper.GetNewUserGroup();
 
-        dbContext.Users.DynamicCollectionAddMany(userGroup, users);
+        dbContext.Users.Commands.DynamicCollectionInsertMany(userGroup, users);
 
         // 验证添加是否成功
-        var addedUserCount = dbContext.Users.DynamicCollectionFind(userGroup, w => w.Email == "zhangfei@qq.com").CountDocuments();
+        var addedUserCount = dbContext.Users.Commands.DynamicCollectionFind(userGroup, w => w.Email == "zhangfei@qq.com").CountDocuments();
         Assert.AreEqual(3, addedUserCount, "未成功添加，数量不正确");
 
 
         // 删除用户
-        dbContext.Users.DynamicCollectionDeleteMany(userGroup, users);
+        dbContext.Users.Commands.DynamicCollectionDeleteMany(userGroup, users);
 
         // 验证删除是否成功
-        var deletedUserCount = dbContext.Users.DynamicCollectionFind(userGroup, w => true).CountDocuments();
+        var deletedUserCount = dbContext.Users.Commands.DynamicCollectionFind(userGroup, w => true).CountDocuments();
         Assert.AreEqual(0, deletedUserCount, "用户未成功删除。");
     }
 
@@ -283,16 +283,16 @@ public class TestDbSetAdd : TestBase
     /// 测试事务批量添加、查询、删除（同步方法）
     /// </summary>
     [TestMethod]
-    public void AddManySession()
+    public void InsertManySession()
     {
         using (var session = dbContext.Client.StartSession())
         {
             session.StartTransaction();
 
-            dbContext.Users.AddMany(session, users);
+            dbContext.Users.Commands.InsertMany(session, users);
 
             // 验证添加是否成功
-            var addedUserCount = dbContext.Users.Find(session, w => w.Email == "zhangfei@qq.com").CountDocuments();
+            var addedUserCount = dbContext.Users.Commands.Find(session, w => w.Email == "zhangfei@qq.com").CountDocuments();
 
             Assert.IsNotNull(addedUserCount, "未成功添加用户。");
 
@@ -300,10 +300,10 @@ public class TestDbSetAdd : TestBase
 
 
             // 删除用户
-            var result = dbContext.Users.DeleteMany(session, users);
+            var result = dbContext.Users.Commands.DeleteMany(session, users);
 
             // 验证删除是否成功
-            var deletedUserCount = dbContext.Users.Find(session, w => true).CountDocuments();
+            var deletedUserCount = dbContext.Users.Commands.Find(session, w => true).CountDocuments();
             Assert.AreEqual(0, deletedUserCount, "用户未成功删除。");
 
             session.CommitTransaction();
@@ -311,7 +311,7 @@ public class TestDbSetAdd : TestBase
     }
 
     [TestMethod]
-    public void AddManyDynamicSession()
+    public void InsertManyDynamicSession()
     {
         var userGroup = DataHelper.GetNewUserGroup();
 
@@ -319,20 +319,20 @@ public class TestDbSetAdd : TestBase
         {
             session.StartTransaction();
 
-            dbContext.Users.DynamicCollectionDeleteMany(session, userGroup, d => d.Password == "123456");
+            dbContext.Users.Commands.DynamicCollectionDeleteMany(session, userGroup, d => d.Password == "123456");
 
-            dbContext.Users.DynamicCollectionAddMany(session, userGroup, users);
+            dbContext.Users.Commands.DynamicCollectionInsertMany(session, userGroup, users);
 
             // 验证添加是否成功
-            var addedUserCount = dbContext.Users.DynamicCollectionFind(session, userGroup, w => w.Email == "zhangfei@qq.com").CountDocuments();
+            var addedUserCount = dbContext.Users.Commands.DynamicCollectionFind(session, userGroup, w => w.Email == "zhangfei@qq.com").CountDocuments();
             Assert.AreEqual(3, addedUserCount, "未成功添加，数量不正确");
 
 
             // 删除用户
-            dbContext.Users.DynamicCollectionDeleteMany(session, userGroup, users);
+            dbContext.Users.Commands.DynamicCollectionDeleteMany(session, userGroup, users);
 
             // 验证删除是否成功
-            var deletedUserCount = dbContext.Users.DynamicCollectionFind(session, userGroup, w => true).CountDocuments();
+            var deletedUserCount = dbContext.Users.Commands.DynamicCollectionFind(session, userGroup, w => true).CountDocuments();
             Assert.AreEqual(0, deletedUserCount, "用户未成功删除。");
 
             session.CommitTransaction();
@@ -346,11 +346,11 @@ public class TestDbSetAdd : TestBase
     [TestMethod]
     public async Task TestAddManyAsync()
     {
-        await dbContext.Users.AddManyAsync(users);
+        await dbContext.Users.Commands.InsertManyAsync(users);
 
         // 验证添加是否成功
         List<User> addedUser = new();
-        await foreach (var user in dbContext.Users.FindAsync(w => w.Email == "zhangfei@qq.com"))
+        await foreach (var user in dbContext.Users.Commands.FindAsync(w => w.Email == "zhangfei@qq.com"))
         {
             addedUser.Add(user);
         }
@@ -358,11 +358,11 @@ public class TestDbSetAdd : TestBase
 
 
         // 删除用户
-        var result = await dbContext.Users.DeleteManyAsync(users);
+        var result = await dbContext.Users.Commands.DeleteManyAsync(users);
 
         // 验证删除是否成功
         addedUser.Clear();
-        await foreach (var user in dbContext.Users.FindAsync(w => true))
+        await foreach (var user in dbContext.Users.Commands.FindAsync(w => true))
         {
             addedUser.Add(user);
         }
@@ -378,11 +378,11 @@ public class TestDbSetAdd : TestBase
     {
         var userGroup = DataHelper.GetNewUserGroup();
 
-        await dbContext.Users.DynamicCollectionAddManyAsync(userGroup, users);
+        await dbContext.Users.Commands.DynamicCollectionInsertManyAsync(userGroup, users);
 
         // 验证添加是否成功
         List<User> addedUser = new();
-        await foreach (var user in dbContext.Users.DynamicCollectionFindAsync(userGroup, w => w.Email == "zhangfei@qq.com"))
+        await foreach (var user in dbContext.Users.Commands.DynamicCollectionFindAsync(userGroup, w => w.Email == "zhangfei@qq.com"))
         {
             addedUser.Add(user);
         }
@@ -390,11 +390,11 @@ public class TestDbSetAdd : TestBase
 
 
         // 删除用户
-        var result = await dbContext.Users.DynamicCollectionDeleteManyAsync(userGroup, users);
+        var result = await dbContext.Users.Commands.DynamicCollectionDeleteManyAsync(userGroup, users);
 
         // 验证删除是否成功
         addedUser.Clear();
-        await foreach (var user in dbContext.Users.DynamicCollectionFindAsync(userGroup, w => true))
+        await foreach (var user in dbContext.Users.Commands.DynamicCollectionFindAsync(userGroup, w => true))
         {
             addedUser.Add(user);
         }
@@ -412,11 +412,11 @@ public class TestDbSetAdd : TestBase
         {
             session.StartTransaction();
 
-            await dbContext.Users.AddManyAsync(session, users);
+            await dbContext.Users.Commands.InsertManyAsync(session, users);
 
             // 验证添加是否成功
             List<User> addedUser = new();
-            await foreach (var user in dbContext.Users.FindAsync(session, w => w.Email == "zhangfei@qq.com"))
+            await foreach (var user in dbContext.Users.Commands.FindAsync(session, w => w.Email == "zhangfei@qq.com"))
             {
                 addedUser.Add(user);
             }
@@ -424,11 +424,11 @@ public class TestDbSetAdd : TestBase
 
 
             // 删除用户
-            var result = await dbContext.Users.DeleteManyAsync(session, users);
+            var result = await dbContext.Users.Commands.DeleteManyAsync(session, users);
 
             // 验证删除是否成功
             addedUser.Clear();
-            await foreach (var user in dbContext.Users.FindAsync(session, w => true))
+            await foreach (var user in dbContext.Users.Commands.FindAsync(session, w => true))
             {
                 addedUser.Add(user);
             }
@@ -451,22 +451,22 @@ public class TestDbSetAdd : TestBase
         {
             session.StartTransaction();
 
-            await dbContext.Users.DynamicCollectionAddManyAsync(session, userGroup, users);
+            await dbContext.Users.Commands.DynamicCollectionInsertManyAsync(session, userGroup, users);
 
             // 验证添加是否成功
             List<User> addedUser = new();
-            await foreach (var user in dbContext.Users.DynamicCollectionFindAsync(session, userGroup, w => w.Email == "zhangfei@qq.com"))
+            await foreach (var user in dbContext.Users.Commands.DynamicCollectionFindAsync(session, userGroup, w => w.Email == "zhangfei@qq.com"))
             {
                 addedUser.Add(user);
             }
             Assert.AreEqual(3, addedUser.Count, "未成功添加，数量不正确");
 
             // 删除用户
-            var result = await dbContext.Users.DynamicCollectionDeleteManyAsync(session, userGroup, users);
+            var result = await dbContext.Users.Commands.DynamicCollectionDeleteManyAsync(session, userGroup, users);
 
             // 验证删除是否成功
             addedUser.Clear();
-            await foreach (var user in dbContext.Users.DynamicCollectionFindAsync(session, userGroup, w => true))
+            await foreach (var user in dbContext.Users.Commands.DynamicCollectionFindAsync(session, userGroup, w => true))
             {
                 addedUser.Add(user);
             }

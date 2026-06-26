@@ -1,10 +1,9 @@
 ﻿using MongoDB.Driver;
-using Apteryx.MongoDB.Driver.Extend;
 using Microsoft.Extensions.Configuration;
-using Apteryx.Mongodb.Driver.Extend.Tests.Data;
+using Apteryx.MongoDB.Driver.Extend.Tests.Data;
 using Microsoft.Extensions.DependencyInjection;
 
-namespace Apteryx.Mongodb.Driver.Extend.Tests;
+namespace Apteryx.MongoDB.Driver.Extend.Tests;
 
 public class TestBase : IDisposable
 {

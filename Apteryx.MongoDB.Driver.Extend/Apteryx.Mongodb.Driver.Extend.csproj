@@ -10,12 +10,12 @@
     <Product>Apteryx.MongoDB.Driver.Extend</Product>
     <Description>apteryx QQ:82121500</Description>
     <PackageTags>core,.netcore,aspnetcore,asp.netcore, mongodb,mongodbcore</PackageTags>
-    <Version>3.11.0</Version>
+    <Version>4.0.0-rc-1003</Version>
     <PackageProjectUrl>https://github.com/code-institutes/Apteryx.MongoDB.Driver.Extend</PackageProjectUrl>
     <NeutralLanguage>zh-CN</NeutralLanguage>
-    <AssemblyVersion>3.0.0.0</AssemblyVersion>
+    <AssemblyVersion>4.0.0.0</AssemblyVersion>
     <RepositoryUrl>https://github.com/code-institutes/Apteryx.MongoDB.Driver.Extend</RepositoryUrl>
-    <EnableNETAnalyzers>False</EnableNETAnalyzers>
+    <EnableNETAnalyzers>True</EnableNETAnalyzers>
     <UserSecretsId>45f699d8-b40f-48c0-9a04-1c4fd1573c89</UserSecretsId>
   </PropertyGroup>
 
@@ -31,10 +31,10 @@
   </ItemGroup>
 
   <ItemGroup>
-    <PackageReference Include="Microsoft.Extensions.Configuration.UserSecrets" Version="10.0.1" />
-    <PackageReference Include="Microsoft.Extensions.DependencyInjection" Version="10.0.1" />
-    <PackageReference Include="Microsoft.Extensions.Options" Version="10.0.1" />
-    <PackageReference Include="MongoDB.Driver" Version="3.5.2" />
+    <PackageReference Include="Microsoft.Extensions.Configuration.UserSecrets" Version="10.0.9" />
+    <PackageReference Include="Microsoft.Extensions.DependencyInjection" Version="10.0.9" />
+    <PackageReference Include="Microsoft.Extensions.Options" Version="10.0.9" />
+    <PackageReference Include="MongoDB.Driver" Version="3.9.0" />
   </ItemGroup>
 
 </Project>
